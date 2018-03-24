@@ -42,6 +42,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
+      <Project>{0ed07c38-6112-4112-ad1e-db9cbc80002f}</Project>
+      <Name>NTC.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTC.BusinessObjects\NTC.BusinessObjects.csproj">
+      <Project>{c00c8e3d-9acd-4524-9d99-19085853b059}</Project>
+      <Name>NTC.BusinessObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTC.InterfaceServices\NTC.InterfaceServices.csproj">
+      <Project>{ea43e672-a59b-4a70-824b-13e8c756c8a5}</Project>
+      <Name>NTC.InterfaceServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
