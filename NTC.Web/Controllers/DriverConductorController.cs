@@ -13,5 +13,10 @@ namespace NTC.Web.Views.Dashboard
         {
             return View();
         }
+
+        public ActionResult List()
+        {
+            return View();
+        }
     }
 }

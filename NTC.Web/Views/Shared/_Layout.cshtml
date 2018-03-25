@@ -13,13 +13,28 @@
     <link href="~/Content/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="~/Content/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="~/Content/build/css/custom.min.css" rel="stylesheet">
+    
 
     <!-- jQuery -->
     <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Content/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/ntc/common.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.min.js"></script>
+
+    <!-- Datatables -->
+    <link href="~/Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/Content/build/css/custom.min.css" rel="stylesheet">
+    
 
 </head>
 <body class="nav-md">
@@ -43,7 +58,8 @@
                                 <li>
                                     <a><i class="fa fa-user"></i> Driver/ Conductor <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>                                        
+                                        <li><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>
+                                        <li><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>                                        
                                     </ul>
                                 </li>                                
                             </ul>
@@ -133,5 +149,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="~/Content/build/js/custom.min.js"></script>
+
+    
 </body>
 </html>

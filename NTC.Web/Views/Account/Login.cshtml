@@ -21,22 +21,26 @@
     <link href="~/Content/vendors/animate.css/animate.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="~/Content/build/css/custom.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.min.js"></script>
+
 </head>
 <body class="login">
     <div>
-        <div class="login_wrapper">
+        <div class="login_wrapper" id="loginForm">
             <div class="animate form login_form">
                 <section class="login_content">
                     <form>
                         <h1>Login Form</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="" />
+                            <input type="text" class="form-control" placeholder="Username" required="" v-mode="userModel.userName" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="" />
+                            <input type="password" class="form-control" placeholder="Password" required="" v-mode="userModel.password" />
                         </div>
                         <div>
-                            <button class="btn btn-default submit">Log in</button>
+                            <button class="btn btn-default submit" v-on:click="login">Log in</button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">                            
@@ -52,5 +56,7 @@
             </div>            
         </div>
     </div>
+
+    <script src="~/Scripts/ntc/usermanager.js"></script>
 </body>
 </html>
