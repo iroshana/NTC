@@ -43,8 +43,7 @@
     <link href="~/Content/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-      
-
+     
     <!-- Custom Theme Style -->
     <link href="~/Content/build/css/custom.css" rel="stylesheet">
     
@@ -75,7 +74,17 @@
                                         <li><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>
                                         <li><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>                                        
                                     </ul>
-                                </li>                                
+                                </li>  
+                                <li>
+                                    <a><i class="fa fa-bar-chart"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Advisingpanel", "Reports")">Advising Panel  </a></li>
+                                        <li><a href="@Url.Action("FinePayments", "Reports")">Fine Payments </a></li>
+                                        <li><a href="@Url.Action("PunishmentTraining", "Reports")">Punishment Training </a></li>
+                                        <li><a href="@Url.Action("CancelationLicense", "Reports")">Cancelation Of License </a></li>
+                                        <li><a href="@Url.Action("ComplaintManagement", "Reports")">Complaint Management </a></li>
+                                    </ul>
+                                </li>                              
                             </ul>
                         </div>
                         <div class="menu_section">
@@ -185,6 +194,7 @@
     <script src="~/Content/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
     <!-- starrr -->
     <script src="~/Content/vendors/starrr/dist/starrr.js"></script>
+    
 
     <!-- Custom Theme Scripts -->
     <script src="~/Content/build/js/custom.js"></script>

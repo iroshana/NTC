@@ -31,16 +31,24 @@ var Memeber = new Vue({
             dateIssued: '',
             dateValidity: '',
             educationQuali: '',
-            dateJoin: ''
+            dateJoin: '',
+            image: {},
+            imagePath: "",
         },
-        submitted: false
+        submitted: false,
+        isResultShow: true
     },
     methods: {
         validate: function () {
             this.submitted = true;            
             if (this.memeber.nicNo && this.memeber.dob && this.memeber.fullName && this.memeber.permanetAddress) {
                 this.submitted = false;
-                this.submitMemeber();
+                var formData = new FormData();
+                formData.append('UploadedImage', this.memeber.image);                
+                formData.append('nic', this.memeber.nicNo);
+                formData.append('uploadedFileName', "");
+                formData.append('fileExtension', '.png');
+                //this.submitMemeber();
             }
         },
         submitMemeber: function () {
@@ -129,5 +137,70 @@ var Memeber = new Vue({
             //$('#initial').val(initials + ' ' + x[a - 1].toString());
             this.memeber.nameWithInitial = initials + ' ' + x[a - 1].toString();
         });
+
+        //$(document).ready(function(){
+        //    var $uploadCrop;
+        //    $uploadCrop = $('#item-img').croppie({
+        //        viewport: {
+        //            width: 150,
+        //            height: 150,
+        //            type: 'squre'
+        //        },
+        //        boundary: { width: 250, height: 250 },                
+        //    });
+        
+        //    $('#upload').on('change', function () {
+        //        $("#item-img-result").empty();
+        //        Memeber.isResultShow = false;
+                
+        //        if (this.files && this.files[0]) {
+        //            var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        //            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) != -1) {
+        //                var reader = new FileReader();
+
+        //                reader.onload = function (e) {
+        //                    $('.upload-demo').addClass('ready');
+        //                    $uploadCrop.croppie('bind', {
+        //                        url: e.target.result
+        //                    }).then(function () {
+        //                        console.log('jQuery bind complete');
+        //                    });
+        //                }
+        //                reader.readAsDataURL(this.files[0]);
+        //            }
+        //            else {
+                        
+        //            }
+        //        }
+        //        else {
+                    
+        //        }
+        //    });
+        //    $('#cropImage').on('click', function (ev) {
+        //        $uploadCrop.croppie('result', {
+        //            type: 'blob',
+        //            size: { width: 150, height: 150 },
+        //            format: 'jpeg'
+        //        }).then(function (resp) {
+        //            Memeber.memeber.image = resp;
+        //            $uploadCrop.croppie('result', {
+        //                type: 'canvas',
+        //                size: 'viewport'
+        //            }).then(function (resp) {
+        //                Memeber.isResultShow = true;
+        //                var html;
+        //                if (resp) {
+        //                    html = '<img src="' + resp + '" />';
+        //                    $("#item-img-result").empty();
+        //                    $("#item-img-result").append(html);
+        //                    $uploadCrop.croppie('bind', {
+        //                        url: ''
+        //                    })
+        //                }
+        //            });
+        //        });
+        //    });
+           
+        //});
     }
 });

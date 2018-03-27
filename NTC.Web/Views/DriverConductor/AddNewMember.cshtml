@@ -22,13 +22,30 @@
                     </div>
                     <div class="x_content">
                         <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                            <div class="profile_img">
-                                <div id="crop-avatar">
-                                    <!-- Current avatar -->
-                                    <img class="img-responsive avatar-view" src="~/Images/appimg/user.png" alt="Avatar" title="Change the avatar">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div id="item-img" v-show="!isResultShow">
+
+                                    </div>
+                                    <div id="item-img-result" v-show="isResultShow">
+                                        <img class="img-responsive avatar-view" src="~/Images/appimg/user.png" alt="Avatar" title="Change the avatar">
+                                    </div>
                                 </div>
                             </div>
-                            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Upload Image</a>
+                            <div class="row">
+                                <label class="btn btn-default">
+                                    <i class="fa fa-picture-o"></i> Browse
+                                    <input type="file" id="upload" accept="image/*" />
+                                </label>
+                                <button type="button" id="cropImage" class="btn btn-default"><i class="fa fa-crop "></i>  Crop</button>
+                            </div>
+                            @*<div class="profile_img">
+                                    <div id="crop-avatar">
+                                         Current avatar
+                                        <img class="img-responsive avatar-view" src="~/Images/appimg/user.png" alt="Avatar" title="Change the avatar">
+                                    </div>
+                                </div>
+                                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Upload Image</a>*@
                             <br />
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -46,7 +63,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <input id="dob" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" v-model="memeber.dob">
-                                            <small v-show="!memeber.dob && submitted" class="text-danger">Date of Birth is Required</small>                                            
+                                            <small v-show="!memeber.dob && submitted" class="text-danger">Date of Birth is Required</small>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -136,7 +153,6 @@
     </div>
 </div>
 <!-- /page content -->
-
 @*Alert*@
 
 <div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
