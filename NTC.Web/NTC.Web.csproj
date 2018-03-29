@@ -175,7 +175,6 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,7 +199,6 @@
     <Content Include="Content\build\images\loading.gif" />
     <Content Include="Content\build\js\custom.js" />
     <Content Include="Content\build\js\custom.min.js" />
-    <Content Include="Content\spinner.css" />
     <Content Include="Content\vendors\animate.css\animate.css" />
     <Content Include="Content\vendors\animate.css\animate.min.css" />
     <Content Include="Content\vendors\animate.css\gulpfile.js" />
@@ -3940,13 +3938,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\ntc\addnewmember.js" />
     <Content Include="Scripts\ntc\common.js" />
-    <Content Include="Scripts\ntc\reportadvisingpanel.js" />
-    <Content Include="Scripts\ntc\reportcancellicence.js" />
-    <Content Include="Scripts\ntc\reportcomplainmanagement.js" />
-    <Content Include="Scripts\ntc\reportfinepayment.js" />
-    <Content Include="Scripts\ntc\reportpunishmenttraining.js" />
     <Content Include="Scripts\ntc\usermanager.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -3988,11 +3980,6 @@
     <Content Include="Views\Dashboard\AdminDashboard.cshtml" />
     <Content Include="Views\DriverConductor\AddNewMember.cshtml" />
     <Content Include="Views\DriverConductor\List.cshtml" />
-    <Content Include="Views\Reports\Advisingpanel.cshtml" />
-    <Content Include="Views\Reports\FinePayments.cshtml" />
-    <Content Include="Views\Reports\PunishmentTraining.cshtml" />
-    <Content Include="Views\Reports\CancelationLicense.cshtml" />
-    <Content Include="Views\Reports\ComplaintManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
