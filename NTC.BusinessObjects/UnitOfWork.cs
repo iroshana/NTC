@@ -11,14 +11,14 @@ namespace NTC.BusinessObjects
     public class UnitOfWork
     {
         private readonly IDbFactory _dbFactory;
-        private NTCModel _dbContext;
+        private NTCEntities _dbContext;
 
         public UnitOfWork(IDbFactory dbFactory)
         {
             _dbFactory = dbFactory;
         }
 
-        public NTCModel DbContext
+        public NTCEntities DbContext
         {
             get { return _dbContext ?? (_dbContext = _dbFactory.Init()); }
         }

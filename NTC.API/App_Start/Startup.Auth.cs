@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using NTC.API.Providers;
 using NTC.API.Models;
+using System.Data.Entity;
+using NTC.BusinessEntities;
 
 namespace NTC.API
 {
@@ -22,6 +24,7 @@ namespace NTC.API
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NTCEntities, NTC.BusinessEntities.Migrations.Configuration>());
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

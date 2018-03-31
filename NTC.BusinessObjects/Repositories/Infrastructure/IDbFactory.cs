@@ -9,6 +9,6 @@ namespace NTC.BusinessObjects.Repositories
 {
     public interface IDbFactory : IDisposable
     {
-        NTCModel Init();
+        NTCEntities Init();
     }
 }

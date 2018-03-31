@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0ED07C38-6112-4112-AD1E-DB9CBC80002F}</ProjectGuid>
+    <ProjectGuid>{0A05613C-E9E2-4BA3-A6CF-95A3E89E13A0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NTC.BusinessEntities</RootNamespace>
@@ -49,12 +49,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Complain.cs" />
+    <Compile Include="Conductor.cs" />
+    <Compile Include="DeMerit.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="Migrations\201803311109031_initial.cs" />
+    <Compile Include="Migrations\201803311109031_initial.Designer.cs">
+      <DependentUpon>201803311109031_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="WorkerNotice.cs" />
+    <Compile Include="Evidence.cs" />
+    <Compile Include="Merit.cs" />
+    <Compile Include="Notice.cs" />
     <Compile Include="NTCModel.cs" />
+    <Compile Include="Officer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803311109031_initial.resx">
+      <DependentUpon>201803311109031_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

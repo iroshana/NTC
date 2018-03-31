@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
-      <Project>{0ed07c38-6112-4112-ad1e-db9cbc80002f}</Project>
+      <Project>{0a05613c-e9e2-4ba3-a6cf-95a3e89e13a0}</Project>
       <Name>NTC.BusinessEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\NTC.BusinessObjects\NTC.BusinessObjects.csproj">

@@ -11,7 +11,7 @@ namespace NTC.BusinessObjects.Repositories
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
-        private NTCModel _dbContext;
+        private NTCEntities _dbContext;
         private readonly IDbSet<T> _dbSet;
 
         protected IDbFactory DbFactory
@@ -19,7 +19,7 @@ namespace NTC.BusinessObjects.Repositories
             get;
             private set;
         }
-        public NTCModel DbContext
+        public NTCEntities DbContext
         {
             get { return _dbContext ?? (_dbContext = DbFactory.Init()); }
         }

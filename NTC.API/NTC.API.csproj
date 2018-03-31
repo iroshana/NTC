@@ -211,6 +211,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803310508542_initialUser.cs" />
+    <Compile Include="Migrations\201803310508542_initialUser.Designer.cs">
+      <DependentUpon>201803310508542_initialUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -287,7 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
-      <Project>{0ed07c38-6112-4112-ad1e-db9cbc80002f}</Project>
+      <Project>{0a05613c-e9e2-4ba3-a6cf-95a3e89e13a0}</Project>
       <Name>NTC.BusinessEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\NTC.InterfaceServices\NTC.InterfaceServices.csproj">
@@ -302,6 +307,11 @@
       <Project>{84e630b3-e8b5-4924-8bc2-1dd6bf094f22}</Project>
       <Name>NTC.ViewModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803310508542_initialUser.resx">
+      <DependentUpon>201803310508542_initialUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

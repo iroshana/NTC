@@ -59,17 +59,17 @@
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
-      <Project>{0ed07c38-6112-4112-ad1e-db9cbc80002f}</Project>
-      <Name>NTC.BusinessEntities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Repositories\Interface\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
+      <Project>{0a05613c-e9e2-4ba3-a6cf-95a3e89e13a0}</Project>
+      <Name>NTC.BusinessEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

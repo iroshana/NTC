@@ -10,7 +10,7 @@ namespace NTC.BusinessObjects.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        NTCModel DbContext { get; }
+        NTCEntities DbContext { get; }
         void Add(T entity);
         void Update(T entity);
         void Update(T entity, List<string> properties, bool isIncluded);

@@ -9,10 +9,10 @@ namespace NTC.BusinessObjects.Repositories
 {
     public class DbFactory : Disposable, IDisposable, IDbFactory
     {
-        private NTCModel _dbContext;
-        public NTCModel Init()
+        private NTCEntities _dbContext;
+        public NTCEntities Init()
         {
-            return _dbContext ?? (_dbContext = new NTCModel());
+            return _dbContext ?? (_dbContext = new NTCEntities());
         }
         public override void DisposeCore()
         {
