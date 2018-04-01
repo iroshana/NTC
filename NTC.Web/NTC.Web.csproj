@@ -3945,6 +3945,7 @@
     <Content Include="Scripts\ntc\common.js" />
     <Content Include="Scripts\ntc\dashboardDetails.js" />
     <Content Include="Scripts\ntc\notice.js" />
+    <Content Include="Scripts\ntc\panalties.js" />
     <Content Include="Scripts\ntc\reportadvisingpanel.js" />
     <Content Include="Scripts\ntc\reportcancellicence.js" />
     <Content Include="Scripts\ntc\reportcomplainmanagement.js" />
