@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NTC - @ViewBag.Title</title>
-
+    <link href="~/Content/spinner.css" rel="stylesheet" />
     <!-- Bootstrap -->
     <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -13,12 +13,24 @@
     <link href="~/Content/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="~/Content/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    
+    <!-- iCheck -->
+    <link href="~/Content/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    @*<link href="~/Content/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">*@
+    <!-- Select2 -->
+    <link href="~/Content/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Content/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Content/vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!--Date picker-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.4/datepicker.css" rel="stylesheet" />
 
     <!-- jQuery -->
     <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Content/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.4/datepicker.js"></script>
 
     <script src="~/Scripts/ntc/common.js"></script>
 
@@ -33,11 +45,12 @@
     <link href="~/Content/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="~/Content/build/css/custom.min.css" rel="stylesheet">
-    
+    <link href="~/Content/build/css/custom.css" rel="stylesheet">
+
 
 </head>
 <body class="nav-md">
+    <div id="spinner" class="loading" style="display:none"></div>
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -45,7 +58,7 @@
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title"><i class="fa fa-bus"></i> <span>NTC</span></a>
                     </div>
-                    <div class="clearfix"></div>                    
+                    <div class="clearfix"></div>
                     <br />
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -53,22 +66,30 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="@Url.Action("AdminDashboard", "Dashboard")"><i class="fa fa-home"></i> Home </a>                                    
+                                    <a href="@Url.Action("AdminDashboard", "Dashboard")"><i class="fa fa-home"></i> Home </a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-user"></i> Driver/ Conductor <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>
-                                        <li><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>                                        
+                                        <li><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>
                                     </ul>
-                                </li>                                
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bar-chart"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@Url.Action("Advisingpanel", "Reports")">Advising Panel  </a></li>
+                                        <li><a href="@Url.Action("FinePayments", "Reports")">Fine Payments </a></li>
+                                        <li><a href="@Url.Action("PunishmentTraining", "Reports")">Punishment Training </a></li>
+                                        <li><a href="@Url.Action("CancelationLicense", "Reports")">Cancelation Of License </a></li>
+                                        <li><a href="@Url.Action("ComplaintManagement", "Reports")">Complaint Management </a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                         <div class="menu_section">
                             <h3>Live On</h3>
-                            <ul class="nav side-menu">                      
-                                
-                            </ul>
+                            <ul class="nav side-menu"></ul>
                         </div>
                     </div>
                     <!-- /sidebar menu -->
@@ -79,7 +100,7 @@
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>                        
+                        </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout" href="@Url.Action("Login", "Account")">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
@@ -97,13 +118,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">John Doe
+                                    @*<img src="images/img.jpg" alt="">*@John Doe
                                     <span class="fa fa-angle-down"></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">                                    
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
                                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
-                            </li>                            
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -147,9 +168,35 @@
     <script src="~/Content/vendors/moment/min/moment.min.js"></script>
     <script src="~/Content/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="~/Content/build/js/custom.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Content/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Content/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="~/Content/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/Content/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="~/Content/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="~/Content/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="~/Content/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Content/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="~/Content/vendors/parsleyjs/dist/parsley.js"></script>
+    <!-- Autosize -->
+    <script src="~/Content/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="~/Content/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="~/Content/vendors/starrr/dist/starrr.js"></script>
 
-    
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/Content/build/js/custom.js"></script>
+
+
 </body>
 </html>
