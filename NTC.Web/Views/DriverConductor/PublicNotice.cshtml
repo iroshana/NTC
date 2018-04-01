@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Notice";
+}
+
+<div class="right_col" role="main" id="notice">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Notice</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Notice <small></small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#noticeModal"><i class="fa fa-circle-o-notch"></i> Add Notice</button>
+                        </div>
+
+                        <div class="row top_tiles" style="margin: 10px 0;">
+                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="note in noticeList">
+                                <div class="tile-stats">
+                                    <h5><strong>Notice</strong></h5>
+                                    <p>{{ note.note }}</p>
+                                    <br />
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-default" v-on:click="sendMsg">Send</button>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Notice Modal-->
+
+<div class="modal fade bs-example-modal-sm" id="noticeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Add New Notice</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Notice</h4>
+                <textarea class="form-control" rows="6" placeholder='Enter Notice' v-model="noticeVm.note"></textarea> 
+                <small class="text-danger" v-show="!noticeVm.note && submit">Note is Required</small>              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" v-on:click="saveNotice">Add Notice</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Alert*@
+
+<div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog modal-val">
+        <div class="modal-content">
+            <div class="modal-header" v-bind:class="{'alert-success' : isSuccess, 'alert-danger' : !isSuccess}">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="bold-700">{{header}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12" id="alertInfo">
+                        <div class="alert rounded" id="alert">
+                            <div class="icon center-block text-center"><i class="fa fa-4x" v-bind:class="{'fa-close' : !isSuccess, 'fa-check': isSuccess}"></i></div>
+                            <span class="center-block text-center" id="alertMessage">{{alertMessage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" v-bind:class="{'btn-success' : isSuccess, 'btn-danger' : !isSuccess}" type="button" id="closeAlert"><i class="fa fa-times-circle"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*End Alert*@
+
+
+<script src="~/Scripts/ntc/notice.js"></script>

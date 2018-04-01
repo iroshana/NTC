@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -3942,6 +3943,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ntc\addnewmember.js" />
     <Content Include="Scripts\ntc\common.js" />
+    <Content Include="Scripts\ntc\dashboardDetails.js" />
+    <Content Include="Scripts\ntc\notice.js" />
     <Content Include="Scripts\ntc\reportadvisingpanel.js" />
     <Content Include="Scripts\ntc\reportcancellicence.js" />
     <Content Include="Scripts\ntc\reportcomplainmanagement.js" />
@@ -3993,6 +3996,9 @@
     <Content Include="Views\Reports\ComplaintManagement.cshtml" />
     <Content Include="Views\Reports\FinePayments.cshtml" />
     <Content Include="Views\Reports\PunishmentTraining.cshtml" />
+    <Content Include="Views\DriverConductor\Panalties.cshtml" />
+    <Content Include="Views\DriverConductor\PublicNotice.cshtml" />
+    <Content Include="Views\Charts\ChartDiaplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

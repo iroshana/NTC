@@ -18,5 +18,15 @@ namespace NTC.Web.Views.Dashboard
         {
             return View();
         }
+
+        public ActionResult Panalties()
+        {
+            return View();
+        }
+
+        public ActionResult PublicNotice()
+        {
+            return View();
+        }
     }
 }
