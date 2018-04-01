@@ -52,15 +52,15 @@
     <Compile Include="Bus.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Complain.cs" />
-    <Compile Include="Conductor.cs" />
     <Compile Include="DeMerit.cs" />
-    <Compile Include="Driver.cs" />
-    <Compile Include="Migrations\201803311109031_initial.cs" />
-    <Compile Include="Migrations\201803311109031_initial.Designer.cs">
-      <DependentUpon>201803311109031_initial.cs</DependentUpon>
+    <Compile Include="Employee.cs" />
+    <Compile Include="EmployeeType.cs" />
+    <Compile Include="Migrations\201804010608045_Initial.cs" />
+    <Compile Include="Migrations\201804010608045_Initial.Designer.cs">
+      <DependentUpon>201804010608045_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="WorkerNotice.cs" />
+    <Compile Include="EmployeeNotice.cs" />
     <Compile Include="Evidence.cs" />
     <Compile Include="Merit.cs" />
     <Compile Include="Notice.cs" />
@@ -75,8 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803311109031_initial.resx">
-      <DependentUpon>201803311109031_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804010608045_Initial.resx">
+      <DependentUpon>201804010608045_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

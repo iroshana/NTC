@@ -11,8 +11,7 @@ namespace NTC.BusinessEntities
     {
         public int ID { get; set; }
         public int UserID { get; set; }
-        public int? DriverId { get; set; }
-        public int? ConductorId { get; set; }
+        public int EmployeeId { get; set; }
         public int MeritId { get; set; }
         public int RouteId { get; set; }
         public DateTime InqueryDate { get; set; }
@@ -22,10 +21,8 @@ namespace NTC.BusinessEntities
         public virtual Bus Bus { get; set; }
         [ForeignKey("RouteId")]
         public virtual Route Route { get; set; }
-        [ForeignKey("DriverId")]
-        public virtual Driver Driver { get; set; }
-        [ForeignKey("ConductorId")]
-        public virtual Conductor Conductor { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
         [ForeignKey("OfficeriId")]
         public virtual Officer Officer { get; set; }
         [ForeignKey("MeritId")]
