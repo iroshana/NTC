@@ -19,6 +19,7 @@ var Memeber = new Vue({
     data: {
         memeber: {
             id: '',
+            type:'',
             nicNo: '',
             dob: '',
             fullName: '',

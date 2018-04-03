@@ -176,6 +176,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OnlineFormController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3932,6 +3933,7 @@
     <Content Include="Content\vendors\validator\.bower.json" />
     <Content Include="Content\vendors\validator\README.md" />
     <Content Include="Content\vendors\validator\validator.jquery.json" />
+    <None Include="Properties\PublishProfiles\NTC.Web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3944,6 +3946,7 @@
     <Content Include="Scripts\ntc\addnewmember.js" />
     <Content Include="Scripts\ntc\common.js" />
     <Content Include="Scripts\ntc\dashboardDetails.js" />
+    <Content Include="Scripts\ntc\memberfullyprofile.js" />
     <Content Include="Scripts\ntc\notice.js" />
     <Content Include="Scripts\ntc\panalties.js" />
     <Content Include="Scripts\ntc\reportadvisingpanel.js" />
@@ -4000,6 +4003,10 @@
     <Content Include="Views\DriverConductor\Panalties.cshtml" />
     <Content Include="Views\DriverConductor\PublicNotice.cshtml" />
     <Content Include="Views\Charts\ChartDiaplay.cshtml" />
+    <Content Include="Views\DriverConductor\MemeberFullProfile.cshtml" />
+    <Content Include="Views\DriverConductor\AddCompian.cshtml" />
+    <Content Include="Views\OnlineForm\Complain.cshtml" />
+    <Content Include="Views\DriverConductor\AddPoints.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

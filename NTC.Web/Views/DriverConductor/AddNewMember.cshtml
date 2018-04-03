@@ -53,6 +53,15 @@
                                 <br />
                                 <form class="form-horizontal form-label-left">
                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Member Type<span class="required">*</span></label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <select class="form-control" v-model="memeber.type">
+                                                <option value="Driver" selected="selected">Driver</option>
+                                                <option value="Conductor">Conductor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">NIC No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <input type="text" class="form-control" placeholder="Enter NIC NO" v-model="memeber.nicNo">

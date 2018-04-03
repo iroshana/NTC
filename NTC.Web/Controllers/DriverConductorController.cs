@@ -28,5 +28,20 @@ namespace NTC.Web.Views.Dashboard
         {
             return View();
         }
+
+        public ActionResult MemeberFullProfile()
+        {
+            return View();
+        }
+
+        public ActionResult AddCompian()
+        {
+            return View();
+        }
+
+        public ActionResult AddPoints()
+        {
+            return View();
+        }
     }
 }

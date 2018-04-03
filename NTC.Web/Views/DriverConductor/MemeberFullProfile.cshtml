@@ -1,0 +1,305 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+}
+
+<!-- page content -->
+<div class="right_col" role="main" id="fullyDetails">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>User Profile</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Member Details</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div id="item-img-result">
+                                        <img class="img-responsive avatar-view" src="~/Images/appimg/user.png" alt="Avatar" title="Change the avatar">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="x_content">
+                                <br />
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab_content1" id="personaldetails" role="tab" data-toggle="tab" aria-expanded="true">Personal Details</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content2" role="tab" id="complain" data-toggle="tab" aria-expanded="false">Complain Management</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content3" role="tab" id="demerit" data-toggle="tab" aria-expanded="false">De Merit System</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content4" role="tab" id="notice" data-toggle="tab" aria-expanded="false">Notice</a>
+                                        </li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="personaldetails">
+                                            <!--Start Personal Details-->
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">NIC No<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" v-model="memeber.nicNo" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input id="dob" type="text" class="form-control" v-model="memeber.dob" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Name<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input id="fullName" type="text" class="form-control" v-model="memeber.fullName" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Name With Initial</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" readonly="readonly" v-model="memeber.nameWithInitial">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Permanet Address<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea class="form-control" rows="3" v-model="memeber.permanetAddress" readonly="readonly"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Current Address</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea class="form-control" rows="3" v-model="memeber.currentAddress" readonly="readonly"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Training Cetificate No</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" v-model="memeber.cetificateNo" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Training Center</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" v-model="memeber.trainingCenter" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Driving Licence No</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" v-model="memeber.licenceNo" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Issued</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input id="dateIssued" type="text" class="form-control" v-model="memeber.dateIssued" readonly="readonly">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Validity</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input id="dateValidity" type="text" class="form-control" v-model="memeber.dateValidity" readonly="readonly">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Highest Education Qualification</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" v-model="memeber.educationQuali" readonly="readonly">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Joined</label>
+                                                    <div class="col-md-9">
+                                                        <input id="dateJoined" type="text" class="form-control" v-model="memeber.dateJoin" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--End Personal Details-->
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="complain">
+                                            <!--Start Complain-->
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <div class="col-md-12 pull-right">
+                                                        <a href="@Url.Action("AddCompian", "DriverConductor")" class="btn btn-primary">Add Complain</a>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain No<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select class="form-control" v-model="complainMgt.complain">
+                                                            <option v-for="complain in complainList" v-bind:value="complain">{{complain.no}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain Category</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input type="text" class="form-control" readonly="readonly">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complains</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea class="form-control" rows="8"></textarea>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--End Complain-->
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="demerit">
+                                            <!--Start De Merit-->
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <div class="col-md-12 pull-right">
+                                                        <a href="@Url.Action("AddPoints", "DriverConductor")" class="btn btn-primary">Add Point</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain No<span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select class="form-control" v-model="demeritNo">
+                                                            <option v-for="demerit in deMeritRecordList" v-bind:value="demerit">{{demerit}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li class="red">RED - Cancelation of the Licence</li>
+                                                    <li class="purple">PURPLE - Punishment Trainig</li>
+                                                    <li class="blue">BLUE - Fine Payments</li>
+                                                    <li class="green">GREEN - Advising Panel</li>
+                                                </ul>
+                                                <table class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Description</th>
+                                                            <th>Points</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </form>
+
+                                            <!--End De Merit-->
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="notice">
+                                            <!--Start Notice-->
+                                            <div class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <div class="col-md-12 pull-right">
+                                                        <button class="btn btn-primary" v-on:click="noticeModalShow"><i class="fa fa-circle-o-notch"></i> Add Notice</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="row top_tiles" style="margin: 10px 0;">
+                                                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="note in noticeList">
+                                                            <div class="tile-stats">
+                                                                <h5><strong>Notice</strong></h5>
+                                                                <p>{{ note.note }}</p>
+                                                                <br />
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-2">
+                                                                    <button class="btn btn-default" v-on:click="sendMsg">Send</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--End Notice-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+
+
+<!--Notice Modal-->
+
+<div class="modal fade bs-example-modal-sm" id="noticeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Add New Notice</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Notice</h4>
+                <textarea class="form-control" rows="6" placeholder='Enter Notice' v-model="noticeVm.note"></textarea>
+                <small class="text-danger" v-show="!noticeVm.note && submit">Note is Required</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" v-on:click="saveNotice">Add Notice</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Start Alert*@
+
+<div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog modal-val">
+        <div class="modal-content">
+            <div class="modal-header" v-bind:class="{'alert-success' : isSuccess, 'alert-danger' : !isSuccess}">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="bold-700">{{header}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12" id="alertInfo">
+                        <div class="alert rounded" id="alert">
+                            <div class="icon center-block text-center"><i class="fa fa-4x" v-bind:class="{'fa-close' : !isSuccess, 'fa-check': isSuccess}"></i></div>
+                            <span class="center-block text-center" id="alertMessage">{{alertMessage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" v-bind:class="{'btn-success' : isSuccess, 'btn-danger' : !isSuccess}" type="button" id="closeAlert"><i class="fa fa-times-circle"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*End Alert*@
+
+<script src="~/Scripts/ntc/memberfullyprofile.js"></script>
