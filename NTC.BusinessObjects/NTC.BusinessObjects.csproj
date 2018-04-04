@@ -61,6 +61,7 @@
     <Compile Include="Repositories\Infrastructure\IRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Repositories\Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Repositories\Infrastructure\UnitOfWork.cs" />
     <Compile Include="Repositories\Interface\ICategoryRepository.cs" />
     <Compile Include="Repositories\Interface\IComplainRepository.cs" />
     <Compile Include="Repositories\Interface\IDeMeritRepository.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
     <Compile Include="Repositories\LogmessageRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Repositories\Infrastructure\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

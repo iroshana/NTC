@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplainService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="EntityService.cs" />
     <Compile Include="EventLogService.cs" />
