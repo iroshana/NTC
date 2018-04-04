@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IComplainService.cs" />
+    <Compile Include="IEmployeeService.cs" />
+    <Compile Include="IEntityService.cs" />
+    <Compile Include="IEventLogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

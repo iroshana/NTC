@@ -13,6 +13,7 @@ namespace NTC.BusinessEntities
         {
             Complains = new HashSet<Complain>();
             DeMerits = new HashSet<DeMerit>();
+            LoginHistories = new HashSet<LoginHistory>();
         }
         public int ID { get; set; }
         [Required]
@@ -29,5 +30,6 @@ namespace NTC.BusinessEntities
         public string NIC { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<DeMerit> DeMerits { get; set; }
+        public virtual ICollection<LoginHistory> LoginHistories { get; set; }
     }
 }

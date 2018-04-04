@@ -22,7 +22,7 @@ namespace NTC.BusinessEntities
         public string TrainingCenter { get; set; }
         public string HighestEducation { get; set; }
         public DateTime JoinDate { get; set; }
-        public string IssuedDate { get; set; }
+        public DateTime IssuedDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public string ImagePath { get; set; }
         [ForeignKey("UserID")]

@@ -55,9 +55,19 @@
     <Compile Include="DeMerit.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeType.cs" />
+    <Compile Include="LoginHistory.cs" />
+    <Compile Include="LogMessage.cs" />
     <Compile Include="Migrations\201804010608045_Initial.cs" />
     <Compile Include="Migrations\201804010608045_Initial.Designer.cs">
       <DependentUpon>201804010608045_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031502375_logmsgtable.cs" />
+    <Compile Include="Migrations\201804031502375_logmsgtable.Designer.cs">
+      <DependentUpon>201804031502375_logmsgtable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804040151067_employeechanges.cs" />
+    <Compile Include="Migrations\201804040151067_employeechanges.Designer.cs">
+      <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="EmployeeNotice.cs" />
@@ -77,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804010608045_Initial.resx">
       <DependentUpon>201804010608045_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031502375_logmsgtable.resx">
+      <DependentUpon>201804031502375_logmsgtable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804040151067_employeechanges.resx">
+      <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
