@@ -11,12 +11,12 @@ using System.Web.Http;
 
 namespace NTC.API.Controllers
 {
-    public class EmployeeController : ApiController
+    public class MemberController : ApiController
     {
         private readonly IEmployeeService _employee;
         private readonly IEventLogService _eventLog;
 
-        public EmployeeController(IEmployeeService employee, IEventLogService eventLog)
+        public MemberController(IEmployeeService employee, IEventLogService eventLog)
         {
             _employee = employee;
             _eventLog = eventLog;

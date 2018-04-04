@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201804041205426_initial.Designer.cs">
       <DependentUpon>201804041205426_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804041329545_Dbcorrections.cs" />
+    <Compile Include="Migrations\201804041329545_Dbcorrections.Designer.cs">
+      <DependentUpon>201804041329545_Dbcorrections.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -80,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804041205426_initial.resx">
       <DependentUpon>201804041205426_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041329545_Dbcorrections.resx">
+      <DependentUpon>201804041329545_Dbcorrections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

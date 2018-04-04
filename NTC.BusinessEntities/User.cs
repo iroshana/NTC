@@ -12,24 +12,18 @@ namespace NTC.BusinessEntities
         public User()
         {
             Complains = new HashSet<Complain>();
-            DeMerits = new HashSet<DeMerit>();
             LoginHistories = new HashSet<LoginHistory>();
         }
         public int ID { get; set; }
         [Required]
         [StringLength(100)]
-        public string FirstName { get; set; }
+        public string UserName { get; set; }
         [StringLength(100)]
-        public string LastName { get; set; }
-        public DateTime DOB { get; set; }
-        [StringLength(1000)]
-        public string PrivateAddress { get; set; }
-        [StringLength(1000)]
-        public string CUrrentAddress { get; set; }
         public string TelNo { get; set; }
         public string NIC { get; set; }
+        public string Email { get; set; }
+        public DateTime LastLogin { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
-        public virtual ICollection<DeMerit> DeMerits { get; set; }
         public virtual ICollection<LoginHistory> LoginHistories { get; set; }
     }
 }

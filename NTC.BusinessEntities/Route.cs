@@ -12,13 +12,13 @@ namespace NTC.BusinessEntities
         public Route()
         {
             Complains = new HashSet<Complain>();
-            Routes = new HashSet<Route>();
+            Buses = new HashSet<Bus>();
         }
         public int ID { get; set; }
         public String From { get; set; }
         public string To { get; set; }
         public string RouteNo { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
-        public virtual ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Bus> Buses { get; set; }
     }
 }

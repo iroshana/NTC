@@ -10,10 +10,10 @@ namespace NTC.BusinessEntities
     {
         public MemberType()
         {
-            Employees = new HashSet<Member>();
+            Members = new HashSet<Member>();
         }
         public int ID { get; set; }
         public string Code { get; set; }
-        public virtual ICollection<Member> Employees { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

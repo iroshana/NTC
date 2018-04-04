@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,18 @@ namespace NTC.BusinessEntities
             WorkerNotices = new HashSet<MemberNotice>();
         }
         public int ID { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string FullName { get; set; }
+        [StringLength(100)]
+        public string ShortName { get; set; }
+        public DateTime DOB { get; set; }
+        [StringLength(1000)]
+        public string PermanetAddress { get; set; }
+        [StringLength(1000)]
+        public string CurrentAddress { get; set; }
+        public string TelNo { get; set; }
+        public string NIC { get; set; }
         public int? UserID { get; set; }
         public int TypeId { get; set; }
         public string TrainingCertificateNo { get; set; }

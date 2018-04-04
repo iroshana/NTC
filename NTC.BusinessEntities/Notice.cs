@@ -10,13 +10,13 @@ namespace NTC.BusinessEntities
     {
         public Notice()
         {
-            WorkerNotices = new HashSet<MemberNotice>();
+            MemberNotices = new HashSet<MemberNotice>();
         }
         public int ID { get; set; }
         public string NoticeCode { get; set; }
         public string Content { get; set; }
         public string Type { get; set; }
-        public virtual ICollection<MemberNotice> WorkerNotices { get; set; }
+        public virtual ICollection<MemberNotice> MemberNotices { get; set; }
 
     }
 }

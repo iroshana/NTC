@@ -14,7 +14,7 @@ namespace NTC.BusinessEntities
             MemberDeMerits = new HashSet<MemberDeMerit>();
         }
         public int ID { get; set; }
-        public int EmployeeId { get; set; }
+        public int MemberId { get; set; }
         public int RouteId { get; set; }
         public DateTime InqueryDate { get; set; }
         public int OfficeriId { get; set; }
@@ -23,7 +23,7 @@ namespace NTC.BusinessEntities
         public virtual Bus Bus { get; set; }
         [ForeignKey("RouteId")]
         public virtual Route Route { get; set; }
-        [ForeignKey("EmployeeId")]
+        [ForeignKey("MemberId")]
         public virtual Member Employee { get; set; }
         [ForeignKey("OfficeriId")]
         public virtual Officer Officer { get; set; }

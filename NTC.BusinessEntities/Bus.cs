@@ -18,11 +18,14 @@ namespace NTC.BusinessEntities
         public string LicenceNo { get; set; }
         public string Type { get; set; }
         public int DriverId { get; set; }
+        public int RouteId { get; set; }
         public int ConductorId { get; set; }
         [ForeignKey("DriverId")]
         public virtual Member Driver { get; set; }
         [ForeignKey("ConductorId")]
         public virtual Member Conductor { get; set; }
+        [ForeignKey("RouteId")]
+        public virtual Route Route { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<DeMerit> DeMerits { get; set; }
     }
