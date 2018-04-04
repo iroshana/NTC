@@ -10,14 +10,13 @@ namespace NTC.BusinessEntities
     {
         public Merit()
         {
-            DeMerits = new HashSet<DeMerit>();
+            MemberDeMerits = new HashSet<MemberDeMerit>();
         }
         public int ID { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public int Point { get; set; }
         public int ColorCodeId { get; set; }
-        public virtual ICollection<DeMerit> DeMerits { get; set; }
+        public virtual ICollection<MemberDeMerit> MemberDeMerits { get; set; }
 
     }
 }

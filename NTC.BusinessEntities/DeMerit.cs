@@ -9,10 +9,12 @@ namespace NTC.BusinessEntities
 {
     public partial class DeMerit
     {
+        public DeMerit()
+        {
+            MemberDeMerits = new HashSet<MemberDeMerit>();
+        }
         public int ID { get; set; }
-        public int UserID { get; set; }
         public int EmployeeId { get; set; }
-        public int MeritId { get; set; }
         public int RouteId { get; set; }
         public DateTime InqueryDate { get; set; }
         public int OfficeriId { get; set; }
@@ -25,10 +27,8 @@ namespace NTC.BusinessEntities
         public virtual Member Employee { get; set; }
         [ForeignKey("OfficeriId")]
         public virtual Officer Officer { get; set; }
-        [ForeignKey("MeritId")]
-        public virtual Merit Merit { get; set; }
-        [ForeignKey("UserID")]
-        public virtual User User { get; set; }
+        public virtual ICollection<MemberDeMerit> MemberDeMerits { get; set; }
+
 
     }
 }

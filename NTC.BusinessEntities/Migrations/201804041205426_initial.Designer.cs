@@ -7,13 +7,13 @@ namespace NTC.BusinessEntities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class meritcolorcode : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(meritcolorcode));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804041118223_meritcolorcode"; }
+            get { return "201804041205426_initial"; }
         }
         
         string IMigrationMetadata.Source

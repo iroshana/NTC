@@ -54,28 +54,13 @@
     <Compile Include="Complain.cs" />
     <Compile Include="DeMerit.cs" />
     <Compile Include="Member.cs" />
+    <Compile Include="MemberDeMerit.cs" />
     <Compile Include="MemberType.cs" />
     <Compile Include="LoginHistory.cs" />
     <Compile Include="LogMessage.cs" />
-    <Compile Include="Migrations\201804010608045_Initial.cs" />
-    <Compile Include="Migrations\201804010608045_Initial.Designer.cs">
-      <DependentUpon>201804010608045_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804031502375_logmsgtable.cs" />
-    <Compile Include="Migrations\201804031502375_logmsgtable.Designer.cs">
-      <DependentUpon>201804031502375_logmsgtable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804040151067_employeechanges.cs" />
-    <Compile Include="Migrations\201804040151067_employeechanges.designer.cs">
-      <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041118223_meritcolorcode.cs" />
-    <Compile Include="Migrations\201804041118223_meritcolorcode.Designer.cs">
-      <DependentUpon>201804041118223_meritcolorcode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041121062_TableNameChange.cs" />
-    <Compile Include="Migrations\201804041121062_TableNameChange.Designer.cs">
-      <DependentUpon>201804041121062_TableNameChange.cs</DependentUpon>
+    <Compile Include="Migrations\201804041205426_initial.cs" />
+    <Compile Include="Migrations\201804041205426_initial.Designer.cs">
+      <DependentUpon>201804041205426_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
@@ -93,20 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804010608045_Initial.resx">
-      <DependentUpon>201804010608045_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804031502375_logmsgtable.resx">
-      <DependentUpon>201804031502375_logmsgtable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804040151067_employeechanges.resx">
-      <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041118223_meritcolorcode.resx">
-      <DependentUpon>201804041118223_meritcolorcode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041121062_TableNameChange.resx">
-      <DependentUpon>201804041121062_TableNameChange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804041205426_initial.resx">
+      <DependentUpon>201804041205426_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
