@@ -33,15 +33,26 @@ namespace NTC.Services
             }
         }
 
-        public Complain GetComplainByNo(string complainNo)
+        public IEnumerable<Complain> GetComplainNo(int userId)
         {
             try
             {
-                return _complainRepository.Get(x=>x.ComplainNo == complainNo).FirstOrDefault();
+                return _complainRepository.Get(x => x.UserId == userId).ToList();
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
 
+        public Complain GetComplainByNo(string complainNo, int userId)
+        {
+            try
+            {
+                return _complainRepository.Get(x => x.ComplainNo == complainNo && x.UserId == userId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

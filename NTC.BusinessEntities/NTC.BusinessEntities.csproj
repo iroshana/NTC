@@ -52,6 +52,7 @@
     <Compile Include="Bus.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Complain.cs" />
+    <Compile Include="ComplainCategory.cs" />
     <Compile Include="DeMerit.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="MemberDeMerit.cs" />
@@ -65,6 +66,10 @@
     <Compile Include="Migrations\201804041329545_Dbcorrections.cs" />
     <Compile Include="Migrations\201804041329545_Dbcorrections.Designer.cs">
       <DependentUpon>201804041329545_Dbcorrections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804041536201_categorychanges.cs" />
+    <Compile Include="Migrations\201804041536201_categorychanges.Designer.cs">
+      <DependentUpon>201804041536201_categorychanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
@@ -87,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804041329545_Dbcorrections.resx">
       <DependentUpon>201804041329545_Dbcorrections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041536201_categorychanges.resx">
+      <DependentUpon>201804041536201_categorychanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

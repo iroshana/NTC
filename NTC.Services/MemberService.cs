@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NTC.Services
 {
-    public class EmployeeService:EntityService<Member>,IEmployeeService
+    public class MemberService:EntityService<Member>,IMemberService
     {
         #region Member Variables
 
@@ -19,7 +19,7 @@ namespace NTC.Services
         #endregion Member Variables
 
 
-        public EmployeeService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository)
+        public MemberService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository)
             :base(unitOfWork, employeeRepository)
         {
             try
@@ -38,6 +38,29 @@ namespace NTC.Services
             try
             {
                 return base.GetAll(x=>x.User.ID == Id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void Add(Member member, out string errorMessage)
+        {
+            try
+            {
+                errorMessage = String.Empty;
+                IEnumerable<Member> members = base.GetAll(x=>x.NIC == member.NIC).ToList();
+                if (members == null || members.Count() == 0 )
+                {
+                    base.Add(member);
+                }
+                else
+                {
+                    errorMessage = "Member Already in system";
+                }
+                
             }
             catch (Exception ex)
             {

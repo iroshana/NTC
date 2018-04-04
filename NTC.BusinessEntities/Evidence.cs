@@ -16,6 +16,7 @@ namespace NTC.BusinessEntities
         public string EvidenceNo { get; set; }
         public string FileName { get; set; }
         public string Extension { get; set; }
+        public string FilePath { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
 
     }

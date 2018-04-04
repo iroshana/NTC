@@ -13,44 +13,45 @@ namespace NTC.API.Controllers
 {
     public class MemberController : ApiController
     {
-        private readonly IEmployeeService _employee;
+        private readonly IMemberService _member;
         private readonly IEventLogService _eventLog;
 
-        public MemberController(IEmployeeService employee, IEventLogService eventLog)
+        public MemberController(IMemberService member, IEventLogService eventLog)
         {
-            _employee = employee;
+            _member = member;
             _eventLog = eventLog;
         }
-        #region GetEmployee
+        #region GetMember
         [HttpGet]
-        public IHttpActionResult GetEmployee(int Id)
+        public IHttpActionResult GetMember(int Id)
         {
             try
             {
-                EmployeeViewModel employeeView = new EmployeeViewModel();
-                Member employee = new Member();
-                employee = _employee.GetEmployee(Id);
-                if (employee != null)
+                MemberViewModel memberView = new MemberViewModel();
+                Member member = new Member();
+                member = _member.GetEmployee(Id);
+                if (member != null)
                 {
-                    employeeView.id = employee.ID;
-                    employeeView.userID = employee.UserID.Value;
-                    employeeView.fullName = employee.User.FirstName + " " + employee.User.LastName;
-                    employeeView.currentAddress = employee.User.CUrrentAddress;
-                    employeeView.privateAddress = employee.User.PrivateAddress;
-                    employeeView.nic = employee.User.NIC;
-                    employeeView.dob = employee.User.DOB.ToString("yyyy-MM-dd");
-                    employeeView.trainingCertificateNo = employee.TrainingCertificateNo;
-                    employeeView.trainingCenter = employee.TrainingCenter;
-                    employeeView.licenceNo = employee.LicenceNo;
-                    employeeView.issuedDate = employee.IssuedDate.ToString("yyyy-MM-dd");
-                    employeeView.expireDate = employee.ExpireDate.ToString("yyyy-MM-dd");
-                    employeeView.highestEducation = employee.HighestEducation;
+                    memberView.id = member.ID;
+                    memberView.userID = member.UserID.Value;
+                    memberView.fullName = member.FullName;
+                    memberView.currentAddress = member.CurrentAddress;
+                    memberView.permanetAddress = member.PermanetAddress;
+                    memberView.nic = member.NIC;
+                    memberView.dob = member.DOB.ToString("yyyy-MM-dd");
+                    memberView.cetificateNo = member.TrainingCertificateNo;
+                    memberView.trainingCenter = member.TrainingCenter;
+                    memberView.licenceNo = member.LicenceNo;
+                    memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
+                    memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
+                    memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
+                    memberView.educationQuali = member.HighestEducation;
 
                 }
 
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { item = employeeView, messageCode = messageData };
+                var returnObject = new { item = memberView, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -63,34 +64,45 @@ namespace NTC.API.Controllers
         }
         #endregion
 
-        #region GetEmployee
+        #region AddEmployee
         [HttpGet]
-        public IHttpActionResult AddEmployee(EmployeeViewModel employer)
+        public IHttpActionResult AddEmployee(MemberViewModel memberView)
         {
             try
             {
-                Member employee = new Member();
-                if (employer != null)
+                string errorMessage = String.Empty;
+                Member member = new Member();
+                if (memberView != null)
                 {
-                    //employeeView.id = employee.ID;
-                    //employeeView.userID = employee.UserID;
-                    //employeeView.fullName = employee.User.FirstName + " " + employee.User.LastName;
-                    //employeeView.currentAddress = employee.User.CUrrentAddress;
-                    //employeeView.privateAddress = employee.User.PrivateAddress;
-                    //employeeView.nic = employee.User.NIC;
-                    //employeeView.dob = employee.User.DOB.ToString("yyyy-MM-dd");
-                    //employeeView.trainingCertificateNo = employee.TrainingCertificateNo;
-                    //employeeView.trainingCenter = employee.TrainingCenter;
-                    //employeeView.licenceNo = employee.LicenceNo;
-                    //employeeView.issuedDate = employee.IssuedDate.ToString("yyyy-MM-dd");
-                    //employeeView.expireDate = employee.ExpireDate.ToString("yyyy-MM-dd");
-                    //employeeView.highestEducation = employee.HighestEducation;
+                    member.NIC = memberView.nic;
+                    member.DOB = DateTime.Parse(memberView.dob);
+                    member.FullName = memberView.fullName;
+                    member.ShortName = memberView.nameWithInitial;
+                    member.PermanetAddress = memberView.permanetAddress;
+                    member.CurrentAddress = memberView.currentAddress;
+                    member.TrainingCertificateNo = memberView.cetificateNo;
+                    member.TrainingCenter = memberView.trainingCenter;
+                    member.LicenceNo = memberView.licenceNo;
+                    member.IssuedDate = DateTime.Parse(memberView.dateIssued);
+                    member.ExpireDate = DateTime.Parse(memberView.dateValidity);
+                    member.JoinDate = DateTime.Parse(memberView.dateJoin);
+                    member.HighestEducation = memberView.educationQuali;
+
+                    _member.Add(member,out errorMessage);
 
                 }
+                else
+                {
+                    errorMessage = Constant.MessageGeneralError;
+                }
 
-
-                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { item = "", messageCode = messageData };
+                var messageData = new
+                {
+                    code = String.IsNullOrEmpty(errorMessage) ? Constant.SuccessMessageCode : Constant.ErrorMessageCode
+                   ,
+                    message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
+                };
+                var returnObject = new { messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

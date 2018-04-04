@@ -11,14 +11,14 @@ namespace NTC.BusinessEntities
     {
         public Complain()
         {
-            Categories = new HashSet<Category>();
+            ComplainCategories = new HashSet<ComplainCategory>();
         }
         public int ID { get; set; }
         public string ComplainNo { get; set; }
         public int BusId { get; set; }
         public int RouteId { get; set; }
         public string Place { get; set; }
-        public string Time { get; set; }
+        public DateTime Date { get; set; }
         public string Method { get; set; }
         public string ComplainCode { get; set; }
         public string Description { get; set; }
@@ -26,6 +26,7 @@ namespace NTC.BusinessEntities
         public int? EvidenceId { get; set; }
         public int MemberId { get; set; }
         public bool IsEvidenceHave { get; set; }
+        public bool IsInqueryParticipation { get; set; }
         [ForeignKey("BusId")]
         public virtual Bus Bus { get; set; }
         [ForeignKey("RouteId")]
@@ -36,6 +37,6 @@ namespace NTC.BusinessEntities
         public virtual Member Member { get; set; }
         [ForeignKey("EvidenceId")]
         public virtual Evidence Evidence { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<ComplainCategory> ComplainCategories { get; set; }
     }
 }

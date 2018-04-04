@@ -9,6 +9,7 @@ namespace NTC.InterfaceServices
 {
     public interface IComplainService:IEntityService<Complain>
     {
-        Complain GetComplainByNo(string complainNo);
+        IEnumerable<Complain> GetComplainNo(int userId);
+        Complain GetComplainByNo(string complainNo, int userId);
     }
 }

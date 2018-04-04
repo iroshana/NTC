@@ -26,5 +26,6 @@ namespace NTC.BusinessEntities
         public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<MemberNotice> MemberNotices { get; set; }
+        public virtual DbSet<ComplainCategory> ComplainCategories { get; set; }
     }
 }

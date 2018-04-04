@@ -10,12 +10,12 @@ namespace NTC.BusinessEntities
     {
         public Category()
         {
-            Complains = new HashSet<Complain>();
+            ComplainCategories = new HashSet<ComplainCategory>();
         }
         public int ID { get; set; }
         public string CategoryNo { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Complain> Complains { get; set; }
+        public virtual ICollection<ComplainCategory> ComplainCategories { get; set; }
 
     }
 }
