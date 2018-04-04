@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTC.BusinessEntities
 {
-    public partial class EmployeeNotice
+    public partial class MemberNotice
     {
         public int ID { get; set; }
         public int EmployeeId { get; set; }
@@ -15,7 +15,7 @@ namespace NTC.BusinessEntities
         public bool IsSent { get; set; }
         public bool  IsOpened { get; set; }
         [ForeignKey("EmployeeId")]
-        public virtual Employee Employee { get; set; }
+        public virtual Member Employee { get; set; }
         [ForeignKey("NoticeId")]
         public virtual Notice Notice { get; set; }
 

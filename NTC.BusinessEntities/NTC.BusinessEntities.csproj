@@ -53,8 +53,8 @@
     <Compile Include="Category.cs" />
     <Compile Include="Complain.cs" />
     <Compile Include="DeMerit.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="EmployeeType.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="MemberType.cs" />
     <Compile Include="LoginHistory.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Migrations\201804010608045_Initial.cs" />
@@ -69,8 +69,16 @@
     <Compile Include="Migrations\201804040151067_employeechanges.designer.cs">
       <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804041118223_meritcolorcode.cs" />
+    <Compile Include="Migrations\201804041118223_meritcolorcode.Designer.cs">
+      <DependentUpon>201804041118223_meritcolorcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804041121062_TableNameChange.cs" />
+    <Compile Include="Migrations\201804041121062_TableNameChange.Designer.cs">
+      <DependentUpon>201804041121062_TableNameChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="EmployeeNotice.cs" />
+    <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
     <Compile Include="Merit.cs" />
     <Compile Include="Notice.cs" />
@@ -93,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804040151067_employeechanges.resx">
       <DependentUpon>201804040151067_employeechanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041118223_meritcolorcode.resx">
+      <DependentUpon>201804041118223_meritcolorcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041121062_TableNameChange.resx">
+      <DependentUpon>201804041121062_TableNameChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

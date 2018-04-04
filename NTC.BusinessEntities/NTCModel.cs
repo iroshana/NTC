@@ -16,8 +16,8 @@ namespace NTC.BusinessEntities
         public virtual DbSet<Bus> Buses { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Complain> Complains { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<MemberType> MemberTypes { get; set; }
         public virtual DbSet<DeMerit> DeMerits { get; set; }
         public virtual DbSet<Evidence> Evidences { get; set; }
         public virtual DbSet<Merit> Merits { get; set; }
@@ -25,5 +25,6 @@ namespace NTC.BusinessEntities
         public virtual DbSet<Officer> Officers { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MemberNotice> MemberNotices { get; set; }
     }
 }

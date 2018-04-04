@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NTC.InterfaceServices
 {
-    public interface IEmployeeService:IEntityService<Employee>
+    public interface IEmployeeService:IEntityService<Member>
     {
-        Employee GetEmployee(int Id);
+        Member GetEmployee(int Id);
     }
 }

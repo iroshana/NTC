@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace NTC.BusinessEntities
 {
-    public partial class EmployeeType
+    public partial class MemberType
     {
-        public EmployeeType()
+        public MemberType()
         {
-            Employees = new HashSet<Employee>();
+            Employees = new HashSet<Member>();
         }
         public int ID { get; set; }
         public string Code { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Member> Employees { get; set; }
     }
 }

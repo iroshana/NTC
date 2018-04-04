@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace NTC.Services
 {
-    public class EmployeeService:EntityService<Employee>,IEmployeeService
+    public class EmployeeService:EntityService<Member>,IEmployeeService
     {
         #region Member Variables
 
         protected IUnitOfWork _unitOfWork;
-        protected IEmployeeRepository _employeeRepository;
+        protected IMemberRepository _employeeRepository;
 
         #endregion Member Variables
 
 
-        public EmployeeService(IUnitOfWork unitOfWork, IEmployeeRepository employeeRepository)
+        public EmployeeService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository)
             :base(unitOfWork, employeeRepository)
         {
             try
@@ -33,7 +33,7 @@ namespace NTC.Services
             }
         }
         #region GetEmployee
-        public Employee GetEmployee(int Id)
+        public Member GetEmployee(int Id)
         {
             try
             {

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NTC.BusinessObjects.Repositories
 {
-    public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
+    public class MemberRepository : RepositoryBase<Member>, IMemberRepository
     {
-        public EmployeeRepository(IDbFactory dbFactory) : base(dbFactory)
+        public MemberRepository(IDbFactory dbFactory) : base(dbFactory)
         {
 
         }

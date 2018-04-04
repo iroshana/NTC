@@ -53,8 +53,8 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\ComplainRepository.cs" />
     <Compile Include="Repositories\DeMeritRepository.cs" />
-    <Compile Include="Repositories\EmployeeNoticeRepository.cs" />
-    <Compile Include="Repositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\MemberNoticeRepository.cs" />
+    <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\Infrastructure\DbFactory.cs" />
     <Compile Include="Repositories\Infrastructure\Disposable.cs" />
     <Compile Include="Repositories\Infrastructure\IDbFactory.cs" />
@@ -65,8 +65,8 @@
     <Compile Include="Repositories\Interface\ICategoryRepository.cs" />
     <Compile Include="Repositories\Interface\IComplainRepository.cs" />
     <Compile Include="Repositories\Interface\IDeMeritRepository.cs" />
-    <Compile Include="Repositories\Interface\IEmployeeNoticeRepository.cs" />
-    <Compile Include="Repositories\Interface\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\Interface\IMemberNoticeRepository.cs" />
+    <Compile Include="Repositories\Interface\IMemberRepository.cs" />
     <Compile Include="Repositories\Interface\ILogmessageRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
     <Compile Include="Repositories\LogmessageRepository.cs" />

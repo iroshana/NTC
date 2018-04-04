@@ -33,7 +33,7 @@ namespace NTC.BusinessEntities
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         [ForeignKey("EmployeeId")]
-        public virtual Employee Employee { get; set; }
+        public virtual Member Employee { get; set; }
         [ForeignKey("EvidenceId")]
         public virtual Evidence Evidence { get; set; }
         public virtual ICollection<Category> Categories { get; set; }

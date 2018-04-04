@@ -22,7 +22,7 @@ namespace NTC.BusinessEntities
         [ForeignKey("RouteId")]
         public virtual Route Route { get; set; }
         [ForeignKey("EmployeeId")]
-        public virtual Employee Employee { get; set; }
+        public virtual Member Employee { get; set; }
         [ForeignKey("OfficeriId")]
         public virtual Officer Officer { get; set; }
         [ForeignKey("MeritId")]

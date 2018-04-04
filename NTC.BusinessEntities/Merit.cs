@@ -15,6 +15,8 @@ namespace NTC.BusinessEntities
         public int ID { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
+        public int Point { get; set; }
+        public int ColorCodeId { get; set; }
         public virtual ICollection<DeMerit> DeMerits { get; set; }
 
     }

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace NTC.BusinessEntities
 {
-    public partial class Employee
+    public partial class Member
     {
-        public Employee()
+        public Member()
         {
             DeMerits = new HashSet<DeMerit>();
-            WorkerNotices = new HashSet<EmployeeNotice>();
+            WorkerNotices = new HashSet<MemberNotice>();
         }
         public int ID { get; set; }
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
         public int TypeId { get; set; }
         public string TrainingCertificateNo { get; set; }
         public string LicenceNo { get; set; }
@@ -28,8 +28,8 @@ namespace NTC.BusinessEntities
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
         [ForeignKey("TypeId")]
-        public virtual EmployeeType EmployeeType { get; set; }
+        public virtual MemberType EmployeeType { get; set; }
         public virtual ICollection<DeMerit> DeMerits { get; set; }
-        public virtual ICollection<EmployeeNotice> WorkerNotices { get; set; }
+        public virtual ICollection<MemberNotice> WorkerNotices { get; set; }
     }
 }

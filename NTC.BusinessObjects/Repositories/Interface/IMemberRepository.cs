@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTC.BusinessObjects.Repositories
 {
-    public interface IEmployeeNoticeRepository:IRepository<EmployeeNotice>
+    public interface IMemberRepository:IRepository<Member>
     {
     }
 }
