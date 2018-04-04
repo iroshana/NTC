@@ -56,5 +56,11 @@ namespace NTC.Services
                 throw ex;
             }
         }
+
+        public void Add(Complain complain, out string errorMessage)
+        {
+            errorMessage = String.Empty;
+            base.Add(complain);
+        }
     }
 }
