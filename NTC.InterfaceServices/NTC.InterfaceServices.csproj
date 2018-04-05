@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICommonDataService.cs" />
     <Compile Include="IComplainService.cs" />
     <Compile Include="IMemberService.cs" />
     <Compile Include="IEntityService.cs" />

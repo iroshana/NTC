@@ -49,6 +49,7 @@ namespace NTC.ViewModels
     {
         public int id { get; set; }
         public string busNo { get; set; }
+        public RouteViewModel route { get; set; }
     }
     public class RouteViewModel
     {

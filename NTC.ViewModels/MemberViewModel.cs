@@ -41,4 +41,9 @@ namespace NTC.ViewModels
         public string notification2 { get; set; }
         public string notification3 { get; set; }
     }
+    public class MemberTypeViewModel
+    {
+        public int id { get; set; }
+        public string code { get; set; }
+    }
 }

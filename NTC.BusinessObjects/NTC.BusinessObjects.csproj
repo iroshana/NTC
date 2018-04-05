@@ -50,9 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BusRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\ComplainRepository.cs" />
     <Compile Include="Repositories\DeMeritRepository.cs" />
+    <Compile Include="Repositories\EvidenceRepository.cs" />
+    <Compile Include="Repositories\Interface\IBusRepository.cs" />
+    <Compile Include="Repositories\Interface\IEvidenceRepository.cs" />
+    <Compile Include="Repositories\Interface\IMemberTypeRepository.cs" />
     <Compile Include="Repositories\MemberNoticeRepository.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\Infrastructure\DbFactory.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="Repositories\Interface\ILogmessageRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
     <Compile Include="Repositories\LogmessageRepository.cs" />
+    <Compile Include="Repositories\MemberTypeRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />

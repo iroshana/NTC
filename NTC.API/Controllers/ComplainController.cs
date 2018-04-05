@@ -15,11 +15,14 @@ namespace NTC.API.Controllers
     {
         private readonly IComplainService _complain;
         private readonly IEventLogService _eventLog;
+        private readonly ICommonDataService _commonData;
 
-        public ComplainController(IEventLogService eventLog, IComplainService complain)
+
+        public ComplainController(IEventLogService eventLog, IComplainService complain, ICommonDataService commonData)
         {
             _complain = complain;
             _eventLog = eventLog;
+            _commonData = commonData;
         }
 
         #region GetComplainByNo
@@ -88,8 +91,9 @@ namespace NTC.API.Controllers
                         complain.Evidence.EvidenceNo = complainView.evidence.evidenceNo;
                         complain.Evidence.Extension = complainView.evidence.extension;
                         complain.Evidence.FilePath = complainView.evidence.filePath;
+                        complain.EvidenceId = complain.Evidence.ID;
                     }
-
+                    
                     foreach (ComplainCategoryViewModel complainCategory in complainView.complainCategory)
                     {
                         ComplainCategory category = new ComplainCategory();
@@ -104,6 +108,124 @@ namespace NTC.API.Controllers
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { complain = complainView, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region SearchBus
+        [HttpGet]
+        public IHttpActionResult SearchBus(string busNo)
+        {
+            try
+            {
+                List<BusViewModel> busViewModel = new List<BusViewModel>();
+                IEnumerable<Bus> buses = new List<Bus>();
+                buses = _commonData.SearchBuses(busNo);
+                if (buses != null)
+                {
+                    foreach (Bus bus in buses)
+                    {
+                        BusViewModel busVM = new BusViewModel();
+                        busVM.id = bus.ID;
+                        busVM.busNo = bus.LicenceNo;
+                        busVM.route = new RouteViewModel();
+                        if (bus.Route != null)
+                        {
+                            busVM.route.id = bus.Route.ID;
+                            busVM.route.routeNo = bus.Route.RouteNo;
+                            busVM.route.from = bus.Route.From;
+                            busVM.route.to = bus.Route.To;
+                        }
+
+                        busViewModel.Add(busVM);
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { bus = busViewModel, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetBusByNo
+        [HttpGet]
+        public IHttpActionResult GetBusByNo(string busNo)
+        {
+            try
+            {
+                BusViewModel busVM = new BusViewModel();
+                Bus bus = new Bus();
+                bus = _commonData.GetBusByNo(busNo);
+                if (bus != null)
+                {
+                    busVM.id = bus.ID;
+                    busVM.busNo = bus.LicenceNo;
+                    busVM.route = new RouteViewModel();
+                    if (bus.Route != null)
+                    {
+                        busVM.route.id = bus.Route.ID;
+                        busVM.route.routeNo = bus.Route.RouteNo;
+                        busVM.route.from = bus.Route.From;
+                        busVM.route.to = bus.Route.To;
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { bus = busVM, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetAllCategorties
+        [HttpGet]
+        public IHttpActionResult GetAllCategorties()
+        {
+            try
+            {
+                List<CategoryViewModel> categoryVM = new List<CategoryViewModel>();
+                IEnumerable<Category> category = new List<Category>();
+
+                category = _commonData.GetAllCategories();
+
+                if (category.Count()>0)
+                {
+                    foreach (Category cat in category)
+                    {
+                        CategoryViewModel categoryView = new CategoryViewModel();
+                        categoryView.id = cat.ID;
+                        categoryView.categoryNo = cat.CategoryNo;
+                        categoryView.description = cat.Description;
+
+                        categoryVM.Add(categoryView);
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { categories = categoryVM, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
