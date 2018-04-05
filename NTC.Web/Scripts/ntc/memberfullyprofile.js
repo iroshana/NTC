@@ -34,6 +34,7 @@ var MemberDetails = new Vue({
             dateJoin: '',
             image: {},
             imagePath: "",
+            type:''
         },
         complainList: [],
         complainMgt: {
@@ -55,6 +56,9 @@ var MemberDetails = new Vue({
                 note: ''
             }
             $('#noticeModal').modal('show');
+        },
+        getMemberDetails: function (id) {
+
         }
     },
     mounted() {

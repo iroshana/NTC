@@ -110,7 +110,7 @@ namespace NTC.API.Controllers
         #endregion
 
         #region AddEmployee
-        [HttpGet]
+        [HttpPost]
         public IHttpActionResult AddEmployee(MemberViewModel memberView)
         {
             try
