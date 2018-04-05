@@ -48,6 +48,49 @@ namespace NTC.API.Controllers
                     memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
                     memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
                     memberView.educationQuali = member.HighestEducation;
+                    memberView.type = member.MemberType.Code;
+                }
+
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { item = memberView, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetMember
+        [HttpGet]
+        public IHttpActionResult GetAllMember(int Id)
+        {
+            try
+            {
+                MemberViewModel memberView = new MemberViewModel();
+                Member member = new Member();
+                member = _member.GetEmployee(Id);
+                if (member != null)
+                {
+                    memberView.id = member.ID;
+                    memberView.userID = member.UserID.Value;
+                    memberView.fullName = member.FullName;
+                    memberView.currentAddress = member.CurrentAddress;
+                    memberView.permanetAddress = member.PermanetAddress;
+                    memberView.nic = member.NIC;
+                    memberView.dob = member.DOB.ToString("yyyy-MM-dd");
+                    memberView.cetificateNo = member.TrainingCertificateNo;
+                    memberView.trainingCenter = member.TrainingCenter;
+                    memberView.licenceNo = member.LicenceNo;
+                    memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
+                    memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
+                    memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
+                    memberView.educationQuali = member.HighestEducation;
 
                 }
 
@@ -90,7 +133,7 @@ namespace NTC.API.Controllers
                     member.JoinDate = DateTime.Parse(memberView.dateJoin);
                     member.HighestEducation = memberView.educationQuali;
 
-                    _member.Add(member,out errorMessage);
+                    _member.Add(member, out errorMessage);
 
                 }
                 else
@@ -138,7 +181,7 @@ namespace NTC.API.Controllers
                     }
 
                 }
-                
+
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { types = memberType, messageCode = messageData };
                 return Ok(returnObject);
