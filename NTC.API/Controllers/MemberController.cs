@@ -31,7 +31,7 @@ namespace NTC.API.Controllers
             {
                 MemberViewModel memberView = new MemberViewModel();
                 Member member = new Member();
-                member = _member.GetEmployee(Id);
+                member = _member.GetMember(Id);
                 if (member != null)
                 {
                     memberView.id = member.ID;
@@ -53,7 +53,7 @@ namespace NTC.API.Controllers
 
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { item = memberView, messageCode = messageData };
+                var returnObject = new { member = memberView, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -72,31 +72,35 @@ namespace NTC.API.Controllers
         {
             try
             {
-                MemberViewModel memberView = new MemberViewModel();
-                Member member = new Member();
-                member = _member.GetEmployee(Id);
-                if (member != null)
+                List<MemberViewModel> memberList = new List<MemberViewModel>();
+                IEnumerable<Member> members = new List<Member>();
+                members = _member.GetAllMembers();
+                if (members != null)
                 {
-                    memberView.id = member.ID;
-                    memberView.userID = member.UserID.Value;
-                    memberView.fullName = member.FullName;
-                    memberView.currentAddress = member.CurrentAddress;
-                    memberView.permanetAddress = member.PermanetAddress;
-                    memberView.nic = member.NIC;
-                    memberView.dob = member.DOB.ToString("yyyy-MM-dd");
-                    memberView.cetificateNo = member.TrainingCertificateNo;
-                    memberView.trainingCenter = member.TrainingCenter;
-                    memberView.licenceNo = member.LicenceNo;
-                    memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
-                    memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
-                    memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
-                    memberView.educationQuali = member.HighestEducation;
+                    foreach (Member member in members)
+                    {
+                        MemberViewModel memberView = new MemberViewModel();
+                        memberView.id = member.ID;
+                        memberView.userID = member.UserID.Value;
+                        memberView.fullName = member.FullName;
+                        memberView.currentAddress = member.CurrentAddress;
+                        memberView.permanetAddress = member.PermanetAddress;
+                        memberView.nic = member.NIC;
+                        memberView.dob = member.DOB.ToString("yyyy-MM-dd");
+                        memberView.cetificateNo = member.TrainingCertificateNo;
+                        memberView.trainingCenter = member.TrainingCenter;
+                        memberView.licenceNo = member.LicenceNo;
+                        memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
+                        memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
+                        memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
+                        memberView.educationQuali = member.HighestEducation;
 
+                        memberList.Add(memberView);
+                    }
                 }
-
-
+                
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { item = memberView, messageCode = messageData };
+                var returnObject = new { members = memberList, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

@@ -33,7 +33,7 @@ namespace NTC.Services
             }
         }
         #region GetEmployee
-        public Member GetEmployee(int Id)
+        public Member GetMember(int Id)
         {
             try
             {
@@ -66,6 +66,19 @@ namespace NTC.Services
             {
 
                 throw ex;
+            }
+        }
+
+        public IEnumerable<Member> GetAllMembers()
+        {
+            try
+            {
+                return base.GetAll().ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
         #endregion

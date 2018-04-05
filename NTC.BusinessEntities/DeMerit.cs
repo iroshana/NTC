@@ -14,6 +14,7 @@ namespace NTC.BusinessEntities
             MemberDeMerits = new HashSet<MemberDeMerit>();
         }
         public int ID { get; set; }
+        public string DeMeritNo { get; set; }
         public int MemberId { get; set; }
         public int RouteId { get; set; }
         public DateTime InqueryDate { get; set; }

@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201804041536201_categorychanges.Designer.cs">
       <DependentUpon>201804041536201_categorychanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804051758585_complainchange.cs" />
+    <Compile Include="Migrations\201804051758585_complainchange.Designer.cs">
+      <DependentUpon>201804051758585_complainchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804041536201_categorychanges.resx">
       <DependentUpon>201804041536201_categorychanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804051758585_complainchange.resx">
+      <DependentUpon>201804051758585_complainchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

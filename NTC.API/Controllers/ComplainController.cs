@@ -94,10 +94,10 @@ namespace NTC.API.Controllers
                         complain.EvidenceId = complain.Evidence.ID;
                     }
                     
-                    foreach (ComplainCategoryViewModel complainCategory in complainView.complainCategory)
+                    foreach (CategoryViewModel complainCategory in complainView.Category)
                     {
                         ComplainCategory category = new ComplainCategory();
-                        category.CategoryId = complainCategory.categoryId;
+                        category.CategoryId = complainCategory.id;
                         category.ComplainId = complain.ID;
                         category.Description = String.IsNullOrEmpty(complainCategory.description)?String.Empty: complainCategory.description;
 
