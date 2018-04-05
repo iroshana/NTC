@@ -1,4 +1,18 @@
-﻿
+﻿var msgAlert = new Vue({
+    el: "#alertModal",
+    data: {
+        isSuccess: true,
+        alertMessage: "",
+        modalShown: false,
+        header: ''
+    },
+    methods: {
+        showModal: function () {
+            this.header = this.isSuccess ? "Success!" : "Error!";
+            $("#alertModal").modal('show');
+        }
+    }
+});
 
 var DashBoard = new Vue({
     el: '#dash',
@@ -8,9 +22,31 @@ var DashBoard = new Vue({
         }
     },
     methods: {
-
+        getDashboardData: function () {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + '').then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    //this.memeberTypeList = response.body.
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        }
     },
     mounted() {
+        //this.getDashboardData();
+
         $('#driverMonth').datepicker({
             dateFormat: 'yy-mm-dd',
             showOtherMonths: true,

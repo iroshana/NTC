@@ -19,7 +19,7 @@ var Memeber = new Vue({
     data: {
         memeber: {
             id: '',
-            type:'',
+            type: {},
             nicNo: '',
             dob: '',
             fullName: '',
@@ -37,7 +37,8 @@ var Memeber = new Vue({
             imagePath: "",
         },
         submitted: false,
-        isResultShow: true
+        isResultShow: true,
+        memeberTypeList: []
     },
     methods: {
         validate: function () {
@@ -49,16 +50,37 @@ var Memeber = new Vue({
                 formData.append('nic', this.memeber.nicNo);
                 formData.append('uploadedFileName', "");
                 formData.append('fileExtension', '.png');
-                //this.submitMemeber();
+                this.submitMemeber();
             }
         },
         submitMemeber: function () {
             $('#spinner').css("display", "block");
-            this.$http.post(apiURL + '', this.memeber).then(function (response) {
+            this.$http.post(apiURL + 'api/Member/AddEmployee', this.memeber).then(function (response) {
                 if (response.body.messageCode.code == 1) {                    
                     msgAlert.isSuccess = true;
                     msgAlert.alertMessage = "Member Save Successfully.";
                     msgAlert.showModal();
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        },
+        getMemberTypeList: function () {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + '').then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    //this.memeberTypeList = response.body.
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;

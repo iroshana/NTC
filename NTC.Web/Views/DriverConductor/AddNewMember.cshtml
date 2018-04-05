@@ -56,8 +56,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Member Type<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <select class="form-control" v-model="memeber.type">
-                                                <option value="Driver" selected="selected">Driver</option>
-                                                <option value="Conductor">Conductor</option>
+                                                <option v-for="type in memeberTypeList" v-bind:value="type">{{type.code}}</option>
                                             </select>
                                         </div>
                                     </div>
