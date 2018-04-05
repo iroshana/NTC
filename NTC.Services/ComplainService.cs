@@ -15,17 +15,19 @@ namespace NTC.Services
 
         protected IUnitOfWork _unitOfWork;
         protected IComplainRepository _complainRepository;
+        protected IEvidenceRepository _evideneceRepository;
 
         #endregion Member Variables
 
 
-        public ComplainService(IUnitOfWork unitOfWork, IComplainRepository complainRepository)
+        public ComplainService(IUnitOfWork unitOfWork, IComplainRepository complainRepository, IEvidenceRepository evideneceRepository)
             :base(unitOfWork, complainRepository)
         {
             try
             {
                 _unitOfWork = unitOfWork;
                 _complainRepository = complainRepository;
+                _evideneceRepository = evideneceRepository;
             }
             catch (Exception ex)
             {
@@ -59,8 +61,31 @@ namespace NTC.Services
 
         public void Add(Complain complain, out string errorMessage)
         {
-            errorMessage = String.Empty;
-            base.Add(complain);
+            try
+            {
+                using (var dbContextTransaction = _complainRepository.DbContext.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        _evideneceRepository.Add(complain.Evidence);
+                        errorMessage = String.Empty;
+                        base.Add(complain);
+                        dbContextTransaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        dbContextTransaction.Rollback();
+                        throw ex;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+            
         }
     }
 }

@@ -15,11 +15,13 @@ namespace NTC.API.Controllers
     {
         private readonly IMemberService _member;
         private readonly IEventLogService _eventLog;
+        private readonly ICommonDataService _common;
 
-        public MemberController(IMemberService member, IEventLogService eventLog)
+        public MemberController(IMemberService member, IEventLogService eventLog, ICommonDataService common)
         {
             _member = member;
             _eventLog = eventLog;
+            _common = common;
         }
         #region GetMember
         [HttpGet]
@@ -103,6 +105,42 @@ namespace NTC.API.Controllers
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
                 var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetAllMemberTypes
+        [HttpGet]
+        public IHttpActionResult GetAllMemberTypes()
+        {
+            try
+            {
+                List<MemberTypeViewModel> memberType = new List<MemberTypeViewModel>();
+                IEnumerable<MemberType> types = new List<MemberType>();
+                types = _common.GetAllMemberTypes();
+                if (types.Count() > 0)
+                {
+                    foreach (MemberType type in types)
+                    {
+                        MemberTypeViewModel typeView = new MemberTypeViewModel();
+                        typeView.id = type.ID;
+                        typeView.code = type.Code;
+
+                        memberType.Add(typeView);
+                    }
+
+                }
+                
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { types = memberType, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
