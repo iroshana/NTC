@@ -1,5 +1,5 @@
 ﻿var webURL = 'http://localhost/NTC.Web/';
-var apiURL = '';
+var apiURL = 'http://localhost/NTC.API/';
 var imageURL = 'http://localhost/NTC.Web/Images';
 
 

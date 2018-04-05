@@ -78,9 +78,9 @@ var Memeber = new Vue({
         },
         getMemberTypeList: function () {
             $('#spinner').css("display", "block");
-            this.$http.get(apiURL + '').then(function (response) {
+            this.$http.get(apiURL + 'api/Member/GetAllMemberTypes').then(function (response) {
                 if (response.body.messageCode.code == 1) {
-                    //this.memeberTypeList = response.body.
+                    this.memeberTypeList = response.body.types;
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -99,6 +99,8 @@ var Memeber = new Vue({
         }
     },
     mounted() {
+        this.getMemberTypeList();
+
         $('#dob').datepicker({
             dateFormat: 'yy-mm-dd',
             showOtherMonths: true,
@@ -129,22 +131,22 @@ var Memeber = new Vue({
         });
 
         $('#dob').on('change', function () {
-            this.memeber.dob = $('#dob').val();
+            Memeber.memeber.dob = $('#dob').val();
             $(this).datepicker('hide');
         });
 
         $('#dateIssued').on('change', function () {
-            this.memeber.dateIssued = $('#dateIssued').val();
+            Memeber.memeber.dateIssued = $('#dateIssued').val();
             $(this).datepicker('hide');
         });
 
         $('#dateValidity').on('change', function () {
-            this.memeber.dateValidity = $('#dateValidity').val();
+            Memeber.memeber.dateValidity = $('#dateValidity').val();
             $(this).datepicker('hide');
         });
 
         $('#dateJoined').on('change', function () {
-            this.memeber.dateJoin = $('#dateJoined').val();
+            Memeber.memeber.dateJoin = $('#dateJoined').val();
             $(this).datepicker('hide');
         });
 
@@ -158,7 +160,7 @@ var Memeber = new Vue({
                 initials += x[i].charAt(0).toUpperCase() + " ";
             }
             //$('#initial').val(initials + ' ' + x[a - 1].toString());
-            this.memeber.nameWithInitial = initials + ' ' + x[a - 1].toString();
+            Memeber.memeber.nameWithInitial = initials + ' ' + x[a - 1].toString();
         });
 
         //$(document).ready(function(){
