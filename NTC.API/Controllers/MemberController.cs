@@ -37,6 +37,7 @@ namespace NTC.API.Controllers
                     memberView.id = member.ID;
                     memberView.userID = member.UserID == null ? 0:member.UserID.Value;
                     memberView.fullName = String.IsNullOrEmpty(member.FullName)? String.Empty: member.FullName;
+                    memberView.nameWithInitial = String.IsNullOrEmpty(member.ShortName) ? String.Empty : member.ShortName;
                     memberView.currentAddress = String.IsNullOrEmpty(member.CurrentAddress)? String.Empty : member.CurrentAddress;
                     memberView.permanetAddress = String.IsNullOrEmpty(member.PermanetAddress)? String.Empty : member.PermanetAddress;
                     memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
@@ -83,6 +84,7 @@ namespace NTC.API.Controllers
                         memberView.id = member.ID;
                         memberView.userID = member.UserID == null ? 0 : member.UserID.Value;
                         memberView.fullName = String.IsNullOrEmpty(member.FullName) ? String.Empty : member.FullName;
+                        memberView.nameWithInitial = String.IsNullOrEmpty(member.ShortName) ? String.Empty : member.ShortName;
                         memberView.currentAddress = String.IsNullOrEmpty(member.CurrentAddress) ? String.Empty : member.CurrentAddress;
                         memberView.permanetAddress = String.IsNullOrEmpty(member.PermanetAddress) ? String.Empty : member.PermanetAddress;
                         memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
