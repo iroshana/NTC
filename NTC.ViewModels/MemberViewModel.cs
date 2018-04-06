@@ -23,6 +23,7 @@ namespace NTC.ViewModels
         public int userID { get; set; }
         [Required]
         public int typeId { get; set; }
+        public string type { get; set; }
         public string cetificateNo { get; set; }
         public string licenceNo { get; set; }
         public string trainingCenter { get; set; }

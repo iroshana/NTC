@@ -22,7 +22,7 @@ namespace NTC.BusinessEntities
         public string Method { get; set; }
         public string ComplainCode { get; set; }
         public string Description { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public int? EvidenceId { get; set; }
         public int MemberId { get; set; }
         public bool IsEvidenceHave { get; set; }

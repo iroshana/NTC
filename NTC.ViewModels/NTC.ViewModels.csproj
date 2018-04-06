@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ComplainViewModel.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="DeMeritViewModel.cs" />
     <Compile Include="MemberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

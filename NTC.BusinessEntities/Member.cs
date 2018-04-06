@@ -41,7 +41,7 @@ namespace NTC.BusinessEntities
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
         [ForeignKey("TypeId")]
-        public virtual MemberType EmployeeType { get; set; }
+        public virtual MemberType MemberType { get; set; }
         public virtual ICollection<DeMerit> DeMerits { get; set; }
         public virtual ICollection<MemberNotice> WorkerNotices { get; set; }
     }

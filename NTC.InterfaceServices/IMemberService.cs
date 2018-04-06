@@ -9,7 +9,8 @@ namespace NTC.InterfaceServices
 {
     public interface IMemberService:IEntityService<Member>
     {
-        Member GetEmployee(int Id);
+        Member GetMember(int Id);
+        IEnumerable<Member> GetAllMembers();
         void Add(Member member, out string erroeMessage);
     }
 }

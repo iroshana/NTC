@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace NTC.BusinessEntities
         public string NoticeCode { get; set; }
         public string Content { get; set; }
         public string Type { get; set; }
+        public int? MemberId { get; set; }
+        [ForeignKey("MemberId")]
+        public virtual Member Member { get; set; }
         public virtual ICollection<MemberNotice> MemberNotices { get; set; }
 
     }
