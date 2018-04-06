@@ -19,7 +19,7 @@ var MemberDetails = new Vue({
     data: {
         memeber: {
             id: '',
-            nicNo: '',
+            nic: '',
             dob: '',
             fullName: '',
             nameWithInitial: '',
@@ -65,7 +65,7 @@ var MemberDetails = new Vue({
                 }
             }).then(function (response) {
                 if (response.body.messageCode.code == 1) {
-                    this.memeber = response.body.item;
+                    this.memeber = response.body.member;
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -84,7 +84,8 @@ var MemberDetails = new Vue({
         }
     },
     mounted() {        
-        //this.getMemberDetails(getUrlParameter("memberId"));
+        this.getMemberDetails(getUrlParameter("memberId"));
+        //this.getMemberDetails(7);
     }
 });
 
