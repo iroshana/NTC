@@ -4,7 +4,7 @@
 }
 
 <!-- page content -->
-<div class="right_col" role="main">
+<div class="right_col" role="main" id="complain">
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -29,29 +29,29 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Bus No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Bus No">
+                                            <input type="text" class="form-control" placeholder="Enter Bus No" v.model="complainVm.bus">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Route No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Bus No">
+                                            <input type="text" class="form-control" placeholder="Enter Route No" readonly="readonly" v-model="complainVm.bus.route.routeNo">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">From</label>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="">
+                                            <input type="text" class="form-control" placeholder="" readonly="readonly" v-model="complainVm.bus.route.from">
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">To</label>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="">
+                                            <input type="text" class="form-control" placeholder="" readonly="readonly" v-model="complainVm.bus.route.to">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Place of Complain</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Place of Complain">
+                                            <input type="text" class="form-control" placeholder="Enter Place of Complain" v-model="complainVm.place">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -133,3 +133,6 @@
     </div>
 </div>
 <!-- /page content -->
+
+<script src="~/Scripts/ntc/addcomplain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>

@@ -15,7 +15,7 @@
 });
 
 var MemberDetails = new Vue({
-    el:'#fullyDetails',
+    el: '#fullyDetails',
     data: {
         memeber: {
             id: '',
@@ -34,11 +34,11 @@ var MemberDetails = new Vue({
             dateJoin: '',
             image: {},
             imagePath: "",
-            type:''
+            type: ''
         },
         complainList: [],
         complainMgt: {
-            complain:{}
+            complain: {}
         },
         deMeritRecordList: [],
         demeritNo: '',
@@ -58,11 +58,33 @@ var MemberDetails = new Vue({
             $('#noticeModal').modal('show');
         },
         getMemberDetails: function (id) {
-
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/Member/GetMember', {
+                params: {
+                    id:  id
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.memeber = response.body.item;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
         }
     },
-    mounted() {
-
+    mounted() {        
+        //this.getMemberDetails(getUrlParameter("memberId"));
     }
 });
 
@@ -81,8 +103,29 @@ var NoticeModal = new Vue({
             this.submit = true;
             if (this.noticeVm.note) {
                 this.submit = false;
-                MemberDetails.noticeList.push(this.noticeVm);
-                $('#noticeModal').modal('hide');
+                $('#spinner').css("display", "block");
+                this.$http.post(apiURL + 'api//', this.noticeVm).then(function (response) {
+                    if (response.body.messageCode.code == 1) {
+                        MemberDetails.noticeList.push(this.noticeVm);
+                        $('#noticeModal').modal('hide');
+                        msgAlert.isSuccess = true;
+                        msgAlert.alertMessage = "Notice Save Successfully.";
+                        msgAlert.showModal();
+                    } else {
+                        msgAlert.isSuccess = false;
+                        msgAlert.alertMessage = response.body.messageCode.message;
+                        msgAlert.showModal();
+                    }
+                    $('#spinner').css("display", "none");
+                }).catch(function (response) {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.statusText;
+                    msgAlert.showModal();
+                    $('#spinner').css("display", "none");
+                    if (response.statusText == "Unauthorized") {
+                        $(location).attr('href', webURL + 'Account/Login');
+                    }
+                });                
             }
         }
     }
