@@ -14,6 +14,7 @@ namespace NTC.ViewModels
         [Required]
         public string fullName { get; set; }
         public string nameWithInitial { get; set; }
+        [Required]
         public string dob { get; set; }
         public string permanetAddress { get; set; }
         public string currentAddress { get; set; }

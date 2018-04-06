@@ -37,7 +37,7 @@ namespace NTC.Services
         {
             try
             {
-                return base.GetAll(x=>x.User.ID == Id).FirstOrDefault();
+                return base.GetAll(x=>x.ID == Id).FirstOrDefault();
             }
             catch (Exception ex)
             {

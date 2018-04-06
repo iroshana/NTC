@@ -43,7 +43,7 @@ namespace NTC.Services
             LogMessage errorLog = new LogMessage();
             errorLog.ApplicationName = applicationName;
             errorLog.Message = String.Format("{0} {1}", exception.Message, exception.StackTrace);
-            errorLog.User = "Arjuna";
+            errorLog.User = "Tharindu";
             errorLog.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
 
             _logMessageRepository.Add(errorLog);
