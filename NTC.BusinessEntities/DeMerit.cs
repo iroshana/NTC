@@ -25,7 +25,7 @@ namespace NTC.BusinessEntities
         [ForeignKey("RouteId")]
         public virtual Route Route { get; set; }
         [ForeignKey("MemberId")]
-        public virtual Member Employee { get; set; }
+        public virtual Member Member { get; set; }
         [ForeignKey("OfficeriId")]
         public virtual Officer Officer { get; set; }
         public virtual ICollection<MemberDeMerit> MemberDeMerits { get; set; }

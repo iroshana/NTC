@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CommonDataService.cs" />
     <Compile Include="ComplainService.cs" />
+    <Compile Include="DeMeritService.cs" />
     <Compile Include="MemberService.cs" />
     <Compile Include="EntityService.cs" />
     <Compile Include="EventLogService.cs" />
