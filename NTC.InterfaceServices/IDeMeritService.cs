@@ -10,7 +10,7 @@ namespace NTC.InterfaceServices
     public interface IDeMeritService:IEntityService<DeMerit>
     {
         void Add(DeMerit deMerit, out string errorMessage);
-        DeMerit GetDeMeritNo(string deMeritNo);
+        DeMerit GetDeMeritByNo(string deMeritNo);
         IEnumerable<DeMerit> GetDeMeritByUser(int memberId);
     }
 }

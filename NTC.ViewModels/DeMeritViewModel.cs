@@ -13,8 +13,8 @@ namespace NTC.ViewModels
         public MemberViewModel member { get; set; }
         public int routeId { get; set; }
         public string inqueryDate { get; set; }
-        public int officeriId { get; set; }
-        public int busId { get; set; }
+        public OfficerViewModel officer { get; set; }
+        public BusViewModel bus { get; set; }
         public List<MemberDeMeritViewModel> MemberDeMerit { get; set; }
 
     }
@@ -27,13 +27,22 @@ namespace NTC.ViewModels
         public string description { get; set; }
         public int meritId { get; set; }
         public int point { get; set; }
+        public int colorCode { get; set; }
     }
-    public class Merit
+    public class MeritViewModel
     {
-        public int iD { get; set; }
+        public int id { get; set; }
         public string code { get; set; }
         public string description { get; set; }
         public int colorCodeId { get; set; }
+    }
+
+    public class OfficerViewModel
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string telNo { get; set; }
+        public string nic { get; set; }
     }
 
 }

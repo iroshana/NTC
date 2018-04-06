@@ -33,21 +33,41 @@ namespace NTC.API.Controllers
             {
                 DeMeritViewModel deMeritView = new DeMeritViewModel();
                 DeMerit deMerit = new DeMerit();
-                deMerit = _deMerit.GetDeMeritNo(deMeritNo);
+                deMerit = _deMerit.GetDeMeritByNo(deMeritNo);
                 if (deMerit != null)
                 {
                     deMeritView.id = deMerit.ID;
+                    deMeritView.deMeritNo = deMerit.DeMeritNo;
                     deMeritView.inqueryDate = deMerit.InqueryDate.ToString(@"yyyy-MM-dd");
                     deMeritView.member = new MemberViewModel();
                     deMeritView.member.id = deMerit.MemberId;
                     deMeritView.member.nameWithInitial = deMerit.Member.ShortName;
+                    deMeritView.inqueryDate = deMerit.InqueryDate.ToString(@"yyyy-MM-dd");
+                    deMeritView.officer = new OfficerViewModel();
+                    deMeritView.officer.id = deMerit.Officer.ID;
+                    deMeritView.officer.name = deMerit.Officer.Name;
+                    deMeritView.bus = new BusViewModel();
+                    deMeritView.bus.id = deMerit.Bus.ID;
+                    deMeritView.bus.busNo = deMerit.Bus.LicenceNo;
 
+                    deMeritView.MemberDeMerit = new List<MemberDeMeritViewModel>();
+                    foreach (MemberDeMerit merti in deMerit.MemberDeMerits)
+                    {
+                        MemberDeMeritViewModel demerit = new MemberDeMeritViewModel();
+                        demerit.id = merti.ID;
+                        demerit.meritId = merti.MeritId;
+                        demerit.code = merti.Merit.Code;
+                        demerit.description = merti.Merit.Description;
+                        demerit.point = merti.Point;
+                        demerit.colorCode = merti.Merit.ColorCodeId;
 
+                        deMeritView.MemberDeMerit.Add(demerit);
+                    }
                 }
 
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { member = deMeritView, messageCode = messageData };
+                var returnObject = new { demerit = deMeritView, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -60,37 +80,30 @@ namespace NTC.API.Controllers
         }
         #endregion
 
-        #region GetDemeritMemberId
+        #region GetDemeritByMemberId
         [HttpGet]
-        public IHttpActionResult GetDemeritMemberId(int Id)
+        public IHttpActionResult GetDemeritByMemberId(int Id)
         {
             try
             {
-                MemberViewModel memberView = new MemberViewModel();
-                Member member = new Member();
-                member = _member.GetMember(Id);
-                if (member != null)
+                List<DeMeritViewModel> deMeritList = new List<DeMeritViewModel>();
+                IEnumerable<DeMerit> deMerits = new List<DeMerit>();
+                deMerits = _deMerit.GetDeMeritByUser(Id);
+                if (deMerits != null)
                 {
-                    memberView.id = member.ID;
-                    memberView.userID = member.UserID.Value;
-                    memberView.fullName = member.FullName;
-                    memberView.currentAddress = member.CurrentAddress;
-                    memberView.permanetAddress = member.PermanetAddress;
-                    memberView.nic = member.NIC;
-                    memberView.dob = member.DOB.ToString("yyyy-MM-dd");
-                    memberView.cetificateNo = member.TrainingCertificateNo;
-                    memberView.trainingCenter = member.TrainingCenter;
-                    memberView.licenceNo = member.LicenceNo;
-                    memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
-                    memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
-                    memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
-                    memberView.educationQuali = member.HighestEducation;
-                    memberView.type = member.MemberType.Code;
+                    foreach (DeMerit deMerit in deMerits)
+                    {
+                        DeMeritViewModel deMeritView = new DeMeritViewModel();
+                        deMeritView.id = deMerit.ID;
+                        deMeritView.deMeritNo = deMerit.DeMeritNo;
+
+                        deMeritList.Add(deMeritView);
+                    }
                 }
 
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { member = memberView, messageCode = messageData };
+                var returnObject = new { demerit = deMeritList, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

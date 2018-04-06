@@ -45,7 +45,7 @@ namespace NTC.Services
             }
         }
 
-        public DeMerit GetDeMeritNo(string deMeritNo)
+        public DeMerit GetDeMeritByNo(string deMeritNo)
         {
             try
             {
