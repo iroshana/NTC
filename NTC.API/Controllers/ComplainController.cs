@@ -37,14 +37,15 @@ namespace NTC.API.Controllers
                 if (complain != null)
                 {
                     complainView.id = complain.ID;
-                    complainView.complainNo = complain.ComplainNo;
-                    complainView.description = complain.Description;
+                    complainView.complainNo = String.IsNullOrEmpty(complain.ComplainNo) ? String.Empty : complain.ComplainNo;
+                    complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
                     complainView.Category = new List<CategoryViewModel>();
                     foreach (ComplainCategory category in complain.ComplainCategories)
                     {
                         CategoryViewModel complainCategory = new CategoryViewModel();
-                        complainCategory.categoryNo = category.Category.CategoryNo;
-                        complainCategory.description = category.Category.Description;
+                        complainCategory.id = category.ComplainId;
+                        complainCategory.categoryNo = String.IsNullOrEmpty(category.Category.CategoryNo) ? String.Empty : category.Category.CategoryNo;
+                        complainCategory.description = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
                         complainView.Category.Add(complainCategory);
                     }
                 }
@@ -69,28 +70,31 @@ namespace NTC.API.Controllers
         {
             try
             {
+                string errorMessage = String.Empty;
                 Complain complain = new Complain();
                 if (complain != null)
                 {
                     complain.ID = complainView.id;
-                    complain.ComplainNo = complainView.complainNo;
+                    complain.ComplainNo = String.IsNullOrEmpty(complainView.complainNo) ? String.Empty : complainView.complainNo;
                     complain.BusId = complainView.bus.id;
                     complain.RouteId = complainView.route.id;
-                    complain.Place = complainView.place;
+                    complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
                     complain.Date = DateTime.Parse(complainView.time);
-                    complain.UserId = complainView.userId;
-                    complain.Method = complainView.method;
+                    complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
+                    complain.MemberId = complainView.memberId;
+                    complain.Method = String.IsNullOrEmpty(complainView.method) ? String.Empty : complainView.method;
                     complain.IsInqueryParticipation = complainView.isInqueryParticipation;
                     complain.IsEvidenceHave = complainView.isEvidenceHave;
-                    complain.Description = complain.Description;
+                    complain.Description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
                     complain.ComplainCategories = new List<ComplainCategory>();
-                    complain.Evidence = new Evidence();
+                    
                     if (complain.IsEvidenceHave)
                     {
-                        complain.Evidence.FileName = complainView.evidence.fileName;
-                        complain.Evidence.EvidenceNo = complainView.evidence.evidenceNo;
-                        complain.Evidence.Extension = complainView.evidence.extension;
-                        complain.Evidence.FilePath = complainView.evidence.filePath;
+                        complain.Evidence = new Evidence();
+                        complain.Evidence.FileName = String.IsNullOrEmpty(complainView.evidence.fileName) ? String.Empty : complainView.evidence.fileName;
+                        complain.Evidence.EvidenceNo = String.IsNullOrEmpty(complainView.evidence.evidenceNo) ? String.Empty : complainView.evidence.evidenceNo;
+                        complain.Evidence.Extension = String.IsNullOrEmpty(complainView.evidence.extension) ? String.Empty : complainView.evidence.extension;
+                        complain.Evidence.FilePath = String.IsNullOrEmpty(complainView.evidence.filePath) ? String.Empty : complainView.evidence.filePath;
                         complain.EvidenceId = complain.Evidence.ID;
                     }
                     
@@ -103,11 +107,15 @@ namespace NTC.API.Controllers
 
                         complain.ComplainCategories.Add(category);
                     }
-                    
+                    _complain.Add(complain,out errorMessage);
                 }
-
-                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { complain = complainView, messageCode = messageData };
+                var messageData = new
+                {
+                    code = String.IsNullOrEmpty(errorMessage) ? Constant.SuccessMessageCode : Constant.ErrorMessageCode
+                   ,
+                    message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
+                };
+                var returnObject = new { messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

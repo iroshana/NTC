@@ -51,7 +51,7 @@ namespace NTC.Services
         {
             try
             {
-                return _complainRepository.Get(x => x.ComplainNo == complainNo && x.UserId == userId).FirstOrDefault();
+                return _complainRepository.Get(x => x.ComplainNo == complainNo || x.UserId == userId).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -67,7 +67,6 @@ namespace NTC.Services
                 {
                     try
                     {
-                        _evideneceRepository.Add(complain.Evidence);
                         errorMessage = String.Empty;
                         base.Add(complain);
                         dbContextTransaction.Commit();

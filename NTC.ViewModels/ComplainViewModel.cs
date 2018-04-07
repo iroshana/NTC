@@ -19,12 +19,12 @@ namespace NTC.ViewModels
         public string description { get; set; }
         public int userId { get; set; }
         public int? evidenceId { get; set; }
-        public int employeeId { get; set; }
+        public int memberId { get; set; }
         public bool isEvidenceHave { get; set; }
         public bool isInqueryParticipation { get; set; }
         public List<CategoryViewModel> Category { get; set; }
         public EvidenceViewModel evidence { get; set; }
-        public List<ComplainCategoryViewModel> complainCategory { get; set; }
+        //public List<ComplainCategoryViewModel> complainCategory { get; set; }
 
     }
     public class ComplainCategoryViewModel

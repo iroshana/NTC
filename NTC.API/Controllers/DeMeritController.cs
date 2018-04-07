@@ -50,7 +50,7 @@ namespace NTC.API.Controllers
                     deMeritView.bus.id = deMerit.Bus.ID;
                     deMeritView.bus.busNo = deMerit.Bus.LicenceNo;
 
-                    deMeritView.MemberDeMerit = new List<MemberDeMeritViewModel>();
+                    deMeritView.memberDeMerit = new List<MemberDeMeritViewModel>();
                     foreach (MemberDeMerit merti in deMerit.MemberDeMerits)
                     {
                         MemberDeMeritViewModel demerit = new MemberDeMeritViewModel();
@@ -61,7 +61,7 @@ namespace NTC.API.Controllers
                         demerit.point = merti.Point;
                         demerit.colorCode = merti.Merit.ColorCodeId;
 
-                        deMeritView.MemberDeMerit.Add(demerit);
+                        deMeritView.memberDeMerit.Add(demerit);
                     }
                 }
 
@@ -82,7 +82,7 @@ namespace NTC.API.Controllers
 
         #region GetDemeritByMemberId
         [HttpGet]
-        public IHttpActionResult GetDemeritByMemberId(int Id)
+        public IHttpActionResult GetDemeritByNoMemberId(int Id)
         {
             try
             {
@@ -104,6 +104,60 @@ namespace NTC.API.Controllers
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { demerit = deMeritList, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region AddDeMerit
+        [HttpPost]
+        public IHttpActionResult AddDeMerit(DeMeritViewModel deMeritView)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                DeMerit deMerit = new DeMerit();
+                if (deMeritView != null)
+                {
+                    deMerit.DeMeritNo = deMeritView.deMeritNo;
+                    deMerit.InqueryDate = DateTime.Parse(deMeritView.inqueryDate);
+                    deMerit.MemberId = deMeritView.member.id;
+                    deMerit.BusId = deMeritView.bus.id;
+                    deMerit.RouteId = deMeritView.route.id;
+                    deMerit.OfficeriId = deMeritView.officer.id;
+                    deMerit.MemberDeMerits = new List<MemberDeMerit>();
+                    foreach (MemberDeMeritViewModel memberDemerit in deMeritView.memberDeMerit)
+                    {
+                        MemberDeMerit demerit = new MemberDeMerit();
+                        demerit.DeMeritId = deMerit.ID;
+                        demerit.MeritId = memberDemerit.meritId;
+                        demerit.Point = memberDemerit.point;
+
+                        deMerit.MemberDeMerits.Add(demerit);
+                    }
+
+                    _deMerit.Add(deMerit,out errorMessage);
+
+                }
+                else
+                {
+                    errorMessage = Constant.MessageGeneralError;
+                }
+
+                var messageData = new
+                {
+                    code = String.IsNullOrEmpty(errorMessage) ? Constant.SuccessMessageCode : Constant.ErrorMessageCode
+                   ,
+                    message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
+                };
+                var returnObject = new { messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

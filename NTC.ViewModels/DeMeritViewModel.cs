@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,12 @@ namespace NTC.ViewModels
         public int id { get; set; }
         public string deMeritNo { get; set; }
         public MemberViewModel member { get; set; }
-        public int routeId { get; set; }
+        public RouteViewModel route { get; set; }
+        [Required]
         public string inqueryDate { get; set; }
         public OfficerViewModel officer { get; set; }
         public BusViewModel bus { get; set; }
-        public List<MemberDeMeritViewModel> MemberDeMerit { get; set; }
+        public List<MemberDeMeritViewModel> memberDeMerit { get; set; }
 
     }
 
