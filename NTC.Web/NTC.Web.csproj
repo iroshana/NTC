@@ -3948,6 +3948,7 @@
     <Content Include="Scripts\ntc\common.js" />
     <Content Include="Scripts\ntc\dashboardDetails.js" />
     <Content Include="Scripts\ntc\memberfullyprofile.js" />
+    <Content Include="Scripts\ntc\memberlist.js" />
     <Content Include="Scripts\ntc\notice.js" />
     <Content Include="Scripts\ntc\panalties.js" />
     <Content Include="Scripts\ntc\reportadvisingpanel.js" />

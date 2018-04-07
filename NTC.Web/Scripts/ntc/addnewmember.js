@@ -19,8 +19,8 @@ var Memeber = new Vue({
     data: {
         memeber: {
             id: '',
-            type: {},
-            nicNo: '',
+            typeId: '',
+            nic: '',
             dob: '',
             fullName: '',
             nameWithInitial: '',
@@ -41,13 +41,37 @@ var Memeber = new Vue({
         memeberTypeList: []
     },
     methods: {
+        clearData: function(){
+            this.memeber = {
+                id: '',
+                typeId: '',
+                nic: '',
+                dob: '',
+                fullName: '',
+                nameWithInitial: '',
+                permanetAddress: '',
+                currentAddress: '',
+                cetificateNo: '',
+                trainingCenter: '',
+                licenceNo: '',
+                dateIssued: '',
+                dateValidity: '',
+                educationQuali: '',
+                dateJoin: '',
+                image: {},
+                imagePath: "",
+            };
+            this.submitted = false;
+            this.isResultShow = true;
+        
+        },
         validate: function () {
             this.submitted = true;            
-            if (this.memeber.nicNo && this.memeber.dob && this.memeber.fullName && this.memeber.permanetAddress) {
+            if (this.memeber.nic && this.memeber.dob && this.memeber.fullName && this.memeber.permanetAddress) {
                 this.submitted = false;
                 var formData = new FormData();
                 formData.append('UploadedImage', this.memeber.image);                
-                formData.append('nic', this.memeber.nicNo);
+                formData.append('nic', this.memeber.nic);
                 formData.append('uploadedFileName', "");
                 formData.append('fileExtension', '.png');
                 this.submitMemeber();
@@ -55,8 +79,9 @@ var Memeber = new Vue({
         },
         submitMemeber: function () {
             $('#spinner').css("display", "block");
-            this.$http.post(apiURL + 'api/Member/AddEmployee', this.memeber).then(function (response) {
-                if (response.body.messageCode.code == 1) {                    
+            this.$http.post(apiURL + 'api/Member/AddMember', this.memeber).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.clearData();
                     msgAlert.isSuccess = true;
                     msgAlert.alertMessage = "Member Save Successfully.";
                     msgAlert.showModal();
