@@ -227,6 +227,7 @@ namespace NTC.API.Controllers
                         categoryView.id = cat.ID;
                         categoryView.categoryNo = cat.CategoryNo;
                         categoryView.description = cat.Description;
+                        categoryView.isSelected = false;
 
                         categoryVM.Add(categoryView);
                     }

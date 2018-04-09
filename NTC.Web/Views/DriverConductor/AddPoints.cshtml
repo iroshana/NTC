@@ -5,7 +5,7 @@
 
 
 <!-- page content -->
-<div class="right_col" role="main">
+<div class="right_col" role="main" id="point">
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -20,11 +20,95 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Plain Page</h2>                        
+                        <h2></h2>                        
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Record No</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Record No" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Accredited Officer Name</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Officer Name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Bus No</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Bus No" class="form-control">
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Driver No</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Driver No" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Conductor No</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Conductor No" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Inquery Date</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Inquery Date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Inquery Time</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" placeholder="Enter Inquery Time" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Description</th>
+                                    <th>Point</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="de in demeritList">
+                                    <td>{{de.code}}</td>
+                                    <td class="" v-bind:class="de.colorCodeId == '1' ? 'red' : de.colorCodeId == '2' ? 'blue' : de.colorCodeId == '3' ? 'purple' : 'green'">{{de.description}}</td>
+                                    <td><input type="text" class="form-control" v-model="de.point" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -32,3 +116,5 @@
     </div>
 </div>
 <!-- /page content -->
+
+<script src="~/Scripts/ntc/addpoint.js"></script>

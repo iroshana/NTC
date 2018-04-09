@@ -23,19 +23,19 @@
                     <div class="x_content">
 
                         <div class="col-md-6">
-                            <form class="form-horizontal form-label-left">
+                            <div class="form-horizontal form-label-left">
                                 <h5>Complain Detials</h5>
                                 <div class="x_content">
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Bus No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Bus No" v.model="complainVm.bus">
+                                            <input type="text" class="form-control" placeholder="Enter Bus No" v-model="complainVm.busNo" v-on:change="getBusDetails(complainVm.busNo)">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Route No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Route No" readonly="readonly" v-model="complainVm.bus.route.routeNo">
+                                            <input type="text" class="form-control" placeholder="Enter Route No" readonly="readonly" v-model="complainVm.bus.id">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -103,29 +103,35 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <form class="form-horizontal">
+                            <div class="form-horizontal">
                                 <h5>Complain Category</h5>
                                 <div class="x_content">
-                                    <div class="form-group">                                        
+                                    <div class="form-group" v-for="category in categoryList">                                        
                                         <div class="col-md-2 col-sm-2">
-                                            <input type="checkbox" class="form-control">
+                                            <input type="checkbox" class="form-control" v-model="category.isSelected">
                                         </div>
-                                        <label class="control-label col-md-6 col-sm-6 col-xs-12">Availability of written evidence</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <form class="form-horizontal form-label-left">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5">Complain Description</label>
-                                <div class="col-md-7 col-sm-7">
-                                    <textarea type="text" class="form-control" placeholder="Enter Complain Description" rows="3"></textarea>
+                                        <label class="control-label col-md-6 col-sm-6 col-xs-12">{{category.description}}</label>
+                                    </div>  
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-4"><label class="control-label">Complain Description</label></div>
+                                    <div class="col-md-7 col-sm-7">
+                                        <textarea type="text" class="form-control" placeholder="Enter Complain Description" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pull-right">
+                                <button class="btn btn-primary" v-on:click="addComplain">Add Complain</button>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,6 +139,34 @@
     </div>
 </div>
 <!-- /page content -->
+
+@*Start Alert*@
+
+<div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog modal-val">
+        <div class="modal-content">
+            <div class="modal-header" v-bind:class="{'alert-success' : isSuccess, 'alert-danger' : !isSuccess}">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="bold-700">{{header}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12" id="alertInfo">
+                        <div class="alert rounded" id="alert">
+                            <div class="icon center-block text-center"><i class="fa fa-4x" v-bind:class="{'fa-close' : !isSuccess, 'fa-check': isSuccess}"></i></div>
+                            <span class="center-block text-center" id="alertMessage">{{alertMessage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" v-bind:class="{'btn-success' : isSuccess, 'btn-danger' : !isSuccess}" type="button" id="closeAlert"><i class="fa fa-times-circle"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*End Alert*@
 
 <script src="~/Scripts/ntc/addcomplain.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>

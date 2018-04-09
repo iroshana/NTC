@@ -39,6 +39,7 @@ namespace NTC.ViewModels
         public int id { get; set; }
         public string categoryNo { get; set; }
         public string description { get; set; }
+        public bool isSelected { get; set; }
     }
     public class ComplainDropDownViewModel
     {

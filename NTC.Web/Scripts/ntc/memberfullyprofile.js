@@ -42,9 +42,13 @@ var MemberDetails = new Vue({
         },
         deMeritRecordList: [],
         demeritNo: '',
-        noticeList: []
+        noticeList: [],
+
     },
     methods: {
+        addComplain: function () {
+            $(location).attr('href', webURL + 'DriverConductor/AddCompian?memberId=' + this.memeber.id);
+        },
         sendMsg: function () {
             msgAlert.isSuccess = true;
             msgAlert.alertMessage = 'Message Send Succesfully.'
@@ -84,8 +88,7 @@ var MemberDetails = new Vue({
         }
     },
     mounted() {        
-        this.getMemberDetails(getUrlParameter("memberId"));
-        //this.getMemberDetails(7);
+        this.getMemberDetails(getUrlParameter("memberId"));        
     }
 });
 
