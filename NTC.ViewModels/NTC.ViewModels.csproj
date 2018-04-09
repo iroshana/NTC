@@ -45,6 +45,7 @@
     <Compile Include="Constant.cs" />
     <Compile Include="DeMeritViewModel.cs" />
     <Compile Include="MemberViewModel.cs" />
+    <Compile Include="NoticeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

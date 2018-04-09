@@ -57,6 +57,7 @@
     <Compile Include="MemberService.cs" />
     <Compile Include="EntityService.cs" />
     <Compile Include="EventLogService.cs" />
+    <Compile Include="NoticeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
