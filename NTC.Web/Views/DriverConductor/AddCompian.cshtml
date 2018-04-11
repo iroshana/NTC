@@ -29,13 +29,13 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Bus No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Bus No" v-model="complainVm.busNo" v-on:change="getBusDetails(complainVm.busNo)">
+                                            <input type="text" class="form-control" placeholder="Enter Bus No" v-model="complainVm.bus.busNo" v-on:change="getBusDetails(complainVm.bus.busNo)">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Route No<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Route No" readonly="readonly" v-model="complainVm.bus.id">
+                                            <input type="text" class="form-control" placeholder="Enter Route No" readonly="readonly" v-model="complainVm.bus.route.routeNo">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -57,49 +57,59 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain Date</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Complain Date">
+                                            <input id="dateComplain" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" v-model="complainVm.complainDate">
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Method</label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <select class="form-control" v-model="complainVm.method">
+                                                <option value="Online" selected="selected" >Online</option>
+                                                <option value="Email">Email</option>
+                                                <option value="Over the Phone">Over the Phone</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain Time</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <input type="text" class="form-control" placeholder="Enter Complain Time">
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Complainer Name</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Complainer Name">
+                                            <input type="text" class="form-control" placeholder="Enter Complainer Name" v-model="complainVm.complainerName">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Complainer Address</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Complainer Address">
+                                            <input type="text" class="form-control" placeholder="Enter Complainer Address" v-model="complainVm.complainerAddress">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Complainer TEl No</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="text" class="form-control" placeholder="Enter Complainer TEl No">
+                                            <input type="text" class="form-control" placeholder="Enter Complainer TEl No" v-model="complainVm.telNo">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-6 col-sm-6 col-xs-12">Complainer Participating Inquiry</label>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <input type="checkbox" class="form-control">
+                                            <input type="checkbox" class="form-control" v-model="complainVm.isInqueryParticipation">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-6 col-sm-6 col-xs-12">Availability of written evidence</label>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <input type="checkbox" class="form-control">
+                                            <input type="checkbox" class="form-control" v-model="complainVm.isEvidenceHave">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Evidence for complain</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <input type="file" class="form-control">
+                                            <input type="file" class="form-control" v-model="complainVm.file">
                                         </div>
                                     </div>
                                 </div>
