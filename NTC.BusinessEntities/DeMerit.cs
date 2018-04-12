@@ -18,6 +18,7 @@ namespace NTC.BusinessEntities
         public int MemberId { get; set; }
         public int RouteId { get; set; }
         public DateTime InqueryDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public int OfficeriId { get; set; }
         public int BusId { get; set; }
         [ForeignKey("BusId")]

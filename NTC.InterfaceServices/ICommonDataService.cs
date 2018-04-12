@@ -13,5 +13,6 @@ namespace NTC.InterfaceServices
         IEnumerable<Bus> SearchBuses(string busNo);
         Bus GetBusByNo(string busNo);
         IEnumerable<Category> GetAllCategories();
+        IEnumerable<Merit> GetAllMerits();
     }
 }

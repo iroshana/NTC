@@ -14,11 +14,13 @@ namespace NTC.Services
         protected IMemberTypeRepository _memberTypeRepository;
         protected IBusRepository _busRepository;
         protected ICategoryRepository _categoryRepository;
-        public CommonDataService(IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository)
+        protected IMeritRepository _meritRepository;
+        public CommonDataService(IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository, IMeritRepository meritRepository)
         {
             _memberTypeRepository = memberTypeRepository;
             _busRepository = busRepository;
             _categoryRepository = categoryRepository;
+            _meritRepository = meritRepository;
         }
 
         public IEnumerable<MemberType> GetAllMemberTypes()
@@ -70,6 +72,19 @@ namespace NTC.Services
             {
 
                 throw ex;
+            }
+        }
+
+        public IEnumerable<Merit> GetAllMerits()
+        {
+            try
+            {
+                return _meritRepository.Get().ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }

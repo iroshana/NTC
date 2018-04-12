@@ -55,6 +55,7 @@
     <Compile Include="Repositories\ComplainRepository.cs" />
     <Compile Include="Repositories\DeMeritRepository.cs" />
     <Compile Include="Repositories\EvidenceRepository.cs" />
+    <Compile Include="Repositories\Interface\IMeritRepository.cs" />
     <Compile Include="Repositories\Interface\IBusRepository.cs" />
     <Compile Include="Repositories\Interface\IEvidenceRepository.cs" />
     <Compile Include="Repositories\Interface\IMemberTypeRepository.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
     <Compile Include="Repositories\LogmessageRepository.cs" />
     <Compile Include="Repositories\MemberTypeRepository.cs" />
+    <Compile Include="Repositories\MeritRepository.cs" />
     <Compile Include="Repositories\NoticeRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>

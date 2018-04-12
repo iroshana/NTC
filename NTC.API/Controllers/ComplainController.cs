@@ -3,6 +3,7 @@ using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -95,7 +96,9 @@ namespace NTC.API.Controllers
                         complain.Evidence.EvidenceNo = String.IsNullOrEmpty(complainView.evidence.evidenceNo) ? String.Empty : complainView.evidence.evidenceNo;
                         complain.Evidence.Extension = String.IsNullOrEmpty(complainView.evidence.extension) ? String.Empty : complainView.evidence.extension;
                         complain.Evidence.FilePath = String.IsNullOrEmpty(complainView.evidence.filePath) ? String.Empty : complainView.evidence.filePath;
+                        complain.Evidence.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                         complain.EvidenceId = complain.Evidence.ID;
+                        
                     }
                     
                     foreach (CategoryViewModel complainCategory in complainView.Category)
@@ -235,6 +238,79 @@ namespace NTC.API.Controllers
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { categories = categoryVM, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetLastComplainNo
+        [HttpGet]
+        public IHttpActionResult GetLastComplainNo()
+        {
+            try
+            {
+                Complain complain = new Complain();
+                complain = _complain.GetLastComplain();
+                DateTime date = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+
+
+                string today = date.ToShortDateString().Replace("/", String.Empty);
+                string nextComplainNo = String.Empty;
+
+                if (complain != null)
+                {
+                    string complainNo = complain.ComplainNo;
+
+                    string complaindate = complainNo.Split('-')[0];
+                    int no = int.Parse(complainNo.Split('-')[1]);
+
+                    if (complaindate == today)
+                    {
+                        nextComplainNo = complaindate + "-" + (no + 1);
+                    }
+                    else
+                    {
+                        nextComplainNo = today + "-" + "1";
+                    }
+                }else
+                {
+                    nextComplainNo = today + "-" + "1";
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { complainNo = nextComplainNo, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetComplainNo
+        [HttpGet]
+        public IHttpActionResult GetComplainNo(int userId)
+        {
+            try
+            {
+                IEnumerable<Complain> complain = new List<Complain>();
+                complain = _complain.GetComplainNo(userId);
+
+                List<string> complainNos = complain.Select(x => x.ComplainNo).ToList();
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { complainNo = complainNos, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

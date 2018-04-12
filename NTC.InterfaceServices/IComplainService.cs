@@ -12,5 +12,6 @@ namespace NTC.InterfaceServices
         void Add(Complain complain,out string errorMessage);
         IEnumerable<Complain> GetComplainNo(int userId);
         Complain GetComplainByNo(string complainNo, int userId);
+        Complain GetLastComplain();
     }
 }

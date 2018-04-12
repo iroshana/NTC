@@ -3,6 +3,7 @@ using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -74,7 +75,7 @@ namespace NTC.API.Controllers
                     notice.Content = noticeView.Content;
                     notice.NoticeCode = noticeView.NoticeCode;
                     notice.Type = noticeView.Type;
-
+                    notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                     if (noticeView.NoticeMember != null)
                     {
                         notice.MemberNotices = new List<MemberNotice>();

@@ -3,6 +3,7 @@ using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -82,7 +83,7 @@ namespace NTC.API.Controllers
 
         #region GetDemeritByMemberId
         [HttpGet]
-        public IHttpActionResult GetDemeritByNoMemberId(int Id)
+        public IHttpActionResult GetDemeritByMemberId(int Id)
         {
             try
             {
@@ -132,6 +133,7 @@ namespace NTC.API.Controllers
                     deMerit.BusId = deMeritView.bus.id;
                     deMerit.RouteId = deMeritView.route.id;
                     deMerit.OfficeriId = deMeritView.officer.id;
+                    deMerit.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                     deMerit.MemberDeMerits = new List<MemberDeMerit>();
                     foreach (MemberDeMeritViewModel memberDemerit in deMeritView.memberDeMerit)
                     {
@@ -158,6 +160,91 @@ namespace NTC.API.Controllers
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
                 var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetLastDemeritNo
+        [HttpGet]
+        public IHttpActionResult GetLastDemeritNo()
+        {
+            try
+            {
+                DeMerit deMerit = new DeMerit();
+                deMerit = _deMerit.GetLastDeMeritNo();
+                DateTime date = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+
+
+                string today = date.ToShortDateString().Replace("/", String.Empty);
+                string nextdeMeritNo = String.Empty;
+
+                if (deMerit != null)
+                {
+                    string deMeritNo = deMerit.DeMeritNo;
+
+                    string deMeritdate = deMeritNo.Split('-')[0];
+                    int no = int.Parse(deMeritNo.Split('-')[1]);
+
+                    if (deMeritdate == today)
+                    {
+                        nextdeMeritNo = deMeritdate + "-" + (no + 1);
+                    }
+                    else
+                    {
+                        nextdeMeritNo = today + "-" + "1";
+                    }
+                }
+                else
+                {
+                    nextdeMeritNo = today + "-" + "1";
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { complainNo = nextdeMeritNo, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region GetAllMerits
+        [HttpGet]
+        public IHttpActionResult GetAllMerits()
+        {
+            try
+            {
+                List<MemberDeMeritViewModel> meritList = new List<MemberDeMeritViewModel>();
+                IEnumerable<Merit> merits = new List<Merit>();
+                merits = _common.GetAllMerits();
+
+                foreach (Merit merit in merits)
+                {
+                    MemberDeMeritViewModel meritView = new MemberDeMeritViewModel();
+                    meritView.meritId = merit.ID;
+                    meritView.code = merit.Code;
+                    meritView.description = merit.Description;
+                    merit.ColorCodeId = merit.ColorCodeId;
+                    meritView.point = 0;
+
+                    meritList.Add(meritView);
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { merits = meritList, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

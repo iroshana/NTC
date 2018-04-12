@@ -39,7 +39,7 @@ namespace NTC.Services
         {
             try
             {
-                return _complainRepository.Get(x => x.UserId == userId).ToList();
+                return _complainRepository.Get(x => x.MemberId == userId).ToList();
             }
             catch (Exception ex)
             {
@@ -85,6 +85,19 @@ namespace NTC.Services
             }
             
             
+        }
+
+        public Complain GetLastComplain()
+        {
+            try
+            {
+                return base.GetAll().OrderBy(x=>x.ID).LastOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

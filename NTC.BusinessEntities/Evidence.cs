@@ -17,6 +17,7 @@ namespace NTC.BusinessEntities
         public string FileName { get; set; }
         public string Extension { get; set; }
         public string FilePath { get; set; }
+        public DateTime CreatedDate { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
 
     }

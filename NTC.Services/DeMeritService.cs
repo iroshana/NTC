@@ -70,6 +70,19 @@ namespace NTC.Services
                 throw ex;
             }
         }
+
+        public DeMerit GetLastDeMeritNo()
+        {
+            try
+            {
+                return base.GetAll().OrderBy(x => x.ID).LastOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
     }

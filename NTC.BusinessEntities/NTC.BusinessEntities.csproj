@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201804090802161_removeMemIdfromNotice.Designer.cs">
       <DependentUpon>201804090802161_removeMemIdfromNotice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804100247388_createdateadd.cs" />
+    <Compile Include="Migrations\201804100247388_createdateadd.Designer.cs">
+      <DependentUpon>201804100247388_createdateadd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804090802161_removeMemIdfromNotice.resx">
       <DependentUpon>201804090802161_removeMemIdfromNotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100247388_createdateadd.resx">
+      <DependentUpon>201804100247388_createdateadd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
