@@ -137,27 +137,18 @@ namespace NTC.API.Controllers
         {
             try
             {
-                List<BusViewModel> busViewModel = new List<BusViewModel>();
-                IEnumerable<Bus> buses = new List<Bus>();
-                buses = _commonData.SearchBuses(busNo);
+                BusViewModel busViewModel = new BusViewModel();
+                Bus buses = new Bus();
+                buses = _commonData.SearchBuses(busNo).FirstOrDefault();
                 if (buses != null)
-                {
-                    foreach (Bus bus in buses)
-                    {
-                        BusViewModel busVM = new BusViewModel();
-                        busVM.id = bus.ID;
-                        busVM.busNo = bus.LicenceNo;
-                        busVM.route = new RouteViewModel();
-                        if (bus.Route != null)
-                        {
-                            busVM.route.id = bus.Route.ID;
-                            busVM.route.routeNo = bus.Route.RouteNo;
-                            busVM.route.from = bus.Route.From;
-                            busVM.route.to = bus.Route.To;
-                        }
-
-                        busViewModel.Add(busVM);
-                    }
+                {                   
+                    busViewModel.id = buses.ID;
+                    busViewModel.busNo = buses.LicenceNo;
+                    busViewModel.route = new RouteViewModel();
+                    busViewModel.route.id = buses.Route.ID;
+                    busViewModel.route.routeNo = buses.Route.RouteNo;
+                    busViewModel.route.from = buses.Route.From;
+                    busViewModel.route.to = buses.Route.To;                    
                 }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };

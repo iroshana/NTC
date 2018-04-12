@@ -18,13 +18,11 @@ var AddComplain = new Vue({
     el: '#complain',
     data: {
         complainVm: {
-            id: '',
-            busNo:'',
-            bus: { id: '', busNo: '', route: { id: '', routeNo: '', from: '', to: '' } },
+            id: '0',
+            bus: { id: '', busNo: '', route: { id: '1', routeNo: '', from: '', to: '' }},            
             place: '',
-            time: '',
             method: '',
-            complainCode: '',
+            complainDate: '',
             description: '',
             userId: '',
             evidenceId: '',
@@ -32,7 +30,10 @@ var AddComplain = new Vue({
             isEvidenceHave: false,
             isInqueryParticipation: false,
             Category: [],
-            routeNo:''
+            complainerName: '',
+            complainerAddress: '',
+            telNo: '',
+            file:''
         },
         categoryList: []
     },
@@ -44,10 +45,8 @@ var AddComplain = new Vue({
                     busNo: busno
                 }
             }).then(function (response) {
-                if (response.body.messageCode.code == 1) {
-                                        
-                    this.complainVm.bus = JSON.parse(JSON.stringify(response.body.bus));
-                    this.complainVm.routeNo = this.complainVm.bus.route.routeNo;
+                if (response.body.messageCode.code == 1) {                                        
+                    this.complainVm.bus = JSON.parse(JSON.stringify(response.body.bus));                   
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -116,6 +115,19 @@ var AddComplain = new Vue({
         }
     },
     mounted() {
+        $('#dateComplain').datepicker({
+            dateFormat: 'yy-mm-dd',
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            numberOfMonths: 1,
+            maxDate: '0'
+        });
+
+        $('#dateComplain').on('change', function () {
+            AddComplain.complainVm.complainDate = $('#dateComplain').val();
+            $(this).datepicker('hide');
+        });
+
         this.complainVm.userId = getUrlParameter("memberId");
         this.getAllCategory();
     }
