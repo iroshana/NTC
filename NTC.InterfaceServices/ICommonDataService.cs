@@ -12,6 +12,7 @@ namespace NTC.InterfaceServices
         IEnumerable<MemberType> GetAllMemberTypes();
         IEnumerable<Bus> SearchBuses(string busNo);
         Bus GetBusByNo(string busNo);
+        Bus GetBusById(int Id);
         IEnumerable<Category> GetAllCategories();
         IEnumerable<Merit> GetAllMerits();
     }

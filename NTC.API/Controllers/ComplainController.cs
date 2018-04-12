@@ -82,7 +82,8 @@ namespace NTC.API.Controllers
                     complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
                     complain.Date = DateTime.Parse(complainView.time);
                     complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
-                    complain.MemberId = complainView.memberId;
+                    complain.DriverId = _commonData.GetBusById(complainView.bus.id).DriverId;
+                    complain.ConductorId = _commonData.GetBusById(complainView.bus.id).ConductorId;
                     complain.Method = String.IsNullOrEmpty(complainView.method) ? String.Empty : complainView.method;
                     complain.IsInqueryParticipation = complainView.isInqueryParticipation;
                     complain.IsEvidenceHave = complainView.isEvidenceHave;

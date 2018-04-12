@@ -24,7 +24,8 @@ namespace NTC.BusinessEntities
         public string Description { get; set; }
         public int? UserId { get; set; }
         public int? EvidenceId { get; set; }
-        public int MemberId { get; set; }
+        public int ConductorId { get; set; }
+        public int DriverId { get; set; }
         public bool IsEvidenceHave { get; set; }
         public bool IsInqueryParticipation { get; set; }
         [ForeignKey("BusId")]
@@ -33,7 +34,7 @@ namespace NTC.BusinessEntities
         public virtual Route Route { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        [ForeignKey("MemberId")]
+        [ForeignKey("DriverId")]
         public virtual Member Member { get; set; }
         [ForeignKey("EvidenceId")]
         public virtual Evidence Evidence { get; set; }

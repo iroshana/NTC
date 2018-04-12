@@ -87,5 +87,18 @@ namespace NTC.Services
                 throw;
             }
         }
+
+        public Bus GetBusById(int Id)
+        {
+            try
+            {
+                return _busRepository.Get(x => x.ID == Id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace NTC.Services
         {
             try
             {
-                return _complainRepository.Get(x => x.MemberId == userId).ToList();
+                return _complainRepository.Get(x => x.DriverId == userId || x.ConductorId == userId).ToList();
             }
             catch (Exception ex)
             {
