@@ -45,11 +45,11 @@ namespace NTC.Services
             }
         }
 
-        public DeMerit GetDeMeritByNo(string deMeritNo)
+        public DeMerit GetDeMeritByNo(int deMeritId)
         {
             try
             {
-                return base.GetAll(x=>x.DeMeritNo == deMeritNo).FirstOrDefault();
+                return base.GetAll(x=>x.ID == deMeritId).FirstOrDefault();
             }
             catch (Exception ex)
             {

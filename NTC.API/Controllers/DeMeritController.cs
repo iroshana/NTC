@@ -28,7 +28,7 @@ namespace NTC.API.Controllers
         }
         #region GetDemeritByNo
         [HttpGet]
-        public IHttpActionResult GetDemeritByNo(string deMeritNo)
+        public IHttpActionResult GetDemeritByNo(int deMeritNo)
         {
             try
             {
@@ -83,13 +83,13 @@ namespace NTC.API.Controllers
 
         #region GetDemeritByMemberId
         [HttpGet]
-        public IHttpActionResult GetDemeritByMemberId(int Id)
+        public IHttpActionResult GetDemeritByMemberId(int memberId)
         {
             try
             {
                 List<DeMeritViewModel> deMeritList = new List<DeMeritViewModel>();
                 IEnumerable<DeMerit> deMerits = new List<DeMerit>();
-                deMerits = _deMerit.GetDeMeritByUser(Id);
+                deMerits = _deMerit.GetDeMeritByUser(memberId);
                 if (deMerits != null)
                 {
                     foreach (DeMerit deMerit in deMerits)

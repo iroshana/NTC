@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NTC.ViewModels;
+using System.Data.SqlClient;
 
 namespace NTC.Services
 {
@@ -15,17 +17,19 @@ namespace NTC.Services
 
         protected IUnitOfWork _unitOfWork;
         protected IMemberRepository _employeeRepository;
+        protected IMemberEntityRepository _memberEntityRepository;
 
         #endregion Member Variables
 
 
-        public MemberService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository)
+        public MemberService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository, IMemberEntityRepository memberEntityRepository)
             :base(unitOfWork, employeeRepository)
         {
             try
             {
                 _unitOfWork = unitOfWork;
                 _employeeRepository = employeeRepository;
+                _memberEntityRepository = memberEntityRepository;
             }
             catch (Exception ex)
             {
@@ -79,6 +83,27 @@ namespace NTC.Services
             {
 
                 throw;
+            }
+        }
+
+        public IEnumerable<MemberEntityModel> GetAllMembersSP(int colorCode, DateTime? fromDate, DateTime? toDate, int type)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                object[] param = {
+                        new SqlParameter("@colorCode", colorCode),
+                        new SqlParameter("@createdDateFrom", fromDate == null ? String.Empty : fromDate.Value.ToString(@"yyyy-MM-dd")),
+                        new SqlParameter("@createdDateTo", toDate == null ? String.Empty : toDate.Value.AddMonths(-1).ToString(@"yyyy-MM-dd")),
+                        new SqlParameter("@typeId", type)
+                };
+                return _memberEntityRepository.ExecuteStoredProcedure("dbo.GetMembers @colorCode, @createdDateFrom, @createdDateTo, @typeId", param);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
         #endregion

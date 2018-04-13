@@ -48,4 +48,14 @@ namespace NTC.ViewModels
         public int id { get; set; }
         public string code { get; set; }
     }
+
+
+    public class MemberEntityViewModel
+    {
+        public int id { get; set; }
+        public string fullName { get; set; }
+        public string trainingCenter { get; set; }
+        public string trainingCertificateNo { get; set; }
+        public int points { get; set; }
+    }
 }

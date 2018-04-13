@@ -69,34 +69,22 @@ namespace NTC.API.Controllers
 
         #region GetMember
         [HttpGet]
-        public IHttpActionResult GetAllMembers()
+        public IHttpActionResult GetAllMembers(int colorCode,DateTime? fromdate, DateTime? todate, int type)
         {
             try
             {
-                List<MemberViewModel> memberList = new List<MemberViewModel>();
-                IEnumerable<Member> members = new List<Member>();
-                members = _member.GetAllMembers();
+                List<MemberEntityViewModel> memberList = new List<MemberEntityViewModel>();
+                IEnumerable<MemberEntityModel> members = new List<MemberEntityModel>();
+                members = _member.GetAllMembersSP(colorCode, fromdate, todate, type);
                 if (members != null)
                 {
-                    foreach (Member member in members)
+                    foreach (MemberEntityModel member in members)
                     {
-                        MemberViewModel memberView = new MemberViewModel();
+                        MemberEntityViewModel memberView = new MemberEntityViewModel();
                         memberView.id = member.ID;
-                        memberView.userID = member.UserID == null ? 0 : member.UserID.Value;
                         memberView.fullName = String.IsNullOrEmpty(member.FullName) ? String.Empty : member.FullName;
-                        memberView.nameWithInitial = String.IsNullOrEmpty(member.ShortName) ? String.Empty : member.ShortName;
-                        memberView.currentAddress = String.IsNullOrEmpty(member.CurrentAddress) ? String.Empty : member.CurrentAddress;
-                        memberView.permanetAddress = String.IsNullOrEmpty(member.PermanetAddress) ? String.Empty : member.PermanetAddress;
-                        memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
-                        memberView.dob = member.DOB.ToString("yyyy-MM-dd");
-                        memberView.cetificateNo = String.IsNullOrEmpty(member.TrainingCertificateNo) ? String.Empty : member.TrainingCertificateNo;
+                        memberView.trainingCertificateNo = String.IsNullOrEmpty(member.TrainingCertificateNo) ? String.Empty : member.TrainingCertificateNo;
                         memberView.trainingCenter = String.IsNullOrEmpty(member.TrainingCenter) ? String.Empty : member.TrainingCenter;
-                        memberView.licenceNo = String.IsNullOrEmpty(member.LicenceNo) ? String.Empty : member.LicenceNo;
-                        memberView.dateIssued = member.IssuedDate.ToString("yyyy-MM-dd");
-                        memberView.dateValidity = member.ExpireDate.ToString("yyyy-MM-dd");
-                        memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
-                        memberView.educationQuali = String.IsNullOrEmpty(member.HighestEducation) ? String.Empty : member.HighestEducation;
-                        memberView.type = member.MemberType.Code;
 
                         memberList.Add(memberView);
                     }

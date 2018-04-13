@@ -58,6 +58,10 @@
       <Project>{c00c8e3d-9acd-4524-9d99-19085853b059}</Project>
       <Name>NTC.BusinessObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NTC.ViewModels\NTC.ViewModels.csproj">
+      <Project>{84e630b3-e8b5-4924-8bc2-1dd6bf094f22}</Project>
+      <Name>NTC.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

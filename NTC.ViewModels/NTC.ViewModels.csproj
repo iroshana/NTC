@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="ComplainViewModel.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="DashBoardViewModel.cs" />
     <Compile Include="DeMeritViewModel.cs" />
+    <Compile Include="EntityModel.cs" />
     <Compile Include="MemberViewModel.cs" />
     <Compile Include="NoticeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

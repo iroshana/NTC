@@ -73,6 +73,10 @@
       <Project>{ea43e672-a59b-4a70-824b-13e8c756c8a5}</Project>
       <Name>NTC.InterfaceServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NTC.ViewModels\NTC.ViewModels.csproj">
+      <Project>{84e630b3-e8b5-4924-8bc2-1dd6bf094f22}</Project>
+      <Name>NTC.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

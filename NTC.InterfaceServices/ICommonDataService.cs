@@ -1,4 +1,5 @@
 ﻿using NTC.BusinessEntities;
+using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace NTC.InterfaceServices
         Bus GetBusById(int Id);
         IEnumerable<Category> GetAllCategories();
         IEnumerable<Merit> GetAllMerits();
+        IEnumerable<DashBoardEntityModel> GetDashBoardCounts();
     }
 }

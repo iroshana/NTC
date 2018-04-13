@@ -53,13 +53,17 @@
     <Compile Include="Repositories\BusRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\ComplainRepository.cs" />
+    <Compile Include="Repositories\DashBoardEntityRepository.cs" />
     <Compile Include="Repositories\DeMeritRepository.cs" />
     <Compile Include="Repositories\EvidenceRepository.cs" />
+    <Compile Include="Repositories\Interface\IDashBoardEntityRepository.cs" />
+    <Compile Include="Repositories\Interface\IMemberEntityRepository.cs" />
     <Compile Include="Repositories\Interface\IMeritRepository.cs" />
     <Compile Include="Repositories\Interface\IBusRepository.cs" />
     <Compile Include="Repositories\Interface\IEvidenceRepository.cs" />
     <Compile Include="Repositories\Interface\IMemberTypeRepository.cs" />
     <Compile Include="Repositories\Interface\INoticeRepository.cs" />
+    <Compile Include="Repositories\MemberEntityRepository.cs" />
     <Compile Include="Repositories\MemberNoticeRepository.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\Infrastructure\DbFactory.cs" />
@@ -91,6 +95,10 @@
     <ProjectReference Include="..\NTC.BusinessEntities\NTC.BusinessEntities.csproj">
       <Project>{0a05613c-e9e2-4ba3-a6cf-95a3e89e13a0}</Project>
       <Name>NTC.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NTC.ViewModels\NTC.ViewModels.csproj">
+      <Project>{84e630b3-e8b5-4924-8bc2-1dd6bf094f22}</Project>
+      <Name>NTC.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

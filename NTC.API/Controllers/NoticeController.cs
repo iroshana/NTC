@@ -76,11 +76,11 @@ namespace NTC.API.Controllers
                     notice.NoticeCode = noticeView.NoticeCode;
                     notice.Type = noticeView.Type;
                     notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
-                    if (noticeView.NoticeMember != null)
+                    if (noticeView.memberId != 0)
                     {
                         notice.MemberNotices = new List<MemberNotice>();
                         MemberNotice note = new MemberNotice();
-                        note.MemberId = noticeView.NoticeMember.MemberId;
+                        note.MemberId = noticeView.memberId;
                         note.NoticeId = notice.ID;
                         note.IsOpened = false;
                         note.IsSent = false;

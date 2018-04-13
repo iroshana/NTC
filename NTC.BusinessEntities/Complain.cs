@@ -36,6 +36,8 @@ namespace NTC.BusinessEntities
         public virtual User User { get; set; }
         [ForeignKey("DriverId")]
         public virtual Member Member { get; set; }
+        [ForeignKey("ConductorId")]
+        public virtual Member Member1 { get; set; }
         [ForeignKey("EvidenceId")]
         public virtual Evidence Evidence { get; set; }
         public virtual ICollection<ComplainCategory> ComplainCategories { get; set; }

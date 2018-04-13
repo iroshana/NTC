@@ -91,6 +91,14 @@
     <Compile Include="Migrations\201804120412567_adddriverConductortocomplain.Designer.cs">
       <DependentUpon>201804120412567_adddriverConductortocomplain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804130246189_es.cs" />
+    <Compile Include="Migrations\201804130246189_es.Designer.cs">
+      <DependentUpon>201804130246189_es.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804130248050_conductor.cs" />
+    <Compile Include="Migrations\201804130248050_conductor.Designer.cs">
+      <DependentUpon>201804130248050_conductor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -130,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804120412567_adddriverConductortocomplain.resx">
       <DependentUpon>201804120412567_adddriverConductortocomplain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804130246189_es.resx">
+      <DependentUpon>201804130246189_es.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804130248050_conductor.resx">
+      <DependentUpon>201804130248050_conductor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
