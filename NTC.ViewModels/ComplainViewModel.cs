@@ -21,6 +21,7 @@ namespace NTC.ViewModels
         public int? evidenceId { get; set; }
         public bool isEvidenceHave { get; set; }
         public bool isInqueryParticipation { get; set; }
+        public string complainDate { get; set; }
         public List<CategoryViewModel> Category { get; set; }
         public EvidenceViewModel evidence { get; set; }
         //public List<ComplainCategoryViewModel> complainCategory { get; set; }

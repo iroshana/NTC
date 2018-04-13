@@ -36,9 +36,12 @@ var MemberDetails = new Vue({
             imagePath: "",
             type: ''
         },
+        complainNo:'',
         complainList: [],
         complainMgt: {
-            complain: {}
+            id: '',
+            description: '',
+            Category:[]
         },
         deMeritRecordList: [],
         demeritNo: '',
@@ -85,10 +88,70 @@ var MemberDetails = new Vue({
                     $(location).attr('href', webURL + 'Account/Login');
                 }
             });
+        },
+        getAllComplainList: function (userId) {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/Complain/GetComplainNo', {
+                params: {
+                    userId: userId
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.complainList = response.body.complainNo;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        },
+        getSelectedComplain: function (complainNo) {
+            if (complainNo != "") {
+                var userId = getUrlParameter("memberId");
+                $('#spinner').css("display", "block");
+                this.$http.get(apiURL + 'api/Complain/GetComplainByNo', {
+                    params: {
+                        complainNo: complainNo,
+                        userId: userId
+                    }
+                }).then(function (response) {
+                    if (response.body.messageCode.code == 1) {
+                        this.complainMgt = response.body.complain;
+                    } else {
+                        this.complainMgt = {
+                            id: '',
+                            description: '',
+                            Category: []
+                        };
+                        msgAlert.isSuccess = false;
+                        msgAlert.alertMessage = response.body.messageCode.message;
+                        msgAlert.showModal();
+                    }
+                    $('#spinner').css("display", "none");
+                }).catch(function (response) {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.statusText;
+                    msgAlert.showModal();
+                    $('#spinner').css("display", "none");
+                    if (response.statusText == "Unauthorized") {
+                        $(location).attr('href', webURL + 'Account/Login');
+                    }
+                });
+            }
         }
     },
     mounted() {        
-        this.getMemberDetails(getUrlParameter("memberId"));        
+        this.getMemberDetails(getUrlParameter("memberId"));
+        this.getAllComplainList(getUrlParameter("memberId"));
     }
 });
 

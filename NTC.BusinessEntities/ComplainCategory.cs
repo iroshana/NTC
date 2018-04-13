@@ -15,6 +15,7 @@ namespace NTC.BusinessEntities
         [Column(Order = 1), Key, ForeignKey("Category")]
         public int CategoryId { get; set; }
         public string Description { get; set; }
+        public bool IsSelected { get; set; } = false;
         public virtual Complain Complain { get; set; }
         public virtual Category Category { get; set; }
     }
