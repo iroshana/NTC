@@ -12,6 +12,7 @@ namespace NTC.InterfaceServices
         void Add(DeMerit deMerit, out string errorMessage);
         DeMerit GetDeMeritByNo(int deMeritId);
         IEnumerable<DeMerit> GetDeMeritByUser(int memberId);
+        IEnumerable<MemberDeMerit> GetAllDeMerits();
         DeMerit GetLastDeMeritNo();
     }
 }
