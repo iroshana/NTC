@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201804131006342_compare.Designer.cs">
       <DependentUpon>201804131006342_compare.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804131156194_add-ntcNo.cs" />
+    <Compile Include="Migrations\201804131156194_add-ntcNo.Designer.cs">
+      <DependentUpon>201804131156194_add-ntcNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -152,6 +156,16 @@
     <EmbeddedResource Include="Migrations\201804131006342_compare.resx">
       <DependentUpon>201804131006342_compare.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804131156194_add-ntcNo.resx">
+      <DependentUpon>201804131156194_add-ntcNo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQLScripts\DashBoardSP.sql" />
+    <Content Include="SQLScripts\GetMembersSP.sql" />
+    <Content Include="SQLScripts\MemberView.sql" />
+    <Content Include="SQLScripts\Member_type.sql" />
+    <Content Include="SQLScripts\NTCInitialData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

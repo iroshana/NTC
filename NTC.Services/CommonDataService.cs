@@ -18,13 +18,15 @@ namespace NTC.Services
         protected ICategoryRepository _categoryRepository;
         protected IMeritRepository _meritRepository;
         protected IDashBoardEntityRepository _dashBoardEntityRepository;
-        public CommonDataService(IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository, IMeritRepository meritRepository, IDashBoardEntityRepository dashBoardEntityRepository)
+        protected IMemberRepository _memberRepository;
+        public CommonDataService(IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository, IMeritRepository meritRepository, IDashBoardEntityRepository dashBoardEntityRepository, IMemberRepository memberRepository)
         {
             _memberTypeRepository = memberTypeRepository;
             _busRepository = busRepository;
             _categoryRepository = categoryRepository;
             _meritRepository = meritRepository;
             _dashBoardEntityRepository = dashBoardEntityRepository;
+            _memberRepository = memberRepository;
         }
 
         public IEnumerable<MemberType> GetAllMemberTypes()
@@ -110,6 +112,29 @@ namespace NTC.Services
             try
             {
                 return _dashBoardEntityRepository.ExecuteStoredProcedure("dbo.DashBoard");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string GetLastNTCNO()
+        {
+            try
+            {
+                Member member = _memberRepository.Get().OrderByDescending(x => x.ID).FirstOrDefault();
+                if (member != null)
+                {
+                    string lastNo = member.NTCNo;
+                    int no = int.Parse(lastNo.Split('-')[1]);
+                    return "NTC-" + (no + 1).ToString("D4");
+                }
+                else
+                {
+                    return "NTC-0001";
+                }
             }
             catch (Exception ex)
             {

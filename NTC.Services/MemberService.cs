@@ -49,7 +49,7 @@ namespace NTC.Services
                 throw ex;
             }
         }
-
+        #endregion
         public void Add(Member member, out string errorMessage)
         {
             try
@@ -106,6 +106,6 @@ namespace NTC.Services
                 throw ex;
             }
         }
-        #endregion
+        
     }
 }
