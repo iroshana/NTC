@@ -83,6 +83,19 @@ namespace NTC.Services
                 throw;
             }
         }
+
+        public IEnumerable<MemberDeMerit> GetAllDeMerits()
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         #endregion
 
     }

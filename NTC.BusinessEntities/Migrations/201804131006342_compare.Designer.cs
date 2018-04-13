@@ -7,13 +7,13 @@ namespace NTC.BusinessEntities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class conductor : IMigrationMetadata
+    public sealed partial class compare : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(conductor));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(compare));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804130248050_conductor"; }
+            get { return "201804131006342_compare"; }
         }
         
         string IMigrationMetadata.Source

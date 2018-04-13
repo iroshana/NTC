@@ -3,12 +3,12 @@ namespace NTC.BusinessEntities.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class conductor : DbMigration
+    public partial class compare : DbMigration
     {
         public override void Up()
         {
-            CreateIndex("dbo.Complains", "ConductorId");
-            AddForeignKey("dbo.Complains", "ConductorId", "dbo.Members", "ID", cascadeDelete: false);
+            //CreateIndex("dbo.Complains", "ConductorId");
+            //AddForeignKey("dbo.Complains", "ConductorId", "dbo.Members", "ID", cascadeDelete: true);
         }
         
         public override void Down()
