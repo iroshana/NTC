@@ -43,11 +43,14 @@ namespace NTC.API.Controllers
                     complainView.Category = new List<CategoryViewModel>();
                     foreach (ComplainCategory category in complain.ComplainCategories)
                     {
-                        CategoryViewModel complainCategory = new CategoryViewModel();
-                        complainCategory.id = category.ComplainId;
-                        complainCategory.categoryNo = String.IsNullOrEmpty(category.Category.CategoryNo) ? String.Empty : category.Category.CategoryNo;
-                        complainCategory.description = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
-                        complainView.Category.Add(complainCategory);
+                        if (category.IsSelected)
+                        {
+                            CategoryViewModel complainCategory = new CategoryViewModel();
+                            complainCategory.id = category.ComplainId;
+                            complainCategory.categoryNo = String.IsNullOrEmpty(category.Category.CategoryNo) ? String.Empty : category.Category.CategoryNo;
+                            complainCategory.description = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
+                            complainView.Category.Add(complainCategory);
+                        }                        
                     }
                 }
                 
@@ -65,7 +68,7 @@ namespace NTC.API.Controllers
         }
         #endregion
 
-        #region GetComplainByNo
+        #region Add Complain
         [HttpPost]
         public IHttpActionResult AddComplain(ComplainViewModel complainView)
         {
@@ -80,14 +83,14 @@ namespace NTC.API.Controllers
                     complain.BusId = complainView.bus.id;
                     complain.RouteId = complainView.route.id;
                     complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
-                    complain.Date = DateTime.Parse(complainView.time);
+                    complain.Date = DateTime.Parse(complainView.complainDate);
                     complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
                     complain.DriverId = _commonData.GetBusById(complainView.bus.id).DriverId;
                     complain.ConductorId = _commonData.GetBusById(complainView.bus.id).ConductorId;
                     complain.Method = String.IsNullOrEmpty(complainView.method) ? String.Empty : complainView.method;
                     complain.IsInqueryParticipation = complainView.isInqueryParticipation;
                     complain.IsEvidenceHave = complainView.isEvidenceHave;
-                    complain.Description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+                    complain.Description = String.IsNullOrEmpty(complainView.description) ? String.Empty : complainView.description;
                     complain.ComplainCategories = new List<ComplainCategory>();
                     
                     if (complain.IsEvidenceHave)

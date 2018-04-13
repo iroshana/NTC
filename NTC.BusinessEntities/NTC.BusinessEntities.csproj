@@ -99,6 +99,10 @@
     <Compile Include="Migrations\201804130248050_conductor.Designer.cs">
       <DependentUpon>201804130248050_conductor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804130627394_isSelectedColoumAdd.cs" />
+    <Compile Include="Migrations\201804130627394_isSelectedColoumAdd.Designer.cs">
+      <DependentUpon>201804130627394_isSelectedColoumAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804130248050_conductor.resx">
       <DependentUpon>201804130248050_conductor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804130627394_isSelectedColoumAdd.resx">
+      <DependentUpon>201804130627394_isSelectedColoumAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
