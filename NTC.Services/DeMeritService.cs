@@ -84,7 +84,7 @@ namespace NTC.Services
             }
         }
 
-        public IEnumerable<MemberDeMerit> GetAllDeMerits()
+        public IEnumerable<DeMerit> GetAllDeMerits()
         {
             try
             {
@@ -92,7 +92,6 @@ namespace NTC.Services
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

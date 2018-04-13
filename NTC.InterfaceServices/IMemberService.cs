@@ -14,5 +14,6 @@ namespace NTC.InterfaceServices
         IEnumerable<Member> GetAllMembers();
         IEnumerable<MemberEntityModel> GetAllMembersSP(int colorCode,DateTime? fromDate,DateTime? toDate,int type);
         void Add(Member member, out string erroeMessage);
+        
     }
 }

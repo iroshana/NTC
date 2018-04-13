@@ -25,6 +25,10 @@ namespace NTC.ViewModels
         public string TrainingCenter { get; set; }
         public string TrainingCertificateNo { get; set; }
         public int Points { get; set; }
+        public string NIC { get; set; }
+        public string NTCNo { get; set; }
+        public string Code { get; set; }
+        
     }
 
 

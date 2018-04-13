@@ -17,5 +17,6 @@ namespace NTC.InterfaceServices
         IEnumerable<Category> GetAllCategories();
         IEnumerable<Merit> GetAllMerits();
         IEnumerable<DashBoardEntityModel> GetDashBoardCounts();
+        string GetLastNTCNO();
     }
 }

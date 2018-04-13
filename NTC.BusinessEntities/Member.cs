@@ -38,6 +38,7 @@ namespace NTC.BusinessEntities
         public DateTime IssuedDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public string ImagePath { get; set; }
+        public string NTCNo { get; set; }
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
         [ForeignKey("TypeId")]

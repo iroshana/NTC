@@ -57,5 +57,8 @@ namespace NTC.ViewModels
         public string trainingCenter { get; set; }
         public string trainingCertificateNo { get; set; }
         public int points { get; set; }
+        public string nic { get; set; }
+        public string ntcNo { get; set; }
+        public string typeCode { get; set; }
     }
 }
