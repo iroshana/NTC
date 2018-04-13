@@ -18,5 +18,6 @@ namespace NTC.InterfaceServices
         IEnumerable<Merit> GetAllMerits();
         IEnumerable<DashBoardEntityModel> GetDashBoardCounts();
         string GetLastNTCNO();
+        Officer GetOfficer(string name);
     }
 }

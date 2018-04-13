@@ -146,7 +146,7 @@
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="complain">
                                             <!--Start Complain-->
-                                            <form class="form-horizontal form-label-left">
+                                            <div class="form-horizontal form-label-left">
                                                 <div class="form-group">
                                                     <div class="col-md-12 pull-right">
                                                         <a href="#" class="btn btn-primary" v-on:click="addComplain">Add Complain</a>
@@ -186,22 +186,22 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                             <!--End Complain-->
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="demerit">
                                             <!--Start De Merit-->
-                                            <form class="form-horizontal form-label-left">
+                                            <div class="form-horizontal form-label-left">
                                                 <div class="form-group">
                                                     <div class="col-md-12 pull-right">
-                                                        <a href="@Url.Action("AddPoints", "DriverConductor")" class="btn btn-primary">Add Point</a>
+                                                        <a href="#" class="btn btn-primary" v-on:click="addPoint">Add Point</a>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Complain No<span class="required">*</span></label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                                        <select class="form-control" v-model="demeritNo">
-                                                            <option v-for="demerit in deMeritRecordList" v-bind:value="demerit">{{demerit}}</option>
+                                                        <select class="form-control" v-model="demeritNo" v-on:change="getSelectedDeMerit(demeritNo)">
+                                                            <option v-for="demerit in deMeritRecordList" v-bind:value="demerit.id">{{demerit.deMeritNo}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -219,9 +219,15 @@
                                                             <th>Points</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                        <tr v-for="de in deMeritMgt.memberDeMerit">
+                                                            <td>{{ de.code}}</td>
+                                                            <td v-bind:class="de.colorCode == '1' ? 'red' : de.colorCode == '2' ? 'green' : de.colorCode == '3' ? 'purple' : 'blue'">{{ de.description}}</td>
+                                                            <td>{{ de.point}}</td>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
-                                            </form>
+                                            </div>
 
                                             <!--End De Merit-->
                                         </div>

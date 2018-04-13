@@ -44,6 +44,7 @@ var MemberDetails = new Vue({
             Category:[]
         },
         deMeritRecordList: [],
+        deMeritMgt:{id:'', memberDeMerit: []},
         demeritNo: '',
         noticeList: [],
 
@@ -147,11 +148,65 @@ var MemberDetails = new Vue({
                     }
                 });
             }
+        },
+        addPoint: function () {
+            $(location).attr('href', webURL + 'DriverConductor/AddPoints?memberId=' + this.memeber.id);
+        },
+        getAllDeMeritDropDown: function (userId) {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/DeMerit/GetDemeritByMemberId', {
+                params: {
+                    memberId: userId
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.deMeritRecordList = response.body.demerit;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        },
+        getSelectedDeMerit: function (deMeritNo) {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/DeMerit/GetDemeritByNo', {
+                params: {
+                    deMeritNo: deMeritNo
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.deMeritMgt = response.body.demerit;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
         }
     },
     mounted() {        
         this.getMemberDetails(getUrlParameter("memberId"));
         this.getAllComplainList(getUrlParameter("memberId"));
+        this.getAllDeMeritDropDown(getUrlParameter("memberId"));
     }
 });
 
