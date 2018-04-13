@@ -88,7 +88,9 @@ namespace NTC.Services
         {
             try
             {
-                return null;
+                IEnumerable<DeMerit> demerits = _deMeritRepository.Get();
+                return demerits.Where(x=>x.CreatedDate.Date <= DateTime.Now.Date && x.CreatedDate.Date > DateTime.Now.Date.AddMonths(-1));
+                
             }
             catch (Exception ex)
             {
