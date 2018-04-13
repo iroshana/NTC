@@ -237,7 +237,7 @@ namespace NTC.API.Controllers
                     meritView.meritId = merit.ID;
                     meritView.code = merit.Code;
                     meritView.description = merit.Description;
-                    merit.ColorCodeId = merit.ColorCodeId;
+                    meritView.colorCode = merit.ColorCodeId;
                     meritView.point = 0;
 
                     meritList.Add(meritView);
@@ -397,6 +397,37 @@ namespace NTC.API.Controllers
                 return Ok(returnObject);
             }
         }
+        #endregion
+
+        #region Get Officer
+        public IHttpActionResult GetOfficer(string name)
+        {
+            try
+            {
+                OfficerViewModel officerVM = new OfficerViewModel();
+                Officer officer = _common.GetOfficer(name);
+
+                if (officer != null)
+                {
+                    officerVM.id = officer.ID;
+                    officerVM.name = officer.Name;
+                    officerVM.nic = officer.NIC;
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { officer = officerVM, messageCode = messageData };
+                return Ok(returnObject);
+
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+
         #endregion
     }
 }
