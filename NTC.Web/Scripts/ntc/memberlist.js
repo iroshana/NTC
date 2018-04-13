@@ -1,14 +1,21 @@
 ﻿
 
 var MemberList = new Vue({
-    el:'#list',
-    data:{
+    el: '#list',
+    data: {
         memberList: []
     },
     methods: {
-        getAllMembers: function () {
+        getAllMembers: function (colorCode, fromdate, todate, type) {
             $('#spinner').css("display", "block");
-            this.$http.get(apiURL + 'api/Member/GetAllMembers').then(function (response) {
+            this.$http.get(apiURL + 'api/Member/GetAllMembers', {
+                params: {
+                    colorCode: colorCode,
+                    fromdate: fromdate,
+                    todate: todate,
+                    type: type
+                }
+            }).then(function (response) {
                 if (response.body.messageCode.code == 1) {
                     this.memberList = response.body.members;
                     this.bindDatatable();
@@ -31,12 +38,12 @@ var MemberList = new Vue({
         bindDatatable: function () {
             $('#datatable-member').DataTable({
                 "data": this.memberList,
-                "bPaginate": false,
-                "bFilter": false,
-                "bInfo": false,
+                "bPaginate": true,
+                "bFilter": true,
+                "bInfo": true,
                 "bDestroy": true,
                 "rowId": 'id',
-                "aoColumns": [                    
+                "aoColumns": [
                     {
                         "data": "type", sWidth: "10%", bSortable: false, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
@@ -53,7 +60,7 @@ var MemberList = new Vue({
                         }
                     },
                     {
-                        "data": "cetificateNo", sWidth: "20%", bSortable: false, "render": function (data, type, row, meta) {
+                        "data": "trainingCertificateNo", sWidth: "20%", bSortable: false, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
                         }
                     },
@@ -64,10 +71,10 @@ var MemberList = new Vue({
                     },
                     {
                         "data": null, "bSortable": false, sWidth: "10%",
-                        "mRender": function (o) {                            
+                        "mRender": function (o) {
                             var viewBtn = '<button id="btnView" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="top" title="View Member"><div><i class="fa fa-check-circle-o"></i></div></a>';
-                                                       
-                            return viewBtn;   
+
+                            return viewBtn;
                         }
                     }
                 ],
@@ -77,15 +84,15 @@ var MemberList = new Vue({
         }
     },
     mounted() {
-        this.getAllMembers();
+        this.getAllMembers(0, "", "", 0);
 
         $('#datatable-member').on('click', '#btnView', function () {
-                var table = $('#datatable-member').DataTable();
-                var tr = $(this).closest('tr');
-                var row = table.row(tr);
-                var rowData = table.row(tr).data();
+            var table = $('#datatable-member').DataTable();
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+            var rowData = table.row(tr).data();
 
-                $(location).attr('href', webURL + 'DriverConductor/MemeberFullProfile?memberId=' + rowData.id);
-            });
+            $(location).attr('href', webURL + 'DriverConductor/MemeberFullProfile?memberId=' + rowData.id);
+        });
     }
 });
