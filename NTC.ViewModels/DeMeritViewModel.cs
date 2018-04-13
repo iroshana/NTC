@@ -47,4 +47,24 @@ namespace NTC.ViewModels
         public string nic { get; set; }
     }
 
+    public class DeMeritTypeViewModel
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+
+    public class DeMeritMemberTypeViewModel
+    {
+        public DeMeritTypeSetViewModel driver { get; set; }
+        public DeMeritTypeSetViewModel conductor { get; set; }
+    }
+
+    public class DeMeritTypeSetViewModel
+    {
+        public List<DeMeritTypeViewModel> adPannel { get; set; }
+        public List<DeMeritTypeViewModel> finePay { get; set; }
+        public List<DeMeritTypeViewModel> punish { get; set; }
+        public List<DeMeritTypeViewModel> cancel { get; set; }
+    }
+
 }

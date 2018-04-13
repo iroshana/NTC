@@ -107,5 +107,54 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
+        #region AddBulkNotice
+        [HttpPost]
+        public IHttpActionResult AddBulkNotice(BulkNoticeViewModel noticeView)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                Notice notice = new Notice();
+                if (notice != null)
+                {
+                    notice.Content = noticeView.Content;
+                    notice.NoticeCode = noticeView.NoticeCode;
+                    notice.Type = noticeView.Type;
+                    notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                    if (noticeView.members != null)
+                    {
+                        notice.MemberNotices = new List<MemberNotice>();
+                        foreach (int Id in noticeView.members)
+                        {
+                            MemberNotice note = new MemberNotice();
+                            note.MemberId = Id;
+                            note.NoticeId = notice.ID;
+                            note.IsOpened = false;
+                            note.IsSent = false;
+                            notice.MemberNotices.Add(note);
+                        }
+                    }
+                    _notice.Add(notice, out errorMessage);
+
+                }
+                var messageData = new
+                {
+                    code = String.IsNullOrEmpty(errorMessage) ? Constant.SuccessMessageCode : Constant.ErrorMessageCode
+                   ,
+                    message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
+                };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

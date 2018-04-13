@@ -13,8 +13,17 @@ namespace NTC.ViewModels
         public string Content { get; set; }
         public string Type { get; set; }
         public int memberId { get; set; }
-        public MemberNoticeViewModel NoticeMember { get; set; }
     }
+
+    public class BulkNoticeViewModel
+    {
+        public int ID { get; set; }
+        public string NoticeCode { get; set; }
+        public string Content { get; set; }
+        public string Type { get; set; }
+        public List<int> members { get; set; }
+    }
+
     public class MemberNoticeViewModel
     {
         public int ID { get; set; }

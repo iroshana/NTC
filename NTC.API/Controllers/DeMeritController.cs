@@ -237,7 +237,7 @@ namespace NTC.API.Controllers
                     meritView.meritId = merit.ID;
                     meritView.code = merit.Code;
                     meritView.description = merit.Description;
-                    meritView.colorCode = merit.ColorCodeId;
+                    merit.ColorCodeId = merit.ColorCodeId;
                     meritView.point = 0;
 
                     meritList.Add(meritView);
@@ -257,25 +257,137 @@ namespace NTC.API.Controllers
         }
         #endregion
 
-        #region Get Officer
-        public IHttpActionResult GetOfficer(string name)
+        #region GetPanelties
+        [HttpGet]
+        public IHttpActionResult GetPanelties()
         {
             try
             {
-                OfficerViewModel officerVM = new OfficerViewModel();
-                Officer officer = _common.GetOfficer(name);
+                IEnumerable<DeMerit> deMerits = new List<DeMerit>();
+                deMerits = _deMerit.GetAllDeMerits();
+                DeMeritMemberTypeViewModel deMeritMemType = new DeMeritMemberTypeViewModel();
+                deMeritMemType.driver = new DeMeritTypeSetViewModel();
+                deMeritMemType.driver.adPannel = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.finePay = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.punish = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.cancel = new List<DeMeritTypeViewModel>();
 
-                if(officer != null)
+
+                deMeritMemType.conductor = new DeMeritTypeSetViewModel();
+                deMeritMemType.conductor.adPannel = new List<DeMeritTypeViewModel>();
+                deMeritMemType.conductor.finePay = new List<DeMeritTypeViewModel>();
+                deMeritMemType.conductor.punish = new List<DeMeritTypeViewModel>();
+                deMeritMemType.conductor.cancel = new List<DeMeritTypeViewModel>();
+
+
+                foreach (DeMerit demerit in deMerits)
                 {
-                    officerVM.id = officer.ID;
-                    officerVM.name = officer.Name;
-                    officerVM.nic = officer.NIC;
+                    foreach (MemberDeMerit mem in demerit.MemberDeMerits)
+                    {
+                        switch (demerit.Member.MemberType.Code)
+                        {
+                            case "Driver":
+                                switch (mem.Merit.ColorCodeId)
+                                {
+                                    case 1:
+                                        var a = deMeritMemType.driver.cancel.Find(x => x.id == demerit.Member.ID);
+                                        if (a == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.driver.cancel.Add(ad);
+                                        }
+                                        break;
+                                    case 2:
+                                        var b = deMeritMemType.driver.adPannel.Find(x => x.id == demerit.Member.ID);
+                                        if (b == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.driver.adPannel.Add(ad);
+                                        }
+                                        break;
+                                    case 3:
+                                        var c = deMeritMemType.driver.punish.Find(x => x.id == demerit.Member.ID);
+                                        if (c == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.driver.punish.Add(ad);
+                                        }
+                                        break;
+                                    case 4:
+                                        var d = deMeritMemType.driver.finePay.Find(x => x.id == demerit.Member.ID);
+                                        if (d == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.driver.finePay.Add(ad);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case "Conductor":
+                                switch (mem.Merit.ColorCodeId)
+                                {
+                                    case 1:
+                                        var a = deMeritMemType.conductor.cancel.Find(x => x.id == demerit.Member.ID);
+                                        if (a == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.conductor.cancel.Add(ad);
+                                        }
+                                        break;
+                                    case 2:
+                                        var b = deMeritMemType.conductor.adPannel.Find(x => x.id == demerit.Member.ID);
+                                        if (b == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.conductor.adPannel.Add(ad);
+                                        }
+                                        break;
+                                    case 3:
+                                        var c = deMeritMemType.conductor.punish.Find(x => x.id == demerit.Member.ID);
+                                        if (c == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.conductor.punish.Add(ad);
+                                        }
+                                        break;
+                                    case 4:
+                                        var d = deMeritMemType.conductor.finePay.Find(x => x.id == demerit.Member.ID);
+                                        if (d == null)
+                                        {
+                                            DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                            ad.id = demerit.Member.ID;
+                                            ad.name = demerit.Member.FullName;
+                                            deMeritMemType.conductor.finePay.Add(ad);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            default : break;
+                        }
+                    }
                 }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { officer = officerVM, messageCode = messageData };
+                var returnObject = new { merits = deMeritMemType, messageCode = messageData };
                 return Ok(returnObject);
-
             }
             catch (Exception ex)
             {
@@ -285,7 +397,6 @@ namespace NTC.API.Controllers
                 return Ok(returnObject);
             }
         }
-
         #endregion
     }
 }
