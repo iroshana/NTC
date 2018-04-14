@@ -107,6 +107,10 @@
     <Compile Include="Migrations\201804131156194_add-ntcNo.Designer.cs">
       <DependentUpon>201804131156194_add-ntcNo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804141355043_addcomplainstatus.cs" />
+    <Compile Include="Migrations\201804141355043_addcomplainstatus.Designer.cs">
+      <DependentUpon>201804141355043_addcomplainstatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804131156194_add-ntcNo.resx">
       <DependentUpon>201804131156194_add-ntcNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141355043_addcomplainstatus.resx">
+      <DependentUpon>201804141355043_addcomplainstatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

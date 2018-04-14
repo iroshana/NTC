@@ -28,6 +28,7 @@ namespace NTC.BusinessEntities
         public int DriverId { get; set; }
         public bool IsEvidenceHave { get; set; }
         public bool IsInqueryParticipation { get; set; }
+        public string ComplainStatus { get; set; }
         [ForeignKey("BusId")]
         public virtual Bus Bus { get; set; }
         [ForeignKey("RouteId")]
