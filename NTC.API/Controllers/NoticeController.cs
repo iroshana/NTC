@@ -17,12 +17,14 @@ namespace NTC.API.Controllers
         private readonly INoticeService _notice;
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _common;
+        private readonly IMemberNoticeService _memberNotice;
 
-        public NoticeController(INoticeService notice, IEventLogService eventLog, ICommonDataService common)
+        public NoticeController(IMemberNoticeService memberNotice,INoticeService notice, IEventLogService eventLog, ICommonDataService common)
         {
             _notice = notice;
             _eventLog = eventLog;
             _common = common;
+            _memberNotice = memberNotice;
         }
 
         #region GetAllNotices
@@ -145,6 +147,43 @@ namespace NTC.API.Controllers
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
                 var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region Get ALL Memeber Notice
+        [HttpGet]
+        public IHttpActionResult GetMemberNotice(int memberId)
+        {
+            try
+            {
+                List<NoticeViewModel> noticeListVM = new List<NoticeViewModel>();
+                IEnumerable<MemberNotice> notice = new List<MemberNotice>();
+                notice = _memberNotice.GetAllMemeberNotice(memberId);
+                if (notice != null)
+                {
+                    foreach (MemberNotice note in notice)
+                    {
+                        NoticeViewModel noticeVM = new NoticeViewModel();
+                        noticeVM.Content = note.Notice.Content;
+                        noticeVM.NoticeCode = note.Notice.NoticeCode;
+                        noticeVM.ID = note.Notice.ID;
+                        noticeVM.Type = note.Notice.Type;
+
+                        noticeListVM.Add(noticeVM);
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { notice = noticeListVM, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

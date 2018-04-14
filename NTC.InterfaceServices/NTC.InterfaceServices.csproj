@@ -43,6 +43,7 @@
     <Compile Include="ICommonDataService.cs" />
     <Compile Include="IComplainService.cs" />
     <Compile Include="IDeMeritService.cs" />
+    <Compile Include="IMemberNoticeService.cs" />
     <Compile Include="IMemberService.cs" />
     <Compile Include="IEntityService.cs" />
     <Compile Include="IEventLogService.cs" />
