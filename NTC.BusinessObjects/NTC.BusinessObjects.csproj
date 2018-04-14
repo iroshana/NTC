@@ -63,6 +63,7 @@
     <Compile Include="Repositories\Interface\IEvidenceRepository.cs" />
     <Compile Include="Repositories\Interface\IMemberTypeRepository.cs" />
     <Compile Include="Repositories\Interface\INoticeRepository.cs" />
+    <Compile Include="Repositories\Interface\IOfficerRepository.cs" />
     <Compile Include="Repositories\MemberEntityRepository.cs" />
     <Compile Include="Repositories\MemberNoticeRepository.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Repositories\MemberTypeRepository.cs" />
     <Compile Include="Repositories\MeritRepository.cs" />
     <Compile Include="Repositories\NoticeRepository.cs" />
+    <Compile Include="Repositories\OfficerRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -19,7 +19,8 @@ namespace NTC.Services
         protected IMeritRepository _meritRepository;
         protected IDashBoardEntityRepository _dashBoardEntityRepository;
         protected IMemberRepository _memberRepository;
-        public CommonDataService(IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository, IMeritRepository meritRepository, IDashBoardEntityRepository dashBoardEntityRepository, IMemberRepository memberRepository)
+        protected IOfficerRepository _officerRepository;
+        public CommonDataService(IOfficerRepository officerRepository, IMemberTypeRepository memberTypeRepository, IBusRepository busRepository, ICategoryRepository categoryRepository, IMeritRepository meritRepository, IDashBoardEntityRepository dashBoardEntityRepository, IMemberRepository memberRepository)
         {
             _memberTypeRepository = memberTypeRepository;
             _busRepository = busRepository;
@@ -27,6 +28,7 @@ namespace NTC.Services
             _meritRepository = meritRepository;
             _dashBoardEntityRepository = dashBoardEntityRepository;
             _memberRepository = memberRepository;
+            _officerRepository = officerRepository;
         }
 
         public IEnumerable<MemberType> GetAllMemberTypes()
@@ -135,6 +137,19 @@ namespace NTC.Services
                 {
                     return "NTC-0001";
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public Officer GetOfficer(string name)
+        {
+            try
+            {
+                return _officerRepository.Get(c => c.Name.StartsWith(name)).FirstOrDefault();
             }
             catch (Exception ex)
             {

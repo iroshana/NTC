@@ -83,7 +83,7 @@ var Memeber = new Vue({
                 if (response.body.messageCode.code == 1) {
                     this.clearData();
                     msgAlert.isSuccess = true;
-                    msgAlert.alertMessage = "Member Save Successfully.";
+                    msgAlert.alertMessage = "Member Save Successfully. NTC No = " + response.body.ntcNo;
                     msgAlert.showModal();
                 } else {
                     msgAlert.isSuccess = false;

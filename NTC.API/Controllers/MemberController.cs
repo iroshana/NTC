@@ -145,7 +145,7 @@ namespace NTC.API.Controllers
                    ,
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
-                var returnObject = new { messageCode = messageData };
+                var returnObject = new {ntcNo = member.NTCNo, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

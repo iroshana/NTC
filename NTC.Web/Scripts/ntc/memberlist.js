@@ -45,17 +45,22 @@ var MemberList = new Vue({
                 "rowId": 'id',
                 "aoColumns": [
                     {
-                        "data": "type", sWidth: "10%", bSortable: false, "render": function (data, type, row, meta) {
+                        "data": "type", sWidth: "10%", bSortable: true, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
                         }
                     },
                     {
-                        "data": "nic", sWidth: "15%", bSortable: false, "render": function (data, type, row, meta) {
+                        "data": "nic", sWidth: "15%", bSortable: true, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
                         }
                     },
                     {
-                        "data": "fullName", sWidth: "20%", bSortable: false, "render": function (data, type, row, meta) {
+                        "data": "ntcNo", sWidth: "15%", bSortable: true, "render": function (data, type, row, meta) {
+                            return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
+                        }
+                    },
+                    {
+                        "data": "fullName", sWidth: "20%", bSortable: true, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
                         }
                     },
