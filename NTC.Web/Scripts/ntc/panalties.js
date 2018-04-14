@@ -19,23 +19,41 @@ var Panaltie = new Vue({
     data:{
         details: {
             driver: {
-                advisingPanelList: [],
-                finePaymentList: [],
-                punishmentList: [],
-                cancelationList: []
+                adPannel: [],
+                finePay: [],
+                punish: [],
+                cancel: []
 
             },
             conductor: {
-                advisingPanelList: [],
-                finePaymentList: [],
-                punishmentList: [],
-                cancelationList: []
+                adPannel: [],
+                finePay: [],
+                punish: [],
+                cancel: []
             }
         }
     },
     methods:{
         loadDetails: function () {
-
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/DeMerit/GetPanelties').then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.details = response.body.merits;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
         }        
     },
     mounted(){
