@@ -17,8 +17,7 @@
 var Notice = new Vue({
     el:'#notice',
     data: {
-        noticeList: [],
-        
+        noticeList: [],        
     
     },
     methods: {
@@ -29,9 +28,9 @@ var Notice = new Vue({
         },
         getAllGenaralNotice: function () {
             $('#spinner').css("display", "block");
-            this.$http.get(apiURL + 'api//').then(function (response) {
+            this.$http.get(apiURL + 'api/Notice/GetAllNotices').then(function (response) {
                 if (response.body.messageCode.code == 1) {
-                    this.noticeList = response.body.noticeList;
+                    this.noticeList = response.body.notice;
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -50,7 +49,7 @@ var Notice = new Vue({
         }
     },
     mounted() {
-        //this.getAllGenaralNotice();
+        this.getAllGenaralNotice();
     }
 });
 
@@ -58,25 +57,38 @@ var NoticeModal = new Vue({
     el: '#noticeModal',
     data: {
         noticeVm: {
-            id: '',
-            note: ''
-
+            id: '0',
+            Content: '',
+            NoticeCode: '',
+            Type: '',
+            memberId: ''
         },
-        submit:false
+        submit: false
     },
     methods: {
-        saveNotice: function() {
+        clearData: function () {
+            this.noticeVm = {
+                id: '0',
+                Content: '',
+                NoticeCode: '',
+                Type: '',
+                memberId: '0'                
+            };
+            this.submit = false;
+        },
+        saveNotice: function () {
             this.submit = true;
-            if (this.noticeVm.note) {
+            if (this.noticeVm.Content) {
                 this.submit = false;
-                 $('#spinner').css("display", "block");
-                this.$http.post(apiURL + 'api//', this.noticeVm).then(function (response) {
+                $('#spinner').css("display", "block");
+                this.$http.post(apiURL + 'api/Notice/AddNotice', this.noticeVm).then(function (response) {
                     if (response.body.messageCode.code == 1) {
-                        Notice.noticeList.push(this.noticeVm);
+                        MemberDetails.noticeList.push(this.noticeVm);
                         $('#noticeModal').modal('hide');
                         msgAlert.isSuccess = true;
                         msgAlert.alertMessage = "Notice Save Successfully.";
                         msgAlert.showModal();
+                        this.clearData();
                     } else {
                         msgAlert.isSuccess = false;
                         msgAlert.alertMessage = response.body.messageCode.message;
@@ -91,10 +103,11 @@ var NoticeModal = new Vue({
                     if (response.statusText == "Unauthorized") {
                         $(location).attr('href', webURL + 'Account/Login');
                     }
-                });           
-
-                
+                });
             }
         }
+    },
+    mounted() {
+        
     }
 });

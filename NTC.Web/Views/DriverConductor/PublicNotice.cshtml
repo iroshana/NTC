@@ -34,7 +34,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="note in noticeList">
                                 <div class="tile-stats">
                                     <h5><strong>Notice</strong></h5>
-                                    <p>{{ note.note }}</p>
+                                    <p>{{ note.Content }}</p>
                                     <br />
                                     <div class="clearfix"></div>
                                     <div class="col-md-6"></div>
@@ -66,8 +66,8 @@
             </div>
             <div class="modal-body">
                 <h4>Notice</h4>
-                <textarea class="form-control" rows="6" placeholder='Enter Notice' v-model="noticeVm.note"></textarea> 
-                <small class="text-danger" v-show="!noticeVm.note && submit">Note is Required</small>              
+                <textarea class="form-control" rows="6" placeholder='Enter Notice' v-model="noticeVm.Content"></textarea> 
+                <small class="text-danger" v-show="!noticeVm.Content && submit">Note is Required</small>              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
