@@ -23,7 +23,7 @@ namespace NTC.BusinessEntities
         public string TelNo { get; set; }
         public string NIC { get; set; }
         public string Email { get; set; }
-        public DateTime LastLogin { get; set; }
+        public DateTime? LastLogin { get; set; }
         [Column(TypeName = "varchar(MAX)")]
         public string password { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }

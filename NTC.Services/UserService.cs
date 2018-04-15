@@ -73,14 +73,11 @@ namespace NTC.Services
         public int validateUser(string userName, string password, out string errorMessage)
         {
             errorMessage = String.Empty;
-            User user = _userRepository.Get(x=>x.UserName == userName).FirstOrDefault();
+            User user = _userRepository.Get(x=>x.UserName == userName && x.password == password).FirstOrDefault();
             UserRole userRole = new UserRole();
             if (user!= null)
             {
-                if (DecodeandDecryptData(user.password) == DecodeandDecryptData(password))
-                {
-                    userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
-                }
+                userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
             }
             else
             {

@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201804151300391_usertable.Designer.cs">
       <DependentUpon>201804151300391_usertable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804151547071_lastloginchange.cs" />
+    <Compile Include="Migrations\201804151547071_lastloginchange.Designer.cs">
+      <DependentUpon>201804151547071_lastloginchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804151300391_usertable.resx">
       <DependentUpon>201804151300391_usertable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151547071_lastloginchange.resx">
+      <DependentUpon>201804151547071_lastloginchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

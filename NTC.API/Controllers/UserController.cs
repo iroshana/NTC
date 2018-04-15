@@ -26,7 +26,7 @@ namespace NTC.API.Controllers
 
         #region GeRoles
         [HttpGet]
-        public IHttpActionResult GetRoles(int Id)
+        public IHttpActionResult GetRoles()
         {
             try
             {
@@ -100,7 +100,7 @@ namespace NTC.API.Controllers
         }
         #endregion
 
-        #region RegisterUser
+        #region Login
         [HttpPost]
         public IHttpActionResult Login(UserViewModel userView)
         {
