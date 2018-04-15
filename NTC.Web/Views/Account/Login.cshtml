@@ -11,6 +11,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NTC | Login </title>
+    <!-- jQuery -->
+    <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -21,12 +23,15 @@
     <link href="~/Content/vendors/animate.css/animate.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="~/Content/build/css/custom.min.css" rel="stylesheet">
-
+    
+    
+    <script src="~/Scripts/ntc/common.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.min.js"></script>
-
+    
 </head>
 <body class="login">
+    <div id="spinner" class="loading" style="display:none"></div>
     <div>
         <div class="login_wrapper" id="loginForm">
             <div class="animate form login_form">
@@ -34,10 +39,12 @@
                     <form>
                         <h1>Login Form</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="" v-mode="userModel.userName" />
+                            <input type="text" class="form-control" placeholder="Username" required="" v-model="userModel.userName" />
+                            <span class="text-danger" v-show="!userModel.userName && submitted">User Name Required</span>
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="" v-mode="userModel.password" />
+                            <input type="password" class="form-control" placeholder="Password" required="" v-model="userModel.password" />
+                            <span class="text-danger" v-show="!userModel.password && submitted">Password Required</span>
                         </div>
                         <div>
                             <button class="btn btn-default submit" v-on:click="login">Log in</button>
@@ -56,6 +63,34 @@
             </div>            
         </div>
     </div>
+
+    @*Start Alert*@
+
+    <div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog modal-val">
+            <div class="modal-content">
+                <div class="modal-header" v-bind:class="{'alert-success' : isSuccess, 'alert-danger' : !isSuccess}">
+                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="bold-700">{{header}}</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-12" id="alertInfo">
+                            <div class="alert rounded" id="alert">
+                                <div class="icon center-block text-center"><i class="fa fa-4x" v-bind:class="{'fa-close' : !isSuccess, 'fa-check': isSuccess}"></i></div>
+                                <span class="center-block text-center" id="alertMessage">{{alertMessage}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn" v-bind:class="{'btn-success' : isSuccess, 'btn-danger' : !isSuccess}" type="button" id="closeAlert"><i class="fa fa-times-circle"></i> Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*End Alert*@
 
     <script src="~/Scripts/ntc/usermanager.js"></script>
 </body>

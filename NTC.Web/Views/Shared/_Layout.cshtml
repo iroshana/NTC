@@ -53,10 +53,10 @@
     <div id="spinner" class="loading" style="display:none"></div>
     <div class="container body">
         <div class="main_container">
-            <div class="col-md-3 left_col">
+            <div class="col-md-3 left_col" id="menu">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-bus"></i> <span>NTC</span></a>
+                        <a href="#" class="site_title"><i class="fa fa-bus"></i> <span>NTC</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br />
@@ -65,20 +65,20 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li>
+                                <li v-show="role == 'ADMIN'">
                                     <a href="@Url.Action("AdminDashboard", "Dashboard")"><i class="fa fa-home"></i> Home </a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-user"></i> Driver/ Conductor <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>
-                                        <li><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>
-                                        <li><a href="@Url.Action("Panalties", "DriverConductor")">Panelties</a></li>
-                                        <li><a href="@Url.Action("PublicNotice", "DriverConductor")">Notice</a></li>
-                                        <li><a href="@Url.Action("MemeberFullProfile", "DriverConductor")">Profile</a></li>
+                                        <li v-show="role == 'ADMIN'"><a href="@Url.Action("AddNewMember", "DriverConductor")">New Member</a></li>
+                                        <li v-show="role == 'ADMIN' || role == 'OFFICER'"><a href="@Url.Action("List", "DriverConductor")">Memeber List</a></li>
+                                        <li v-show="role == 'ADMIN'"><a href="@Url.Action("Panalties", "DriverConductor")">Panelties</a></li>
+                                        <li v-show="role == 'ADMIN'"><a href="@Url.Action("PublicNotice", "DriverConductor")">Notice</a></li>
+                                        @*<li v-show="role == 'ADMIN'"><a href="@Url.Action("MemeberFullProfile", "DriverConductor")">Profile</a></li>*@
                                     </ul>
                                 </li>
-                                <li>
+                                <li v-show="role == 'ADMIN'">
                                     <a><i class="fa fa-bar-chart"></i> Reports <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Advisingpanel", "Reports")">Advising Panel  </a></li>
@@ -88,15 +88,15 @@
                                         <li><a href="@Url.Action("ComplaintManagement", "Reports")">Complaint Management </a></li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li v-show="role == 'ADMIN'">
                                     <a href="@Url.Action("ChartDiaplay", "Charts")"><i class="fa fa-line-chart"></i> Charts </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="menu_section">
+                        @*<div class="menu_section">
                             <h3>Live On</h3>
                             <ul class="nav side-menu"></ul>
-                        </div>
+                        </div>*@
                     </div>
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
@@ -124,11 +124,11 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    @*<img src="images/img.jpg" alt="">*@John Doe
+                                    @*<img src="images/img.jpg" alt="">*@Memeber
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="href="@Url.Action("Login", "Account")""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -150,6 +150,7 @@
         </div>
     </div>
 
+    <script src="~/Scripts/ntc/layout.js"></script>
     <!-- FastClick -->
     <script src="~/Content/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
