@@ -109,11 +109,11 @@ namespace NTC.Services
             }
         }
 
-        public IEnumerable<DashBoardEntityModel> GetDashBoardCounts()
+        public DashBoardEntityModel GetDashBoardCounts()
         {
             try
             {
-                return _dashBoardEntityRepository.ExecuteStoredProcedure("dbo.DashBoard");
+                return _dashBoardEntityRepository.ExecuteStoredProcedure("dbo.DashBoard").FirstOrDefault();
             }
             catch (Exception ex)
             {

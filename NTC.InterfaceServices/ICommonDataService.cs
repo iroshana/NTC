@@ -16,7 +16,7 @@ namespace NTC.InterfaceServices
         Bus GetBusById(int Id);
         IEnumerable<Category> GetAllCategories();
         IEnumerable<Merit> GetAllMerits();
-        IEnumerable<DashBoardEntityModel> GetDashBoardCounts();
+        DashBoardEntityModel GetDashBoardCounts();
         string GetLastNTCNO();
         Officer GetOfficer(string name);
     }

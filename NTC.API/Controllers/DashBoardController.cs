@@ -27,27 +27,24 @@ namespace NTC.API.Controllers
         {
             try
             {
-                List<DashBoardViewModel> dashboardCounts = new List<DashBoardViewModel>();
-                IEnumerable<DashBoardEntityModel> dashboards = new List<DashBoardEntityModel>();
-                dashboards = _common.GetDashBoardCounts();
-                if (dashboards != null)
+                DashBoardViewModel dashboardView = new DashBoardViewModel();
+                DashBoardEntityModel dashboard = new DashBoardEntityModel();
+                dashboard = _common.GetDashBoardCounts();
+                if (dashboard != null)
                 {
-                    foreach (DashBoardEntityModel dashboard in dashboards)
-                    {
-                        DashBoardViewModel dashboardView = new DashBoardViewModel();
-                        dashboardView.highestConductorComplain = dashboard.HighestConductorComplain;
-                        dashboardView.highestDriverComplain = dashboard.HighestDriverComplain;
-                        dashboardView.highestConductorPoints = dashboard.HighestConductorPoints;
-                        dashboardView.highestDriverPoints = dashboard.HighestDriverPoints;
-                        dashboardView.redNoticeConductors = dashboard.RedNoticeConductors;
-                        dashboardView.redNoticeDrivers = dashboard.RedNoticeDrivers;
-                        dashboardView.redNoticeMembers = dashboard.RedNoticeMembers;
-                        dashboardCounts.Add(dashboardView);
-                    }
+                    
+                    dashboardView.highestConductorComplain = dashboard.HighestConductorComplain;
+                    dashboardView.highestDriverComplain = dashboard.HighestDriverComplain;
+                    dashboardView.highestConductorPoints = dashboard.HighestConductorPoints;
+                    dashboardView.highestDriverPoints = dashboard.HighestDriverPoints;
+                    dashboardView.redNoticeConductors = dashboard.RedNoticeConductors;
+                    dashboardView.redNoticeDrivers = dashboard.RedNoticeDrivers;
+                    dashboardView.redNoticeMembers = dashboard.RedNoticeMembers;
+                    
                 }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { dashboard = dashboardCounts, messageCode = messageData };
+                var returnObject = new { dashboard = dashboardView, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
