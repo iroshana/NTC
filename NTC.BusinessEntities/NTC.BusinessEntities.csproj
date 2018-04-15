@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201804141355043_addcomplainstatus.Designer.cs">
       <DependentUpon>201804141355043_addcomplainstatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804151300391_usertable.cs" />
+    <Compile Include="Migrations\201804151300391_usertable.Designer.cs">
+      <DependentUpon>201804151300391_usertable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -119,8 +123,10 @@
     <Compile Include="NTCModel.cs" />
     <Compile Include="Officer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804141355043_addcomplainstatus.resx">
       <DependentUpon>201804141355043_addcomplainstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151300391_usertable.resx">
+      <DependentUpon>201804151300391_usertable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

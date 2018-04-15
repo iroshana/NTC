@@ -29,5 +29,8 @@ namespace NTC.BusinessEntities
         public virtual DbSet<ComplainCategory> ComplainCategories { get; set; }
         public virtual DbSet<LogMessage> LogMessages { get; set; }
         public virtual DbSet<LoginHistory> LoginHistories { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+
     }
 }

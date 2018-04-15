@@ -429,5 +429,54 @@ namespace NTC.API.Controllers
         }
 
         #endregion
+
+        #region GetBestMember
+        [HttpGet]
+        public IHttpActionResult GetBestMember()
+        {
+            try
+            {
+                DeMerit deMerit = new DeMerit();
+                deMerit = _deMerit.GetLastDeMeritNo();
+                DateTime date = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+
+
+                string today = date.ToShortDateString().Replace("/", String.Empty);
+                string nextdeMeritNo = String.Empty;
+
+                if (deMerit != null)
+                {
+                    string deMeritNo = deMerit.DeMeritNo;
+
+                    string deMeritdate = deMeritNo.Split('-')[0];
+                    int no = int.Parse(deMeritNo.Split('-')[1]);
+
+                    if (deMeritdate == today)
+                    {
+                        nextdeMeritNo = deMeritdate + "-" + (no + 1);
+                    }
+                    else
+                    {
+                        nextdeMeritNo = today + "-" + "1";
+                    }
+                }
+                else
+                {
+                    nextdeMeritNo = today + "-" + "1";
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { complainNo = nextdeMeritNo, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace NTC.BusinessEntities
         public string NIC { get; set; }
         public string Email { get; set; }
         public DateTime LastLogin { get; set; }
+        [Column(TypeName = "varchar(MAX)")]
+        public string password { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<LoginHistory> LoginHistories { get; set; }
     }
