@@ -74,7 +74,7 @@ namespace NTC.API.Controllers
                     newUser.TelNo = userView.telNo;
                     newUser.password = userView.password;
 
-                    _user.registerUser(newUser,out errorMessage);
+                    _user.registerUser(newUser, userView.roleId, out errorMessage);
                 }
                 else
                 {
@@ -106,11 +106,11 @@ namespace NTC.API.Controllers
         {
             try
             {
-                int roleId = 0;
+                string roleCode = String.Empty;
                 string errorMessage = String.Empty;
                 if (userView != null)
                 {
-                    roleId = _user.validateUser(userView.userName,userView.password,out errorMessage);
+                    roleCode = _user.validateUser(userView.userName,userView.password,out errorMessage);
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace NTC.API.Controllers
                    ,
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
-                var returnObject = new {userRole = roleId, messageCode = messageData };
+                var returnObject = new {userRole = roleCode, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

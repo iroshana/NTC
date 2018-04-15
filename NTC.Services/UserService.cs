@@ -48,7 +48,7 @@ namespace NTC.Services
             }
         }
 
-        public void registerUser(User userView, out string errorMessage)
+        public void registerUser(User userView, int roleId, out string errorMessage)
         {
             try
             {
@@ -57,6 +57,13 @@ namespace NTC.Services
                 if (user!= null)
                 {
                     base.Add(userView);
+                    if (roleId != 0)
+                    {
+                        UserRole userRole = new UserRole();
+                        userRole.RoleId = roleId;
+                        userRole.UserId = user.ID;
+                        _userRoleRepository.Add(userRole);
+                    }
                 }
                 else
                 {
@@ -70,7 +77,7 @@ namespace NTC.Services
             }
         }
 
-        public int validateUser(string userName, string password, out string errorMessage)
+        public string validateUser(string userName, string password, out string errorMessage)
         {
             errorMessage = String.Empty;
             User user = _userRepository.Get(x=>x.UserName == userName && x.password == password).FirstOrDefault();
@@ -78,12 +85,15 @@ namespace NTC.Services
             if (user!= null)
             {
                 userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
+
+                return userRole.Role.Code;
             }
             else
             {
-                errorMessage = "Invalid User Name";
+                errorMessage = "Invalid User Name or password";
+                return String.Empty;
             }
-            return userRole.RoleId;
+           
         }
 
         public string EncryptandEncodeData(string plainText)

@@ -14,6 +14,7 @@ namespace NTC.ViewModels
         public string telNo { get; set; }
         public string nic { get; set; }
         public string email { get; set; }
+        public int roleId { get; set; }
     }
     public class RoleViewModel
     {
