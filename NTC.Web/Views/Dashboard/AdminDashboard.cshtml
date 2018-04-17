@@ -11,7 +11,7 @@
                 <a href="@Url.Action("List", "DriverConductor")">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-user"></i></div>
-                        <div class="count">{{ wighet.driverCount}}</div>
+                        <div class="count">-</div>
                         <h3>Driver/ Conductor</h3>
                         <p>driver conductor details</p>
                     </div>
@@ -69,7 +69,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{ wighet.redNoticeDrivers}}</div>
 
                                     <h3></h3>
                                     <p>Red Notice Drivers.</p>
@@ -78,7 +78,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{ wighet.highestDriverComplain }}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Complains.</p>
@@ -87,7 +87,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{ wighet.highestDriverPoints}}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
@@ -146,7 +146,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{wighet.redNoticeConductors}}</div>
 
                                     <h3></h3>
                                     <p>Red Notice Conductor.</p>
@@ -155,7 +155,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{ wighet.highestConductorComplain}}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Complaint.</p>
@@ -164,7 +164,7 @@
                             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count">0</div>
+                                    <div class="count">{{wighet.highestConductorPoints}}</div>
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
                                 </div>

@@ -18,15 +18,23 @@ var DashBoard = new Vue({
     el: '#dash',
     data: {
         wighet: {
-            driverCount:'0'
+            driverCount: '-',
+            highestConductorComplain: '0',
+            highestDriverComplain: '0',
+            highestConductorPoints: '0',
+            highestDriverPoints: '0',
+            redNoticeConductors: '0',
+            redNoticeDrivers: '0',
+            redNoticeMembers: '0'
+
         }
     },
     methods: {
         getDashboardData: function () {
             $('#spinner').css("display", "block");
-            this.$http.get(apiURL + '').then(function (response) {
+            this.$http.get(apiURL + 'api/DashBoard/GetDashboardCounts').then(function (response) {
                 if (response.body.messageCode.code == 1) {
-                    //this.memeberTypeList = response.body.
+                    this.wighet = response.body.dashboard;
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -45,7 +53,7 @@ var DashBoard = new Vue({
         }
     },
     mounted() {
-        //this.getDashboardData();
+        this.getDashboardData();
 
         $('#driverMonth').datepicker({
             dateFormat: 'yy-mm-dd',
