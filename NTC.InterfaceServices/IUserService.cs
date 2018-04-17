@@ -13,7 +13,7 @@ namespace NTC.InterfaceServices
         IEnumerable<Role> GetUserRoles();
         void registerUser(User user, int roleId, out string errorMessage);
         string validateUser(string userName,string password, out string errorMessage);
-        string DecodeandDecryptData(string encryptedText);
-        string EncryptandEncodeData(string plainText);
+        //string DecodeandDecryptData(string encryptedText);
+        //string EncryptandEncodeData(string plainText);
     }
 }

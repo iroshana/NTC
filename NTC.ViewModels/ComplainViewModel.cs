@@ -67,4 +67,11 @@ namespace NTC.ViewModels
         public string extension { get; set; }
         public string filePath { get; set; }
     }
+    public class ComplainReportViewModel
+    {
+        public string driverName { get; set; }
+        public string ntcNo { get; set; }
+        public string complain { get; set; }
+        public string complainStatus { get; set; }
+    }
 }

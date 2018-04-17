@@ -58,6 +58,7 @@
     <Compile Include="Repositories\EvidenceRepository.cs" />
     <Compile Include="Repositories\Interface\IDashBoardEntityRepository.cs" />
     <Compile Include="Repositories\Interface\IMemberEntityRepository.cs" />
+    <Compile Include="Repositories\Interface\IMeritReportRepository.cs" />
     <Compile Include="Repositories\Interface\IMeritRepository.cs" />
     <Compile Include="Repositories\Interface\IBusRepository.cs" />
     <Compile Include="Repositories\Interface\IEvidenceRepository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
     <Compile Include="Repositories\LogmessageRepository.cs" />
     <Compile Include="Repositories\MemberTypeRepository.cs" />
+    <Compile Include="Repositories\MeritReportRepository.cs" />
     <Compile Include="Repositories\MeritRepository.cs" />
     <Compile Include="Repositories\NoticeRepository.cs" />
     <Compile Include="Repositories\OfficerRepository.cs" />

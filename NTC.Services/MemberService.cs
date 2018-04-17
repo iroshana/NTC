@@ -18,11 +18,11 @@ namespace NTC.Services
         protected IUnitOfWork _unitOfWork;
         protected IMemberRepository _employeeRepository;
         protected IMemberEntityRepository _memberEntityRepository;
-
+        protected IComplainRepository _complainRepository;
         #endregion Member Variables
 
 
-        public MemberService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository, IMemberEntityRepository memberEntityRepository)
+        public MemberService(IUnitOfWork unitOfWork, IMemberRepository employeeRepository, IMemberEntityRepository memberEntityRepository, IComplainRepository complainRepository)
             :base(unitOfWork, employeeRepository)
         {
             try
@@ -30,6 +30,7 @@ namespace NTC.Services
                 _unitOfWork = unitOfWork;
                 _employeeRepository = employeeRepository;
                 _memberEntityRepository = memberEntityRepository;
+                _complainRepository = complainRepository;
             }
             catch (Exception ex)
             {
@@ -106,6 +107,27 @@ namespace NTC.Services
                 throw ex;
             }
         }
-        
+
+        public Member GetBestMember(DateTime date, bool isMonth)
+        {
+            try
+            {
+
+                IEnumerable<Member> members = base.GetAll().ToList();
+                foreach (Member mem in members)
+                {
+                    if (mem.DeMerits == null)
+                    {
+
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

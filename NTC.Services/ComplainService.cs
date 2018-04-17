@@ -99,6 +99,19 @@ namespace NTC.Services
                 throw;
             }
         }
-        
+
+        public IEnumerable<Complain> GetAllComplains(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                IEnumerable<Complain> complains = base.GetAll().ToList();
+                return complains.Where(x => x.Date.Date >= fromDate && x.Date.Date <= toDate);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

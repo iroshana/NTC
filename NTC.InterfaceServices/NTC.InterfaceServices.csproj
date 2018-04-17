@@ -48,6 +48,7 @@
     <Compile Include="IEntityService.cs" />
     <Compile Include="IEventLogService.cs" />
     <Compile Include="INoticeService.cs" />
+    <Compile Include="IReportService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
