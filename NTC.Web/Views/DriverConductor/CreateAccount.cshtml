@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Create Account";
+}
+
+<!-- page content -->
+<div class="right_col" role="main" id="memeberAcc">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>User Profile</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Member Account</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">                        
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="x_content">
+                                <br />
+                                <div class="form-horizontal form-label-left">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">UserName<span class="required">*</span></label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <input id="fullName" type="text" class="form-control" placeholder="Enter NTC No" v-model="userView.userName">
+                                            <small v-show="!userView.userName && submitted" class="text-danger">NTC No is Required</small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Password<span class="required">*</span></label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <input id="fullName" type="text" class="form-control" placeholder="Enter Password" v-model="userView.password">
+                                            <small v-show="submitted && !userView.password" class="text-danger">Password is Required</small>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Role<span class="required">*</span></label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <select class="form-control" v-model="userView.roleId">
+                                                <option v-for="role in roleList" v-bind:value="role.id">{{ role.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                            <button type="button" class="btn btn-success" v-on:click="createAccount">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+@*Alert*@
+
+<div aria-labelledby="myModalLabel" role="dialog" id="alertModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog modal-val">
+        <div class="modal-content">
+            <div class="modal-header" v-bind:class="{'alert-success' : isSuccess, 'alert-danger' : !isSuccess}">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="bold-700">{{header}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12" id="alertInfo">
+                        <div class="alert rounded" id="alert">
+                            <div class="icon center-block text-center"><i class="fa fa-4x" v-bind:class="{'fa-close' : !isSuccess, 'fa-check': isSuccess}"></i></div>
+                            <span class="center-block text-center" id="alertMessage">{{alertMessage}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" v-bind:class="{'btn-success' : isSuccess, 'btn-danger' : !isSuccess}" type="button" id="closeAlert"><i class="fa fa-times-circle"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*End Alert*@
+
+<script src="~/Scripts/ntc/useraccount.js"></script>
+
+

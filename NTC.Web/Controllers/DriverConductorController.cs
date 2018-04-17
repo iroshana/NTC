@@ -43,5 +43,10 @@ namespace NTC.Web.Views.Dashboard
         {
             return View();
         }
+
+        public ActionResult CreateAccount()
+        {
+            return View();
+        }
     }
 }

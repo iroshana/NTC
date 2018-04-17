@@ -35,8 +35,10 @@ var Login = new Vue({
                         localStorage.setItem('role', response.body.userRole);
                         if (response.body.userRole == 'ADMIN') {
                             window.location.replace(webURL + 'Dashboard/AdminDashboard');
-                        } else {
+                        } else if(response.body.userRole == "OFFICER") {
                             window.location.replace(webURL + 'DriverConductor/List');
+                        } else {
+                            window.location.replace(webURL + 'DriverConductor/MemeberFullProfile?memberId=' + 16);
                         }
                         
                     } else {
