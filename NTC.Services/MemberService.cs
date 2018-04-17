@@ -118,10 +118,10 @@ namespace NTC.Services
                 {
                     if (mem.DeMerits == null)
                     {
-
+                        _complainRepository.Get();
                     }
                 }
-               
+                return null;
             }
             catch (Exception ex)
             {
