@@ -43,7 +43,6 @@ namespace NTC.API.Controllers
                     
 
                     string FileFolder1 = formData["imageFolder"].ToString();
-                    string FileFolder2 = formData["imagePath"].ToString();
 
 
                     for (int i = 0; i < files.Count; i++)
@@ -67,7 +66,7 @@ namespace NTC.API.Controllers
                         string filename = String.Empty;
                         Stream input = await uploadedFile.ReadAsStreamAsync();
 
-                        directoryName = HttpContext.Current.Server.MapPath(String.Format("~/images/{0}/{1}/", FileFolder1, FileFolder2));
+                        directoryName = HttpContext.Current.Server.MapPath(String.Format("~/images/{0}/", FileFolder1));
                         filename = Path.Combine(directoryName, uploadedFileName);
 
                         //Deletion exists file  
@@ -84,7 +83,7 @@ namespace NTC.API.Controllers
                         }
 
                         UploadFileDataViewModel uplaodedFileData = new UploadFileDataViewModel();
-                        uplaodedFileData.filePath = String.Format("{0}/{1}/{2}", FileFolder1, FileFolder2, uploadedFileName);
+                        uplaodedFileData.filePath = String.Format("{0}/{1}", FileFolder1, uploadedFileName);
                         lstUploadedFileResult.Add(uplaodedFileData);
                     }
                 }
