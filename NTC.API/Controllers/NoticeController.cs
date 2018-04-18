@@ -198,5 +198,57 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
+        #region SentMemberNotice
+        [HttpGet]
+        public IHttpActionResult SentMemberNotice(int noticeId)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                MemberNotice notice = _memberNotice.GetAll(x=>x.ID == noticeId).FirstOrDefault();
+                notice.IsSent = true;
+                _memberNotice.UpdateMemberNotice(notice, out errorMessage);
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new {messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
+
+        #region SentNotice
+        [HttpGet]
+        public IHttpActionResult SentNotice(int noticeId)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                Notice notice = new Notice();
+                notice = _notice.GetAll(x=>x.ID == noticeId).FirstOrDefault();
+                notice.IsSent = true;
+
+                _notice.UpdaterNotice(notice, out errorMessage);
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

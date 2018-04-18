@@ -74,7 +74,7 @@ namespace NTC.API.Controllers
                     newUser.TelNo = userView.telNo;
                     newUser.password = userView.password;
 
-                    _user.registerUser(newUser, userView.roleId, userView.memberId, out errorMessage);
+                    _user.registerUser(newUser, userView.roleId, out errorMessage);
                 }
                 else
                 {

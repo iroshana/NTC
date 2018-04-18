@@ -50,7 +50,7 @@ namespace NTC.Services
             }
         }
 
-        public void registerUser(User userView, int roleId, int memberId, out string errorMessage)
+        public void registerUser(User userView, int roleId, out string errorMessage)
         {
             try
             {
@@ -66,13 +66,13 @@ namespace NTC.Services
                         userRole.UserId = user.ID;
                         _userRoleRepository.Add(userRole);
                     }
-                    if (memberId != 0)
+                    if (userView.UserName.StartsWith("NTC"))
                     {
                         List<string> properties = new List<string>();
                         properties.Add("UserID");
 
                         Member member = new Member();
-                        member.ID = memberId;
+                        member = _memberRepository.Get(x=>x.NTCNo == userView.UserName).FirstOrDefault();
                         member.UserID = userView.ID;
                         _memberRepository.Update(member, properties, true);
                     }

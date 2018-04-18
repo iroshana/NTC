@@ -40,5 +40,19 @@ namespace NTC.Services
                 throw ex;
             }
         }
+
+        public void UpdateMemberNotice(MemberNotice notice, out string errorMessage)
+        {
+            try
+            {
+                errorMessage = String.Empty;
+                base.Update(notice);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+        }
     }
 }
