@@ -44,7 +44,7 @@ namespace NTC.API.Controllers
                         meritView.fullName = merit.FullName;
                         meritView.description = merit.Description;
                         meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-
+                        meritView.ntcNo = merit.NTCNo;
                         meritList.Add(meritView);
                     }
                 }

@@ -12,6 +12,7 @@ namespace NTC.ViewModels
         public string fullName { get; set; }
         public string description { get; set; }
         public string inqueryDate { get; set; }
+        public string ntcNo { get; set; }
 
     }
 

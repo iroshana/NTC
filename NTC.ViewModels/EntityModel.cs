@@ -37,6 +37,8 @@ namespace NTC.ViewModels
         public string FullName { get; set; }
         public string Description { get; set; }
         public DateTime InqueryDate { get; set; }
+        public string NTCNo { get; set; }
+
 
     }
 }
