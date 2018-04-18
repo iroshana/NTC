@@ -18,7 +18,8 @@ namespace NTC.Services
         protected IRoleRepository _roleRepository;
         protected IUserRoleRepository _userRoleRepository;
         protected IMemberEntityRepository _memberEntityRepository;
-        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, IMemberEntityRepository memberEntityRepository, IRoleRepository roleRepository, IUserRoleRepository userRoleRepository)
+        protected IMemberRepository _memberRepository;
+        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, IMemberEntityRepository memberEntityRepository, IRoleRepository roleRepository, IUserRoleRepository userRoleRepository, IMemberRepository memberRepository)
             :base(unitOfWork, userRepository)
         {
             try
@@ -28,6 +29,7 @@ namespace NTC.Services
                 _memberEntityRepository = memberEntityRepository;
                 _roleRepository = roleRepository;
                 _userRoleRepository = userRoleRepository;
+                _memberRepository = memberRepository;
             }
             catch (Exception ex)
             {
@@ -48,7 +50,7 @@ namespace NTC.Services
             }
         }
 
-        public void registerUser(User userView, int roleId, out string errorMessage)
+        public void registerUser(User userView, int roleId, int memberId, out string errorMessage)
         {
             try
             {
@@ -64,6 +66,16 @@ namespace NTC.Services
                         userRole.UserId = user.ID;
                         _userRoleRepository.Add(userRole);
                     }
+                    if (memberId != 0)
+                    {
+                        List<string> properties = new List<string>();
+                        properties.Add("UserID");
+
+                        Member member = new Member();
+                        member.ID = memberId;
+                        member.UserID = userView.ID;
+                        _memberRepository.Update(member, properties, true);
+                    }
                 }
                 else
                 {
@@ -77,7 +89,7 @@ namespace NTC.Services
             }
         }
 
-        public string validateUser(string userName, string password, out string errorMessage)
+        public UserLoginViewModel validateUser(string userName, string password, out string errorMessage)
         {
             errorMessage = String.Empty;
             User user = _userRepository.Get(x=>x.UserName == userName && x.password == password).FirstOrDefault();
@@ -85,13 +97,16 @@ namespace NTC.Services
             if (user!= null)
             {
                 userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
-
-                return userRole.Role.Code;
+                UserLoginViewModel userLogin = new UserLoginViewModel();
+                userLogin.memberId = _memberRepository.Get(x => x.UserID == user.ID).FirstOrDefault().ID;
+                userLogin.role = userRole.Role.Code;
+                return userLogin;
             }
             else
             {
                 errorMessage = "Invalid User Name or password";
-                return String.Empty;
+                UserLoginViewModel userLogin = new UserLoginViewModel();
+                return userLogin;
             }
            
         }

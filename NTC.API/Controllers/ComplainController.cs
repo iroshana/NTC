@@ -40,10 +40,35 @@ namespace NTC.API.Controllers
                     complainView.id = complain.ID;
                     complainView.complainNo = String.IsNullOrEmpty(complain.ComplainNo) ? String.Empty : complain.ComplainNo;
                     complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+                    complainView.bus = new BusViewModel();
+                    complainView.bus.id = complain.BusId;
+                    complainView.bus.busNo = complain.Bus.LicenceNo;
+                    complainView.route = new RouteViewModel();
+                    complainView.route.id = complain.RouteId;
+                    complainView.route.from = complain.Route.From;
+                    complainView.route.from = complain.Route.To;
+                    complainView.route.routeNo = complain.Route.RouteNo;
+                    complainView.place = String.IsNullOrEmpty(complain.Place) ? String.Empty : complain.Place;
+                    complainView.complainDate = complain.Date.ToString(@"yyyy-MM-dd");
+                    complainView.userId = complain.UserId == null ? 0 : complain.UserId.Value;
+                    complainView.method = String.IsNullOrEmpty(complain.Method) ? String.Empty : complain.Method;
+                    complainView.isInqueryParticipation = complain.IsInqueryParticipation;
+                    complainView.isEvidenceHave = complain.IsEvidenceHave;
+                    complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+
+
+                    if (complain.IsEvidenceHave)
+                    {
+                        complainView.evidence = new EvidenceViewModel();
+                        complainView.evidence.fileName = String.IsNullOrEmpty(complain.Evidence.FileName) ? String.Empty : complainView.evidence.fileName;
+                        complainView.evidence.evidenceNo = String.IsNullOrEmpty(complain.Evidence.EvidenceNo) ? String.Empty : complainView.evidence.evidenceNo;
+                        complainView.evidence.extension = String.IsNullOrEmpty(complain.Evidence.Extension) ? String.Empty : complainView.evidence.extension;
+                        complainView.evidence.filePath = String.IsNullOrEmpty(complain.Evidence.FilePath) ? String.Empty : complainView.evidence.filePath;
+                        
+                    }
+
                     complainView.Category = new List<CategoryViewModel>();
-
-
-
+                    
                     foreach (ComplainCategory category in complain.ComplainCategories)
                     {
                         if (category.IsSelected)

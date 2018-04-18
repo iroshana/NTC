@@ -15,11 +15,18 @@ namespace NTC.ViewModels
         public string nic { get; set; }
         public string email { get; set; }
         public int roleId { get; set; }
+        public int memberId { get; set; }
     }
     public class RoleViewModel
     {
         public int id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
+    }
+
+    public class UserLoginViewModel
+    {
+        public int memberId { get; set; }
+        public string role { get; set; }
     }
 }

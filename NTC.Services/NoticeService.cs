@@ -52,7 +52,7 @@ namespace NTC.Services
         {
             try
             {
-                return base.GetAll().ToList();
+                return base.GetAll(x=>x.IsSent == false).ToList();
             }
             catch (Exception ex)
             {
