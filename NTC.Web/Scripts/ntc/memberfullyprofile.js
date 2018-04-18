@@ -68,8 +68,8 @@ var MemberDetails = new Vue({
             route:''
         },
         categoryList: [],
-        role:''
-
+        role:'',
+        imageURL:''
     },
     methods: {
         getAllMemeberNotice: function (userId) {
@@ -100,10 +100,35 @@ var MemberDetails = new Vue({
         addComplain: function () {
             $(location).attr('href', webURL + 'DriverConductor/AddCompian?memberId=' + this.memeber.id);
         },
-        sendMsg: function () {
-            msgAlert.isSuccess = true;
-            msgAlert.alertMessage = 'Message Send Succesfully.'
-            msgAlert.showModal();
+        sendMsg: function (note) {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/Notice/SentNotice', {
+                params: {
+                    noticeId: note.ID
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.getAllMemeberNotice(getUrlParameter("memberId"));
+                    msgAlert.isSuccess = true;
+                    msgAlert.alertMessage = 'Message Send Succesfully.'
+                    msgAlert.showModal();
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+
+            
         },
         noticeModalShow: function () {
             NoticeModal.noticeVm = {
@@ -176,13 +201,8 @@ var MemberDetails = new Vue({
                     }
                 }).then(function (response) {
                     if (response.body.messageCode.code == 1) {
-                        this.complainMgt = response.body.complain;
-                    } else {
-                        this.complainMgt = {
-                            id: '',
-                            description: '',
-                            Category: []
-                        };
+                        this.complainVm = response.body.complain;
+                    } else {                        
                         msgAlert.isSuccess = false;
                         msgAlert.alertMessage = response.body.messageCode.message;
                         msgAlert.showModal();
@@ -251,6 +271,32 @@ var MemberDetails = new Vue({
                     $(location).attr('href', webURL + 'Account/Login');
                 }
             });
+        },
+        getOverallDeMerit: function () {
+            var memberId = getUrlParameter("memberId");
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/DeMerit/GetDemeritSummery', {
+                params: {
+                    memberId: memberId
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.deMeritMgt.memberDeMerit = response.body.merits;
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
         }
     },
     mounted() {
@@ -260,6 +306,9 @@ var MemberDetails = new Vue({
         this.getAllComplainList(getUrlParameter("memberId"));
         this.getAllDeMeritDropDown(getUrlParameter("memberId"));
         this.getAllMemeberNotice(getUrlParameter("memberId"));
+        this.getOverallDeMerit();
+
+        this.imageURL = imageURL;
     }
 });
 

@@ -56,7 +56,7 @@ namespace NTC.Services
             {
                 errorMessage = String.Empty;
                 User user = _userRepository.Get(x=>x.UserName == userView.UserName).FirstOrDefault();
-                if (user!= null)
+                if (user == null)
                 {
                     base.Add(userView);
                     if (roleId != 0)
@@ -98,7 +98,17 @@ namespace NTC.Services
             {
                 userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
                 UserLoginViewModel userLogin = new UserLoginViewModel();
-                userLogin.memberId = _memberRepository.Get(x => x.UserID == user.ID).FirstOrDefault().ID;
+
+                var userID = _memberRepository.Get(x => x.NTCNo == userName).FirstOrDefault();
+                if(userID != null)
+                {
+                    userLogin.memberId = userID.ID;
+                }
+                else
+                {
+                    userLogin.memberId = 0;
+                }
+                
                 userLogin.role = userRole.Role.Code;
                 return userLogin;
             }

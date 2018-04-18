@@ -40,13 +40,17 @@ namespace NTC.API.Controllers
                 {
                     foreach (Notice Note in notice)
                     {
-                        NoticeViewModel noticeVM = new NoticeViewModel();
-                        noticeVM.Content = Note.Content;
-                        noticeVM.NoticeCode = Note.NoticeCode;
-                        noticeVM.ID = Note.ID;
-                        noticeVM.Type = Note.Type;
+                        if (!Note.IsSent)
+                        {
+                            NoticeViewModel noticeVM = new NoticeViewModel();
+                            noticeVM.Content = Note.Content;
+                            noticeVM.NoticeCode = Note.NoticeCode;
+                            noticeVM.ID = Note.ID;
+                            noticeVM.Type = Note.Type;
 
-                        noticeListVM.Add(noticeVM);
+                            noticeListVM.Add(noticeVM);
+                        }
+                        
                     }
                 }
 
@@ -175,13 +179,17 @@ namespace NTC.API.Controllers
                 {
                     foreach (MemberNotice note in notice)
                     {
-                        NoticeViewModel noticeVM = new NoticeViewModel();
-                        noticeVM.Content = note.Notice.Content;
-                        noticeVM.NoticeCode = note.Notice.NoticeCode;
-                        noticeVM.ID = note.Notice.ID;
-                        noticeVM.Type = note.Notice.Type;
+                        if (!note.Notice.IsSent)
+                        {
+                            NoticeViewModel noticeVM = new NoticeViewModel();
+                            noticeVM.Content = note.Notice.Content;
+                            noticeVM.NoticeCode = note.Notice.NoticeCode;
+                            noticeVM.ID = note.Notice.ID;
+                            noticeVM.Type = note.Notice.Type;
 
-                        noticeListVM.Add(noticeVM);
+                            noticeListVM.Add(noticeVM);
+                        }
+                        
                     }
                 }
 

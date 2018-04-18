@@ -50,6 +50,7 @@ namespace NTC.API.Controllers
                     memberView.dateJoin = member.JoinDate.ToString("yyyy-MM-dd");
                     memberView.educationQuali = String.IsNullOrEmpty(member.HighestEducation) ? String.Empty : member.HighestEducation;
                     memberView.type = member.MemberType.Code;
+                    memberView.imagePath = member.ImagePath;
                 }
 
 
@@ -131,6 +132,7 @@ namespace NTC.API.Controllers
                     member.HighestEducation = String.IsNullOrEmpty(memberView.educationQuali)? String.Empty : memberView.educationQuali;
                     member.TypeId = memberView.typeId;
                     member.NTCNo = _common.GetLastNTCNO();
+                    member.ImagePath = memberView.imagePath;
                     _member.Add(member, out errorMessage);
 
                 }
