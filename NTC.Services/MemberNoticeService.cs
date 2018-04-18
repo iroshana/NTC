@@ -32,7 +32,7 @@ namespace NTC.Services
         {
             try
             {
-                return base.GetAll(x => x.MemberId == memberId).ToList();
+                return base.GetAll(x => x.MemberId == memberId && x.IsSent == false).ToList();
             }
             catch (Exception ex)
             {
