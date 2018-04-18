@@ -41,6 +41,9 @@ namespace NTC.API.Controllers
                     complainView.complainNo = String.IsNullOrEmpty(complain.ComplainNo) ? String.Empty : complain.ComplainNo;
                     complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
                     complainView.Category = new List<CategoryViewModel>();
+
+
+
                     foreach (ComplainCategory category in complain.ComplainCategories)
                     {
                         if (category.IsSelected)

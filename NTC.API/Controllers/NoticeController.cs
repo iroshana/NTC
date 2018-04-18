@@ -77,7 +77,9 @@ namespace NTC.API.Controllers
                     notice.Content = noticeView.Content;
                     notice.NoticeCode = noticeView.NoticeCode;
                     notice.Type = noticeView.Type;
+                    notice.IsSent = false;
                     notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+
                     if (noticeView.memberId != 0)
                     {
                         notice.MemberNotices = new List<MemberNotice>();
@@ -123,6 +125,7 @@ namespace NTC.API.Controllers
                     notice.Content = noticeView.Content;
                     notice.NoticeCode = noticeView.NoticeCode;
                     notice.Type = noticeView.Type;
+                    notice.IsSent = true;
                     notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                     if (noticeView.members != null)
                     {

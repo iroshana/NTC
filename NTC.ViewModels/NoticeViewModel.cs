@@ -13,6 +13,7 @@ namespace NTC.ViewModels
         public string Content { get; set; }
         public string Type { get; set; }
         public int memberId { get; set; }
+        public bool IsSent { get; set; }
     }
 
     public class BulkNoticeViewModel

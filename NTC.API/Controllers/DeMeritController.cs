@@ -291,7 +291,7 @@ namespace NTC.API.Controllers
                                 {
                                     case 1:
                                         var a = deMeritMemType.driver.cancel.Find(x => x.id == demerit.Member.ID);
-                                        if (a == null)
+                                        if (a == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -301,7 +301,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 2:
                                         var b = deMeritMemType.driver.adPannel.Find(x => x.id == demerit.Member.ID);
-                                        if (b == null)
+                                        if (b == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -311,7 +311,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 3:
                                         var c = deMeritMemType.driver.punish.Find(x => x.id == demerit.Member.ID);
-                                        if (c == null)
+                                        if (c == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -321,7 +321,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 4:
                                         var d = deMeritMemType.driver.finePay.Find(x => x.id == demerit.Member.ID);
-                                        if (d == null)
+                                        if (d == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -338,7 +338,7 @@ namespace NTC.API.Controllers
                                 {
                                     case 1:
                                         var a = deMeritMemType.conductor.cancel.Find(x => x.id == demerit.Member.ID);
-                                        if (a == null)
+                                        if (a == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -348,7 +348,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 2:
                                         var b = deMeritMemType.conductor.adPannel.Find(x => x.id == demerit.Member.ID);
-                                        if (b == null)
+                                        if (b == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -358,7 +358,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 3:
                                         var c = deMeritMemType.conductor.punish.Find(x => x.id == demerit.Member.ID);
-                                        if (c == null)
+                                        if (c == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -368,7 +368,7 @@ namespace NTC.API.Controllers
                                         break;
                                     case 4:
                                         var d = deMeritMemType.conductor.finePay.Find(x => x.id == demerit.Member.ID);
-                                        if (d == null)
+                                        if (d == null && mem.Point > 2)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
