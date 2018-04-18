@@ -3958,6 +3958,7 @@
     <Content Include="Scripts\ntc\reportcomplainmanagement.js" />
     <Content Include="Scripts\ntc\reportfinepayment.js" />
     <Content Include="Scripts\ntc\reportpunishmenttraining.js" />
+    <Content Include="Scripts\ntc\useraccount.js" />
     <Content Include="Scripts\ntc\usermanager.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -4011,6 +4012,7 @@
     <Content Include="Views\DriverConductor\AddCompian.cshtml" />
     <Content Include="Views\OnlineForm\Complain.cshtml" />
     <Content Include="Views\DriverConductor\AddPoints.cshtml" />
+    <Content Include="Views\DriverConductor\CreateAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

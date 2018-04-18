@@ -46,7 +46,29 @@ var MemberDetails = new Vue({
         deMeritRecordList: [],
         deMeritMgt: { id: '', memberDeMerit: [] },
         demeritNo: '',
-        noticeList: []
+        noticeList: [],
+        complainVm: {
+            id: '0',
+            bus: { id: '', busNo: '', route: { id: '1', routeNo: '', from: '', to: '' }},            
+            place: '',
+            complainNo: '',
+            method: '',
+            complainDate: '',
+            description: '',
+            userId: '',
+            evidenceId: '',
+            employeeId: '',
+            isEvidenceHave: false,
+            isInqueryParticipation: false,
+            Category: [],
+            complainerName: '',
+            complainerAddress: '',
+            telNo: '',
+            file: '',
+            route:''
+        },
+        categoryList: [],
+        role:''
 
     },
     methods: {
@@ -232,6 +254,8 @@ var MemberDetails = new Vue({
         }
     },
     mounted() {
+        this.role = localStorage.getItem('role');
+
         this.getMemberDetails(getUrlParameter("memberId"));
         this.getAllComplainList(getUrlParameter("memberId"));
         this.getAllDeMeritDropDown(getUrlParameter("memberId"));

@@ -83,7 +83,8 @@ var NoticeModal = new Vue({
                 $('#spinner').css("display", "block");
                 this.$http.post(apiURL + 'api/Notice/AddNotice', this.noticeVm).then(function (response) {
                     if (response.body.messageCode.code == 1) {
-                        MemberDetails.noticeList.push(this.noticeVm);
+                        //MemberDetails.noticeList.push(this.noticeVm);
+                        Notice.getAllGenaralNotice();
                         $('#noticeModal').modal('hide');
                         msgAlert.isSuccess = true;
                         msgAlert.alertMessage = "Notice Save Successfully.";

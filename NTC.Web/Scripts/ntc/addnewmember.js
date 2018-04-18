@@ -188,69 +188,69 @@ var Memeber = new Vue({
             Memeber.memeber.nameWithInitial = initials + ' ' + x[a - 1].toString();
         });
 
-        //$(document).ready(function(){
-        //    var $uploadCrop;
-        //    $uploadCrop = $('#item-img').croppie({
-        //        viewport: {
-        //            width: 150,
-        //            height: 150,
-        //            type: 'squre'
-        //        },
-        //        boundary: { width: 250, height: 250 },                
-        //    });
+        $(document).ready(function(){
+            var $uploadCrop;
+            $uploadCrop = $('#item-img').croppie({
+                viewport: {
+                    width: 150,
+                    height: 150,
+                    type: 'squre'
+                },
+                boundary: { width: 250, height: 250 },                
+            });
         
-        //    $('#upload').on('change', function () {
-        //        $("#item-img-result").empty();
-        //        Memeber.isResultShow = false;
+            $('#upload').on('change', function () {
+                $("#item-img-result").empty();
+                Memeber.isResultShow = false;
                 
-        //        if (this.files && this.files[0]) {
-        //            var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
-        //            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) != -1) {
-        //                var reader = new FileReader();
+                if (this.files && this.files[0]) {
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) != -1) {
+                        var reader = new FileReader();
 
-        //                reader.onload = function (e) {
-        //                    $('.upload-demo').addClass('ready');
-        //                    $uploadCrop.croppie('bind', {
-        //                        url: e.target.result
-        //                    }).then(function () {
-        //                        console.log('jQuery bind complete');
-        //                    });
-        //                }
-        //                reader.readAsDataURL(this.files[0]);
-        //            }
-        //            else {
+                        reader.onload = function (e) {
+                            $('.upload-demo').addClass('ready');
+                            $uploadCrop.croppie('bind', {
+                                url: e.target.result
+                            }).then(function () {
+                                console.log('jQuery bind complete');
+                            });
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    else {
                         
-        //            }
-        //        }
-        //        else {
+                    }
+                }
+                else {
                     
-        //        }
-        //    });
-        //    $('#cropImage').on('click', function (ev) {
-        //        $uploadCrop.croppie('result', {
-        //            type: 'blob',
-        //            size: { width: 150, height: 150 },
-        //            format: 'jpeg'
-        //        }).then(function (resp) {
-        //            Memeber.memeber.image = resp;
-        //            $uploadCrop.croppie('result', {
-        //                type: 'canvas',
-        //                size: 'viewport'
-        //            }).then(function (resp) {
-        //                Memeber.isResultShow = true;
-        //                var html;
-        //                if (resp) {
-        //                    html = '<img src="' + resp + '" />';
-        //                    $("#item-img-result").empty();
-        //                    $("#item-img-result").append(html);
-        //                    $uploadCrop.croppie('bind', {
-        //                        url: ''
-        //                    })
-        //                }
-        //            });
-        //        });
-        //    });
+                }
+            });
+            $('#cropImage').on('click', function (ev) {
+                $uploadCrop.croppie('result', {
+                    type: 'blob',
+                    size: { width: 150, height: 150 },
+                    format: 'jpeg'
+                }).then(function (resp) {
+                    Memeber.memeber.image = resp;
+                    $uploadCrop.croppie('result', {
+                        type: 'canvas',
+                        size: 'viewport'
+                    }).then(function (resp) {
+                        Memeber.isResultShow = true;
+                        var html;
+                        if (resp) {
+                            html = '<img src="' + resp + '" />';
+                            $("#item-img-result").empty();
+                            $("#item-img-result").append(html);
+                            $uploadCrop.croppie('bind', {
+                                url: ''
+                            })
+                        }
+                    });
+                });
+            });
            
-        //});
+        });
     }
 });
