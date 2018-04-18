@@ -57,6 +57,7 @@
     <Compile Include="Repositories\DeMeritRepository.cs" />
     <Compile Include="Repositories\EvidenceRepository.cs" />
     <Compile Include="Repositories\Interface\IDashBoardEntityRepository.cs" />
+    <Compile Include="Repositories\Interface\IMemberDeMeritRepository.cs" />
     <Compile Include="Repositories\Interface\IMemberEntityRepository.cs" />
     <Compile Include="Repositories\Interface\IMeritReportRepository.cs" />
     <Compile Include="Repositories\Interface\IMeritRepository.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Repositories\Interface\IOfficerRepository.cs" />
     <Compile Include="Repositories\Interface\IRoleRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRoleRepository.cs" />
+    <Compile Include="Repositories\MemberDeMeritRepository.cs" />
     <Compile Include="Repositories\MemberEntityRepository.cs" />
     <Compile Include="Repositories\MemberNoticeRepository.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />

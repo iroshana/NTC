@@ -478,5 +478,29 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
+        #region GetDemeritSummery
+        [HttpGet]
+        public IHttpActionResult GetDemeritSummery(int memberId)
+        {
+            try
+            {
+                IList<MemberDeMeritViewModel> memberDemeritView = new List<MemberDeMeritViewModel>();
+                memberDemeritView = _deMerit.GetDeMeritSummery(memberId);
+
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { merits = memberDemeritView, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

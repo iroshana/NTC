@@ -1,8 +1,10 @@
 ﻿using NTC.BusinessEntities;
 using NTC.BusinessObjects.Repositories;
 using NTC.InterfaceServices;
+using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +15,20 @@ namespace NTC.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDeMeritRepository _deMeritRepository;
-        
+        private readonly IMeritRepository _meritRepository;
+        private readonly IMemberDeMeritRepository _memberDeMeritRepository;
 
         #region Constructor
 
-        public DeMeritService(IUnitOfWork unitOfWork, IDeMeritRepository deMeritRepository)
+        public DeMeritService(IUnitOfWork unitOfWork, IDeMeritRepository deMeritRepository, IMeritRepository meritRepository, IMemberDeMeritRepository memberDeMeritRepository)
             : base(unitOfWork, deMeritRepository)
         {
             try
             {
                 _unitOfWork = unitOfWork;
                 _deMeritRepository = deMeritRepository;
+                _meritRepository = meritRepository;
+                _memberDeMeritRepository = memberDeMeritRepository;
             }
             catch (Exception ex)
             {
@@ -94,6 +99,33 @@ namespace NTC.Services
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public IList<MemberDeMeritViewModel> GetDeMeritSummery(int memberId)
+        {
+            try
+            {
+                IList<MemberDeMeritViewModel> memberDemeritView = new List<MemberDeMeritViewModel>();
+                DateTime fromDate = TimeZoneInfo.ConvertTime(DateTime.Now.AddMonths(-1), TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                DateTime toDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                IEnumerable<Merit> merits = _meritRepository.Get().ToList();
+                foreach (Merit merit in merits)
+                {
+                    MemberDeMeritViewModel demerit = new MemberDeMeritViewModel();
+                    demerit.code = merit.Code;
+                    demerit.description = merit.Description;
+                    IEnumerable<MemberDeMerit> memDeMerit = _memberDeMeritRepository.Get(x => x.MeritId == merit.ID && x.DeMerit.MemberId == memberId).ToList();
+                    demerit.point = memDeMerit.Where(y=>y.DeMerit.CreatedDate.Date >= fromDate.Date && y.DeMerit.CreatedDate.Date <= toDate.Date).Sum(z=>z.Point);
+
+                    memberDemeritView.Add(demerit);
+                }
+                return memberDemeritView;
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
         }

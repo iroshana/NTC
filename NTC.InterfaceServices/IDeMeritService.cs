@@ -1,4 +1,5 @@
 ﻿using NTC.BusinessEntities;
+using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace NTC.InterfaceServices
         IEnumerable<DeMerit> GetDeMeritByUser(int memberId);
         IEnumerable<DeMerit> GetAllDeMerits();
         DeMerit GetLastDeMeritNo();
+        IList<MemberDeMeritViewModel> GetDeMeritSummery(int memberId);
     }
 }
