@@ -72,6 +72,7 @@ var Report = new Vue({
             var table = $('#datatable-complain').DataTable();
         },
         exportReport: function () {
+            var obj = window.open(apiURL + 'api/Report/ComplainManagementReport?fromDate=' + Report.fromDate + '&toDate=' + Report.toDate);
 
         }
     },

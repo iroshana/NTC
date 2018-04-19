@@ -73,7 +73,7 @@ var Report = new Vue({
             var table = $('#datatable-fine').DataTable();
         },
         exportReport: function () {
-
+            var obj = window.open(apiURL + 'api/Report/FinePayReport?fromDate=' + Report.fromDate + '&toDate=' + Report.toDate + '&typeId=0&order=ASC');
         }
     },
     mounted() {

@@ -73,7 +73,7 @@ var Report = new Vue({
             var table = $('#datatable-punishment').DataTable();
         },
         exportReport: function () {
-
+            var obj = window.open(apiURL + 'api/Report/ExportPunishmentTrainingReport?fromDate=' + Report.fromDate + '&toDate=' + Report.toDate + '&typeId=0&order=ASC');
         }
 
     },
@@ -96,14 +96,16 @@ var Report = new Vue({
         $("#toDate").datepicker("setDate", new Date());
 
         $('#fromDate').on('change', function () {
-            this.fromDate = $('#fromDate').val();
+            Report.fromDate = $('#fromDate').val();
             $(this).datepicker('hide');
         });
 
         $('#toDate').on('change', function () {
-            this.toDate = $('#toDate').val();
+            Report.toDate = $('#toDate').val();
             $(this).datepicker('hide');
         });
+        this.fromDate = $('#fromDate').val();
+        this.toDate = $('#toDate').val();
 
         this.getReportData();
     }

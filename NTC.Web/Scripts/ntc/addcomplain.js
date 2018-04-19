@@ -94,7 +94,7 @@ var AddComplain = new Vue({
         addComplain: function () {
             this.complainVm.Category = this.categoryList;
 
-            if (complainVm.isEvidenceHave) {
+            if (this.complainVm.isEvidenceHave) {
                 //var formData = new FormData();
                 //formData.append('UploadedImage', this.memeber.image);
                 //formData.append('nic', this.memeber.nic);

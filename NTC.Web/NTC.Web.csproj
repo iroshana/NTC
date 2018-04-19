@@ -3946,6 +3946,7 @@
     <Content Include="Scripts\ntc\addcomplain.js" />
     <Content Include="Scripts\ntc\addnewmember.js" />
     <Content Include="Scripts\ntc\addpoint.js" />
+    <Content Include="Scripts\ntc\charts.js" />
     <Content Include="Scripts\ntc\common.js" />
     <Content Include="Scripts\ntc\dashboardDetails.js" />
     <Content Include="Scripts\ntc\layout.js" />
