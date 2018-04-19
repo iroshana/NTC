@@ -45,7 +45,7 @@ var MemberList = new Vue({
                 "rowId": 'id',
                 "aoColumns": [
                     {
-                        "data": "type", sWidth: "10%", bSortable: true, "render": function (data, type, row, meta) {
+                        "data": "typeCode", sWidth: "10%", bSortable: true, "render": function (data, type, row, meta) {
                             return '<a data-view="view" data-dataId="' + row.id + '">' + ((data != null) ? data : '<center>-</center>') + '</a>';
                         }
                     },

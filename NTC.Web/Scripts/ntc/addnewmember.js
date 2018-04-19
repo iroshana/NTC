@@ -69,12 +69,26 @@ var Memeber = new Vue({
             this.submitted = true;            
             if (this.memeber.nic && this.memeber.dob && this.memeber.fullName && this.memeber.permanetAddress) {
                 this.submitted = false;
-                var formData = new FormData();
-                formData.append('UploadedImage', this.memeber.image);                
-                formData.append('nic', this.memeber.nic);
-                formData.append('uploadedFileName', "");
-                formData.append('fileExtension', '.png');
-                this.submitMemeber();
+                if (this.memeber.image != null) {
+                    var formData = new FormData();
+                    formData.append('UploadedImage', this.memeber.image);                
+                    formData.append('nic', this.memeber.nic);
+                    formData.append('uploadedFileName', "");
+                    formData.append('fileExtension', '.png');
+                    formData.append('imageFolder', "profilePictures");
+
+
+                    this.$http.post(apiURL + '/api/DocumentUpload/MediaUpload', formData).then(function (response) {
+                            if (response.body.messageCode.code == 1) {
+                                this.memeber.imagePath = response.body.filesData[0].filePath;
+                                this.submitMemeber(); 
+                            }
+                            else {
+
+                            }
+                        });                           
+                }
+                
             }
         },
         submitMemeber: function () {
@@ -184,7 +198,6 @@ var Memeber = new Vue({
             for (var i = 0; i < a - 1; i++) {
                 initials += x[i].charAt(0).toUpperCase() + " ";
             }
-            //$('#initial').val(initials + ' ' + x[a - 1].toString());
             Memeber.memeber.nameWithInitial = initials + ' ' + x[a - 1].toString();
         });
 

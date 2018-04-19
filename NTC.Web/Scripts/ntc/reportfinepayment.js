@@ -43,6 +43,7 @@ var Report = new Vue({
                 "bPaginate": true,
                 "bFilter": true,
                 "bInfo": true,
+                "searching": false,
                 "bDestroy": true,
                 "rowId": 'id',
                 "aoColumns": [

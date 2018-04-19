@@ -34,7 +34,8 @@ var AddComplain = new Vue({
             complainerName: '',
             complainerAddress: '',
             telNo: '',
-            file: '',
+            file: {},
+            filePath:'',
             route:''
         },
         categoryList: []
@@ -92,6 +93,19 @@ var AddComplain = new Vue({
         },
         addComplain: function () {
             this.complainVm.Category = this.categoryList;
+
+            if (complainVm.isEvidenceHave) {
+                //var formData = new FormData();
+                //formData.append('UploadedImage', this.memeber.image);
+                //formData.append('nic', this.memeber.nic);
+                //formData.append('uploadedFileName', "");
+                //formData.append('fileExtension', '.png');
+
+                //this.complainVm.evidence = {
+                //    fileName:''
+                //}
+            }
+
 
             $('#spinner').css("display", "block");
             this.$http.post(apiURL + 'api/Complain/AddComplain', this.complainVm).then(function (response) {

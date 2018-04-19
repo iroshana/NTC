@@ -24,6 +24,20 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                             <div class="row">
                                 <div class="col-sm-12 col-xs-12">
+                                    <div id="item-img" v-show="!isResultShow"></div>
+                                    <div id="item-img-result" v-show="isResultShow" class="mg-t-10"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="form-group mg-t-10">
+                                        <input type="file" id="upload" accept="image/*" />
+                                    </div>
+                                    <button type="button" id="cropImage" class="btn btn-default"><i class="fa fa-crop"></i>  Crop</button>
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                <div class="col-sm-12 col-xs-12">
                                     <div id="item-img" v-show="!isResultShow">
 
                                     </div>
@@ -31,14 +45,14 @@
                                         <img class="img-responsive avatar-view" src="~/Images/appimg/user.png" alt="Avatar" title="Change the avatar">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div>*@
+                            @*<div class="row">
                                 <label class="btn btn-default">
                                     <i class="fa fa-picture-o"></i> Browse
                                     <input type="file" id="upload" accept="image/*" />
                                 </label>
                                 <button type="button" id="cropImage" class="btn btn-default"><i class="fa fa-crop "></i>  Crop</button>
-                            </div>
+                            </div>*@
                             @*<div class="profile_img">
                                     <div id="crop-avatar">
                                          Current avatar
@@ -190,6 +204,8 @@
 @*End Alert*@
 
 
-<script src="~/Content/vendors/cropper/dist/cropper.js"></script>
+
 <script src="~/Scripts/ntc/addnewmember.js"></script>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>

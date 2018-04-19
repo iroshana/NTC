@@ -21,10 +21,34 @@ var Notice = new Vue({
     
     },
     methods: {
-        sendMsg: function () {
-            msgAlert.isSuccess = true;
-            msgAlert.alertMessage = 'Message Send Succesfully.'
-            msgAlert.showModal();
+        sendMsg: function (note) {
+
+        $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/Notice/SentNotice', {
+                params: {
+                    noticeId: note.ID
+                }
+            }).then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.getAllGenaralNotice();
+                    msgAlert.isSuccess = true;
+                    msgAlert.alertMessage = 'Message Send Succesfully.'
+                    msgAlert.showModal();
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });            
         },
         getAllGenaralNotice: function () {
             $('#spinner').css("display", "block");

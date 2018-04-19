@@ -38,7 +38,7 @@ var Login = new Vue({
                         } else if(response.body.userRole == "OFFICER") {
                             window.location.replace(webURL + 'DriverConductor/List');
                         } else {
-                            window.location.replace(webURL + 'DriverConductor/MemeberFullProfile?memberId=' + 16);
+                            window.location.replace(webURL + 'DriverConductor/MemeberFullProfile?memberId=' + response.body.memberId);
                         }
                         
                     } else {
