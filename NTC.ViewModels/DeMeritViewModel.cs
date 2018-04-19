@@ -67,4 +67,28 @@ namespace NTC.ViewModels
         public List<DeMeritTypeViewModel> cancel { get; set; }
     }
 
+    public class ChartDeMeritViewModel
+    {
+        public int jan { get; set; }
+        public int feb { get; set; }
+        public int mar { get; set; }
+        public int april { get; set; }
+        public int may { get; set; }
+        public int june { get; set; }
+        public int july { get; set; }
+        public int aug { get; set; }
+        public int sep { get; set; }
+        public int oct { get; set; }
+        public int nov { get; set; }
+        public int dec { get; set; }
+    }
+
+    public class ChartDeMeritCountViewModel
+    {
+        public ChartDeMeritViewModel adPannel { get; set; }
+        public ChartDeMeritViewModel finePay { get; set; }
+        public ChartDeMeritViewModel punish { get; set; }
+        public ChartDeMeritViewModel cancel { get; set; }
+    }
+
 }

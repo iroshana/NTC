@@ -16,5 +16,6 @@ namespace NTC.InterfaceServices
         IEnumerable<DeMerit> GetAllDeMerits();
         DeMerit GetLastDeMeritNo();
         IList<MemberDeMeritViewModel> GetDeMeritSummery(int memberId);
+        IEnumerable<MemberDeMerit> GetDeMerits();
     }
 }

@@ -131,5 +131,16 @@ namespace NTC.Services
         }
         #endregion
 
+        public IEnumerable<MemberDeMerit> GetDeMerits()
+        {
+            try
+            {
+                return _memberDeMeritRepository.Get().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
