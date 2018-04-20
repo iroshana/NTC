@@ -81,12 +81,14 @@ var Memeber = new Vue({
                     this.$http.post(apiURL + '/api/DocumentUpload/MediaUpload', formData).then(function (response) {
                             if (response.body.messageCode.code == 1) {
                                 this.memeber.imagePath = response.body.filesData[0].filePath;
-                                this.submitMemeber(); 
+                                
                             }
                             else {
 
                             }
-                        });                           
+                        });
+                        
+                        this.submitMemeber(); 
                 }
                 
             }

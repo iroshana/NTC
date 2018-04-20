@@ -73,6 +73,7 @@ var Report = new Vue({
             var table = $('#datatable-cancel').DataTable();
         },
         exportReport: function () {
+            var obj = window.open(apiURL + 'api/Report/CancelationReport?fromDate=' + Report.fromDate + '&toDate=' + Report.toDate + '&typeId=0&order=ASC');
 
         }
     },

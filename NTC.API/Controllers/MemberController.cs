@@ -74,7 +74,8 @@ namespace NTC.API.Controllers
         {
             try
             {
-                List<MemberEntityViewModel> memberList = new List<MemberEntityViewModel>();
+                List<MemberEntityViewModel> memberListDriver = new List<MemberEntityViewModel>();
+                List<MemberEntityViewModel> memberListConductor = new List<MemberEntityViewModel>();
                 IEnumerable<MemberEntityModel> members = new List<MemberEntityModel>();
                 members = _member.GetAllMembersSP(colorCode, fromdate, todate, type);
                 if (members != null)
@@ -82,6 +83,7 @@ namespace NTC.API.Controllers
                     foreach (MemberEntityModel member in members)
                     {
                         MemberEntityViewModel memberView = new MemberEntityViewModel();
+
                         memberView.id = member.ID;
                         memberView.fullName = String.IsNullOrEmpty(member.FullName) ? String.Empty : member.FullName;
                         memberView.trainingCertificateNo = String.IsNullOrEmpty(member.TrainingCertificateNo) ? String.Empty : member.TrainingCertificateNo;
@@ -89,12 +91,22 @@ namespace NTC.API.Controllers
                         memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
                         memberView.ntcNo = String.IsNullOrEmpty(member.NTCNo) ? String.Empty : member.NTCNo;
                         memberView.typeCode = member.Code;
-                        memberList.Add(memberView);
+
+                        if (member.Code == "Driver")
+                        {             
+                            memberListDriver.Add(memberView);
+                        }
+                        else
+                        {
+                            memberListConductor.Add(memberView);
+                        }
+
+                        
                     }
                 }
                 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { members = memberList, messageCode = messageData };
+                var returnObject = new { memberListDriver = memberListDriver, memberListConductor = memberListConductor, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
