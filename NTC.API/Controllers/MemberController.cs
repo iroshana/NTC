@@ -70,7 +70,7 @@ namespace NTC.API.Controllers
 
         #region GetMember
         [HttpGet]
-        public IHttpActionResult GetAllMembers(int colorCode,DateTime? fromdate, DateTime? todate, int type)
+        public IHttpActionResult GetAllMembers(int colorCode,DateTime? fromdate, DateTime? todate, int type,int point)
         {
             try
             {
@@ -91,17 +91,30 @@ namespace NTC.API.Controllers
                         memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
                         memberView.ntcNo = String.IsNullOrEmpty(member.NTCNo) ? String.Empty : member.NTCNo;
                         memberView.typeCode = member.Code;
-
-                        if (member.Code == "Driver")
-                        {             
-                            memberListDriver.Add(memberView);
-                        }
-                        else
+                        memberView.total = member.Total == null ? 0 : member.Total.Value;
+                        if (point != 0 && memberView.total <= point)
                         {
-                            memberListConductor.Add(memberView);
+                            if (member.Code == "Driver")
+                            {
+                                memberListDriver.Add(memberView);
+                            }
+                            else
+                            {
+                                memberListConductor.Add(memberView);
+                            }
+                        }
+                        else if (point == 0)
+                        {
+                            if (member.Code == "Driver")
+                            {
+                                memberListDriver.Add(memberView);
+                            }
+                            else
+                            {
+                                memberListConductor.Add(memberView);
+                            }
                         }
 
-                        
                     }
                 }
                 
@@ -143,7 +156,7 @@ namespace NTC.API.Controllers
                     member.JoinDate = DateTime.Parse(memberView.dateJoin);
                     member.HighestEducation = String.IsNullOrEmpty(memberView.educationQuali)? String.Empty : memberView.educationQuali;
                     member.TypeId = memberView.typeId;
-                    member.NTCNo = _common.GetLastNTCNO();
+                    member.NTCNo = _common.GetLastNTCNO(memberView.typeId);
                     member.ImagePath = memberView.imagePath;
                     _member.Add(member, out errorMessage);
 
@@ -214,7 +227,7 @@ namespace NTC.API.Controllers
         {
             try
             {
-                string a = _common.GetLastNTCNO();
+                string a = _common.GetLastNTCNO(2);
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { types = a, messageCode = messageData };

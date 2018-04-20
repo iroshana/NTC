@@ -122,20 +122,28 @@ namespace NTC.Services
             }
         }
 
-        public string GetLastNTCNO()
+        public string GetLastNTCNO(int type)
         {
             try
             {
-                Member member = _memberRepository.Get().OrderByDescending(x => x.ID).FirstOrDefault();
+                Member member = _memberRepository.Get(x=> x.TypeId == type).OrderByDescending(o => o.ID).FirstOrDefault();
                 if (member != null)
                 {
                     string lastNo = member.NTCNo;
                     int no = int.Parse(lastNo.Split('-')[1]);
-                    return "NTC-" + (no + 1).ToString("D4");
+                    return lastNo.Split('-')[0] +"-"+ (no + 1).ToString("D5");
                 }
                 else
                 {
-                    return "NTC-0001";
+                    string code = GetAllMemberTypes().Where(x=>x.ID == type).FirstOrDefault().Code;
+                    if (code == "Conductor")
+                    {
+                        return "C-" + (1).ToString("D5");
+                    }
+                    else
+                    {
+                        return "D-" + (1).ToString("D5");
+                    }
                 }
             }
             catch (Exception ex)

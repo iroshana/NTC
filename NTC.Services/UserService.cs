@@ -99,10 +99,10 @@ namespace NTC.Services
                 userRole = _userRoleRepository.Get(x => x.UserId == user.ID).FirstOrDefault();
                 UserLoginViewModel userLogin = new UserLoginViewModel();
 
-                var userID = _memberRepository.Get(x => x.NTCNo == userName).FirstOrDefault();
-                if(userID != null)
+                var memberId = _memberRepository.Get(x => x.NTCNo == userName).FirstOrDefault();
+                if(memberId != null)
                 {
-                    userLogin.memberId = userID.ID;
+                    userLogin.memberId = memberId.ID;
                 }
                 else
                 {
