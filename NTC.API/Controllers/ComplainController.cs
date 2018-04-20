@@ -345,5 +345,78 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        public IHttpActionResult GetAllComplainsByMember(int memberId)
+        {
+            try
+            {
+                List<ComplainViewModel> complainViewList = new List<ComplainViewModel>();
+                IEnumerable<Complain> complains = new List<Complain>();
+                complains = _complain.GetAllComplains(memberId);
+                if (complains != null)
+                {
+                    foreach (Complain complain in complains)
+                    {
+                        ComplainViewModel complainView = new ComplainViewModel();
+                        complainView.id = complain.ID;
+                        complainView.complainNo = String.IsNullOrEmpty(complain.ComplainNo) ? String.Empty : complain.ComplainNo;
+                        complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+                        complainView.bus = new BusViewModel();
+                        complainView.bus.id = complain.BusId;
+                        complainView.bus.busNo = complain.Bus.LicenceNo;
+                        complainView.route = new RouteViewModel();
+                        complainView.route.id = complain.RouteId;
+                        complainView.route.from = complain.Route.From;
+                        complainView.route.from = complain.Route.To;
+                        complainView.route.routeNo = complain.Route.RouteNo;
+                        complainView.place = String.IsNullOrEmpty(complain.Place) ? String.Empty : complain.Place;
+                        complainView.complainDate = complain.Date.ToString(@"yyyy-MM-dd");
+                        complainView.userId = complain.UserId == null ? 0 : complain.UserId.Value;
+                        complainView.method = String.IsNullOrEmpty(complain.Method) ? String.Empty : complain.Method;
+                        complainView.isInqueryParticipation = complain.IsInqueryParticipation;
+                        complainView.isEvidenceHave = complain.IsEvidenceHave;
+                        complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+
+
+                        if (complain.IsEvidenceHave)
+                        {
+                            complainView.evidence = new EvidenceViewModel();
+                            complainView.evidence.fileName = String.IsNullOrEmpty(complain.Evidence.FileName) ? String.Empty : complainView.evidence.fileName;
+                            complainView.evidence.evidenceNo = String.IsNullOrEmpty(complain.Evidence.EvidenceNo) ? String.Empty : complainView.evidence.evidenceNo;
+                            complainView.evidence.extension = String.IsNullOrEmpty(complain.Evidence.Extension) ? String.Empty : complainView.evidence.extension;
+                            complainView.evidence.filePath = String.IsNullOrEmpty(complain.Evidence.FilePath) ? String.Empty : complainView.evidence.filePath;
+
+                        }
+
+                        complainView.Category = new List<CategoryViewModel>();
+
+                        foreach (ComplainCategory category in complain.ComplainCategories)
+                        {
+                            if (category.IsSelected)
+                            {
+                                CategoryViewModel complainCategory = new CategoryViewModel();
+                                complainCategory.id = category.ComplainId;
+                                complainCategory.categoryNo = String.IsNullOrEmpty(category.Category.CategoryNo) ? String.Empty : category.Category.CategoryNo;
+                                complainCategory.description = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
+                                complainView.Category.Add(complainCategory);
+                            }
+                        }
+                        complainViewList.Add(complainView);
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { complains = complainViewList, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
     }
 }

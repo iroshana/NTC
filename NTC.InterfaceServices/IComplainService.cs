@@ -14,5 +14,6 @@ namespace NTC.InterfaceServices
         Complain GetComplainByNo(string complainNo, int userId);
         Complain GetLastComplain();
         IEnumerable<Complain> GetAllComplains(DateTime fromDate,DateTime toDate);
+        IEnumerable<Complain> GetAllComplains(int mrmberId);
     }
 }

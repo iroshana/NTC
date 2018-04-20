@@ -35,11 +35,11 @@ namespace NTC.Services
             }
         }
 
-        public IEnumerable<Complain> GetComplainNo(int userId)
+        public IEnumerable<Complain> GetComplainNo(int memberId)
         {
             try
             {
-                return _complainRepository.Get(x => x.DriverId == userId || x.ConductorId == userId).ToList();
+                return _complainRepository.Get(x => x.DriverId == memberId || x.ConductorId == memberId).ToList();
             }
             catch (Exception ex)
             {
@@ -51,7 +51,8 @@ namespace NTC.Services
         {
             try
             {
-                return _complainRepository.Get(x => x.ComplainNo == complainNo || x.UserId == userId).FirstOrDefault();
+                return _complainRepository.Get(x => (complainNo == String.Empty || x.ComplainNo == complainNo)
+                && (x.DriverId == userId || x.ConductorId == userId)).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -110,6 +111,18 @@ namespace NTC.Services
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Complain> GetAllComplains(int mrmberId)
+        {
+            try
+            {
+                return _complainRepository.Get(x=>(x.DriverId == mrmberId || x.ConductorId == mrmberId)).ToList();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

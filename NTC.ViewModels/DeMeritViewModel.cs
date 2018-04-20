@@ -85,10 +85,10 @@ namespace NTC.ViewModels
 
     public class ChartDeMeritCountViewModel
     {
-        public ChartDeMeritViewModel adPannel { get; set; }
-        public ChartDeMeritViewModel finePay { get; set; }
-        public ChartDeMeritViewModel punish { get; set; }
-        public ChartDeMeritViewModel cancel { get; set; }
+        public List<int> adPannel { get; set; }
+        public List<int> finePay { get; set; }
+        public List<int> punish { get; set; }
+        public List<int> cancel { get; set; }
     }
 
 }

@@ -120,62 +120,6 @@ namespace NTC.Services
             }
            
         }
-
-        //public string EncryptandEncodeData(string plainText)
-        //{
-        //    try
-        //    {
-        //        //Encrypt plain text - Start
-        //        CspParameters cspParamsE = new CspParameters();
-        //        cspParamsE.ProviderType = Constant.PROVIDER_RSA_FULL;
-
-        //        RSACryptoServiceProvider rsaProviderE = new RSACryptoServiceProvider(cspParamsE);
-        //        rsaProviderE.FromXmlString(Constant.PUBLIC_KEY_XML);
-
-        //        var queryStringData = Encoding.UTF8.GetBytes(plainText);
-        //        byte[] encryptedData = rsaProviderE.Encrypt(queryStringData, false);
-        //        //Encrypt plain text - end
-
-        //        //Base64 encode 
-        //        string base64EncodedData = Convert.ToBase64String(encryptedData);
-
-        //        return base64EncodedData;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
-        #region Decode and Decrypt Text
-        //public string DecodeandDecryptData(string encryptedText)
-        //{
-        //    try
-        //    {
-        //        //base64 decode 
-        //        byte[] base64DecodedData = Convert.FromBase64String(encryptedText);
-
-        //        //Decrypt code - Start
-        //        CspParameters cspParamsD = new CspParameters();
-        //        cspParamsD.ProviderType = Constant.PROVIDER_RSA_FULL;
-
-        //        RSACryptoServiceProvider rsaProviderD = new RSACryptoServiceProvider(cspParamsD);
-        //        rsaProviderD.FromXmlString(Constant.PRIVATE_KEY_XML);
-
-        //        byte[] decryptedData = rsaProviderD.Decrypt(base64DecodedData, false);
-
-        //        string plainText = String.Empty;
-        //        plainText = System.Text.Encoding.UTF8.GetString(decryptedData);
-
-        //        return plainText;
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
-        #endregion Decode and Decrypt Text
+        
     }
 }
