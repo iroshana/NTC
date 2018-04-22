@@ -147,8 +147,7 @@ namespace NTC.API.Controllers
                         category.CategoryId = complainCategory.id;
                         category.ComplainId = complain.ID;
                         category.Description = String.IsNullOrEmpty(complainCategory.description)?String.Empty: complainCategory.description;
-                        category.IsSelected = complainCategory.isSelected;
-
+                        
                         complain.ComplainCategories.Add(category);
                     }
                     _complain.Add(complain,out errorMessage);
