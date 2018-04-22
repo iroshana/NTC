@@ -27,8 +27,8 @@ namespace NTC.BusinessEntities
         public string Description { get; set; }
         public int? UserId { get; set; }
         public int? EvidenceId { get; set; }
-        public int ConductorId { get; set; }
-        public int DriverId { get; set; }
+        public int? ConductorId { get; set; }
+        public int? DriverId { get; set; }
         public bool IsEvidenceHave { get; set; }
         public bool IsInqueryParticipation { get; set; }
         public string ComplainStatus { get; set; }

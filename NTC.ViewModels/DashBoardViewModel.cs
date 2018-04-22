@@ -8,13 +8,13 @@ namespace NTC.ViewModels
 {
     public class DashBoardViewModel
     {
-        public int highestConductorPoints { get; set; }
-        public int highestDriverPoints { get; set; }
+        public string highestConductorPoints { get; set; }
+        public string highestDriverPoints { get; set; }
         public int redNoticeDrivers { get; set; }
         public int redNoticeConductors { get; set; }
         public int redNoticeMembers { get; set; }
-        public int highestDriverComplain { get; set; }
-        public int highestConductorComplain { get; set; }
+        public string highestDriverComplain { get; set; }
+        public string highestConductorComplain { get; set; }
         public int bestdriversofMonth { get; set; }
         public int bestConductorsofMonth { get; set; }
         public int bestdriversofYear { get; set; }

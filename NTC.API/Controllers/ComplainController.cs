@@ -17,13 +17,14 @@ namespace NTC.API.Controllers
         private readonly IComplainService _complain;
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _commonData;
+        private readonly IMemberService _member;
 
-
-        public ComplainController(IEventLogService eventLog, IComplainService complain, ICommonDataService commonData)
+        public ComplainController(IEventLogService eventLog, IComplainService complain, ICommonDataService commonData, IMemberService member)
         {
             _complain = complain;
             _eventLog = eventLog;
             _commonData = commonData;
+            _member = member;
         }
 
         #region GetComplainByNo
@@ -117,8 +118,24 @@ namespace NTC.API.Controllers
                     complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
                     complain.Date = DateTime.Parse(complainView.complainDate);
                     complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
-                    complain.DriverId = _commonData.GetBusById(complainView.bus.id).DriverId;
-                    complain.ConductorId = _commonData.GetBusById(complainView.bus.id).ConductorId;
+                    if (complainView.memberId != 0) { 
+                        Member member = _member.GetMember(complainView.memberId);
+                        if (member.MemberType.Code == "Driver")
+                        {
+                            complain.DriverId = member.ID;
+                            complain.ConductorId = (int?)null;
+                        }
+                        else
+                        {
+                            complain.DriverId = (int?)null;
+                            complain.ConductorId = member.ID;
+                        }
+                    }
+                    else
+                    {
+                        complain.DriverId = _commonData.GetBusById(complainView.bus.id).DriverId;
+                        complain.ConductorId = _commonData.GetBusById(complainView.bus.id).ConductorId;
+                    }
                     complain.Method = String.IsNullOrEmpty(complainView.method) ? String.Empty : complainView.method;
                     complain.IsInqueryParticipation = complainView.isInqueryParticipation;
                     complain.IsEvidenceHave = complainView.isEvidenceHave;
@@ -147,7 +164,8 @@ namespace NTC.API.Controllers
                         category.CategoryId = complainCategory.id;
                         category.ComplainId = complain.ID;
                         category.Description = String.IsNullOrEmpty(complainCategory.description)?String.Empty: complainCategory.description;
-                        
+                        category.IsSelected = complainCategory.isSelected;
+
                         complain.ComplainCategories.Add(category);
                     }
                     _complain.Add(complain,out errorMessage);
@@ -393,5 +411,37 @@ namespace NTC.API.Controllers
                 return Ok(returnObject);
             }
         }
+
+        #region ChangeComplainStatus
+        [HttpPost]
+        public IHttpActionResult ChangeComplainStatus(int complainId,string status)
+        {
+            try
+            {
+                string errorMessage = String.Empty;
+                Complain complain = new Complain();
+                complain = _complain.GetAll(x=>x.ID == complainId).FirstOrDefault();
+                complain.ComplainStatus = status;
+
+                _complain.Update(complain);
+
+                var messageData = new
+                {
+                    code = String.IsNullOrEmpty(errorMessage) ? Constant.SuccessMessageCode : Constant.ErrorMessageCode
+                   ,
+                    message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
+                };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

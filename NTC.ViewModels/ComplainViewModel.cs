@@ -14,6 +14,7 @@ namespace NTC.ViewModels
         public RouteViewModel route { get; set; }
         public string place { get; set; }
         public string time { get; set; }
+        public int memberId { get; set; }
         public string method { get; set; }
         public string complainCode { get; set; }
         public string description { get; set; }
