@@ -1,4 +1,5 @@
-﻿using NTC.InterfaceServices;
+﻿using NTC.BusinessEntities;
+using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -40,11 +41,11 @@ namespace NTC.API.Controllers
 
                 dashboard = _common.GetDashBoardCounts();
 
-                IEnumerable<MemberEntityModel> drivers = new List<MemberEntityModel>();
-                drivers = _member.GetAllMembersSP(0, DateTime.Now.Date.AddMonths(-1), DateTime.Now.Date, 1);
+                IEnumerable<Member> drivers = new List<Member>();
+                drivers = _member.GetAll().ToList();
                 if (drivers != null)
                 {
-                    bestdriversofMonth = drivers.Where(x => x.Total == null || x.Total.Value <= 2).ToList().Count();
+                    bestdriversofMonth = drivers.Where(x => x.DeMerits == null || x.DeMerits.Select(y=>y.MemberDeMerits.Sum(z=>z.Point)).FirstOrDefault() <= 2 && x.TypeId == 1).ToList().Count();
                 }
 
                 IEnumerable<MemberEntityModel> conductors = new List<MemberEntityModel>();

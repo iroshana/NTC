@@ -242,5 +242,69 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
+        #region GetAllRetnoticeMembers
+        [HttpGet]
+        public IHttpActionResult GetAllRetnoticeMembers(int colorCode, DateTime? fromdate, DateTime? todate, int type, int point)
+        {
+            try
+            {
+                List<MemberEntityViewModel> memberListDriver = new List<MemberEntityViewModel>();
+                List<MemberEntityViewModel> memberListConductor = new List<MemberEntityViewModel>();
+                IEnumerable<MemberEntityModel> members = new List<MemberEntityModel>();
+                members = _member.GetAllMembersSP(colorCode, fromdate, todate, type);
+                if (members != null)
+                {
+                    foreach (MemberEntityModel member in members)
+                    {
+                        MemberEntityViewModel memberView = new MemberEntityViewModel();
+
+                        memberView.id = member.ID;
+                        memberView.fullName = String.IsNullOrEmpty(member.FullName) ? String.Empty : member.FullName;
+                        memberView.trainingCertificateNo = String.IsNullOrEmpty(member.TrainingCertificateNo) ? String.Empty : member.TrainingCertificateNo;
+                        memberView.trainingCenter = String.IsNullOrEmpty(member.TrainingCenter) ? String.Empty : member.TrainingCenter;
+                        memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
+                        memberView.ntcNo = String.IsNullOrEmpty(member.NTCNo) ? String.Empty : member.NTCNo;
+                        memberView.typeCode = member.Code;
+                        memberView.total = member.Total == null ? 0 : member.Total.Value;
+                        if (point != 0 && memberView.total >= point)
+                        {
+                            if (member.Code == "Driver")
+                            {
+                                memberListDriver.Add(memberView);
+                            }
+                            else
+                            {
+                                memberListConductor.Add(memberView);
+                            }
+                        }
+                        else if (point == 0)
+                        {
+                            if (member.Code == "Driver")
+                            {
+                                memberListDriver.Add(memberView);
+                            }
+                            else
+                            {
+                                memberListConductor.Add(memberView);
+                            }
+                        }
+
+                    }
+                }
+
+                var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
+                var returnObject = new { memberListDriver = memberListDriver, memberListConductor = memberListConductor, messageCode = messageData };
+                return Ok(returnObject);
+            }
+            catch (Exception ex)
+            {
+                string errorLogId = _eventLog.WriteLogs(User.Identity.Name, ex, MethodBase.GetCurrentMethod().Name);
+                var messageData = new { code = Constant.ErrorMessageCode, message = String.Format(Constant.MessageTaskmateError, errorLogId) };
+                var returnObject = new { messageCode = messageData };
+                return Ok(returnObject);
+            }
+        }
+        #endregion
     }
 }

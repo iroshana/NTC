@@ -95,10 +95,10 @@ namespace NTC.Services
                 object[] param = {
                         new SqlParameter("@colorCode", colorCode),
                         new SqlParameter("@createdDateFrom", fromDate == null ? String.Empty : fromDate.Value.ToString(@"yyyy-MM-dd")),
-                        new SqlParameter("@createdDateTo", toDate == null ? String.Empty : toDate.Value.AddMonths(-1).ToString(@"yyyy-MM-dd")),
+                        new SqlParameter("@createdDateTo", toDate == null ? String.Empty : toDate.Value.ToString(@"yyyy-MM-dd")),
                         new SqlParameter("@typeId", type)
                 };
-                return _memberEntityRepository.ExecuteStoredProcedure("dbo.GetMembers @colorCode, @createdDateFrom, @createdDateTo, @typeId", param);
+                return _memberEntityRepository.ExecuteStoredProcedure("dbo.GetMembers @colorCode, @createdDateFrom, @createdDateTo, @typeId", param).ToList();
 
             }
             catch (Exception ex)
