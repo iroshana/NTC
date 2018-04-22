@@ -15,6 +15,7 @@
     <script src="~/Content/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="~/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Content/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Font Awesome -->
     <link href="~/Content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -36,18 +37,18 @@
         <div class="login_wrapper" id="loginForm">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form>
+                    <div class="form-horizontal">
                         <h1>Login Form</h1>
-                        <div>
+                        <div class="form-group">
                             <input type="text" class="form-control" placeholder="Username" required="" v-model="userModel.userName" />
                             <span class="text-danger" v-show="!userModel.userName && submitted">User Name Required</span>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password" required="" v-model="userModel.password" />
                             <span class="text-danger" v-show="!userModel.password && submitted">Password Required</span>
                         </div>
                         <div>
-                            <button class="btn btn-default submit" v-on:click="login">Log in</button>
+                            <button class="btn btn-default" v-on:click="login">Log in</button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">                            
@@ -58,7 +59,7 @@
                                 <p>©2018 All Rights Reserved. National Transport Commission</p>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </section>
             </div>            
         </div>

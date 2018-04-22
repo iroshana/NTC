@@ -11,7 +11,7 @@
                 <a href="@Url.Action("List", "DriverConductor")">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-user"></i></div>
-                        <div class="count">-</div>
+                        <div class="count">&nbsp;</div>
                         <h3>Driver/ Conductor</h3>
                         <p>driver conductor details</p>
                     </div>
@@ -21,7 +21,7 @@
                 <a href="@Url.Action("Panalties", "DriverConductor")">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-comments-o"></i></div>
-                        <div class="count">-</div>
+                        <div class="count">&nbsp;</div>
                         <h3>Panalties</h3>
                         <p>Monthly Panalties.</p>
                     </div>
@@ -31,7 +31,7 @@
                 <a href="@Url.Action("PublicNotice", "DriverConductor")">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-sticky-note-o"></i></div>
-                        <div class="count">-</div>
+                        <div class="count">&nbsp;</div>
                         <h3>Notice</h3>
                         <p>General Notice.</p>
                     </div>
@@ -41,7 +41,7 @@
                 <a href="@Url.Action("ChartDiaplay", "Charts")">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-line-chart"></i></div>
-                        <div class="count">4</div>
+                        <div class="count">&nbsp;</div>
                         <h3>Charts</h3>
                         <p>NTC Charts</p>
                     </div>
@@ -66,7 +66,7 @@
                     <div class="x_content">
                         <br />
                         <div class="row top_tiles" style="margin: 10px 0;">
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
                                     <div class="count">{{ wighet.redNoticeDrivers}}</div>
@@ -75,19 +75,19 @@
                                     <p>Red Notice Drivers.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count">{{ wighet.highestDriverComplain }}</div>
+                                    <div class="count">{{ wighet.highestDriverComplain == "" ? '&nbsp;' : wighet.highestDriverComplain }}</div>
 
                                     <h3></h3>
-                                    <p>Highest Number of Complains.</p>
+                                    <p>Highest Number of Complain.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-47 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count">{{ wighet.highestDriverPoints}}</div>
+                                    <div class="count">{{ wighet.highestDriverPoints == "" ? '&nbsp;' : wighet.highestDriverPoints }}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="row top_tiles" style="margin: 10px 0;">
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
                                     <div class="count">0</div>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
                                     <div class="count">0</div>
@@ -143,28 +143,28 @@
                     <div class="x_content">
                         <br />
                         <div class="row top_tiles" style="margin: 10px 0;">
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
                                     <div class="count">{{wighet.redNoticeConductors}}</div>
 
                                     <h3></h3>
-                                    <p>Red Notice Conductor.</p>
+                                    <p>Red Notice Conductors.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count">{{ wighet.highestConductorComplain}}</div>
+                                    <div class="count">{{ wighet.highestConductorComplain == "" ? '&nbsp;' : wighet.highestConductorComplain}}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Complaint.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count">{{wighet.highestConductorPoints}}</div>
+                                    <div class="count">{{wighet.highestConductorPoints == "" ? '&nbsp;' : wighet.highestConductorPoints}}</div>
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
                                 </div>
@@ -172,25 +172,29 @@
                         </div>
 
                         <div class="row top_tiles" style="margin: 10px 0;">
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
                                     <div class="count">0</div>
                                     <p>Best Conductor of the Months.</p>
                                     <input id="conMonth" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
-                                    <a class="btn btn-primary btn-sm">Go</a>
+                                    <div class="col-md-6 pull-left">
+                                        <a class="btn btn-primary btn-sm">Go</a>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
                                     <div class="count">0</div>
                                     <p>Best Conductor of the Year.</p>
                                     <input id="conYear" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
-                                    <a class="btn btn-primary btn-sm">Go</a>
+                                    <div class="col-md-6 pull-left">
+                                        <a class="btn btn-primary btn-sm">Go</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

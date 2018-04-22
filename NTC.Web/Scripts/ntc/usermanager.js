@@ -31,6 +31,7 @@ var Login = new Vue({
                 $('#spinner').css("display", "block");
                 this.$http.post(apiURL + 'api/User/Login', this.userModel).then(function (response) {
                     if (response.body.messageCode.code == 1) {
+                        console.log(response.body.userRole);
                         localStorage.removeItem('role');
                         localStorage.setItem('role', response.body.userRole);
                         if (response.body.userRole == 'ADMIN') {
@@ -40,7 +41,6 @@ var Login = new Vue({
                         } else {
                             window.location.replace(webURL + 'DriverConductor/MemeberFullProfile?memberId=' + response.body.memberId);
                         }
-                        
                     } else {
                         msgAlert.isSuccess = false;
                         msgAlert.alertMessage = response.body.messageCode.message;
@@ -52,6 +52,7 @@ var Login = new Vue({
                     msgAlert.alertMessage = response.statusText;
                     msgAlert.showModal();
                     $('#spinner').css("display", "none");
+                    console.log(response);
                     if (response.statusText == "Unauthorized") {
                         $(location).attr('href', webURL + 'Account/Login');
                     }

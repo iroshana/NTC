@@ -7,14 +7,15 @@ var MemberList = new Vue({
         memberListConductor: []
     },
     methods: {
-        getAllMembers: function (colorCode, fromdate, todate, type) {
+        getAllMembers: function (colorCode, fromdate, todate, type, point) {
             $('#spinner').css("display", "block");
             this.$http.get(apiURL + 'api/Member/GetAllMembers', {
                 params: {
                     colorCode: colorCode,
                     fromdate: fromdate,
                     todate: todate,
-                    type: type
+                    type: type,
+                    point: point
                 }
             }).then(function (response) {
                 if (response.body.messageCode.code == 1) {
@@ -134,7 +135,7 @@ var MemberList = new Vue({
         }
     },
     mounted() {
-        this.getAllMembers(0, "", "", 0);
+        this.getAllMembers(0, "", "", 0, 0);
 
         $('#datatable-memberDriver').on('click', '#btnView', function () {
             var table = $('#datatable-memberDriver').DataTable();

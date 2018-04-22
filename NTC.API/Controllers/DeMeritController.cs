@@ -296,6 +296,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.cancel.Add(ad);
                                         }
                                         break;
@@ -306,6 +307,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
                                         break;
@@ -316,6 +318,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
                                         break;
@@ -326,6 +329,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.finePay.Add(ad);
                                         }
                                         break;
@@ -343,6 +347,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.cancel.Add(ad);
                                         }
                                         break;
@@ -353,6 +358,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.adPannel.Add(ad);
                                         }
                                         break;
@@ -363,6 +369,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.punish.Add(ad);
                                         }
                                         break;
@@ -373,6 +380,7 @@ namespace NTC.API.Controllers
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
+                                            ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.finePay.Add(ad);
                                         }
                                         break;

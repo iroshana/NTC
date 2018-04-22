@@ -19,6 +19,7 @@ var AddComplain = new Vue({
     data: {
         complainVm: {
             id: '0',
+            memberId: '',
             bus: { id: '', busNo: '', route: { id: '1', routeNo: '', from: '', to: '' }},            
             place: '',
             complainNo: '',
@@ -111,9 +112,13 @@ var AddComplain = new Vue({
             this.$http.post(apiURL + 'api/Complain/AddComplain', this.complainVm).then(function (response) {
                 if (response.body.messageCode.code == 1) {                    
                     msgAlert.isSuccess = true;
-                    msgAlert.alertMessage = "Complain Save Successfully.";
+                    msgAlert.alertMessage = "Complain Save Successfully. Thank You";
                     msgAlert.showModal();
-                    $(location).attr('href', webURL + 'DriverConductor/MemeberFullProfile?memberId=' + getUrlParameter("memberId"));
+                    var memberId = getUrlParameter("memberId");
+                    if (memberId != 'undefined') {
+                        $(location).attr('href', webURL + 'DriverConductor/MemeberFullProfile?memberId=' + memberId);
+                    }
+                    
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -150,7 +155,7 @@ var AddComplain = new Vue({
                     $(location).attr('href', webURL + 'Account/Login');
                 }
             });
-        }
+        }        
     },
     mounted() {
         $('#dateComplain').datepicker({
@@ -166,7 +171,12 @@ var AddComplain = new Vue({
             $(this).datepicker('hide');
         });
 
-        //this.complainVm.userId = getUrlParameter("memberId");
+        this.complainVm.memberId = getUrlParameter("memberId");
+        console.log(this.complainVm.memberId);
+        if (this.complainVm.memberId = 'undefined') {
+            this.complainVm.memberId = 0;
+            console.log(this.complainVm.memberId);
+        }
         this.getAllCategory();
         this.getComplainNo();
     }

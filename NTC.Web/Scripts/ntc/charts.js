@@ -1,14 +1,38 @@
 ﻿
 var Charts = new Vue({
-    el:'#chart',
+    el: '#chart',
     data: {
-
+        chart: {
+            adPannel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            cancel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            punish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            finePay: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
     },
     methods: {
-
-    },
-    mounted() {
-        $(document).ready(function () {
+        getAllChartDetails: function () {
+            $('#spinner').css("display", "block");
+            this.$http.get(apiURL + 'api/DeMerit/ChartData').then(function (response) {
+                if (response.body.messageCode.code == 1) {
+                    this.chart = response.body.chart;
+                    this.bindData();
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        },
+        bindData: function () {
             if ($('#advising').length) {
                 var ctx = document.getElementById("advising");
                 var advisingChart = new Chart(ctx, {
@@ -24,7 +48,7 @@ var Charts = new Vue({
                             pointHoverBackgroundColor: "#fff",
                             pointHoverBorderColor: "rgba(220,220,220,1)",
                             pointBorderWidth: 1,
-                            data: [31, 74, 6, 39, 20, 85, 7,0 ,0, 0, 0, 0]
+                            data: Charts.chart.adPannel
                         }]
                     },
                 });
@@ -45,7 +69,7 @@ var Charts = new Vue({
                             pointHoverBackgroundColor: "#fff",
                             pointHoverBorderColor: "rgba(151,187,205,1)",
                             pointBorderWidth: 1,
-                            data: [31, 74, 6, 39, 20, 85, 7, 0, 0, 0, 0, 0]
+                            data: Charts.chart.finePay
                         }]
                     },
                 });
@@ -66,7 +90,7 @@ var Charts = new Vue({
                             pointHoverBackgroundColor: "#fff",
                             pointHoverBorderColor: "rgba(220,220,220,1)",
                             pointBorderWidth: 1,
-                            data: [31, 74, 6, 39, 20, 85, 7, 0, 0, 0, 0, 0]
+                            data: Charts.chart.punish
                         }]
                     },
                 });
@@ -87,17 +111,14 @@ var Charts = new Vue({
                             pointHoverBackgroundColor: "#fff",
                             pointHoverBorderColor: "rgba(151,187,205,1)",
                             pointBorderWidth: 1,
-                            data: [31, 74, 6, 39, 20, 85, 7, 0, 0, 0, 0, 0]
+                            data: Charts.chart.cancel
                         }]
                     },
                 });
             }
-
-
-        });
-
-        
-
-        
+        }
+    },
+    mounted() {
+        this.getAllChartDetails();
     }
 });
