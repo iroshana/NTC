@@ -77,6 +77,7 @@ namespace NTC.API.Controllers
                             complainCategory.id = category.ComplainId;
                             complainCategory.categoryNo = String.IsNullOrEmpty(category.Category.CategoryNo) ? String.Empty : category.Category.CategoryNo;
                             complainCategory.description = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
+                            complainCategory.isSelected = category.IsSelected;
                             complainView.Category.Add(complainCategory);
                         }                        
                     }
@@ -360,7 +361,7 @@ namespace NTC.API.Controllers
                     {
                         foreach (ComplainCategory category in complain.ComplainCategories)
                         {
-                            if (categoryList.Find(x=>x.categoryNo == category.Category.CategoryNo) == null)
+                            if (categoryList.Find(x=>x.categoryNo == category.Category.CategoryNo) == null && category.IsSelected == true)
                             {
                                 CategoryViewModel complainCategory = new CategoryViewModel();
                                 complainCategory.id = category.ComplainId;
@@ -369,7 +370,6 @@ namespace NTC.API.Controllers
 
                                 categoryList.Add(complainCategory);
                             }
-
                         }
                     }
                 }

@@ -521,11 +521,11 @@ namespace NTC.API.Controllers
 
                 IEnumerable<MemberDeMerit> deMerits = new List<MemberDeMerit>();
                 deMerits = _deMerit.GetDeMerits();
-                deMerits = deMerits.Where(x=>x.DeMerit.CreatedDate.Year == DateTime.Now.Year).ToList();
+                //deMerits = deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Count();//.ToList();
 
                 if (deMerits != null)
                 {
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 1 && x.Merit.ColorCodeId == 2).Count());
+                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
                     chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 2).Count());
                     chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 2).Count());
                     chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 4 && x.Merit.ColorCodeId == 2).Count());
@@ -567,7 +567,7 @@ namespace NTC.API.Controllers
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 1 && x.Merit.ColorCodeId == 1).Count());
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 1).Count());
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 4 && x.Merit.ColorCodeId == 1).Count());
+                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 5 && x.Merit.ColorCodeId == 1).Count());
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 6 && x.Merit.ColorCodeId == 1).Count());
                     chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 7 && x.Merit.ColorCodeId == 1).Count());
