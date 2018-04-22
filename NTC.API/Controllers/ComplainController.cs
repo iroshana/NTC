@@ -117,6 +117,7 @@ namespace NTC.API.Controllers
                     complain.RouteId = complainView.route.id;
                     complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
                     complain.Date = DateTime.Parse(complainView.complainDate);
+                    complain.ComplainStatus = "Filed";
                     complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
                     if (complainView.memberId != 0) { 
                         Member member = _member.GetMember(complainView.memberId);
