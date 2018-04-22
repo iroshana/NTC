@@ -1,5 +1,4 @@
-﻿using NTC.BusinessEntities;
-using NTC.InterfaceServices;
+﻿using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -41,32 +40,32 @@ namespace NTC.API.Controllers
 
                 dashboard = _common.GetDashBoardCounts();
 
-                IEnumerable<Member> drivers = new List<Member>();
-                drivers = _member.GetAll().ToList();
+                IEnumerable<MemberEntityModel> drivers = new List<MemberEntityModel>();
+                drivers = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 1);
                 if (drivers != null)
                 {
-                    bestdriversofMonth = drivers.Where(x => x.DeMerits == null || x.DeMerits.Select(y=>y.MemberDeMerits.Sum(z=>z.Point)).FirstOrDefault() <= 2 && x.TypeId == 1).ToList().Count();
+                    bestdriversofMonth = drivers.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
                 }
 
                 IEnumerable<MemberEntityModel> conductors = new List<MemberEntityModel>();
-                conductors = _member.GetAllMembersSP(0, DateTime.Now.Date.AddMonths(-1), DateTime.Now.Date, 2);
+                conductors = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 2);
                 if (conductors != null)
                 {
-                    bestConductorsofMonth = conductors.Where(x => x.Total == null || x.Total.Value <= 2).ToList().Count();
+                    bestConductorsofMonth = conductors.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count(); 
                 }
 
                 IEnumerable<MemberEntityModel> drivers1 = new List<MemberEntityModel>();
-                drivers1 = _member.GetAllMembersSP(0, DateTime.Now.Date.AddYears(-1), DateTime.Now.Date, 1);
+                drivers1 = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 1);
                 if (drivers1 != null)
                 {
-                    bestdriversofYear = drivers1.Where(x => x.Total == null || x.Total.Value <= 2).ToList().Count();
+                    bestdriversofYear = drivers1.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
                 }
 
                 IEnumerable<MemberEntityModel> conductors1 = new List<MemberEntityModel>();
-                conductors1 = _member.GetAllMembersSP(0, DateTime.Now.Date.AddYears(-1), DateTime.Now.Date, 2);
+                conductors1 = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 2);
                 if (conductors1 != null)
                 {
-                    bestConductorsofYear = conductors1.Where(x => x.Total == null || x.Total.Value <= 2).ToList().Count();
+                    bestConductorsofYear = conductors1.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
                 }
 
                 if (dashboard != null)

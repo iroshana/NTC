@@ -61,5 +61,6 @@ namespace NTC.ViewModels
         public string nic { get; set; }
         public string ntcNo { get; set; }
         public string typeCode { get; set; }
+        public string createdDate { get; set; }
     }
 }
