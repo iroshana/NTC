@@ -21,6 +21,9 @@ namespace NTC.BusinessEntities
         public DateTime Date { get; set; }
         public string Method { get; set; }
         public string ComplainCode { get; set; }
+        public string ComplainerName { get; set; }
+        public string ComplainerAddress { get; set; }
+        public string ComplainerTel { get; set; }
         public string Description { get; set; }
         public int? UserId { get; set; }
         public int? EvidenceId { get; set; }

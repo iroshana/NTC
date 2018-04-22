@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201804181542427_noticeIsSentAdd.Designer.cs">
       <DependentUpon>201804181542427_noticeIsSentAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804220715245_addcomplaincontact.cs" />
+    <Compile Include="Migrations\201804220715245_addcomplaincontact.Designer.cs">
+      <DependentUpon>201804220715245_addcomplaincontact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -188,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804181542427_noticeIsSentAdd.resx">
       <DependentUpon>201804181542427_noticeIsSentAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804220715245_addcomplaincontact.resx">
+      <DependentUpon>201804220715245_addcomplaincontact.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

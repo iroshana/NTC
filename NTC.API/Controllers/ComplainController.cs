@@ -55,6 +55,9 @@ namespace NTC.API.Controllers
                     complainView.isInqueryParticipation = complain.IsInqueryParticipation;
                     complainView.isEvidenceHave = complain.IsEvidenceHave;
                     complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+                    complainView.complainerName = String.IsNullOrEmpty(complain.ComplainerName) ? String.Empty : complain.ComplainerName;
+                    complainView.complainerAddress = String.IsNullOrEmpty(complain.ComplainerAddress) ? String.Empty : complain.ComplainerAddress;
+                    complainView.telNo = String.IsNullOrEmpty(complain.ComplainerTel) ? String.Empty : complain.ComplainerTel;
 
 
                     if (complain.IsEvidenceHave)
@@ -120,6 +123,10 @@ namespace NTC.API.Controllers
                     complain.IsInqueryParticipation = complainView.isInqueryParticipation;
                     complain.IsEvidenceHave = complainView.isEvidenceHave;
                     complain.Description = String.IsNullOrEmpty(complainView.description) ? String.Empty : complainView.description;
+                    complain.ComplainerName = String.IsNullOrEmpty(complainView.complainerName) ? String.Empty : complainView.complainerName;
+                    complain.ComplainerAddress = String.IsNullOrEmpty(complainView.complainerAddress) ? String.Empty : complainView.complainerAddress;
+                    complain.ComplainerTel = String.IsNullOrEmpty(complainView.telNo) ? String.Empty : complainView.telNo;
+
                     complain.ComplainCategories = new List<ComplainCategory>();
                     
                     if (complain.IsEvidenceHave)
@@ -140,6 +147,7 @@ namespace NTC.API.Controllers
                         category.CategoryId = complainCategory.id;
                         category.ComplainId = complain.ID;
                         category.Description = String.IsNullOrEmpty(complainCategory.description)?String.Empty: complainCategory.description;
+                        category.IsSelected = complainCategory.isSelected;
 
                         complain.ComplainCategories.Add(category);
                     }

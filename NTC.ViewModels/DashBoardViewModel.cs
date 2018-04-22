@@ -15,5 +15,9 @@ namespace NTC.ViewModels
         public int redNoticeMembers { get; set; }
         public int highestDriverComplain { get; set; }
         public int highestConductorComplain { get; set; }
+        public int bestdriversofMonth { get; set; }
+        public int bestConductorsofMonth { get; set; }
+        public int bestdriversofYear { get; set; }
+        public int bestConductorsofYear { get; set; }
     }
 }

@@ -525,57 +525,16 @@ namespace NTC.API.Controllers
 
                 if (deMerits != null)
                 {
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 4 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 5 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 6 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 7 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 8 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 9 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 10 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 11 && x.Merit.ColorCodeId == 2).Count());
-                    chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 12 && x.Merit.ColorCodeId == 2).Count());
+                    for (int i = 1;i<=12; i++)
+                    {
+                        chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 2).Select(x => x.DeMerit.MemberId).Distinct().Count());
 
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 1 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 4 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 5 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 6 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 7 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 8 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 9 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 10 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 11 && x.Merit.ColorCodeId == 4).Count());
-                    chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 12 && x.Merit.ColorCodeId == 4).Count());
+                        chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 4).Select(x => x.DeMerit.MemberId).Distinct().Count());
 
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 1 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 4 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 5 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 6 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 7 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 8 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 9 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 10 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 11 && x.Merit.ColorCodeId == 3).Count());
-                    chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 12 && x.Merit.ColorCodeId == 3).Count());
+                        chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 3).Select(x => x.DeMerit.MemberId).Distinct().Count());
 
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 1 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 2 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 3 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 5 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 6 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 7 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 8 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 9 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 10 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 11 && x.Merit.ColorCodeId == 1).Count());
-                    chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Month == 12 && x.Merit.ColorCodeId == 1).Count());
+                        chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
+                    }
 
                 }
 

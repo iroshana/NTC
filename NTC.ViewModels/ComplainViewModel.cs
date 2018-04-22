@@ -24,6 +24,9 @@ namespace NTC.ViewModels
         public string complainDate { get; set; }
         public List<CategoryViewModel> Category { get; set; }
         public EvidenceViewModel evidence { get; set; }
+        public string complainerName { get; set; }
+        public string complainerAddress { get; set; }
+        public string telNo { get; set; }
         //public List<ComplainCategoryViewModel> complainCategory { get; set; }
 
     }
