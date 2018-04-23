@@ -152,7 +152,7 @@ namespace NTC.API.Controllers
                     {
                         complain.Evidence = new Evidence();
                         complain.Evidence.FileName = String.IsNullOrEmpty(complainView.evidence.fileName) ? String.Empty : complainView.evidence.fileName;
-                        complain.Evidence.EvidenceNo = String.IsNullOrEmpty(complainView.evidence.evidenceNo) ? String.Empty : complainView.evidence.evidenceNo;
+                        complain.Evidence.EvidenceNo = complainView.complainNo + complainView.evidence.fileName;
                         complain.Evidence.Extension = String.IsNullOrEmpty(complainView.evidence.extension) ? String.Empty : complainView.evidence.extension;
                         complain.Evidence.FilePath = String.IsNullOrEmpty(complainView.evidence.filePath) ? String.Empty : complainView.evidence.filePath;
                         complain.Evidence.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));

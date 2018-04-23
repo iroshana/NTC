@@ -9,7 +9,7 @@ namespace NTC.InterfaceServices
 {
     public interface INoticeService:IEntityService<Notice>
     {
-        void Add(Notice notice, out string errorMessage);
+        Notice Add(Notice notice, out string errorMessage);
         IEnumerable<Notice> GetAllNotices();
         void UpdaterNotice(Notice notice, out string errorMessage);
     }

@@ -94,7 +94,7 @@ namespace NTC.API.Controllers
                         note.IsSent = false;
                         notice.MemberNotices.Add(note);
                     }
-                    _notice.Add(notice,out errorMessage);
+                    notice = _notice.Add(notice,out errorMessage);
 
                 }
                 var messageData = new
@@ -144,7 +144,7 @@ namespace NTC.API.Controllers
                             notice.MemberNotices.Add(note);
                         }
                     }
-                    _notice.Add(notice, out errorMessage);
+                    notice = _notice.Add(notice, out errorMessage);
 
                 }
                 var messageData = new
@@ -153,7 +153,7 @@ namespace NTC.API.Controllers
                    ,
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
-                var returnObject = new { messageCode = messageData };
+                var returnObject = new { messageCode = messageData, noticeId = notice.ID };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -244,6 +244,10 @@ namespace NTC.API.Controllers
                 notice.IsSent = true;
 
                 _notice.UpdaterNotice(notice, out errorMessage);
+
+                MemberNotice notice1 = _memberNotice.GetAll(x => x.ID == noticeId).FirstOrDefault();
+                notice1.IsSent = true;
+                _memberNotice.UpdateMemberNotice(notice1, out errorMessage);
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { messageCode = messageData };

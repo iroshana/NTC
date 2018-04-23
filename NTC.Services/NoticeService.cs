@@ -33,12 +33,13 @@ namespace NTC.Services
             }
         }
 
-        public void Add(Notice notice, out string errorMessage)
+        public Notice Add(Notice notice, out string errorMessage)
         {
             try
             {
                 errorMessage = String.Empty;
                 base.Add(notice);
+                return notice;
             }
             catch (Exception ex)
             {
