@@ -59,13 +59,10 @@ namespace NTC.Services
                 if (user == null)
                 {
                     base.Add(userView);
-                    if (roleId != 0)
-                    {
-                        UserRole userRole = new UserRole();
-                        userRole.RoleId = roleId;
-                        userRole.UserId = userView.ID;
-                        _userRoleRepository.Add(userRole);
-                    }
+                    //if (roleId != 0)
+                    //{
+                        
+                    //}
                     if (userView.UserName.StartsWith("D") || userView.UserName.StartsWith("C"))
                     {
                         List<string> properties = new List<string>();

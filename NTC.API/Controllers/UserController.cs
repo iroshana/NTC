@@ -74,6 +74,12 @@ namespace NTC.API.Controllers
                     newUser.TelNo = userView.telNo;
                     newUser.password = userView.password;
 
+                    UserRole userRole = new UserRole();
+                    userRole.RoleId = userView.roleId;
+                    userRole.UserId = userView.ID;
+                    newUser.UserRoles = new List<UserRole>();
+                    newUser.UserRoles.Add(userRole);
+
                     _user.registerUser(newUser, userView.roleId, out errorMessage);
                 }
                 else

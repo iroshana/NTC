@@ -14,6 +14,7 @@ namespace NTC.BusinessEntities
         {
             Complains = new HashSet<Complain>();
             LoginHistories = new HashSet<LoginHistory>();
+            UserRoles = new HashSet<UserRole>();
         }
         public int ID { get; set; }
         [Required]
@@ -28,5 +29,6 @@ namespace NTC.BusinessEntities
         public string password { get; set; }
         public virtual ICollection<Complain> Complains { get; set; }
         public virtual ICollection<LoginHistory> LoginHistories { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }
