@@ -83,13 +83,21 @@ namespace NTC.API.Controllers
                 {
                     foreach (Complain complain in complains)
                     {
-                        ComplainReportViewModel complainView = new ComplainReportViewModel();
-                        complainView.driverName = complain.Member.FullName;
-                        complainView.ntcNo = complain.Member.NTCNo;
-                        complainView.complain = String.IsNullOrEmpty(complain.Description)?String.Empty:complain.Description;
-                        complainView.complainStatus = complain.ComplainStatus;
+                        foreach (ComplainCategory category in complain.ComplainCategories)
+                        {
+                            if (category.IsSelected == true)
+                            {
+                                ComplainReportViewModel complainView = new ComplainReportViewModel();
+                                complainView.driverName = complain.Member.FullName;
+                                complainView.ntcNo = complain.Member.NTCNo;
+                                complainView.complain = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
+                                complainView.complainStatus = complain.ComplainStatus;
 
-                        complainList.Add(complainView);
+                                complainList.Add(complainView);
+                            }
+                            
+                        }
+                        
                     }
                 }
                 
@@ -431,13 +439,17 @@ namespace NTC.API.Controllers
                     {
                         foreach (ComplainCategory category in complain.ComplainCategories)
                         {
-                            ComplainReportViewModel complainView = new ComplainReportViewModel();
-                            complainView.driverName = complain.Member.FullName;
-                            complainView.ntcNo = complain.Member.NTCNo;
-                            complainView.complain = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
-                            complainView.complainStatus = String.IsNullOrEmpty(complain.ComplainStatus) ? String.Empty : complain.Description;
+                            if (category.IsSelected)
+                            {
+                                ComplainReportViewModel complainView = new ComplainReportViewModel();
+                                complainView.driverName = complain.Member.FullName;
+                                complainView.ntcNo = complain.Member.NTCNo;
+                                complainView.complain = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
+                                complainView.complainStatus = String.IsNullOrEmpty(complain.ComplainStatus) ? String.Empty : complain.ComplainStatus;
 
-                            complainList.Add(complainView);
+                                complainList.Add(complainView);
+                            }
+                            
                         }
                         
                     }

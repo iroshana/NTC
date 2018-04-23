@@ -30,6 +30,7 @@ namespace NTC.ViewModels
         public int meritId { get; set; }
         public int point { get; set; }
         public int colorCode { get; set; }
+        public bool isSelected { get; set; }
     }
     public class MeritViewModel
     {

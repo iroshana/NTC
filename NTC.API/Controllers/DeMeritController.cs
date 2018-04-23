@@ -140,7 +140,15 @@ namespace NTC.API.Controllers
                         MemberDeMerit demerit = new MemberDeMerit();
                         demerit.DeMeritId = deMerit.ID;
                         demerit.MeritId = memberDemerit.meritId;
-                        demerit.Point = memberDemerit.point;
+                        if (memberDemerit.isSelected)
+                        {
+                            demerit.Point = 1;
+                        }
+                        else
+                        {
+                            demerit.Point = 0;
+                        }
+                        
 
                         deMerit.MemberDeMerits.Add(demerit);
                     }

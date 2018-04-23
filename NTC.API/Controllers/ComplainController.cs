@@ -358,7 +358,7 @@ namespace NTC.API.Controllers
                 IEnumerable<Complain> complain = new List<Complain>();
                 complain = _complain.GetComplainNo(userId);
 
-                List<string> complainNos = complain.Where(y=>y.ComplainStatus != "Resolve").Select(x => x.ComplainNo).ToList();
+                List<string> complainNos = complain.Select(x => x.ComplainNo).ToList();
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { complainNo = complainNos, messageCode = messageData };
