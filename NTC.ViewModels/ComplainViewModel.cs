@@ -54,7 +54,9 @@ namespace NTC.ViewModels
         public EvidenceViewModel evidence { get; set; }
         public string complainerName { get; set; }
         public string complainerAddress { get; set; }
+        
         public string telNo { get; set; }
+        public string status { get; set; }
         //public List<ComplainCategoryViewModel> complainCategory { get; set; }
 
     }
