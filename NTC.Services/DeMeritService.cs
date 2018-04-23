@@ -118,7 +118,7 @@ namespace NTC.Services
                     demerit.description = merit.Description;
                     IEnumerable<MemberDeMerit> memDeMerit = _memberDeMeritRepository.Get(x => x.MeritId == merit.ID && x.DeMerit.MemberId == memberId).ToList();
                     demerit.point = memDeMerit.Where(y=>y.DeMerit.CreatedDate.Date >= fromDate.Date && y.DeMerit.CreatedDate.Date <= toDate.Date).Sum(z=>z.Point);
-
+                    demerit.colorCode = merit.ColorCodeId;
                     memberDemeritView.Add(demerit);
                 }
                 return memberDemeritView;

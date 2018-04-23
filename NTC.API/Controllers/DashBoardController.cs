@@ -37,7 +37,6 @@ namespace NTC.API.Controllers
                 int bestdriversofYear = 0;
                 int bestConductorsofYear = 0;
 
-
                 dashboard = _common.GetDashBoardCounts();
 
                 IEnumerable<MemberEntityModel> drivers = new List<MemberEntityModel>();

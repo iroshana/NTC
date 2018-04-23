@@ -134,7 +134,7 @@ namespace NTC.API.Controllers
 
         #region AddEmployee
         [HttpPost]
-        public IHttpActionResult AddMember(MemberViewModel memberView)
+        public IHttpActionResult AddMember(MemberDataViewModel memberView)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace NTC.API.Controllers
                 if (memberView != null)
                 {
                     member.NIC = String.IsNullOrEmpty(memberView.nic) ? String.Empty: memberView.nic;
-                    member.DOB = DateTime.Parse(memberView.dob);
+                    member.DOB = memberView.dob;
                     member.FullName = memberView.fullName;
                     member.ShortName = String.IsNullOrEmpty(memberView.nameWithInitial)? String.Empty : memberView.nameWithInitial;
                     member.PermanetAddress = String.IsNullOrEmpty(memberView.permanetAddress) ? String.Empty : memberView.permanetAddress;
@@ -151,9 +151,9 @@ namespace NTC.API.Controllers
                     member.TrainingCertificateNo = String.IsNullOrEmpty(memberView.cetificateNo) ? String.Empty : memberView.cetificateNo;
                     member.TrainingCenter = String.IsNullOrEmpty(memberView.trainingCenter) ? String.Empty : memberView.trainingCenter;
                     member.LicenceNo = String.IsNullOrEmpty(memberView.licenceNo)? String.Empty : memberView.licenceNo;
-                    member.IssuedDate = DateTime.Parse(memberView.dateIssued);
-                    member.ExpireDate = DateTime.Parse(memberView.dateValidity);
-                    member.JoinDate = DateTime.Parse(memberView.dateJoin);
+                    member.IssuedDate = memberView.dateIssued;
+                    member.ExpireDate = memberView.dateValidity;
+                    member.JoinDate = memberView.dateJoin;
                     member.HighestEducation = String.IsNullOrEmpty(memberView.educationQuali)? String.Empty : memberView.educationQuali;
                     member.TypeId = memberView.typeId;
                     member.NTCNo = _common.GetLastNTCNO(memberView.typeId);
@@ -366,5 +366,6 @@ namespace NTC.API.Controllers
             }
         }
         #endregion
+
     }
 }

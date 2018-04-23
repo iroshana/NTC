@@ -63,10 +63,10 @@ namespace NTC.Services
                     {
                         UserRole userRole = new UserRole();
                         userRole.RoleId = roleId;
-                        userRole.UserId = user.ID;
+                        userRole.UserId = userView.ID;
                         _userRoleRepository.Add(userRole);
                     }
-                    if (userView.UserName.StartsWith("NTC"))
+                    if (userView.UserName.StartsWith("D") || userView.UserName.StartsWith("C"))
                     {
                         List<string> properties = new List<string>();
                         properties.Add("UserID");

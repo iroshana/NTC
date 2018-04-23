@@ -27,6 +27,33 @@ namespace NTC.ViewModels
         public EvidenceViewModel evidence { get; set; }
         public string complainerName { get; set; }
         public string complainerAddress { get; set; }
+        public string status { get; set; }
+        public string telNo { get; set; }
+        //public List<ComplainCategoryViewModel> complainCategory { get; set; }
+
+    }
+
+    public class ComplainDataViewModel
+    {
+        public int id { get; set; }
+        public string complainNo { get; set; }
+        public BusViewModel bus { get; set; }
+        public RouteViewModel route { get; set; }
+        public string place { get; set; }
+        public string time { get; set; }
+        public int memberId { get; set; }
+        public string method { get; set; }
+        public string complainCode { get; set; }
+        public string description { get; set; }
+        public int userId { get; set; }
+        public int? evidenceId { get; set; }
+        public bool isEvidenceHave { get; set; }
+        public bool isInqueryParticipation { get; set; }
+        public DateTime complainDate { get; set; }
+        public List<CategoryViewModel> Category { get; set; }
+        public EvidenceViewModel evidence { get; set; }
+        public string complainerName { get; set; }
+        public string complainerAddress { get; set; }
         public string telNo { get; set; }
         //public List<ComplainCategoryViewModel> complainCategory { get; set; }
 

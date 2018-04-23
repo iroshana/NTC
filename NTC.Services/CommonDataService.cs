@@ -113,6 +113,7 @@ namespace NTC.Services
         {
             try
             {
+
                 return _dashBoardEntityRepository.ExecuteStoredProcedure("dbo.DashBoard").FirstOrDefault();
             }
             catch (Exception ex)

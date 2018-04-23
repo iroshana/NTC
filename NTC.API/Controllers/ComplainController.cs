@@ -58,6 +58,7 @@ namespace NTC.API.Controllers
                     complainView.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
                     complainView.complainerName = String.IsNullOrEmpty(complain.ComplainerName) ? String.Empty : complain.ComplainerName;
                     complainView.complainerAddress = String.IsNullOrEmpty(complain.ComplainerAddress) ? String.Empty : complain.ComplainerAddress;
+                    complainView.status = complain.ComplainStatus;
                     complainView.telNo = String.IsNullOrEmpty(complain.ComplainerTel) ? String.Empty : complain.ComplainerTel;
 
 
@@ -103,7 +104,7 @@ namespace NTC.API.Controllers
 
         #region Add Complain
         [HttpPost]
-        public IHttpActionResult AddComplain(ComplainViewModel complainView)
+        public IHttpActionResult AddComplain(ComplainDataViewModel complainView)
         {
             try
             {
@@ -116,7 +117,7 @@ namespace NTC.API.Controllers
                     complain.BusId = complainView.bus.id;
                     complain.RouteId = complainView.route.id;
                     complain.Place = String.IsNullOrEmpty(complainView.place) ? String.Empty : complainView.place;
-                    complain.Date = DateTime.Parse(complainView.complainDate);
+                    complain.Date = complainView.complainDate;
                     complain.ComplainStatus = "Filed";
                     complain.UserId = complainView.userId == 0 ? (int?)null : complainView.userId;
                     if (complainView.memberId != 0) { 
@@ -357,7 +358,7 @@ namespace NTC.API.Controllers
                 IEnumerable<Complain> complain = new List<Complain>();
                 complain = _complain.GetComplainNo(userId);
 
-                List<string> complainNos = complain.Where(y=>y.ComplainStatus != "Inactive").Select(x => x.ComplainNo).ToList();
+                List<string> complainNos = complain.Where(y=>y.ComplainStatus != "Resolve").Select(x => x.ComplainNo).ToList();
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { complainNo = complainNos, messageCode = messageData };

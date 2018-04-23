@@ -43,6 +43,43 @@ namespace NTC.ViewModels
         public string notification2 { get; set; }
         public string notification3 { get; set; }
     }
+
+    public class MemberDataViewModel
+    {
+        public int id { get; set; }
+        [Required]
+        public string fullName { get; set; }
+        public string nameWithInitial { get; set; }
+        [Required]
+        public DateTime dob { get; set; }
+        public string permanetAddress { get; set; }
+        public string currentAddress { get; set; }
+        public string telNo { get; set; }
+        [Required]
+        public string nic { get; set; }
+        public int userID { get; set; }
+        [Required]
+        public int typeId { get; set; }
+        public string type { get; set; }
+        public string cetificateNo { get; set; }
+        public string licenceNo { get; set; }
+        public string trainingCenter { get; set; }
+        public string educationQuali { get; set; }
+        [Required]
+        public DateTime dateJoin { get; set; }
+        [Required]
+        public DateTime dateIssued { get; set; }
+        [Required]
+        public DateTime dateValidity { get; set; }
+        public string imagePath { get; set; }
+        public bool isNotification1 { get; set; }
+        public bool isNotification2 { get; set; }
+        public bool isNotification3 { get; set; }
+        public string notification1 { get; set; }
+        public string notification2 { get; set; }
+        public string notification3 { get; set; }
+    }
+
     public class MemberTypeViewModel
     {
         public int id { get; set; }
