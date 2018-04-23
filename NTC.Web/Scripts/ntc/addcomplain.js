@@ -37,9 +37,17 @@ var AddComplain = new Vue({
             telNo: '',
             file: {},
             filePath:'',
-            route:''
+            route: '',
+            evidence: {
+                fileName: '',
+                evidenceNo: '',
+                extension: '',
+                filePath: ''
+            },
+            status:'Unresolve'
         },
-        categoryList: []
+        categoryList: [],
+        isResultShow: false
     },
     methods: {
         getBusDetails: function (busno) {            
@@ -96,19 +104,30 @@ var AddComplain = new Vue({
             this.complainVm.Category = this.categoryList;
 
             if (this.complainVm.isEvidenceHave) {
-                //var formData = new FormData();
-                //formData.append('UploadedImage', this.memeber.image);
-                //formData.append('nic', this.memeber.nic);
-                //formData.append('uploadedFileName', "");
-                //formData.append('fileExtension', '.png');
+                var formData = new FormData();
+                formData.append('UploadedImage', this.complainVm.file);
+                formData.append('nic', this.complainVm.memberId);
+                formData.append('uploadedFileName', "");
+                formData.append('fileExtension', '.png');
+                formData.append('imageFolder', "Evidence");  
+                
+                this.$http.post(apiURL + '/api/DocumentUpload/MediaUpload', formData).then(function (response) {
+                            if (response.body.messageCode.code == 1) {
+                                this.complainVm.evidence.filePath = response.body.filesData[0].filePath;
+                                this.complainSave();
+                            }
+                            else {
 
-                //this.complainVm.evidence = {
-                //    fileName:''
-                //}
-            }
+                            }
+                        }); 
+            } else {
+                this.complainSave();
+            }           
+        },
+        complainSave: function(){
 
 
-            $('#spinner').css("display", "block");
+             $('#spinner').css("display", "block");
             this.$http.post(apiURL + 'api/Complain/AddComplain', this.complainVm).then(function (response) {
                 if (response.body.messageCode.code == 1) {                    
                     msgAlert.isSuccess = true;
@@ -133,7 +152,7 @@ var AddComplain = new Vue({
                 if (response.statusText == "Unauthorized") {
                     $(location).attr('href', webURL + 'Account/Login');
                 }
-            });
+            });        
         },
         getComplainNo: function () {
             $('#spinner').css("display", "block");
@@ -172,12 +191,78 @@ var AddComplain = new Vue({
         });
 
         this.complainVm.memberId = getUrlParameter("memberId");
-        console.log(this.complainVm.memberId);
-        if (this.complainVm.memberId = 'undefined') {
+        if (this.complainVm.memberId == 'undefined') {
             this.complainVm.memberId = 0;
             console.log(this.complainVm.memberId);
         }
         this.getAllCategory();
         this.getComplainNo();
+
+
+
+        $(document).ready(function () {
+            var $uploadCrop;
+            $uploadCrop = $('#item-img').croppie({
+                viewport: {
+                    width: 150,
+                    height: 150,
+                    type: 'squre'
+                },
+                boundary: { width: 250, height: 250 },
+            });
+
+            $('#evidence').on('change', function () {
+                $("#item-img-result").empty();
+                AddComplain.isResultShow = false;
+
+                if (this.files && this.files[0]) {
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) != -1) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('.upload-demo').addClass('ready');
+                            $uploadCrop.croppie('bind', {
+                                url: e.target.result
+                            }).then(function () {
+                                console.log('jQuery bind complete');
+                            });
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    else {
+
+                    }
+                }
+                else {
+
+                }
+            });
+            $('#cropImage').on('click', function (ev) {
+                $uploadCrop.croppie('result', {
+                    type: 'blob',
+                    size: { width: 150, height: 150 },
+                    format: 'jpeg'
+                }).then(function (resp) {
+                    AddComplain.complainVm.file = resp;
+                    $uploadCrop.croppie('result', {
+                        type: 'canvas',
+                        size: 'viewport'
+                    }).then(function (resp) {
+                        AddComplain.isResultShow = true;
+                        var html;
+                        if (resp) {
+                            html = '<img src="' + resp + '" />';
+                            $("#item-img-result").empty();
+                            $("#item-img-result").append(html);
+                            $uploadCrop.croppie('bind', {
+                                url: ''
+                            })
+                        }
+                    });
+                });
+            });
+
+        });
     }
 });
