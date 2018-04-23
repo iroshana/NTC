@@ -152,7 +152,7 @@ var MemberList = new Vue({
                     {
                         "data": null, "bSortable": false, sWidth: "10%",
                         "mRender": function (o) {
-                            var viewBtn = '<button id="btnView" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="top" title="View Member"><div><i class="fa fa-check-circle-o"></i></div></a>';
+                            var viewBtn = '<button id="btnView" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="top" title="View Member"><div><i class="fa fa-eye"></i></div></a>';
 
                             return viewBtn;
                         }
@@ -199,7 +199,7 @@ var MemberList = new Vue({
                     {
                         "data": null, "bSortable": false, sWidth: "10%",
                         "mRender": function (o) {
-                            var viewBtn = '<button id="btnView" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="top" title="View Member"><div><i class="fa fa-check-circle-o"></i></div></a>';
+                            var viewBtn = '<button id="btnView" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="top" title="View Member"><div><i class="fa fa-eye"></i></div></a>';
 
                             return viewBtn;
                         }
@@ -219,14 +219,14 @@ var MemberList = new Vue({
                     var toDate = getUrlParameter("date");                 
                     this.getBestMember(toDate, 1, true);
                 } else if (getUrlParameter("isRedNotice")) {
-                    this.getRedNoticeMember(0, "", "", 1, 2);
+                    this.getRedNoticeMember(1, "", "", 1, 2);
                 } else if (getUrlParameter("year")) {
                     var toDate = getUrlParameter("date");
                     this.getBestMember(toDate, 1, true);
                 }
             } else {
                 if(getUrlParameter("isRedNotice")){
-                    this.getRedNoticeMember(0, "", "", 2, 2);
+                    this.getRedNoticeMember(1, "", "", 2, 2);
                 } else if (getUrlParameter("month")) {
                     var toDate = getUrlParameter("date");
                     this.getBestMember(toDate, 2, true);
