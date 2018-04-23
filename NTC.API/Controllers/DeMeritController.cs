@@ -119,7 +119,7 @@ namespace NTC.API.Controllers
 
         #region AddDeMerit
         [HttpPost]
-        public IHttpActionResult AddDeMerit(DeMeritViewModel deMeritView)
+        public IHttpActionResult AddDeMerit(DeMeritDataViewModel deMeritView)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace NTC.API.Controllers
                 if (deMeritView != null)
                 {
                     deMerit.DeMeritNo = deMeritView.deMeritNo;
-                    deMerit.InqueryDate = DateTime.Parse(deMeritView.inqueryDate);
+                    deMerit.InqueryDate = deMeritView.inqueryDate;
                     deMerit.MemberId = deMeritView.member.id;
                     deMerit.BusId = deMeritView.bus.id;
                     deMerit.RouteId = deMeritView.route.id;

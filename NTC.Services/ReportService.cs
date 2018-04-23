@@ -42,8 +42,8 @@ namespace NTC.Services
                 string errorMessage = String.Empty;
                 object[] param = {
                         new SqlParameter("@colorCode", colorCode),
-                        new SqlParameter("@createdDateFrom", fromDate == null ? DateTime.Now.Date.AddMonths(-1).ToString(@"yyyy-MM-dd") : fromDate.Value.ToString(@"yyyy-MM-dd")),
-                        new SqlParameter("@createdDateTo", toDate == null ? DateTime.Now.Date.ToString(@"yyyy-MM-dd") : toDate.Value.ToString(@"yyyy-MM-dd")),
+                        new SqlParameter("@createdDateFrom", fromDate == null ? DateTime.Now.Date.AddMonths(-1).ToString(@"yyyy-MM-dd 00:00:00") : fromDate.Value.ToString(@"yyyy-MM-dd 00:00:00")),
+                        new SqlParameter("@createdDateTo", toDate == null ? DateTime.Now.Date.ToString(@"yyyy-MM-dd 23:59:59") : toDate.Value.ToString(@"yyyy-MM-dd 23:59:59")),
                         new SqlParameter("@typeId", typeId),
                         new SqlParameter("@orderBy",String.IsNullOrEmpty(order)? "ASC":order)
                 };

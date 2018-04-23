@@ -21,6 +21,20 @@ namespace NTC.ViewModels
 
     }
 
+    public class DeMeritDataViewModel
+    {
+        public int id { get; set; }
+        public string deMeritNo { get; set; }
+        public MemberViewModel member { get; set; }
+        public RouteViewModel route { get; set; }
+        [Required]
+        public DateTime inqueryDate { get; set; }
+        public OfficerViewModel officer { get; set; }
+        public BusViewModel bus { get; set; }
+        public List<MemberDeMeritViewModel> memberDeMerit { get; set; }
+
+    }
+
     public class MemberDeMeritViewModel
     {
         public int id { get; set; }
