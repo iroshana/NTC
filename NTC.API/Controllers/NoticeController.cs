@@ -245,9 +245,12 @@ namespace NTC.API.Controllers
 
                 _notice.UpdaterNotice(notice, out errorMessage);
 
-                MemberNotice notice1 = _memberNotice.GetAll(x => x.ID == noticeId).FirstOrDefault();
-                notice1.IsSent = true;
-                _memberNotice.UpdateMemberNotice(notice1, out errorMessage);
+                MemberNotice notice1 = _memberNotice.GetAll(x => x.ID == noticeId && x.IsSent == false).FirstOrDefault();
+                if (notice1 != null)
+                {
+                    notice1.IsSent = true;
+                    _memberNotice.UpdateMemberNotice(notice1, out errorMessage);
+                }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { messageCode = messageData };

@@ -47,7 +47,7 @@ namespace NTC.API.Controllers
                     complainView.route = new RouteViewModel();
                     complainView.route.id = complain.RouteId;
                     complainView.route.from = complain.Route.From;
-                    complainView.route.from = complain.Route.To;
+                    complainView.route.to = complain.Route.To;
                     complainView.route.routeNo = complain.Route.RouteNo;
                     complainView.place = String.IsNullOrEmpty(complain.Place) ? String.Empty : complain.Place;
                     complainView.complainDate = complain.Date.ToString(@"yyyy-MM-dd");
