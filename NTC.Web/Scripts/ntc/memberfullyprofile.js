@@ -67,11 +67,13 @@ var MemberDetails = new Vue({
             complainerAddress: '',
             telNo: '',
             file: '',
-            route: ''
+            route: '',
+            status:''
         },
         categoryList: [],
         role: '',
-        imageURL: ''
+        imageURL: '',
+        statusComplain: 'Unresolve'
     },
     methods: {
         getAllMemeberNotice: function (userId) {
@@ -336,11 +338,34 @@ var MemberDetails = new Vue({
             this.isComplainShow = true;
             this.complainNo = "";
         },
-        complainAction: function () {
+        complainAction: function (status) {
             $('#spinner').css("display", "block");
-            this.$http.post(apiURL + 'api/Complain/ChangeComplainStatus?complainId=' + MemberDetails.complainVm.id + '&status=Inactive').then(function (response) {
+            this.$http.post(apiURL + 'api/Complain/ChangeComplainStatus?complainId=' + MemberDetails.complainVm.id + '&status=' + status).then(function (response) {
+                if (response.body.messageCode.code == 1) {                    
+                        $(location).attr('href', webURL + 'DriverConductor/AddPoints?memberId=' + this.memeber.id);                                      
+                } else {
+                    msgAlert.isSuccess = false;
+                    msgAlert.alertMessage = response.body.messageCode.message;
+                    msgAlert.showModal();
+                }
+                $('#spinner').css("display", "none");
+            }).catch(function (response) {
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = response.statusText;
+                msgAlert.showModal();
+                $('#spinner').css("display", "none");
+                if (response.statusText == "Unauthorized") {
+                    $(location).attr('href', webURL + 'Account/Login');
+                }
+            });
+        },
+        complainActionAdminChange: function (status) {
+            $('#spinner').css("display", "block");
+            this.$http.post(apiURL + 'api/Complain/ChangeComplainStatus?complainId=' + MemberDetails.complainVm.id + '&status=' + status).then(function (response) {
                 if (response.body.messageCode.code == 1) {
-                    $(location).attr('href', webURL + 'DriverConductor/AddPoints?memberId=' + this.memeber.id);
+                    msgAlert.isSuccess = true;
+                    msgAlert.alertMessage = "Successfully Status Change";
+                    msgAlert.showModal();
                 } else {
                     msgAlert.isSuccess = false;
                     msgAlert.alertMessage = response.body.messageCode.message;
@@ -414,6 +439,7 @@ var NoticeModal = new Vue({
                         msgAlert.alertMessage = "Notice Save Successfully.";
                         msgAlert.showModal();
                         this.clearData();
+                        MemberDetails.getAllMemeberNotice(getUrlParameter("memberId"));
                     } else {
                         msgAlert.isSuccess = false;
                         msgAlert.alertMessage = response.body.messageCode.message;

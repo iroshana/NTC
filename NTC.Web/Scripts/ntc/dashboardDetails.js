@@ -25,9 +25,17 @@ var DashBoard = new Vue({
             highestDriverPoints: '0',
             redNoticeConductors: '0',
             redNoticeDrivers: '0',
-            redNoticeMembers: '0'
+            redNoticeMembers: '0',
+            bestConductorsofMonth: '0',
+            bestConductorsofYear: '0',
+            bestdriversofMonth: '0',
+            bestdriversofYear: '0'
 
-        }
+        },
+        driverMonth: '',
+        driverYear: '',
+        conductorMonth: '',
+        conductorYear:''
     },
     methods: {
         getDashboardData: function () {
@@ -50,6 +58,24 @@ var DashBoard = new Vue({
                     $(location).attr('href', webURL + 'Account/Login');
                 }
             });
+        },
+        bestDriverMonth: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=1&isDash=true&month=true&date=' + DashBoard.driverMonth);
+        },
+        bestDriverYear: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=1&isDash=true&year=true&date=' + DashBoard.driverYear);
+        },
+        bestConductorMonth: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&month=true&date=' + DashBoard.conductorMonth);
+        },
+        bestConductorYear: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&year=true&date=' + DashBoard.conductorYear);
+        },
+        redNoticeDriver: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=1&isDash=true&isRedNotice=true');
+        },
+        redNoticeConductor: function () {
+            $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&isRedNotice=true');
         }
     },
     mounted() {
@@ -62,12 +88,16 @@ var DashBoard = new Vue({
             numberOfMonths: 1
         });
 
+        $("#driverMonth").datepicker("setDate", new Date());
+
         $('#driverYear').datepicker({
             dateFormat: 'yy-mm-dd',
             showOtherMonths: true,
             selectOtherMonths: true,
             numberOfMonths: 1
         });
+
+        $("#driverYear").datepicker("setDate", new Date());
 
         $('#conMonth').datepicker({
             dateFormat: 'yy-mm-dd',
@@ -76,11 +106,40 @@ var DashBoard = new Vue({
             numberOfMonths: 1
         });
 
+        $("#conMonth").datepicker("setDate", new Date());
+
         $('#conYear').datepicker({
             dateFormat: 'yy-mm-dd',
             showOtherMonths: true,
             selectOtherMonths: true,
             numberOfMonths: 1
+        });
+
+        $("#conYear").datepicker("setDate", new Date());
+
+        this.driverMonth = $('#driverMonth').val();
+        this.driverYear = $('#driverYear').val();
+        this.conductorMonth = $('#conMonth').val();
+        this.conductorYear = $('#conYear').val();
+
+        $('#driverMonth').on('change', function () {
+            DashBoard.driverMonth = $('#driverMonth').val();
+            $(this).datepicker('hide');
+        });
+
+        $('#driverYear').on('change', function () {
+            DashBoard.driverYear = $('#driverYear').val();
+            $(this).datepicker('hide');
+        });
+
+        $('#conMonth').on('change', function () {
+            DashBoard.conductorMonth = $('#conMonth').val();
+            $(this).datepicker('hide');
+        });
+
+        $('#conYear').on('change', function () {
+            DashBoard.conductorYear = $('#conYear').val();
+            $(this).datepicker('hide');
         });
     }
 });

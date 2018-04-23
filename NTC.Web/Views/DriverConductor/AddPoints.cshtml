@@ -105,7 +105,9 @@
                                 <tr v-for="de in demeritList">
                                     <td>{{de.code}}</td>
                                     <td class="" v-bind:class="de.colorCode == '1' ? 'red' : de.colorCode == '2' ? 'green' : de.colorCode == '3' ? 'purple' : 'blue'">{{de.description}}</td>
-                                    <td><input type="text" class="form-control" v-model="de.point" /></td>
+                                    <td>
+                                        <input type="checkbox" class="form-control" v-model="de.isSelected" />
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
