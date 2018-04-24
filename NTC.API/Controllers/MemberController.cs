@@ -16,12 +16,14 @@ namespace NTC.API.Controllers
         private readonly IMemberService _member;
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _common;
+        private readonly IDeMeritService _demerit;
 
-        public MemberController(IMemberService member, IEventLogService eventLog, ICommonDataService common)
+        public MemberController(IMemberService member, IEventLogService eventLog, ICommonDataService common, IDeMeritService demerit)
         {
             _member = member;
             _eventLog = eventLog;
             _common = common;
+            _demerit = demerit;
         }
         #region GetMember
         [HttpGet]
@@ -29,9 +31,27 @@ namespace NTC.API.Controllers
         {
             try
             {
+                int point = 0;
                 MemberViewModel memberView = new MemberViewModel();
                 Member member = new Member();
                 member = _member.GetMember(Id);
+                IEnumerable<DeMerit> demerit = new List<DeMerit>();
+                demerit = _demerit.GetAll(x => x.MemberId == Id).ToList();
+                if(demerit != null){
+                    demerit = demerit.Where(y => y.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && y.CreatedDate <= DateTime.Now.Date).ToList();
+
+                    foreach (DeMerit de in demerit)
+                    {
+                        foreach (MemberDeMerit mem in de.MemberDeMerits)
+                        {
+                            if (mem.Merit.ColorCodeId == 1)
+                            {
+                                point += mem.Point;
+                            }
+                        }
+                    }
+                }
+                
                 if (member != null)
                 {
                     memberView.id = member.ID;
@@ -51,6 +71,8 @@ namespace NTC.API.Controllers
                     memberView.educationQuali = String.IsNullOrEmpty(member.HighestEducation) ? String.Empty : member.HighestEducation;
                     memberView.type = member.MemberType.Code;
                     memberView.imagePath = member.ImagePath;
+                    memberView.isNotification1 = point > 0 ? true : false;
+                    memberView.notification1 = point > 0 ? "Red Noticed Driver" : String.Empty;
                 }
 
 
