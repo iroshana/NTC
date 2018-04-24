@@ -17,13 +17,15 @@ namespace NTC.API.Controllers
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _common;
         private readonly IDeMeritService _demerit;
+        private readonly IComplainService _complain;
 
-        public MemberController(IMemberService member, IEventLogService eventLog, ICommonDataService common, IDeMeritService demerit)
+        public MemberController(IMemberService member, IEventLogService eventLog, ICommonDataService common, IDeMeritService demerit, IComplainService complain)
         {
             _member = member;
             _eventLog = eventLog;
             _common = common;
             _demerit = demerit;
+            _complain = complain;
         }
         #region GetMember
         [HttpGet]
@@ -31,7 +33,8 @@ namespace NTC.API.Controllers
         {
             try
             {
-                int point = 0;
+                int redNoticePoint = 0;
+                int bestMemberPoint = 0;
                 MemberViewModel memberView = new MemberViewModel();
                 Member member = new Member();
                 member = _member.GetMember(Id);
@@ -46,11 +49,21 @@ namespace NTC.API.Controllers
                         {
                             if (mem.Merit.ColorCodeId == 1)
                             {
-                                point += mem.Point;
+                                redNoticePoint += mem.Point;
                             }
                         }
                     }
+                    foreach (DeMerit de in demerit)
+                    {
+                        foreach (MemberDeMerit mem in de.MemberDeMerits)
+                        {
+                            bestMemberPoint += mem.Point;
+                        }
+                    }
                 }
+
+                IEnumerable<Complain> complains = new List<Complain>();
+                complains = _complain.GetAll(x=> x.ComplainStatus == "Unresolved" && (x.DriverId == Id || x.ConductorId == Id)).ToList();
                 
                 if (member != null)
                 {
@@ -71,8 +84,12 @@ namespace NTC.API.Controllers
                     memberView.educationQuali = String.IsNullOrEmpty(member.HighestEducation) ? String.Empty : member.HighestEducation;
                     memberView.type = member.MemberType.Code;
                     memberView.imagePath = member.ImagePath;
-                    memberView.isNotification1 = point > 0 ? true : false;
-                    memberView.notification1 = point > 0 ? "Red Noticed Driver" : String.Empty;
+                    memberView.isNotification1 = redNoticePoint > 2 ? true : false;
+                    memberView.notification1 = redNoticePoint > 2 ? "Red Noticed " + member.MemberType.Code : String.Empty;
+                    memberView.isNotification2 = bestMemberPoint < 2 && memberView.isNotification1  == false ? true : false;
+                    memberView.notification2 = bestMemberPoint < 2 && memberView.isNotification1 == false ? "Best " + member.MemberType.Code : String.Empty;
+                    memberView.isNotification3 = complains.Count() > 0 && complains != null? true : false;
+                    memberView.notification3 = complains.Count() > 0 && complains != null ? complains.Count() + " Unresolved Complains" : String.Empty;
                 }
 
 
