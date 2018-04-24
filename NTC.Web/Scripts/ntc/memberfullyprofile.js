@@ -34,7 +34,13 @@ var MemberDetails = new Vue({
             dateJoin: '',
             image: {},
             imagePath: "",
-            type: ''
+            type: '',
+            isNotification1: false,
+            isNotification2: false,
+            isNotification3: false,
+            notification1:'',
+            notification2:'',
+            notification3:''
         },
         complainNo: '',
         complainList: [],

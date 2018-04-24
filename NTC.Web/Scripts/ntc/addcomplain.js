@@ -132,7 +132,9 @@ var AddComplain = new Vue({
                     msgAlert.alertMessage = "Complain Save Successfully. Thank You";
                     msgAlert.showModal();
                     var memberId = getUrlParameter("memberId");
-                    if (memberId != 'undefined') {
+                    if (memberId == undefined) {
+                        $(location).attr('href', webURL + 'OnlineForm/Complain');
+                    } else {
                         $(location).attr('href', webURL + 'DriverConductor/MemeberFullProfile?memberId=' + memberId);
                     }
                     

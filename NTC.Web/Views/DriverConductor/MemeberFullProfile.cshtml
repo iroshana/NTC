@@ -30,6 +30,11 @@
                                 </div>
                             </div>
                             <br />
+                            <div class="row">
+                                <span v-show="memeber.isNotification1" class="red"><strong>{{memeber.notification1}}</strong></span><br />
+                                <span v-show="memeber.isNotification2" class="blue"><strong>{{memeber.notification2}}</strong></span><br />
+                                <span v-show="memeber.isNotification3" class="green"><strong>{{memeber.notification3}}</strong></span>
+                            </div>
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <div class="x_content">
