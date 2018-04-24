@@ -106,7 +106,7 @@ var AddComplain = new Vue({
             if (this.complainVm.isEvidenceHave) {
                 var formData = new FormData();
                 formData.append('UploadedImage', this.complainVm.file);
-                formData.append('nic', this.complainVm.memberId);
+                formData.append('nic', this.complainVm.complainNo);
                 formData.append('uploadedFileName', "");
                 formData.append('fileExtension', '.png');
                 formData.append('imageFolder', "Evidence");  
@@ -125,8 +125,6 @@ var AddComplain = new Vue({
             }           
         },
         complainSave: function(){
-
-
              $('#spinner').css("display", "block");
             this.$http.post(apiURL + 'api/Complain/AddComplain', this.complainVm).then(function (response) {
                 if (response.body.messageCode.code == 1) {                    
