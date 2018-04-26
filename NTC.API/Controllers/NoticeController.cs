@@ -209,6 +209,7 @@ namespace NTC.API.Controllers
         }
         #endregion
 
+
         #region SentMemberNotice
         [HttpGet]
         public IHttpActionResult SentMemberNotice(int noticeId)

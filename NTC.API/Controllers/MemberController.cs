@@ -356,14 +356,14 @@ namespace NTC.API.Controllers
                 List<MemberEntityViewModel> memberListConductor = new List<MemberEntityViewModel>();
                 IEnumerable<MemberEntityModel> members = new List<MemberEntityModel>();
                 
-                members = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, type);
+                //members = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, type);
                 if (isMonth)
                 {
-                    members = members.Where(x => x.Total.Value <= 2).ToList();
+                    members = _member.GetBestMembersSP(date.AddMonths(-1), date, type);
                 }
                 else
                 {
-                    members = members.Where(x => x.Total.Value <= 2).ToList();
+                    members = _member.GetBestMembersSP(date.AddYears(-1), date, type);
                 }
                 
                 if (members != null)
