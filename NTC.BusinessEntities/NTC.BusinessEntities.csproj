@@ -131,6 +131,10 @@
     <Compile Include="Migrations\201804220921277_complainchange1.Designer.cs">
       <DependentUpon>201804220921277_complainchange1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804260222248_IsGeneratNotice.cs" />
+    <Compile Include="Migrations\201804260222248_IsGeneratNotice.Designer.cs">
+      <DependentUpon>201804260222248_IsGeneratNotice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MemberNotice.cs" />
     <Compile Include="Evidence.cs" />
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804220921277_complainchange1.resx">
       <DependentUpon>201804220921277_complainchange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804260222248_IsGeneratNotice.resx">
+      <DependentUpon>201804260222248_IsGeneratNotice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

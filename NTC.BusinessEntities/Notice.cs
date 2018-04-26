@@ -19,6 +19,7 @@ namespace NTC.BusinessEntities
         public string Type { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool IsSent { get; set; }
+        public bool IsGeneratNotice { get; set; }
         public virtual ICollection<MemberNotice> MemberNotices { get; set; }
 
     }

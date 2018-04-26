@@ -21,13 +21,15 @@ namespace NTC.API.Controllers
         private readonly IReportService _report;
         private readonly IComplainService _complain;
         private readonly IExelReportService _exel;
-        public ReportController(IEventLogService eventLog, ICommonDataService common, IReportService report,IComplainService complain, IExelReportService exel)
+        private readonly IMemberService _member;
+        public ReportController(IEventLogService eventLog, ICommonDataService common, IReportService report,IComplainService complain, IExelReportService exel, IMemberService member)
         {
             _eventLog = eventLog;
             _common = common;
             _report = report;
             _complain = complain;
             _exel = exel;
+            _member = member;
         }
 
         #region GetDemeritReports
@@ -88,8 +90,8 @@ namespace NTC.API.Controllers
                             if (category.IsSelected == true)
                             {
                                 ComplainReportViewModel complainView = new ComplainReportViewModel();
-                                complainView.driverName = complain.Member.FullName;
-                                complainView.ntcNo = complain.Member.NTCNo;
+                                complainView.driverName = complain.DriverId == null ? complain.ConductorId == null ? String.Empty : _member.GetMember(complain.ConductorId.Value).FullName : _member.GetMember(complain.DriverId.Value).FullName; ;
+                                complainView.ntcNo = complain.DriverId == null ? complain.ConductorId == null ? String.Empty : _member.GetMember(complain.ConductorId.Value).NTCNo : _member.GetMember(complain.DriverId.Value).NTCNo ;
                                 complainView.complain = String.IsNullOrEmpty(category.Category.Description) ? String.Empty : category.Category.Description;
                                 complainView.complainStatus = complain.ComplainStatus;
 

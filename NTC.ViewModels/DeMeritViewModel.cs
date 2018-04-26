@@ -67,6 +67,7 @@ namespace NTC.ViewModels
         public int id { get; set; }
         public string name { get; set; }
         public string ntcNo { get; set; }
+        public int point { get; set; }
     }
 
     public class DeMeritMemberTypeViewModel

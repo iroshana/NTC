@@ -43,28 +43,28 @@ namespace NTC.API.Controllers
                 drivers = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 1);
                 if (drivers != null)
                 {
-                    bestdriversofMonth = drivers.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
+                    bestdriversofMonth = drivers.Where(x => x.Total.Value <= 2).ToList().Count();
                 }
 
                 IEnumerable<MemberEntityModel> conductors = new List<MemberEntityModel>();
                 conductors = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 2);
                 if (conductors != null)
                 {
-                    bestConductorsofMonth = conductors.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count(); 
+                    bestConductorsofMonth = conductors.Where(x => x.Total.Value <= 2).ToList().Count(); 
                 }
 
                 IEnumerable<MemberEntityModel> drivers1 = new List<MemberEntityModel>();
                 drivers1 = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 1);
                 if (drivers1 != null)
                 {
-                    bestdriversofYear = drivers1.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
+                    bestdriversofYear = drivers1.Where(x => x.Total.Value <= 2).ToList().Count();
                 }
 
                 IEnumerable<MemberEntityModel> conductors1 = new List<MemberEntityModel>();
                 conductors1 = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, 2);
                 if (conductors1 != null)
                 {
-                    bestConductorsofYear = conductors1.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Value.Date <= DateTime.Now.Date)).ToList().Count();
+                    bestConductorsofYear = conductors1.Where(x => x.Total.Value <= 2).ToList().Count();
                 }
 
                 if (dashboard != null)

@@ -18,13 +18,14 @@ namespace NTC.API.Controllers
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _common;
         private readonly IMemberNoticeService _memberNotice;
-
-        public NoticeController(IMemberNoticeService memberNotice,INoticeService notice, IEventLogService eventLog, ICommonDataService common)
+        private readonly IMemberService _member;
+        public NoticeController(IMemberNoticeService memberNotice, INoticeService notice, IEventLogService eventLog, ICommonDataService common, IMemberService member)
         {
             _notice = notice;
             _eventLog = eventLog;
             _common = common;
             _memberNotice = memberNotice;
+            _member = member;
         }
 
         #region GetAllNotices
@@ -50,7 +51,7 @@ namespace NTC.API.Controllers
 
                             noticeListVM.Add(noticeVM);
                         }
-                        
+
                     }
                 }
 
@@ -83,6 +84,7 @@ namespace NTC.API.Controllers
                     notice.Type = noticeView.Type;
                     notice.IsSent = false;
                     notice.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                    notice.IsGeneratNotice = noticeView.memberId == 0 ? true : false;
 
                     if (noticeView.memberId != 0)
                     {
@@ -94,7 +96,7 @@ namespace NTC.API.Controllers
                         note.IsSent = false;
                         notice.MemberNotices.Add(note);
                     }
-                    notice = _notice.Add(notice,out errorMessage);
+                    notice = _notice.Add(notice, out errorMessage);
 
                 }
                 var messageData = new
@@ -103,7 +105,7 @@ namespace NTC.API.Controllers
                    ,
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
-                var returnObject = new { messageCode = messageData , noticeId = notice.ID};
+                var returnObject = new { messageCode = messageData, noticeId = notice.ID };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -189,7 +191,7 @@ namespace NTC.API.Controllers
 
                             noticeListVM.Add(noticeVM);
                         }
-                        
+
                     }
                 }
 
@@ -214,12 +216,17 @@ namespace NTC.API.Controllers
             try
             {
                 string errorMessage = String.Empty;
-                MemberNotice notice = _memberNotice.GetAll(x=>x.ID == noticeId).FirstOrDefault();
+                Notice notice = new Notice();
+                notice = _notice.GetAll(x => x.ID == noticeId && x.IsGeneratNotice == true).FirstOrDefault();
                 notice.IsSent = true;
-                _memberNotice.UpdateMemberNotice(notice, out errorMessage);
+                _notice.UpdaterNotice(notice, out errorMessage);
+
+                MemberNotice noticemem = _memberNotice.GetAll(x => x.ID == noticeId).FirstOrDefault();
+                noticemem.IsSent = true;
+                _memberNotice.UpdateMemberNotice(noticemem, out errorMessage);
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new {messageCode = messageData };
+                var returnObject = new { messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -240,16 +247,20 @@ namespace NTC.API.Controllers
             {
                 string errorMessage = String.Empty;
                 Notice notice = new Notice();
-                notice = _notice.GetAll(x=>x.ID == noticeId).FirstOrDefault();
+                notice = _notice.GetAll(x => x.ID == noticeId && x.IsGeneratNotice == true).FirstOrDefault();
                 notice.IsSent = true;
 
                 _notice.UpdaterNotice(notice, out errorMessage);
-
-                MemberNotice notice1 = _memberNotice.GetAll(x => x.ID == noticeId && x.IsSent == false).FirstOrDefault();
-                if (notice1 != null)
+                IEnumerable<Member> members = _member.GetAll().ToList();
+                foreach (Member member in members)
                 {
-                    notice1.IsSent = true;
-                    _memberNotice.UpdateMemberNotice(notice1, out errorMessage);
+                    MemberNotice noticeVM = new MemberNotice();
+                    noticeVM.MemberId = member.ID;
+                    noticeVM.NoticeId = notice.ID;
+                    noticeVM.IsSent = true;
+                    noticeVM.IsOpened = false;
+
+                    _memberNotice.Add(noticeVM);
                 }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };

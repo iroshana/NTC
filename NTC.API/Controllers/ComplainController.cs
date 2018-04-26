@@ -382,6 +382,7 @@ namespace NTC.API.Controllers
             try
             {
                 List<CategoryViewModel> categoryList = new List<CategoryViewModel>();
+                List<ComplainDescViewModel> complainDesc = new List<ComplainDescViewModel>();
                 IEnumerable<Complain> complains = new List<Complain>();
                 complains = _complain.GetAllComplains(memberId);
                 if (complains != null)
@@ -400,11 +401,17 @@ namespace NTC.API.Controllers
                                 categoryList.Add(complainCategory);
                             }
                         }
+
+                        ComplainDescViewModel desc = new ComplainDescViewModel();
+                        desc.id = complain.ID;
+                        desc.complainNo = complain.ComplainNo;
+                        desc.description = String.IsNullOrEmpty(complain.Description) ? String.Empty : complain.Description;
+
+                        complainDesc.Add(desc);
                     }
                 }
-
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { complainsCategory = categoryList, messageCode = messageData };
+                var returnObject = new { complainsCategory = categoryList, complainsDescList = complainDesc, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)

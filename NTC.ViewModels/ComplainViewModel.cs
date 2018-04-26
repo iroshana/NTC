@@ -74,6 +74,13 @@ namespace NTC.ViewModels
         public string description { get; set; }
         public bool isSelected { get; set; }
     }
+
+    public class ComplainDescViewModel
+    {
+        public int id { get; set; }
+        public string complainNo { get; set; }
+        public string description { get; set; }
+    }
     public class ComplainDropDownViewModel
     {
         public int id { get; set; }

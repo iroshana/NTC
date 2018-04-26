@@ -359,11 +359,11 @@ namespace NTC.API.Controllers
                 members = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, type);
                 if (isMonth)
                 {
-                    members = members.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= date.Date.AddMonths(-1) && x.CreatedDate.Value.Date <= date.Date)).ToList();
+                    members = members.Where(x => x.Total.Value <= 2).ToList();
                 }
                 else
                 {
-                    members = members.Where(x => x.CreatedDate == null || (x.Total.Value <= 2 && x.CreatedDate.Value.Date >= date.Date.AddYears(-1) && x.CreatedDate.Value.Date <= date.Date)).ToList();
+                    members = members.Where(x => x.Total.Value <= 2).ToList();
                 }
                 
                 if (members != null)

@@ -133,7 +133,7 @@ namespace NTC.API.Controllers
                     deMerit.BusId = deMeritView.bus.id;
                     deMerit.RouteId = deMeritView.route.id;
                     deMerit.OfficeriId = deMeritView.officer.id;
-                    deMerit.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                    deMerit.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now.Date, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                     deMerit.MemberDeMerits = new List<MemberDeMerit>();
                     foreach (MemberDeMeritViewModel memberDemerit in deMeritView.memberDeMerit)
                     {
@@ -299,18 +299,23 @@ namespace NTC.API.Controllers
                                 {
                                     case 1:
                                         var a = deMeritMemType.driver.cancel.Find(x => x.id == demerit.Member.ID);
-                                        if (a == null && mem.Point > 2)
+                                        if (a == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.driver.cancel.Add(ad);
+                                        }
+                                        else if(a != null)
+                                        {
+                                            a.point += mem.Point;
                                         }
                                         break;
                                     case 2:
                                         var b = deMeritMemType.driver.adPannel.Find(x => x.id == demerit.Member.ID);
-                                        if (b == null && mem.Point > 2)
+                                        if (b == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -318,10 +323,14 @@ namespace NTC.API.Controllers
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
+                                        else if(b != null)
+                                        {
+                                            b.point += mem.Point;
+                                        }
                                         break;
                                     case 3:
                                         var c = deMeritMemType.driver.punish.Find(x => x.id == demerit.Member.ID);
-                                        if (c == null && mem.Point > 2)
+                                        if (c == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -329,16 +338,24 @@ namespace NTC.API.Controllers
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
+                                        else if(c != null)
+                                        {
+                                            c.point += mem.Point;
+                                        }
                                         break;
                                     case 4:
                                         var d = deMeritMemType.driver.finePay.Find(x => x.id == demerit.Member.ID);
-                                        if (d == null && mem.Point > 2)
+                                        if (d == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.driver.finePay.Add(ad);
+                                        }
+                                        else if(d != null)
+                                        {
+                                            d.point += mem.Point;
                                         }
                                         break;
                                     default:
@@ -350,7 +367,7 @@ namespace NTC.API.Controllers
                                 {
                                     case 1:
                                         var a = deMeritMemType.conductor.cancel.Find(x => x.id == demerit.Member.ID);
-                                        if (a == null && mem.Point > 2)
+                                        if (a == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -358,10 +375,14 @@ namespace NTC.API.Controllers
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.cancel.Add(ad);
                                         }
+                                        else if (a != null)
+                                        {
+                                            a.point += mem.Point;
+                                        }
                                         break;
                                     case 2:
                                         var b = deMeritMemType.conductor.adPannel.Find(x => x.id == demerit.Member.ID);
-                                        if (b == null && mem.Point > 2)
+                                        if (b == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -369,10 +390,14 @@ namespace NTC.API.Controllers
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.adPannel.Add(ad);
                                         }
+                                        else if (b != null)
+                                        {
+                                            b.point += mem.Point;
+                                        }
                                         break;
                                     case 3:
                                         var c = deMeritMemType.conductor.punish.Find(x => x.id == demerit.Member.ID);
-                                        if (c == null && mem.Point > 2)
+                                        if (c == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
@@ -380,16 +405,24 @@ namespace NTC.API.Controllers
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.punish.Add(ad);
                                         }
+                                        else if (c != null)
+                                        {
+                                            c.point += mem.Point;
+                                        }
                                         break;
                                     case 4:
                                         var d = deMeritMemType.conductor.finePay.Find(x => x.id == demerit.Member.ID);
-                                        if (d == null && mem.Point > 2)
+                                        if (d == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             deMeritMemType.conductor.finePay.Add(ad);
+                                        }
+                                        else if(d != null)
+                                        {
+                                            d.point += mem.Point;
                                         }
                                         break;
                                     default:
@@ -400,6 +433,15 @@ namespace NTC.API.Controllers
                         }
                     }
                 }
+                deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point >= 2).ToList();
+
+                deMeritMemType.conductor.adPannel = deMeritMemType.conductor.adPannel.Where(x => x.point > 2).ToList();
+                deMeritMemType.conductor.finePay = deMeritMemType.conductor.finePay.Where(x => x.point > 2).ToList();
+                deMeritMemType.conductor.punish = deMeritMemType.conductor.punish.Where(x => x.point > 2).ToList();
+                deMeritMemType.conductor.cancel = deMeritMemType.conductor.cancel.Where(x => x.point > 2).ToList();
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { merits = deMeritMemType, messageCode = messageData };

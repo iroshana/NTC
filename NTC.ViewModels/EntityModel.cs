@@ -29,7 +29,7 @@ namespace NTC.ViewModels
         public string NIC { get; set; }
         public string NTCNo { get; set; }
         public string Code { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        //public DateTime? CreatedDate { get; set; }
     }
 
     public class MeritReportEntityModel

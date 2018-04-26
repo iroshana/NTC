@@ -53,7 +53,7 @@ namespace NTC.Services
         {
             try
             {
-                return base.GetAll(x=>x.IsSent == false).ToList();
+                return base.GetAll(x => x.IsSent == false && x.IsGeneratNotice == true).ToList();
             }
             catch (Exception ex)
             {
