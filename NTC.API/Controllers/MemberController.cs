@@ -355,20 +355,52 @@ namespace NTC.API.Controllers
                 List<MemberEntityViewModel> memberListDriver = new List<MemberEntityViewModel>();
                 List<MemberEntityViewModel> memberListConductor = new List<MemberEntityViewModel>();
                 IEnumerable<MemberEntityModel> members = new List<MemberEntityModel>();
-                
+
                 //members = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, type);
-                if (isMonth)
+                List<Member> membesDateList = new List<Member>();
+                IEnumerable<Member> memberList = new List<Member>();
+                memberList = _member.GetAll(z=>z.TypeId == type).ToList();
+                foreach (Member mem in memberList)
                 {
-                    members = _member.GetBestMembersSP(date.AddMonths(-1), date, type);
+                    int point = 0;
+                    IEnumerable<DeMerit> memberDe = _demerit.GetAll(x => x.MemberId == mem.ID).ToList();
+                    if (isMonth)
+                    {
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= date.Date.AddMonths(-1) && x.CreatedDate.Date <= date.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                membesDateList.Add(mem);
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            membesDateList.Add(mem);
+                        }
+                    }
+                    else
+                    {
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= date.Date.AddYears(-1) && x.CreatedDate.Date <= date.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                membesDateList.Add(mem);
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            membesDateList.Add(mem);
+                        }
+                    }
+                   
                 }
-                else
-                {
-                    members = _member.GetBestMembersSP(date.AddYears(-1), date, type);
-                }
-                
                 if (members != null)
                 {
-                    foreach (MemberEntityModel member in members)
+                    foreach (Member member in membesDateList)
                     {
                         MemberEntityViewModel memberView = new MemberEntityViewModel();
 
@@ -378,9 +410,9 @@ namespace NTC.API.Controllers
                         memberView.trainingCenter = String.IsNullOrEmpty(member.TrainingCenter) ? String.Empty : member.TrainingCenter;
                         memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
                         memberView.ntcNo = String.IsNullOrEmpty(member.NTCNo) ? String.Empty : member.NTCNo;
-                        memberView.typeCode = member.Code;
-                        memberView.total = member.Total == null ? 0 : member.Total.Value;
-                        if (member.Code == "Driver")
+                        memberView.typeCode = member.MemberType.Code;
+                        //memberView.total = member.Total == null ? 0 : member.Total.Value;
+                        if (member.MemberType.Code == "Driver")
                         {
                             memberListDriver.Add(memberView);
                         }

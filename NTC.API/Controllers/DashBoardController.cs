@@ -1,4 +1,5 @@
-﻿using NTC.InterfaceServices;
+﻿using NTC.BusinessEntities;
+using NTC.InterfaceServices;
 using NTC.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,14 @@ namespace NTC.API.Controllers
         private readonly IEventLogService _eventLog;
         private readonly ICommonDataService _common;
         private readonly IMemberService _member;
+        private readonly IDeMeritService _demerit;
 
-        public DashBoardController(IEventLogService eventLog, ICommonDataService common, IMemberService member)
+        public DashBoardController(IEventLogService eventLog, ICommonDataService common, IMemberService member, IDeMeritService demerit)
         {
             _eventLog = eventLog;
             _common = common;
             _member = member;
+            _demerit = demerit;
         }
         #region GetDashboardCounts
         [HttpGet]
@@ -33,7 +36,96 @@ namespace NTC.API.Controllers
                 DashBoardEntityModel dashboard = new DashBoardEntityModel();
                 
                 dashboard = _common.GetDashBoardCounts();
-                
+
+                int BestDriverMonth = 0;
+                int BestDriverYear = 0;
+                int BestConductorMonth = 0;
+                int BestConductorYear = 0;
+
+
+                List<Member> membesDateList = new List<Member>();
+                IEnumerable<Member> memberList = new List<Member>();
+                memberList = _member.GetAll().ToList();
+
+                foreach (Member mem in memberList)
+                {
+                    if (mem.MemberType.Code == "Driver")
+                    {
+                        int point = 0;
+                        IEnumerable<DeMerit> memberDe = _demerit.GetAll(x => x.MemberId == mem.ID).ToList();
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Date <= DateTime.Now.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                BestDriverMonth++;
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            BestDriverMonth++;
+                        }
+                    }
+                    else
+                    {
+                        int point = 0;
+                        IEnumerable<DeMerit> memberDe = _demerit.GetAll(x => x.MemberId == mem.ID).ToList();
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Date <= DateTime.Now.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                BestConductorMonth++;
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            BestConductorMonth++;
+                        }
+                    }
+                }
+                foreach (Member mem in memberList)
+                {
+                    if (mem.MemberType.Code == "Driver")
+                    {
+                        int point = 0;
+                        IEnumerable<DeMerit> memberDe = _demerit.GetAll(x => x.MemberId == mem.ID).ToList();
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Date <= DateTime.Now.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                BestDriverYear++;
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            BestDriverYear++;
+                        }
+                    }
+                    else
+                    {
+                        int point = 0;
+                        IEnumerable<DeMerit> memberDe = _demerit.GetAll(x => x.MemberId == mem.ID).ToList();
+                        memberDe = memberDe.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddYears(-1) && x.CreatedDate.Date <= DateTime.Now.Date).ToList();
+                        foreach (DeMerit mer in memberDe)
+                        {
+                            point += mer.MemberDeMerits.Sum(x => x.Point);
+                            if (point < 2)
+                            {
+                                BestConductorYear++;
+                            }
+                        }
+                        if (memberDe.Count() == 0)
+                        {
+                            BestConductorYear++;
+                        }
+                    }
+                }
+
                 if (dashboard != null)
                 {
                     
@@ -44,10 +136,10 @@ namespace NTC.API.Controllers
                     dashboardView.redNoticeConductors = dashboard.RedNoticeConductors;
                     dashboardView.redNoticeDrivers = dashboard.RedNoticeDrivers;
                     dashboardView.redNoticeMembers = dashboard.RedNoticeMembers;
-                    dashboardView.bestdriversofYear = dashboard.BestDriverYear;
-                    dashboardView.bestConductorsofYear = dashboard.BestConductorYear;
-                    dashboardView.bestdriversofMonth = dashboard.BestDriverMonth;
-                    dashboardView.bestConductorsofMonth = dashboard.BestConductorMonth;
+                    dashboardView.bestdriversofYear = BestDriverYear;
+                    dashboardView.bestConductorsofYear = BestConductorYear;
+                    dashboardView.bestdriversofMonth = BestDriverMonth;
+                    dashboardView.bestConductorsofMonth = BestConductorMonth;
                 }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };

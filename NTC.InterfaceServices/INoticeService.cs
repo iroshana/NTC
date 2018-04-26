@@ -12,5 +12,6 @@ namespace NTC.InterfaceServices
         Notice Add(Notice notice, out string errorMessage);
         IEnumerable<Notice> GetAllNotices();
         void UpdaterNotice(Notice notice, out string errorMessage);
+        IEnumerable<Notice> GetAllGeneralNotices(bool isSent, bool isGeneral);
     }
 }

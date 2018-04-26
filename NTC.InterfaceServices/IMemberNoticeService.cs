@@ -9,7 +9,7 @@ namespace NTC.InterfaceServices
 {
     public interface IMemberNoticeService: IEntityService<MemberNotice>
     {
-        IEnumerable<MemberNotice> GetAllMemeberNotice(int memberId);
+        IEnumerable<MemberNotice> GetAllMemeberNotice(int memberId, bool isSent, bool isOpen);
         void UpdateMemberNotice(MemberNotice notice, out string errorMessage);
     }
 }

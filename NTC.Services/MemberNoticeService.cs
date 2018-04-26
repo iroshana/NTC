@@ -28,11 +28,11 @@ namespace NTC.Services
             }
         }
 
-        public IEnumerable<MemberNotice> GetAllMemeberNotice(int memberId)
+        public IEnumerable<MemberNotice> GetAllMemeberNotice(int memberId,bool isSent,bool isOpen)
         {
             try
             {
-                return base.GetAll(x => x.MemberId == memberId && x.IsSent == false).ToList();
+                return base.GetAll(x => x.MemberId == memberId && x.IsSent == isSent && x.IsOpened == isOpen).ToList();
             }
             catch (Exception ex)
             {

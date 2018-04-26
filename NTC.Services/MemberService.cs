@@ -129,25 +129,5 @@ namespace NTC.Services
                 throw;
             }
         }
-
-        public IEnumerable<MemberEntityModel> GetBestMembersSP(DateTime fromDate, DateTime toDate, int type)
-        {
-            try
-            {
-                string errorMessage = String.Empty;
-                object[] param = {
-                        new SqlParameter("@createdDateFrom", fromDate.ToString(@"yyyy-MM-dd 00:00:01")),
-                        new SqlParameter("@createdDateTo", toDate.ToString(@"yyyy-MM-dd 23:59:59")),
-                        new SqlParameter("@typeId", type)
-                };
-                return _memberEntityRepository.ExecuteStoredProcedure("dbo.GetBestMembers @createdDateFrom, @createdDateTo, @typeId", param).ToList();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
     }
 }

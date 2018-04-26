@@ -75,5 +75,18 @@ namespace NTC.Services
                 throw ex;
             }
         }
+
+        public IEnumerable<Notice> GetAllGeneralNotices(bool isSent,bool isGeneral)
+        {
+            try
+            {
+                return base.GetAll(x => x.IsSent == isSent && x.IsGeneratNotice == isGeneral).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -15,10 +15,6 @@ namespace NTC.ViewModels
         public int RedNoticeMembers { get; set; }
         public string HighestDriverComplain { get; set; }
         public string HighestConductorComplain { get; set; }
-        public int BestConductorYear { get; set; }
-        public int BestDriverYear { get; set; }
-        public int BestConductorMonth { get; set; }
-        public int BestDriverMonth { get; set; }
     }
 
     
