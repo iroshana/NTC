@@ -18,13 +18,14 @@ namespace NTC.API.Controllers
         private readonly ICommonDataService _common;
         private readonly IMemberService _member;
         private readonly IDeMeritService _demerit;
-
-        public DashBoardController(IEventLogService eventLog, ICommonDataService common, IMemberService member, IDeMeritService demerit)
+        private readonly IComplainService _complain;
+        public DashBoardController(IEventLogService eventLog, ICommonDataService common, IMemberService member, IDeMeritService demerit, IComplainService complain)
         {
             _eventLog = eventLog;
             _common = common;
             _member = member;
             _demerit = demerit;
+            _complain = complain;
         }
         #region GetDashboardCounts
         [HttpGet]
@@ -59,12 +60,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                BestDriverMonth++;
+                                if(_complain.GetAll(x=>x.DriverId == mem.ID).Count() < 1)
+                                {
+                                    BestDriverMonth++;
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            BestDriverMonth++;
+                            if (_complain.GetAll(x => x.DriverId == mem.ID).Count() < 1)
+                            {
+                                BestDriverMonth++;
+                            }
                         }
                     }
                     else
@@ -77,12 +84,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                BestConductorMonth++;
+                                if (_complain.GetAll(x => x.ConductorId == mem.ID).Count() < 1)
+                                {
+                                    BestConductorMonth++;
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            BestConductorMonth++;
+                            if (_complain.GetAll(x => x.ConductorId == mem.ID).Count() < 1)
+                            {
+                                BestConductorMonth++;
+                            }
                         }
                     }
                 }

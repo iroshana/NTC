@@ -84,8 +84,8 @@ namespace NTC.API.Controllers
                     memberView.educationQuali = String.IsNullOrEmpty(member.HighestEducation) ? String.Empty : member.HighestEducation;
                     memberView.type = member.MemberType.Code;
                     memberView.imagePath = member.ImagePath;
-                    memberView.isNotification1 = redNoticePoint > 2 ? true : false;
-                    memberView.notification1 = redNoticePoint > 2 ? "Red Noticed " + member.MemberType.Code : String.Empty;
+                    memberView.isNotification1 = redNoticePoint >= 2 ? true : false;
+                    memberView.notification1 = redNoticePoint >= 2 ? "Red Noticed " + member.MemberType.Code : String.Empty;
                     memberView.isNotification2 = bestMemberPoint < 2 && memberView.isNotification1  == false ? true : false;
                     memberView.notification2 = bestMemberPoint < 2 && memberView.isNotification1 == false ? "Best " + member.MemberType.Code : String.Empty;
                     memberView.isNotification3 = complains.Count() > 0 && complains != null? true : false;
@@ -372,12 +372,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                membesDateList.Add(mem);
+                                if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                                {
+                                    membesDateList.Add(mem);
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            membesDateList.Add(mem);
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            {
+                                membesDateList.Add(mem);
+                            }
                         }
                     }
                     else
@@ -388,12 +394,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                membesDateList.Add(mem);
+                                if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                                {
+                                    membesDateList.Add(mem);
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            membesDateList.Add(mem);
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            {
+                                membesDateList.Add(mem);
+                            }
                         }
                     }
                    
