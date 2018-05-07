@@ -115,10 +115,10 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Evidence for complain</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <div id="item-img" v-show="!isResultShow"></div>
-                                            <div id="item-img-result" v-show="isResultShow" class="mg-t-10"></div>
+                                            @*<div id="item-img" v-show="!isResultShow"></div>
+                                            <div id="item-img-result" v-show="isResultShow" class="mg-t-10"></div>*@
                                             <input id="evidence" type="file" class="form-control">
-                                            <button type="button" id="cropImage" class="btn btn-default"><i class="fa fa-crop"></i>  Crop</button>
+                                            @*<button type="button" id="cropImage" class="btn btn-default"><i class="fa fa-crop"></i>  Crop</button>*@
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                 <div class="form-group">
                                     <div class="col-md-4"><label class="control-label">Complain Description</label></div>
                                     <div class="col-md-7 col-sm-7">
-                                        <textarea type="text" class="form-control" placeholder="Enter Complain Description" rows="3"></textarea>
+                                        <textarea type="text" class="form-control" placeholder="Enter Complain Description" rows="3" v-model="complainVm.description"></textarea>
                                     </div>
                                 </div>
                             </div>

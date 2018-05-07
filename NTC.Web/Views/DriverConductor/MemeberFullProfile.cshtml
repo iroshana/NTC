@@ -286,27 +286,47 @@
                                                     <br />
                                                     <button class="btn btn-primary" v-on:click="complainActionAdminChange(statusComplain)">Change Status</button>
                                                 </div>
-                                                                                                
+                                                
                                                 <div class="form-group" v-show="isComplainShow">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complains Category</label>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Complains Description</label>
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <table class="table table-hover table-bordered">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Category No</th>
+                                                                    <th>Complain No</th>
                                                                     <th>Description</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr v-for="cat in complainsCategory">
-                                                                    <td>{{ cat.categoryNo}}</td>
+                                                                <tr v-for="cat in complainDescList">
+                                                                    <td>{{ cat.complainNo}}</td>
                                                                     <td>{{ cat.description}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                    <br />
+                                                    <div class="form-group" v-show="isComplainShow">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Complains Category</label>
+                                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                                            <table class="table table-hover table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Category No</th>
+                                                                        <th>Description</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr v-for="cat in complainsCategory">
+                                                                        <td>{{ cat.categoryNo}}</td>
+                                                                        <td>{{ cat.description}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <!--End Complain-->
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="demerit">

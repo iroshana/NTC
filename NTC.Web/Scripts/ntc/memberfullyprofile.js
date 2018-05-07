@@ -51,6 +51,7 @@ var MemberDetails = new Vue({
         },
         isComplainShow: false,
         complainsCategory: [],
+        complainDescList: [],
         deMeritRecordList: [],
         deMeritMgt: { id: '', memberDeMerit: [] },
         demeritNo: '',
@@ -323,6 +324,7 @@ var MemberDetails = new Vue({
             }).then(function (response) {
                 if (response.body.messageCode.code == 1) {
                     this.complainsCategory = response.body.complainsCategory;
+                    this.complainDescList = response.body.complainsDescList;
                     this.isComplainShow = true;
                 } else {
                     msgAlert.isSuccess = false;

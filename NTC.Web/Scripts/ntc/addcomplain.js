@@ -100,28 +100,51 @@ var AddComplain = new Vue({
         removeElement: function (array, element) {
             return array.filter(e => e !== element);
         },
+        getFileExtension1: function (filename) {
+            return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : undefined;
+        },
         addComplain: function () {
             this.complainVm.Category = this.categoryList;
 
             if (this.complainVm.isEvidenceHave) {
                 var formData = new FormData();
-                formData.append('UploadedImage', this.complainVm.file);
+                var file = $('#evidence')[0];
+                formData.append('file', file.files[0]);
+                formData.append('UploadedImage', file.files[0]);
                 formData.append('nic', this.complainVm.complainNo);
                 formData.append('uploadedFileName', "");
-                formData.append('fileExtension', '.png');
-                formData.append('imageFolder', "Evidence");  
+                formData.append('fileExtension', this.getFileExtension1(file.files[0].name));
+                formData.append('imageFolder', "Evidence");
+                $.ajax({
+                    url: apiURL + '/api/DocumentUpload/MediaUpload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        AddComplain.complainVm.evidence.filePath = data.filesData[0].filePath;
+                        this.complainSave();
+                    },
+                    error: function () {
+                        alert('Some thing went wrong');
+                    }
+                });
                 
-                this.$http.post(apiURL + '/api/DocumentUpload/MediaUpload', formData).then(function (response) {
-                            if (response.body.messageCode.code == 1) {
-                                this.complainVm.evidence.filePath = response.body.filesData[0].filePath;
-                                this.complainSave();
-                            }
-                            else {
+                //this.$http.post(apiURL + '/api/DocumentUpload/MediaUpload', formData).then(function (response) {
+                //            if (response.body.messageCode.code == 1) {
+                //                this.complainVm.evidence.filePath = response.body.filesData[0].filePath;
+                //                this.complainSave();
+                //            }
+                //            else {
 
-                            }
-                        }); 
-            } else {
-                this.complainSave();
+                //            }
+                //        }); 
+            }
+            else {
+                //this.complainSave();
+                msgAlert.isSuccess = false;
+                msgAlert.alertMessage = "Evidence is Required";
+                msgAlert.showModal();
             }           
         },
         complainSave: function(){
