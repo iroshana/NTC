@@ -148,12 +148,12 @@ namespace NTC.API.Controllers
                         {
                             demerit.Point = 0;
                         }
-                        
+
 
                         deMerit.MemberDeMerits.Add(demerit);
                     }
 
-                    _deMerit.Add(deMerit,out errorMessage);
+                    _deMerit.Add(deMerit, out errorMessage);
 
                 }
                 else
@@ -309,9 +309,10 @@ namespace NTC.API.Controllers
                                             ad.meritId = mem.MeritId;
                                             deMeritMemType.driver.cancel.Add(ad);
                                         }
-                                        else if(a != null && mem.Point > 0)
+                                        else if (a != null && mem.Point > 0)
                                         {
                                             a.point += mem.Point;
+                                            
                                         }
                                         break;
                                     case 2:
@@ -325,7 +326,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
-                                        else if(b != null && mem.Point > 0)
+                                        else if (b != null && mem.Point > 0)
                                         {
                                             b.point += mem.Point;
                                         }
@@ -341,7 +342,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
-                                        else if(c != null && mem.Point > 0)
+                                        else if (c != null && mem.Point > 0)
                                         {
                                             c.point += mem.Point;
                                         }
@@ -357,7 +358,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.finePay.Add(ad);
                                         }
-                                        else if(d != null && mem.Point > 0)
+                                        else if (d != null && mem.Point > 0)
                                         {
                                             d.point += mem.Point;
                                         }
@@ -428,7 +429,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.conductor.finePay.Add(ad);
                                         }
-                                        else if(d != null && mem.Point > 0)
+                                        else if (d != null && mem.Point > 0)
                                         {
                                             d.point += mem.Point;
                                         }
@@ -437,20 +438,116 @@ namespace NTC.API.Controllers
                                         break;
                                 }
                                 break;
-                            default : break;
+                            default: break;
                         }
                     }
                 }
-
+                List<int> admem = new List<int>();
                 deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                admem = deMeritMemType.driver.adPannel.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.driver.adPannel.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.driver.adPannel.Add(ad);
+                }
+                admem.Clear();
                 deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                admem = deMeritMemType.driver.finePay.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.driver.finePay.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.driver.finePay.Add(ad);
+                }
+                admem.Clear();
                 deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                admem = deMeritMemType.driver.punish.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.driver.punish.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.driver.punish.Add(ad);
+                }
+                admem.Clear();
                 deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
+                admem = deMeritMemType.driver.cancel.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.driver.cancel.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.driver.cancel.Add(ad);
+                }
 
                 deMeritMemType.conductor.adPannel = deMeritMemType.conductor.adPannel.Where(x => x.point > 2).ToList();
+                admem.Clear();
+                admem = deMeritMemType.conductor.adPannel.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.conductor.adPannel.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.conductor.adPannel.Add(ad);
+                }
+
                 deMeritMemType.conductor.finePay = deMeritMemType.conductor.finePay.Where(x => x.point > 2).ToList();
+                admem.Clear();
+                admem = deMeritMemType.conductor.finePay.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.conductor.finePay.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.conductor.finePay.Add(ad);
+                }
                 deMeritMemType.conductor.punish = deMeritMemType.conductor.punish.Where(x => x.point > 2).ToList();
+                admem.Clear();
+                admem = deMeritMemType.conductor.punish.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.conductor.punish.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.conductor.punish.Add(ad);
+                }
                 deMeritMemType.conductor.cancel = deMeritMemType.conductor.cancel.Where(x => x.point > 2).ToList();
+                admem.Clear();
+                admem = deMeritMemType.conductor.cancel.Select(x => x.id).Distinct().ToList();
+                deMeritMemType.conductor.cancel.Clear();
+                foreach (int i in admem)
+                {
+                    Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                    ad.id = mem.ID;
+                    ad.name = mem.FullName;
+                    ad.ntcNo = mem.NTCNo;
+                    deMeritMemType.conductor.cancel.Add(ad);
+                }
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { merits = deMeritMemType, messageCode = messageData };
@@ -589,7 +686,7 @@ namespace NTC.API.Controllers
                 IEnumerable<MemberDeMerit> deMerits = new List<MemberDeMerit>();
                 deMerits = _deMerit.GetDeMerits();
                 //deMerits = deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Count();//.ToList();
-                
+
                 for (int i = 1; i <= 12; i++)
                 {
                     DeMeritMemberTypeViewModel deMeritMemType = new DeMeritMemberTypeViewModel();
@@ -671,10 +768,63 @@ namespace NTC.API.Controllers
                                 break;
                         }
                     }
+                    //deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                    //deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                    //deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                    //deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
+
+                    List<int> admem = new List<int>();
                     deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.adPannel.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.adPannel.Clear();
+                    foreach (int j in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == j).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.adPannel.Add(ad);
+                    }
+                    admem.Clear();
                     deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.finePay.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.finePay.Clear();
+                    foreach (int j in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == j).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.finePay.Add(ad);
+                    }
+                    admem.Clear();
                     deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.punish.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.punish.Clear();
+                    foreach (int j in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == j).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.punish.Add(ad);
+                    }
+                    admem.Clear();
                     deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.cancel.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.cancel.Clear();
+                    foreach (int j in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == j).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.cancel.Add(ad);
+                    }
 
                     chart.adPannel.Add(deMeritMemType.driver.adPannel.Count);
                     chart.finePay.Add(deMeritMemType.driver.finePay.Count);
