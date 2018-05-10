@@ -65,6 +65,7 @@ namespace NTC.ViewModels
     public class DeMeritTypeViewModel
     {
         public int id { get; set; }
+        public int meritId { get; set; }
         public string name { get; set; }
         public string ntcNo { get; set; }
         public int point { get; set; }
@@ -107,5 +108,12 @@ namespace NTC.ViewModels
         public List<int> punish { get; set; }
         public List<int> cancel { get; set; }
     }
+    public class MeritDashBoardView
+    {
+        public int id { get; set; }
+        public int point { get; set; }
+        public int memberId { get; set; }
+    }
+
 
 }

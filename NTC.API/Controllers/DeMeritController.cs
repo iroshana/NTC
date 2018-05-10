@@ -298,7 +298,7 @@ namespace NTC.API.Controllers
                                 switch (mem.Merit.ColorCodeId)
                                 {
                                     case 1:
-                                        var a = deMeritMemType.driver.cancel.Find(x => x.id == demerit.Member.ID);
+                                        var a = deMeritMemType.driver.cancel.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (a == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -306,15 +306,16 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.driver.cancel.Add(ad);
                                         }
-                                        else if(a != null)
+                                        else if(a != null && mem.Point > 0)
                                         {
                                             a.point += mem.Point;
                                         }
                                         break;
                                     case 2:
-                                        var b = deMeritMemType.driver.adPannel.Find(x => x.id == demerit.Member.ID);
+                                        var b = deMeritMemType.driver.adPannel.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (b == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -324,13 +325,13 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
-                                        else if(b != null)
+                                        else if(b != null && mem.Point > 0)
                                         {
                                             b.point += mem.Point;
                                         }
                                         break;
                                     case 3:
-                                        var c = deMeritMemType.driver.punish.Find(x => x.id == demerit.Member.ID);
+                                        var c = deMeritMemType.driver.punish.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (c == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -340,13 +341,13 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
-                                        else if(c != null)
+                                        else if(c != null && mem.Point > 0)
                                         {
                                             c.point += mem.Point;
                                         }
                                         break;
                                     case 4:
-                                        var d = deMeritMemType.driver.finePay.Find(x => x.id == demerit.Member.ID);
+                                        var d = deMeritMemType.driver.finePay.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (d == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -356,7 +357,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.driver.finePay.Add(ad);
                                         }
-                                        else if(d != null)
+                                        else if(d != null && mem.Point > 0)
                                         {
                                             d.point += mem.Point;
                                         }
@@ -369,7 +370,7 @@ namespace NTC.API.Controllers
                                 switch (mem.Merit.ColorCodeId)
                                 {
                                     case 1:
-                                        var a = deMeritMemType.conductor.cancel.Find(x => x.id == demerit.Member.ID);
+                                        var a = deMeritMemType.conductor.cancel.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (a == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -379,13 +380,13 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.conductor.cancel.Add(ad);
                                         }
-                                        else if (a != null)
+                                        else if (a != null && mem.Point > 0)
                                         {
                                             a.point += mem.Point;
                                         }
                                         break;
                                     case 2:
-                                        var b = deMeritMemType.conductor.adPannel.Find(x => x.id == demerit.Member.ID);
+                                        var b = deMeritMemType.conductor.adPannel.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (b == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -395,13 +396,13 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.conductor.adPannel.Add(ad);
                                         }
-                                        else if (b != null)
+                                        else if (b != null && mem.Point > 0)
                                         {
                                             b.point += mem.Point;
                                         }
                                         break;
                                     case 3:
-                                        var c = deMeritMemType.conductor.punish.Find(x => x.id == demerit.Member.ID);
+                                        var c = deMeritMemType.conductor.punish.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (c == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -411,13 +412,13 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.conductor.punish.Add(ad);
                                         }
-                                        else if (c != null)
+                                        else if (c != null && mem.Point > 0)
                                         {
                                             c.point += mem.Point;
                                         }
                                         break;
                                     case 4:
-                                        var d = deMeritMemType.conductor.finePay.Find(x => x.id == demerit.Member.ID);
+                                        var d = deMeritMemType.conductor.finePay.Find(x => x.id == demerit.Member.ID && x.meritId == mem.MeritId);
                                         if (d == null && mem.Point > 0)
                                         {
                                             DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -427,7 +428,7 @@ namespace NTC.API.Controllers
                                             ad.point = mem.Point;
                                             deMeritMemType.conductor.finePay.Add(ad);
                                         }
-                                        else if(d != null)
+                                        else if(d != null && mem.Point > 0)
                                         {
                                             d.point += mem.Point;
                                         }
@@ -440,6 +441,7 @@ namespace NTC.API.Controllers
                         }
                     }
                 }
+
                 deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
                 deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
                 deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
@@ -587,20 +589,97 @@ namespace NTC.API.Controllers
                 IEnumerable<MemberDeMerit> deMerits = new List<MemberDeMerit>();
                 deMerits = _deMerit.GetDeMerits();
                 //deMerits = deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == 1).Select(x => x.DeMerit.MemberId).Count();//.ToList();
-
-                if (deMerits != null)
+                
+                for (int i = 1; i <= 12; i++)
                 {
-                    for (int i = 1;i<=12; i++)
+                    DeMeritMemberTypeViewModel deMeritMemType = new DeMeritMemberTypeViewModel();
+                    deMeritMemType.driver = new DeMeritTypeSetViewModel();
+                    deMeritMemType.driver.adPannel = new List<DeMeritTypeViewModel>();
+                    deMeritMemType.driver.finePay = new List<DeMeritTypeViewModel>();
+                    deMeritMemType.driver.punish = new List<DeMeritTypeViewModel>();
+                    deMeritMemType.driver.cancel = new List<DeMeritTypeViewModel>();
+
+                    foreach (MemberDeMerit mem in deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i))
                     {
-                        chart.adPannel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 2).Select(x => x.DeMerit.MemberId).Distinct().Count());
-
-                        chart.finePay.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 4).Select(x => x.DeMerit.MemberId).Distinct().Count());
-
-                        chart.punish.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 3).Select(x => x.DeMerit.MemberId).Distinct().Count());
-
-                        chart.cancel.Add(deMerits.Where(x => x.DeMerit.CreatedDate.Year == DateTime.Now.Year && x.DeMerit.CreatedDate.Month == i && x.Merit.ColorCodeId == 1).Select(x => x.DeMerit.MemberId).Distinct().Count());
+                        switch (mem.Merit.ColorCodeId)
+                        {
+                            case 1:
+                                var a = deMeritMemType.driver.cancel.Find(x => x.id == mem.DeMerit.Member.ID);
+                                if (a == null && mem.Point > 0)
+                                {
+                                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                    ad.id = mem.DeMerit.Member.ID;
+                                    ad.name = mem.DeMerit.Member.FullName;
+                                    ad.ntcNo = mem.DeMerit.Member.NTCNo;
+                                    ad.point = mem.Point;
+                                    deMeritMemType.driver.cancel.Add(ad);
+                                }
+                                else if (a != null)
+                                {
+                                    a.point += mem.Point;
+                                }
+                                break;
+                            case 2:
+                                var b = deMeritMemType.driver.adPannel.Find(x => x.id == mem.DeMerit.Member.ID);
+                                if (b == null && mem.Point > 0)
+                                {
+                                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                    ad.id = mem.DeMerit.Member.ID;
+                                    ad.name = mem.DeMerit.Member.FullName;
+                                    ad.ntcNo = mem.DeMerit.Member.NTCNo;
+                                    ad.point = mem.Point;
+                                    deMeritMemType.driver.adPannel.Add(ad);
+                                }
+                                else if (b != null)
+                                {
+                                    b.point += mem.Point;
+                                }
+                                break;
+                            case 3:
+                                var c = deMeritMemType.driver.punish.Find(x => x.id == mem.DeMerit.Member.ID);
+                                if (c == null && mem.Point > 0)
+                                {
+                                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                    ad.id = mem.DeMerit.Member.ID;
+                                    ad.name = mem.DeMerit.Member.FullName;
+                                    ad.ntcNo = mem.DeMerit.Member.NTCNo;
+                                    ad.point = mem.Point;
+                                    deMeritMemType.driver.punish.Add(ad);
+                                }
+                                else if (c != null)
+                                {
+                                    c.point += mem.Point;
+                                }
+                                break;
+                            case 4:
+                                var d = deMeritMemType.driver.finePay.Find(x => x.id == mem.DeMerit.Member.ID);
+                                if (d == null && mem.Point > 0)
+                                {
+                                    DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                    ad.id = mem.DeMerit.Member.ID;
+                                    ad.name = mem.DeMerit.Member.FullName;
+                                    ad.ntcNo = mem.DeMerit.Member.NTCNo;
+                                    ad.point = mem.Point;
+                                    deMeritMemType.driver.finePay.Add(ad);
+                                }
+                                else if (d != null)
+                                {
+                                    d.point += mem.Point;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
+                    deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                    deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                    deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                    deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
 
+                    chart.adPannel.Add(deMeritMemType.driver.adPannel.Count);
+                    chart.finePay.Add(deMeritMemType.driver.finePay.Count);
+                    chart.punish.Add(deMeritMemType.driver.punish.Count);
+                    chart.cancel.Add(deMeritMemType.driver.cancel.Count);
                 }
 
 
