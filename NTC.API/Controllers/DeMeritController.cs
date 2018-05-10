@@ -321,6 +321,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
                                         else if(b != null)
@@ -336,6 +337,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
                                         else if(c != null)
@@ -351,6 +353,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.driver.finePay.Add(ad);
                                         }
                                         else if(d != null)
@@ -373,6 +376,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.conductor.cancel.Add(ad);
                                         }
                                         else if (a != null)
@@ -388,6 +392,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.conductor.adPannel.Add(ad);
                                         }
                                         else if (b != null)
@@ -403,6 +408,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.conductor.punish.Add(ad);
                                         }
                                         else if (c != null)
@@ -418,6 +424,7 @@ namespace NTC.API.Controllers
                                             ad.id = demerit.Member.ID;
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
+                                            ad.point = mem.Point;
                                             deMeritMemType.conductor.finePay.Add(ad);
                                         }
                                         else if(d != null)
@@ -436,7 +443,7 @@ namespace NTC.API.Controllers
                 deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
                 deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
                 deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
-                deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point >= 2).ToList();
+                deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
 
                 deMeritMemType.conductor.adPannel = deMeritMemType.conductor.adPannel.Where(x => x.point > 2).ToList();
                 deMeritMemType.conductor.finePay = deMeritMemType.conductor.finePay.Where(x => x.point > 2).ToList();

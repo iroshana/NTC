@@ -264,5 +264,35 @@ var AddComplain = new Vue({
             });
 
         });
+        $(document).ready(function () {
+            $('#btn1').click(function () {
+                if ($('#myfile').val() == '') {
+                    alert('Please select file');
+                    return;
+                }
+
+                var formData = new FormData();
+                var file = $('#myfile')[0];
+                formData.append('file', file.files[0]);
+                formData.append('UploadedImage', 'Test');
+                formData.append('nic', 'Test');
+                formData.append('uploadedFileName', "");
+                formData.append('fileExtension', '.mp3');
+                formData.append('imageFolder', "Evidence");  
+                $.ajax({
+                    url: apiURL + '/api/DocumentUpload/MediaUpload',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (d) {
+                        alert('file is uploaded successfully')
+                    },
+                    error: function () {
+                        alert('Some thing went wrong');
+                    }
+                });
+            });
+        });
     }
 });

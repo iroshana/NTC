@@ -111,12 +111,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                BestDriverYear++;
+                                if (_complain.GetAll(x => x.DriverId == mem.ID).Count() < 1)
+                                {
+                                    BestDriverYear++;
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            BestDriverYear++;
+                            if (_complain.GetAll(x => x.DriverId == mem.ID).Count() < 1)
+                            {
+                                BestDriverYear++;
+                            }
                         }
                     }
                     else
@@ -129,12 +135,18 @@ namespace NTC.API.Controllers
                             point += mer.MemberDeMerits.Sum(x => x.Point);
                             if (point < 2)
                             {
-                                BestConductorYear++;
+                                if (_complain.GetAll(x => x.ConductorId == mem.ID).Count() < 1)
+                                {
+                                    BestConductorYear++;
+                                }
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            BestConductorYear++;
+                            if (_complain.GetAll(x => x.ConductorId == mem.ID).Count() < 1)
+                            {
+                                BestConductorYear++;
+                            }
                         }
                     }
                 }
