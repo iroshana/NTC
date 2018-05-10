@@ -80,7 +80,7 @@ namespace NTC.Services
         {
             try
             {
-                return base.GetAll(x => x.IsSent == isSent && x.IsGeneratNotice == isGeneral).ToList();
+                return base.GetAll().ToList();
             }
             catch (Exception ex)
             {

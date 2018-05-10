@@ -45,16 +45,16 @@ namespace NTC.API.Controllers
                     string FileFolder1 = formData["imageFolder"].ToString();
 
 
-                    for (int i = 0; i < files.Count; i++)
-                    {
+                    //for (int i = 0; i < files.Count; i++)
+                    //{
                         string uploadedFileName = String.Empty;
-                        HttpContent uploadedFile = files[i];
+                        HttpContent uploadedFile = files[0];
 
                         if (String.IsNullOrEmpty(formData["uploadedFileName"].ToString()))
                         {
                             var originalFileName = uploadedFile.Headers.ContentDisposition.FileName.Trim('\"');
                             string originalFileExtension = String.IsNullOrEmpty(formData["fileExtension"]) ? Path.GetExtension(originalFileName) : formData["fileExtension"].ToString();
-                            uploadedFileName = String.Format("{0}_{1}", DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"), originalFileExtension);
+                            uploadedFileName = String.Format("{0}.{1}", formData["nic"].ToString(), originalFileExtension);
                         }
                         else
                         {
@@ -85,7 +85,7 @@ namespace NTC.API.Controllers
                         UploadFileDataViewModel uplaodedFileData = new UploadFileDataViewModel();
                         uplaodedFileData.filePath = String.Format("{0}/{1}", FileFolder1, uploadedFileName);
                         lstUploadedFileResult.Add(uplaodedFileData);
-                    }
+                    //}
                 }
                 else
                 {

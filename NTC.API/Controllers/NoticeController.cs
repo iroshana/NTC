@@ -41,7 +41,7 @@ namespace NTC.API.Controllers
                 {
                     foreach (Notice Note in notice)
                     {
-                        if (!Note.IsSent)
+                        if (!Note.IsSent && Note.MemberNotices.Count() == 0)
                         {
                             NoticeViewModel noticeVM = new NoticeViewModel();
                             noticeVM.Content = Note.Content;
@@ -170,10 +170,12 @@ namespace NTC.API.Controllers
 
         #region Get ALL Memeber Notice
         [HttpGet]
-        public IHttpActionResult GetMemberNotice(int memberId,bool isSent,bool isOpen)
+        public IHttpActionResult GetMemberNotice(int memberId)
         {
             try
             {
+                bool isSent = false;
+                bool isOpen = false;
                 List<NoticeViewModel> noticeListVM = new List<NoticeViewModel>();
                 IEnumerable<MemberNotice> notice = new List<MemberNotice>();
                 notice = _memberNotice.GetAllMemeberNotice(memberId, isSent, isOpen);
