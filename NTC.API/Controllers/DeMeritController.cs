@@ -324,6 +324,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.driver.adPannel.Add(ad);
                                         }
                                         else if (b != null && mem.Point > 0)
@@ -340,6 +341,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.driver.punish.Add(ad);
                                         }
                                         else if (c != null && mem.Point > 0)
@@ -356,6 +358,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.driver.finePay.Add(ad);
                                         }
                                         else if (d != null && mem.Point > 0)
@@ -379,6 +382,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.conductor.cancel.Add(ad);
                                         }
                                         else if (a != null && mem.Point > 0)
@@ -395,6 +399,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.conductor.adPannel.Add(ad);
                                         }
                                         else if (b != null && mem.Point > 0)
@@ -411,6 +416,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.conductor.punish.Add(ad);
                                         }
                                         else if (c != null && mem.Point > 0)
@@ -427,6 +433,7 @@ namespace NTC.API.Controllers
                                             ad.name = demerit.Member.FullName;
                                             ad.ntcNo = demerit.Member.NTCNo;
                                             ad.point = mem.Point;
+                                            ad.meritId = mem.MeritId;
                                             deMeritMemType.conductor.finePay.Add(ad);
                                         }
                                         else if (d != null && mem.Point > 0)
@@ -701,7 +708,7 @@ namespace NTC.API.Controllers
                         switch (mem.Merit.ColorCodeId)
                         {
                             case 1:
-                                var a = deMeritMemType.driver.cancel.Find(x => x.id == mem.DeMerit.Member.ID);
+                                var a = deMeritMemType.driver.cancel.Find(x => x.id == mem.DeMerit.Member.ID && x.meritId == mem.MeritId);
                                 if (a == null && mem.Point > 0)
                                 {
                                     DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -709,6 +716,7 @@ namespace NTC.API.Controllers
                                     ad.name = mem.DeMerit.Member.FullName;
                                     ad.ntcNo = mem.DeMerit.Member.NTCNo;
                                     ad.point = mem.Point;
+                                    ad.meritId = mem.MeritId;
                                     deMeritMemType.driver.cancel.Add(ad);
                                 }
                                 else if (a != null)
@@ -717,7 +725,7 @@ namespace NTC.API.Controllers
                                 }
                                 break;
                             case 2:
-                                var b = deMeritMemType.driver.adPannel.Find(x => x.id == mem.DeMerit.Member.ID);
+                                var b = deMeritMemType.driver.adPannel.Find(x => x.id == mem.DeMerit.Member.ID && x.meritId == mem.MeritId);
                                 if (b == null && mem.Point > 0)
                                 {
                                     DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -725,6 +733,7 @@ namespace NTC.API.Controllers
                                     ad.name = mem.DeMerit.Member.FullName;
                                     ad.ntcNo = mem.DeMerit.Member.NTCNo;
                                     ad.point = mem.Point;
+                                    ad.meritId = mem.MeritId;
                                     deMeritMemType.driver.adPannel.Add(ad);
                                 }
                                 else if (b != null)
@@ -733,7 +742,7 @@ namespace NTC.API.Controllers
                                 }
                                 break;
                             case 3:
-                                var c = deMeritMemType.driver.punish.Find(x => x.id == mem.DeMerit.Member.ID);
+                                var c = deMeritMemType.driver.punish.Find(x => x.id == mem.DeMerit.Member.ID && x.meritId == mem.MeritId);
                                 if (c == null && mem.Point > 0)
                                 {
                                     DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -741,6 +750,7 @@ namespace NTC.API.Controllers
                                     ad.name = mem.DeMerit.Member.FullName;
                                     ad.ntcNo = mem.DeMerit.Member.NTCNo;
                                     ad.point = mem.Point;
+                                    ad.meritId = mem.MeritId;
                                     deMeritMemType.driver.punish.Add(ad);
                                 }
                                 else if (c != null)
@@ -749,7 +759,7 @@ namespace NTC.API.Controllers
                                 }
                                 break;
                             case 4:
-                                var d = deMeritMemType.driver.finePay.Find(x => x.id == mem.DeMerit.Member.ID);
+                                var d = deMeritMemType.driver.finePay.Find(x => x.id == mem.DeMerit.Member.ID && x.meritId == mem.MeritId);
                                 if (d == null && mem.Point > 0)
                                 {
                                     DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
@@ -757,6 +767,7 @@ namespace NTC.API.Controllers
                                     ad.name = mem.DeMerit.Member.FullName;
                                     ad.ntcNo = mem.DeMerit.Member.NTCNo;
                                     ad.point = mem.Point;
+                                    ad.meritId = mem.MeritId;
                                     deMeritMemType.driver.finePay.Add(ad);
                                 }
                                 else if (d != null)
