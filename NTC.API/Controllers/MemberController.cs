@@ -71,7 +71,7 @@ namespace NTC.API.Controllers
                     rednotice = meritIdlistDriver.Where(x => x.point >= 2).Count() > 0 ? true : false;
 
                     
-                    if (_complain.GetAll(x => x.ConductorId == Id || x.DriverId == Id).Count() > 0)
+                    if (_complain.GetAll(x => x.ConductorId == Id || x.DriverId == Id).Count() > 2)
                     {
                         bestmember = false;
                     }
@@ -475,14 +475,14 @@ namespace NTC.API.Controllers
                         memberDe = memberDe.Where(x => x.CreatedDate.Date >= date.Date.AddMonths(-1) && x.CreatedDate.Date <= date.Date).ToList();
                         if (memberDe.Count() < 2)
                         {
-                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 2)
                             {
                                 membesDateList.Add(mem);
                             }
                         }
                         else if (memberDe.Count() == 0)
                         {
-                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 2)
                             {
                                 membesDateList.Add(mem);
                             }
@@ -493,14 +493,14 @@ namespace NTC.API.Controllers
                         memberDe = memberDe.Where(x => x.CreatedDate.Date >= date.Date.AddYears(-1) && x.CreatedDate.Date <= date.Date).ToList();
                         if (memberDe.Count() < 2)
                         {
-                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 2)
                             {
                                 membesDateList.Add(mem);
                             }
                         }
                         if (memberDe.Count() == 0)
                         {
-                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 1)
+                            if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 2)
                             {
                                 membesDateList.Add(mem);
                             }
