@@ -191,8 +191,8 @@ namespace NTC.API.Controllers
                     }
                 }
 
-                rednoticeDriver = meritIdlistDriver.Count() <= 0 ? 0 : meritIdlistDriver.Where(x => x.point >= 2).GroupBy(z => z.memberId).Count();
-                rednoticeCon = meritIdlistCond.Count() <= 0 ? 0 : meritIdlistCond.Where(x => x.point >= 2).GroupBy(z => z.memberId).Count();
+                rednoticeDriver = meritIdlistDriver.Count() <= 0 ? 0 : meritIdlistDriver.Where(x => x.point > 2).GroupBy(z => z.memberId).Count();
+                rednoticeCon = meritIdlistCond.Count() <= 0 ? 0 : meritIdlistCond.Where(x => x.point > 2).GroupBy(z => z.memberId).Count();
 
 
                 IEnumerable<Complain> driverComplain = _complain.GetAll(x => x.Member.MemberType.Code == "Driver" && x.ComplainStatus != "Resolve");

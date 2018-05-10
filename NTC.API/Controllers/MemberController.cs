@@ -361,7 +361,7 @@ namespace NTC.API.Controllers
                         IEnumerable<MemberDeMerit> memDe = de.MemberDeMerits.Where(x => x.Merit.ColorCodeId == 1).ToList();
                         foreach (MemberDeMerit memdem in memDe.Where(z => z.Point != 0))
                         {
-                            var a = meritIdlistDriver.Find(x => x.memberId == de.MemberId);
+                            var a = meritIdlistDriver.Find(x => x.memberId == de.MemberId && x.id == memdem.MeritId);
                             if (a == null)
                             {
                                 MeritDashBoardView md = new MeritDashBoardView();
@@ -381,7 +381,7 @@ namespace NTC.API.Controllers
                         IEnumerable<MemberDeMerit> memDe = de.MemberDeMerits.Where(x => x.Merit.ColorCodeId == 1).ToList();
                         foreach (MemberDeMerit memdem in memDe.Where(z => z.Point != 0))
                         {
-                            var a = meritIdlistCond.Find(x => x.memberId == de.MemberId);
+                            var a = meritIdlistCond.Find(x => x.memberId == de.MemberId && x.id == memdem.MeritId);
                             if (a == null)
                             {
                                 MeritDashBoardView md = new MeritDashBoardView();
@@ -397,12 +397,14 @@ namespace NTC.API.Controllers
                         }
                     }
                 }
+                List<int> memb = new List<int>();
                 
                 if (type == 1)
                 {
-                    foreach (MeritDashBoardView mDriver in meritIdlistDriver.Where(r=>r.point > 2))
+                    memb = meritIdlistDriver.Where(r => r.point > 2).Select(z => z.memberId).Distinct().ToList();
+                    foreach (int s in memb)
                     {
-                        Member mem = _member.GetAll(x => x.ID == mDriver.memberId).FirstOrDefault();
+                        Member mem = _member.GetAll(x => x.ID == s).FirstOrDefault();
                         MemberEntityViewModel memberView = new MemberEntityViewModel();
 
                         memberView.id = mem.ID;
@@ -418,9 +420,10 @@ namespace NTC.API.Controllers
                 }
                 else
                 {
-                    foreach (MeritDashBoardView mConduct in meritIdlistCond.Where(r => r.point > 2))
+                    memb = meritIdlistCond.Where(r => r.point > 2).Select(z => z.memberId).Distinct().ToList();
+                    foreach (int s in memb)
                     {
-                        Member mem = _member.GetAll(x => x.ID == mConduct.memberId).FirstOrDefault();
+                        Member mem = _member.GetAll(x => x.ID == s).FirstOrDefault();
                         MemberEntityViewModel memberView = new MemberEntityViewModel();
 
                         memberView.id = mem.ID;
