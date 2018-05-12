@@ -15,5 +15,6 @@ namespace NTC.InterfaceServices
         Complain GetLastComplain();
         IEnumerable<Complain> GetAllComplains(DateTime fromDate,DateTime toDate);
         IEnumerable<Complain> GetAllComplains(int mrmberId);
+        void Update(Complain complain, List<string> properties, out string errorMessage);
     }
 }

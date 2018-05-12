@@ -431,10 +431,11 @@ namespace NTC.API.Controllers
             {
                 string errorMessage = String.Empty;
                 Complain complain = new Complain();
+                List<string> properties = new List<string>();
                 complain = _complain.GetAll(x=>x.ID == complainId).FirstOrDefault();
                 complain.ComplainStatus = status;
-
-                _complain.Update(complain);
+                properties.Add("ComplainStatus");
+                _complain.Update(complain,properties,out errorMessage);
 
                 var messageData = new
                 {
