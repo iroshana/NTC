@@ -222,7 +222,7 @@ var MemberList = new Vue({
                     this.getRedNoticeMember(1, "", "", 1, 2);
                 } else if (getUrlParameter("year")) {
                     var toDate = getUrlParameter("date");
-                    this.getBestMember(toDate, 1, true);
+                    this.getBestMember(toDate, 1, false);
                 }
             } else {
                 if(getUrlParameter("isRedNotice")){
@@ -232,7 +232,7 @@ var MemberList = new Vue({
                     this.getBestMember(toDate, 2, true);
                 } else if (getUrlParameter("year")) {
                     var toDate = getUrlParameter("date");
-                    this.getBestMember(toDate, 2, true);
+                    this.getBestMember(toDate, 2, false);
                 }
             }
         } else {
