@@ -123,7 +123,7 @@ var AddComplain = new Vue({
                     processData: false,
                     success: function (data) {
                         AddComplain.complainVm.evidence.filePath = data.filesData[0].filePath;
-                        AddComplain.complainSave();
+                        this.complainSave();
                     },
                     error: function () {
                         alert('Some thing went wrong');

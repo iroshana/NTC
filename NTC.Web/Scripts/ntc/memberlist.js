@@ -115,62 +115,6 @@ var MemberList = new Vue({
                 }
             });
         },
-        getHighestNoOfComplain: function (typeId) {
-            $('#spinner').css("display", "block");
-            this.$http.get(apiURL + 'api/Member/GetAllHightsNoOfComplainMembers', {
-                params: {
-                    typeId: typeId
-                }
-            }).then(function (response) {
-                if (response.body.messageCode.code == 1) {
-                    this.memberListDriver = response.body.memberListDriver;
-                    this.memberListConductor = response.body.memberListConductor;
-                    this.bindDatatableDriver();
-                    this.bindDatatableConductor();
-                } else {
-                    msgAlert.isSuccess = false;
-                    msgAlert.alertMessage = response.body.messageCode.message;
-                    msgAlert.showModal();
-                }
-                $('#spinner').css("display", "none");
-            }).catch(function (response) {
-                msgAlert.isSuccess = false;
-                msgAlert.alertMessage = response.statusText;
-                msgAlert.showModal();
-                $('#spinner').css("display", "none");
-                if (response.statusText == "Unauthorized") {
-                    $(location).attr('href', webURL + 'Account/Login');
-                }
-            });
-        },
-        getHighestNoOfPoint: function (typeId) {
-            $('#spinner').css("display", "block");
-            this.$http.get(apiURL + 'api/Member/GetAllHightsPointMembers', {
-                params: {
-                    typeId: typeId
-                }
-            }).then(function (response) {
-                if (response.body.messageCode.code == 1) {
-                    this.memberListDriver = response.body.memberListDriver;
-                    this.memberListConductor = response.body.memberListConductor;
-                    this.bindDatatableDriver();
-                    this.bindDatatableConductor();
-                } else {
-                    msgAlert.isSuccess = false;
-                    msgAlert.alertMessage = response.body.messageCode.message;
-                    msgAlert.showModal();
-                }
-                $('#spinner').css("display", "none");
-            }).catch(function (response) {
-                msgAlert.isSuccess = false;
-                msgAlert.alertMessage = response.statusText;
-                msgAlert.showModal();
-                $('#spinner').css("display", "none");
-                if (response.statusText == "Unauthorized") {
-                    $(location).attr('href', webURL + 'Account/Login');
-                }
-            });
-        },
         bindDatatableDriver: function () {
             $('#datatable-memberDriver').DataTable({
                 "data": this.memberListDriver,
@@ -279,10 +223,6 @@ var MemberList = new Vue({
                 } else if (getUrlParameter("year")) {
                     var toDate = getUrlParameter("date");
                     this.getBestMember(toDate, 1, true);
-                } else if (getUrlParameter("isNoOfComplain")) {
-                    this.getHighestNoOfComplain(1);
-                } else if (getUrlParameter("isNoOfPoints")) {
-                    this.getHighestNoOfPoint(1);
                 }
             } else {
                 if(getUrlParameter("isRedNotice")){
@@ -293,10 +233,6 @@ var MemberList = new Vue({
                 } else if (getUrlParameter("year")) {
                     var toDate = getUrlParameter("date");
                     this.getBestMember(toDate, 2, true);
-                } else if (getUrlParameter("isNoOfComplain")) {
-                    this.getHighestNoOfComplain(2);
-                } else if (getUrlParameter("isNoOfPoints")) {
-                    this.getHighestNoOfPoint(2);
                 }
             }
         } else {

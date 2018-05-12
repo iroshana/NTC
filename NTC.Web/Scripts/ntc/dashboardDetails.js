@@ -76,18 +76,6 @@ var DashBoard = new Vue({
         },
         redNoticeConductor: function () {
             $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&isRedNotice=true');
-        },
-        highestNoofComplainDriver: function () {
-            $(location).attr('href', webURL + 'DriverConductor/List?memberType=1&isDash=true&isNoOfComplain=true');
-        },
-        highestNoofComplainConductor: function () {
-            $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&isNoOfComplain=true');
-        },
-        highestNoOfPointDriver: function () {
-            $(location).attr('href', webURL + 'DriverConductor/List?memberType=1&isDash=true&isNoOfPoints=true');
-        },
-        highestNoOfPointConductor: function () {
-            $(location).attr('href', webURL + 'DriverConductor/List?memberType=2&isDash=true&isNoOfPoints=true');
         }
     },
     mounted() {

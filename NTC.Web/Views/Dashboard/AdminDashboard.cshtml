@@ -69,25 +69,25 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12" v-on:click="redNoticeDriver">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
-                                    <div class="count" v-cloak>{{ wighet.redNoticeDrivers}}</div>
+                                    <div class="count">{{ wighet.redNoticeDrivers}}</div>
 
                                     <h3></h3>
                                     <p>Red Notice Drivers.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12" v-on:click="highestNoofComplainDriver">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count" v-cloak>{{ wighet.highestDriverComplain}}</div>
+                                    <div class="count">{{ wighet.highestDriverComplain == "" ? '&nbsp;' : wighet.highestDriverComplain }}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Complain.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-47 col-md-4 col-sm-6 col-xs-12" v-on:click="highestNoOfPointDriver">
+                            <div class="animated flipInY col-lg-47 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count" v-cloak>{{ wighet.highestDriverPoints }}</div>
+                                    <div class="count">{{ wighet.highestDriverPoints == "" ? '&nbsp;' : wighet.highestDriverPoints }}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
@@ -99,7 +99,7 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
-                                    <div class="count" v-cloak>{{wighet.bestdriversofMonth}}</div>
+                                    <div class="count">{{wighet.bestdriversofMonth}}</div>
                                     <p>Best Driver of the Months.</p>
                                     <input id="driverMonth" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
@@ -112,7 +112,7 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
-                                    <div class="count" v-cloak>{{wighet.bestdriversofYear}}</div>
+                                    <div class="count">{{wighet.bestdriversofYear}}</div>
                                     <p>Best Driver of the Year.</p>
                                     <input id="driverYear" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
@@ -146,25 +146,25 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12" v-on:click="redNoticeConductor">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-users"></i></div>
-                                    <div class="count" v-cloak>{{wighet.redNoticeConductors}}</div>
+                                    <div class="count">{{wighet.redNoticeConductors}}</div>
 
                                     <h3></h3>
                                     <p>Red Notice Conductors.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12" v-on:click="highestNoofComplainConductor">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-secret"></i></div>
-                                    <div class="count" v-cloak>{{ wighet.highestConductorComplain}}</div>
+                                    <div class="count">{{ wighet.highestConductorComplain == "" ? '&nbsp;' : wighet.highestConductorComplain}}</div>
 
                                     <h3></h3>
                                     <p>Highest Number of Complaint.</p>
                                 </div>
                             </div>
-                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12" v-on:click="highestNoOfPointConductor">
+                            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="count" v-cloak>{{wighet.highestConductorPoints}}</div>
+                                    <div class="count">{{wighet.highestConductorPoints == "" ? '&nbsp;' : wighet.highestConductorPoints}}</div>
                                     <h3></h3>
                                     <p>Highest Number of Points.</p>
                                 </div>
@@ -175,7 +175,7 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
-                                    <div class="count" v-cloak>{{wighet.bestConductorsofMonth}}</div>
+                                    <div class="count">{{wighet.bestConductorsofMonth}}</div>
                                     <p>Best Conductor of the Months.</p>
                                     <input id="conMonth" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
@@ -188,7 +188,7 @@
                             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="tile-stats">
                                     <div class="icon"><i class="fa fa-user"></i></div>
-                                    <div class="count" v-cloak>{{wighet.bestConductorsofYear}}</div>
+                                    <div class="count">{{wighet.bestConductorsofYear}}</div>
                                     <p>Best Conductor of the Year.</p>
                                     <input id="conYear" type="text" placeholder="MM/DD/YYYY" class="form-control fc-datepicker hasDatepicker" />
                                     <br />
@@ -235,10 +235,6 @@
 </div>
 
 @*End Alert*@
-<style>
-    [v-cloak] {
-        display: none;
-    }
-</style>
+
 
 <script src="~/Scripts/ntc/dashboardDetails.js"></script>

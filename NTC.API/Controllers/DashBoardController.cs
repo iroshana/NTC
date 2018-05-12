@@ -211,7 +211,7 @@ namespace NTC.API.Controllers
                         highDriver.Add(md);
 
                     }
-                    else
+                    else if(dcomp.DriverId != null)
                     {
                         a.point++;
                     }
@@ -219,15 +219,15 @@ namespace NTC.API.Controllers
 
                 foreach (Complain dcomp in conductComplain)
                 {
-                    var a = highCond.Find(x => x.memberId == dcomp.DriverId);
-                    if (a == null && dcomp.DriverId != null)
+                    var a = highCond.Find(x => x.memberId == dcomp.ConductorId);
+                    if (a == null && dcomp.ConductorId != null)
                     {
                         MeritDashBoardView md = new MeritDashBoardView();
                         md.point = 1;
-                        md.memberId = dcomp.DriverId.Value;
+                        md.memberId = dcomp.ConductorId.Value;
                         highCond.Add(md);
                     }
-                    else
+                    else if(dcomp.ConductorId != null)
                     {
                         a.point++;
                     }

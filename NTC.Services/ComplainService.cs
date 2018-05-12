@@ -126,5 +126,17 @@ namespace NTC.Services
                 throw ex;
             }
         }
+        public void Update(Complain complain,List<string> properties,out string errorMessage)
+        {
+            try
+            {
+                errorMessage = String.Empty;
+                base.Update(complain, properties, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
