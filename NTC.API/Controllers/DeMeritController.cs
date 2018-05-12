@@ -288,7 +288,7 @@ namespace NTC.API.Controllers
                 deMeritMemType.conductor.cancel = new List<DeMeritTypeViewModel>();
 
 
-                foreach (DeMerit demerit in deMerits)
+                foreach (DeMerit demerit in deMerits.Where(z=>z.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && z.CreatedDate.Date <= DateTime.Now.Date))
                 {
                     foreach (MemberDeMerit mem in demerit.MemberDeMerits)
                     {
