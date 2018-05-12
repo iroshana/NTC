@@ -498,7 +498,7 @@ namespace NTC.API.Controllers
                                 membesDateList.Add(mem);
                             }
                         }
-                        if (memberDe.Count() == 0)
+                        else if (memberDe.Count() == 0)
                         {
                             if (_complain.GetAll(x => x.DriverId == mem.ID || x.ConductorId == mem.ID).Count() < 2)
                             {
