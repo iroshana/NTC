@@ -33,44 +33,170 @@ namespace NTC.API.Controllers
         {
             try
             {
-                int redNoticePoint = 0;
-                int bestMemberPoint = 0;
                 bool rednotice = false;
+                bool adpanel = false;
+                bool finepay = false;
+                bool punish = false;
                 bool bestmember = true;
                 MemberViewModel memberView = new MemberViewModel();
                 Member member = new Member();
                 member = _member.GetMember(Id);
                 IEnumerable<DeMerit> demerit = new List<DeMerit>();
-                List<MeritDashBoardView> meritIdlistDriver = new List<MeritDashBoardView>();
+                DeMeritMemberTypeViewModel deMeritMemType = new DeMeritMemberTypeViewModel();
+                deMeritMemType.driver = new DeMeritTypeSetViewModel();
+                deMeritMemType.driver.adPannel = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.finePay = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.punish = new List<DeMeritTypeViewModel>();
+                deMeritMemType.driver.cancel = new List<DeMeritTypeViewModel>();
 
                 demerit = _demerit.GetAll(x => x.MemberId == Id).ToList();
-                if(demerit != null){
+                if (demerit != null)
+                {
                     demerit = demerit.Where(y => y.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && y.CreatedDate <= DateTime.Now.Date).ToList();
 
                     foreach (DeMerit de in demerit)
                     {
-                        IEnumerable<MemberDeMerit> memDe = de.MemberDeMerits.Where(x => x.Merit.ColorCodeId == 1).ToList();
-                        foreach (MemberDeMerit memdem in memDe.Where(z => z.Point != 0))
+                        IEnumerable<MemberDeMerit> memDe = de.MemberDeMerits.Where(x => x.DeMeritId == de.ID).ToList();
+                        foreach (MemberDeMerit mem in memDe)
                         {
-                            var a = meritIdlistDriver.Find(x => x.id == memdem.Merit.ID && x.memberId == de.MemberId);
-                            if (a == null)
+                            switch (mem.Merit.ColorCodeId)
                             {
-                                MeritDashBoardView md = new MeritDashBoardView();
-                                md.id = memdem.Merit.ID;
-                                md.point += memdem.Point;
-                                md.memberId = de.MemberId;
-                                meritIdlistDriver.Add(md);
-                            }
-                            else
-                            {
-                                a.point += memdem.Point;
+                                case 1:
+                                    var a = deMeritMemType.driver.cancel.Find(x => x.meritId == mem.MeritId);
+                                    if (a == null && mem.Point > 0)
+                                    {
+                                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                        ad.id = de.Member.ID;
+                                        ad.name = de.Member.FullName;
+                                        ad.ntcNo = de.Member.NTCNo;
+                                        ad.point = mem.Point;
+                                        ad.meritId = mem.MeritId;
+                                        deMeritMemType.driver.cancel.Add(ad);
+                                    }
+                                    else if (a != null && mem.Point > 0)
+                                    {
+                                        a.point += mem.Point;
+
+                                    }
+                                    break;
+                                case 2:
+                                    var b = deMeritMemType.driver.adPannel.Find(x =>x.meritId == mem.MeritId);
+                                    if (b == null && mem.Point > 0)
+                                    {
+                                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                        ad.id = de.Member.ID;
+                                        ad.name = de.Member.FullName;
+                                        ad.ntcNo = de.Member.NTCNo;
+                                        ad.point = mem.Point;
+                                        ad.meritId = mem.MeritId;
+                                        deMeritMemType.driver.adPannel.Add(ad);
+                                    }
+                                    else if (b != null && mem.Point > 0)
+                                    {
+                                        b.point += mem.Point;
+                                    }
+                                    break;
+                                case 3:
+                                    var c = deMeritMemType.driver.punish.Find(x => x.meritId == mem.MeritId);
+                                    if (c == null && mem.Point > 0)
+                                    {
+                                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                        ad.id = de.Member.ID;
+                                        ad.name = de.Member.FullName;
+                                        ad.ntcNo = de.Member.NTCNo;
+                                        ad.point = mem.Point;
+                                        ad.meritId = mem.MeritId;
+                                        deMeritMemType.driver.punish.Add(ad);
+                                    }
+                                    else if (c != null && mem.Point > 0)
+                                    {
+                                        c.point += mem.Point;
+                                    }
+                                    break;
+                                case 4:
+                                    var d = deMeritMemType.driver.finePay.Find(x => x.meritId == mem.MeritId);
+                                    if (d == null && mem.Point > 0)
+                                    {
+                                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                                        ad.id = de.Member.ID;
+                                        ad.name = de.Member.FullName;
+                                        ad.ntcNo = de.Member.NTCNo;
+                                        ad.point = mem.Point;
+                                        ad.meritId = mem.MeritId;
+                                        deMeritMemType.driver.finePay.Add(ad);
+                                    }
+                                    else if (d != null && mem.Point > 0)
+                                    {
+                                        d.point += mem.Point;
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }
+                    List<int> admem = new List<int>();
+                    deMeritMemType.driver.adPannel = deMeritMemType.driver.adPannel.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.adPannel.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.adPannel.Clear();
+                    foreach (int i in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.adPannel.Add(ad);
+                    }
+                    admem.Clear();
+                    deMeritMemType.driver.finePay = deMeritMemType.driver.finePay.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.finePay.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.finePay.Clear();
+                    foreach (int i in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.finePay.Add(ad);
+                    }
+                    admem.Clear();
+                    deMeritMemType.driver.punish = deMeritMemType.driver.punish.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.punish.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.punish.Clear();
+                    foreach (int i in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.punish.Add(ad);
+                    }
+                    admem.Clear();
+                    deMeritMemType.driver.cancel = deMeritMemType.driver.cancel.Where(x => x.point > 2).ToList();
+                    admem = deMeritMemType.driver.cancel.Select(x => x.id).Distinct().ToList();
+                    deMeritMemType.driver.cancel.Clear();
+                    foreach (int i in admem)
+                    {
+                        Member mem = _member.GetAll(x => x.ID == i).FirstOrDefault();
+                        DeMeritTypeViewModel ad = new DeMeritTypeViewModel();
+                        ad.id = mem.ID;
+                        ad.name = mem.FullName;
+                        ad.ntcNo = mem.NTCNo;
+                        deMeritMemType.driver.cancel.Add(ad);
+                    }
 
-                    rednotice = meritIdlistDriver.Where(x => x.point >= 2).Count() > 0 ? true : false;
+                    rednotice = deMeritMemType.driver.cancel.Count() > 0 ? true : false;
+                    adpanel = deMeritMemType.driver.adPannel.Count() > 0 ? true : false;
+                    finepay = deMeritMemType.driver.finePay.Count() > 0 ? true : false;
+                    punish = deMeritMemType.driver.punish.Count() > 0 ? true : false;
 
-                    
+                    if (demerit.Count() >= 2)
+                    {
+                        bestmember = false;
+                    }
                     if (_complain.GetAll(x => x.ConductorId == Id || x.DriverId == Id).Count() > 2)
                     {
                         bestmember = false;
@@ -78,16 +204,16 @@ namespace NTC.API.Controllers
                 }
 
                 IEnumerable<Complain> complains = new List<Complain>();
-                complains = _complain.GetAll(x=> x.ComplainStatus == "Unresolved" && (x.DriverId == Id || x.ConductorId == Id)).ToList();
-                
+                complains = _complain.GetAll(x => x.ComplainStatus == "Unresolved" && (x.DriverId == Id || x.ConductorId == Id)).ToList();
+
                 if (member != null)
                 {
                     memberView.id = member.ID;
-                    memberView.userID = member.UserID == null ? 0:member.UserID.Value;
-                    memberView.fullName = String.IsNullOrEmpty(member.FullName)? String.Empty: member.FullName;
+                    memberView.userID = member.UserID == null ? 0 : member.UserID.Value;
+                    memberView.fullName = String.IsNullOrEmpty(member.FullName) ? String.Empty : member.FullName;
                     memberView.nameWithInitial = String.IsNullOrEmpty(member.ShortName) ? String.Empty : member.ShortName;
-                    memberView.currentAddress = String.IsNullOrEmpty(member.CurrentAddress)? String.Empty : member.CurrentAddress;
-                    memberView.permanetAddress = String.IsNullOrEmpty(member.PermanetAddress)? String.Empty : member.PermanetAddress;
+                    memberView.currentAddress = String.IsNullOrEmpty(member.CurrentAddress) ? String.Empty : member.CurrentAddress;
+                    memberView.permanetAddress = String.IsNullOrEmpty(member.PermanetAddress) ? String.Empty : member.PermanetAddress;
                     memberView.nic = String.IsNullOrEmpty(member.NIC) ? String.Empty : member.NIC;
                     memberView.dob = member.DOB.ToString("yyyy-MM-dd");
                     memberView.cetificateNo = String.IsNullOrEmpty(member.TrainingCertificateNo) ? String.Empty : member.TrainingCertificateNo;
@@ -101,10 +227,16 @@ namespace NTC.API.Controllers
                     memberView.imagePath = member.ImagePath;
                     memberView.isNotification1 = rednotice;
                     memberView.notification1 = rednotice ? "Red Noticed " + member.MemberType.Code : String.Empty;
-                    memberView.isNotification2 = bestmember && memberView.isNotification1  == false ? true : false;
+                    memberView.isNotification2 = bestmember && memberView.isNotification1 == false ? true : false;
                     memberView.notification2 = bestmember && memberView.isNotification1 == false ? "Best " + member.MemberType.Code : String.Empty;
-                    memberView.isNotification3 = complains.Count() > 0 && complains != null? true : false;
+                    memberView.isNotification3 = complains.Count() > 0 && complains != null ? true : false;
                     memberView.notification3 = complains.Count() > 0 && complains != null ? complains.Count() + " Unresolved Complains" : String.Empty;
+                    memberView.isNotification4 = adpanel;
+                    memberView.notification4 = adpanel ? "Advising Panel Panelty " + member.MemberType.Code  : String.Empty;
+                    memberView.isNotification5 = finepay;
+                    memberView.notification5 = finepay ? "Fine Payment Panelty " + member.MemberType.Code  : String.Empty;
+                    memberView.isNotification6 = punish;
+                    memberView.notification6 = punish ? "Punishment Panelty " + member.MemberType.Code : String.Empty;
                 }
 
 
@@ -124,7 +256,7 @@ namespace NTC.API.Controllers
 
         #region GetMember
         [HttpGet]
-        public IHttpActionResult GetAllMembers(int colorCode,DateTime? fromdate, DateTime? todate, int type,int point)
+        public IHttpActionResult GetAllMembers(int colorCode, DateTime? fromdate, DateTime? todate, int type, int point)
         {
             try
             {
@@ -171,7 +303,7 @@ namespace NTC.API.Controllers
 
                     }
                 }
-                
+
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { memberListDriver = memberListDriver, memberListConductor = memberListConductor, messageCode = messageData };
                 return Ok(returnObject);
@@ -196,19 +328,19 @@ namespace NTC.API.Controllers
                 Member member = new Member();
                 if (memberView != null)
                 {
-                    member.NIC = String.IsNullOrEmpty(memberView.nic) ? String.Empty: memberView.nic;
+                    member.NIC = String.IsNullOrEmpty(memberView.nic) ? String.Empty : memberView.nic;
                     member.DOB = memberView.dob;
                     member.FullName = memberView.fullName;
-                    member.ShortName = String.IsNullOrEmpty(memberView.nameWithInitial)? String.Empty : memberView.nameWithInitial;
+                    member.ShortName = String.IsNullOrEmpty(memberView.nameWithInitial) ? String.Empty : memberView.nameWithInitial;
                     member.PermanetAddress = String.IsNullOrEmpty(memberView.permanetAddress) ? String.Empty : memberView.permanetAddress;
                     member.CurrentAddress = String.IsNullOrEmpty(memberView.currentAddress) ? String.Empty : memberView.currentAddress;
                     member.TrainingCertificateNo = String.IsNullOrEmpty(memberView.cetificateNo) ? String.Empty : memberView.cetificateNo;
                     member.TrainingCenter = String.IsNullOrEmpty(memberView.trainingCenter) ? String.Empty : memberView.trainingCenter;
-                    member.LicenceNo = String.IsNullOrEmpty(memberView.licenceNo)? String.Empty : memberView.licenceNo;
+                    member.LicenceNo = String.IsNullOrEmpty(memberView.licenceNo) ? String.Empty : memberView.licenceNo;
                     member.IssuedDate = memberView.dateIssued;
                     member.ExpireDate = memberView.dateValidity;
                     member.JoinDate = memberView.dateJoin;
-                    member.HighestEducation = String.IsNullOrEmpty(memberView.educationQuali)? String.Empty : memberView.educationQuali;
+                    member.HighestEducation = String.IsNullOrEmpty(memberView.educationQuali) ? String.Empty : memberView.educationQuali;
                     member.TypeId = memberView.typeId;
                     member.NTCNo = _common.GetLastNTCNO(memberView.typeId);
                     member.ImagePath = memberView.imagePath;
@@ -226,7 +358,7 @@ namespace NTC.API.Controllers
                    ,
                     message = String.IsNullOrEmpty(errorMessage) ? Constant.MessageSuccess : errorMessage
                 };
-                var returnObject = new {ntcNo = member.NTCNo, messageCode = messageData };
+                var returnObject = new { ntcNo = member.NTCNo, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -305,7 +437,7 @@ namespace NTC.API.Controllers
             {
                 List<MemberEntityViewModel> memberListDriver = new List<MemberEntityViewModel>();
                 List<MemberEntityViewModel> memberListConductor = new List<MemberEntityViewModel>();
-               
+
                 //members = _member.GetAllMembersSP(colorCode, fromdate, todate, type);
 
                 //if (members != null)
@@ -398,7 +530,7 @@ namespace NTC.API.Controllers
                     }
                 }
                 List<int> memb = new List<int>();
-                
+
                 if (type == 1)
                 {
                     memb = meritIdlistDriver.Where(r => r.point > 2).Select(z => z.memberId).Distinct().ToList();
@@ -437,7 +569,7 @@ namespace NTC.API.Controllers
                         memberListConductor.Add(memberView);
                     }
                 }
-                
+
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { memberListDriver = memberListDriver, memberListConductor = memberListConductor, messageCode = messageData };
                 return Ok(returnObject);
@@ -465,7 +597,7 @@ namespace NTC.API.Controllers
                 //members = _member.GetAllMembersSP(0, (DateTime?)null, (DateTime?)null, type);
                 List<Member> membesDateList = new List<Member>();
                 IEnumerable<Member> memberList = new List<Member>();
-                memberList = _member.GetAll(z=>z.TypeId == type).ToList();
+                memberList = _member.GetAll(z => z.TypeId == type).ToList();
                 foreach (Member mem in memberList)
                 {
                     int point = 0;
@@ -506,7 +638,7 @@ namespace NTC.API.Controllers
                             }
                         }
                     }
-                   
+
                 }
                 if (members != null)
                 {
@@ -573,7 +705,8 @@ namespace NTC.API.Controllers
                         md.memberId = dcomp.DriverId.Value;
                         highDriver.Add(md);
 
-                    }else
+                    }
+                    else
                     {
                         a.point++;
                     }
@@ -581,12 +714,12 @@ namespace NTC.API.Controllers
 
                 foreach (Complain dcomp in conductComplain)
                 {
-                    var a = highCond.Find(x => x.memberId == dcomp.ConductorId);
-                    if (a == null && dcomp.ConductorId != null)
+                    var a = highCond.Find(x => x.memberId == dcomp.DriverId);
+                    if (a == null && dcomp.DriverId != null)
                     {
                         MeritDashBoardView md = new MeritDashBoardView();
                         md.point = 1;
-                        md.memberId = dcomp.ConductorId.Value;
+                        md.memberId = dcomp.DriverId.Value;
                         highCond.Add(md);
                     }
                     else

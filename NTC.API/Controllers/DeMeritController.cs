@@ -837,10 +837,10 @@ namespace NTC.API.Controllers
                         deMeritMemType.driver.cancel.Add(ad);
                     }
 
-                    chart.adPannel.Add(deMeritMemType.driver.adPannel.Count);
-                    chart.finePay.Add(deMeritMemType.driver.finePay.Count);
-                    chart.punish.Add(deMeritMemType.driver.punish.Count);
-                    chart.cancel.Add(deMeritMemType.driver.cancel.Count);
+                    chart.adPannel.Add(deMeritMemType.driver.adPannel.Count());
+                    chart.finePay.Add(deMeritMemType.driver.finePay.Count());
+                    chart.punish.Add(deMeritMemType.driver.punish.Count());
+                    chart.cancel.Add(deMeritMemType.driver.cancel.Count());
                 }
 
 

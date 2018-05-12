@@ -42,6 +42,12 @@ namespace NTC.ViewModels
         public string notification1 { get; set; }
         public string notification2 { get; set; }
         public string notification3 { get; set; }
+        public bool isNotification4 { get; set; }
+        public bool isNotification5 { get; set; }
+        public bool isNotification6 { get; set; }
+        public string notification4 { get; set; }
+        public string notification5 { get; set; }
+        public string notification6 { get; set; }
     }
 
     public class MemberDataViewModel
