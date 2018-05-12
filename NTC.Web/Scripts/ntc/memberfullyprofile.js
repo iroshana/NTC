@@ -80,7 +80,13 @@ var MemberDetails = new Vue({
         categoryList: [],
         role: '',
         imageURL: '',
-        statusComplain: 'Unresolve'
+        statusComplain: 'Unresolve',
+        deMeritViewModel: {
+            deMeritNo: '',
+            busNo: '',
+            name: '',
+            inqueryDate:''
+        }
     },
     methods: {
         getAllMemeberNotice: function (userId) {
@@ -262,6 +268,7 @@ var MemberDetails = new Vue({
         getSelectedDeMerit: function (deMeritNo) {
             if (deMeritNo == 0) {
                 this.getOverallDeMerit();
+                this.deMeritViewModel = { deMeritNo: '', busNo: '', name: '', inqueryDate:'' };
             } else {
                 $('#spinner').css("display", "block");
                 this.$http.get(apiURL + 'api/DeMerit/GetDemeritByNo', {
@@ -271,6 +278,10 @@ var MemberDetails = new Vue({
                 }).then(function (response) {
                     if (response.body.messageCode.code == 1) {
                         this.deMeritMgt = response.body.demerit;
+                        this.deMeritViewModel.deMeritNo = response.body.demerit.deMeritNo;
+                        this.deMeritViewModel.busNo = response.body.demerit.bus.busNo;
+                        this.deMeritViewModel.inqueryDate = response.body.demerit.inqueryDate;
+                        this.deMeritViewModel.name = response.body.demerit.officer.name
                     } else {
                         msgAlert.isSuccess = false;
                         msgAlert.alertMessage = response.body.messageCode.message;
