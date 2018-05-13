@@ -159,8 +159,8 @@
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                                            <button type="button" class="btn btn-primary">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Clear</button>
+                                            <a href="@Url.Action("AdminDashboard", "Dashboard")" class="btn btn-primary">Cancel</a>
+                                            <button type="button" class="btn btn-primary" v-on:click="clearData">Clear</button>
                                             <button type="button" class="btn btn-success" v-on:click="validate">Submit</button>
                                         </div>
                                     </div>
