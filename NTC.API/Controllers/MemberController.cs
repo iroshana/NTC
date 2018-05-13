@@ -52,7 +52,7 @@ namespace NTC.API.Controllers
                 demerit = _demerit.GetAll(x => x.MemberId == Id).ToList();
                 if (demerit != null)
                 {
-                    demerit = demerit.Where(y => y.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && y.CreatedDate <= DateTime.Now.Date).ToList();
+                    demerit = demerit.Where(y => y.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && y.CreatedDate <= DateTime.Now.Date.AddDays(1)).ToList();
 
                     foreach (DeMerit de in demerit)
                     {
@@ -482,7 +482,7 @@ namespace NTC.API.Controllers
 
 
                 IEnumerable<DeMerit> memberDem = _demerit.GetAll().ToList();
-                memberDem = memberDem.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Date <= DateTime.Now.Date).ToList();
+                memberDem = memberDem.Where(x => x.CreatedDate.Date >= DateTime.Now.Date.AddMonths(-1) && x.CreatedDate.Date <= DateTime.Now.Date.AddDays(1)).ToList();
                 List<MeritDashBoardView> meritIdlistDriver = new List<MeritDashBoardView>();
                 List<MeritDashBoardView> meritIdlistCond = new List<MeritDashBoardView>();
                 foreach (DeMerit de in memberDem)
