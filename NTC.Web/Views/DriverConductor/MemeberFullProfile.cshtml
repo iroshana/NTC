@@ -33,7 +33,10 @@
                             <div class="row">
                                 <span v-show="memeber.isNotification1" class="red"><strong>{{memeber.notification1}}</strong></span><br />
                                 <span v-show="memeber.isNotification2" class="blue"><strong>{{memeber.notification2}}</strong></span><br />
-                                <span v-show="memeber.isNotification3" class="green"><strong>{{memeber.notification3}}</strong></span>
+                                <span v-show="memeber.isNotification3" class="purple"><strong>{{memeber.notification3}}</strong></span>
+                                <span v-show="memeber.isNotification4" class="purple"><strong>{{memeber.notification4}}</strong></span>
+                                <span v-show="memeber.isNotification5" class="purple"><strong>{{memeber.notification5}}</strong></span>
+                                <span v-show="memeber.isNotification6" class="purple"><strong>{{memeber.notification6}}</strong></span>
                             </div>
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -346,7 +349,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6" v-show="demeritNo != '0'">
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Bus No</label>
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -360,7 +363,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6" v-show="demeritNo != '0'">
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Officer Name</label>
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
