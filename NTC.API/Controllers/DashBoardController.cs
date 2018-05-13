@@ -232,9 +232,11 @@ namespace NTC.API.Controllers
                         a.point++;
                     }
                 }
+                int maxcomplain = highDriver.Max(x=>x.point);
+                int maxcomplaincon = highCond.Max(x => x.point);
 
-                highDriver = highDriver.Where(w => w.point > 5).ToList();
-                highCond = highCond.Where(w => w.point > 5).ToList();
+                highDriver = highDriver.Where(w => w.point == maxcomplain).ToList();
+                highCond = highCond.Where(w => w.point == maxcomplaincon).ToList();
 
                 highestDriverComplain = highDriver.Count();
                 highestConductorComplain = highCond.Count();
@@ -283,8 +285,8 @@ namespace NTC.API.Controllers
                 }
                 int maxvald = deMListDri.Count() <= 0 ? 0 : deMListDri.Max(d => d.point);
 
-                HighestConductorPoints = deMListCond.Where(x => x.point >= maxvalc - 2 && x.point <= maxvalc + 2).Count();
-                HighestDriverPoints = deMListDri.Where(x => x.point >= maxvald - 2 && x.point <= maxvald + 2).Count();
+                HighestConductorPoints = maxvalc == 0 ? 0 : deMListCond.Where(x => x.point == maxvalc).Count();
+                HighestDriverPoints = maxvald == 0 ? 0 : deMListDri.Where(x => x.point == maxvald).Count();
 
                 if (dashboard != null)
                 {
