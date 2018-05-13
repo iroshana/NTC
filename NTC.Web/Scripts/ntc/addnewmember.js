@@ -63,6 +63,8 @@ var Memeber = new Vue({
             };
             this.submitted = false;
             this.isResultShow = true;
+            $('#item-img-result').empty();
+            $('#upload').val("");
         
         },
         validate: function () {
