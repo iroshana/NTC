@@ -54,7 +54,7 @@ var MemberDetails = new Vue({
         complainDescList: [],
         deMeritRecordList: [],
         deMeritMgt: { id: '', memberDeMerit: [] },
-        demeritNo: '',
+        demeritNo: '0',
         noticeList: [],
         complainVm: {
             id: '0',
