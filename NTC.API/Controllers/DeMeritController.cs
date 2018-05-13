@@ -133,7 +133,7 @@ namespace NTC.API.Controllers
                     deMerit.BusId = deMeritView.bus.id;
                     deMerit.RouteId = deMeritView.route.id;
                     deMerit.OfficeriId = deMeritView.officer.id;
-                    deMerit.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now.Date, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
+                    deMerit.CreatedDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById(ConfigurationManager.AppSettings["LocalTimeZone"]));
                     deMerit.MemberDeMerits = new List<MemberDeMerit>();
                     foreach (MemberDeMeritViewModel memberDemerit in deMeritView.memberDeMerit)
                     {

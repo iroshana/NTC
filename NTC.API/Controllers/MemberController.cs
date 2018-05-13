@@ -226,17 +226,17 @@ namespace NTC.API.Controllers
                     memberView.type = member.MemberType.Code;
                     memberView.imagePath = member.ImagePath;
                     memberView.isNotification1 = rednotice;
-                    memberView.notification1 = rednotice ? "Red Noticed " + member.MemberType.Code : String.Empty;
+                    memberView.notification1 = rednotice ? "Red Noticed" : String.Empty;
                     memberView.isNotification2 = bestmember && memberView.isNotification1 == false ? true : false;
                     memberView.notification2 = bestmember && memberView.isNotification1 == false ? "Best " + member.MemberType.Code : String.Empty;
                     memberView.isNotification3 = complains.Count() > 0 && complains != null ? true : false;
                     memberView.notification3 = complains.Count() > 0 && complains != null ? complains.Count() + " Unresolved Complains" : String.Empty;
                     memberView.isNotification4 = adpanel;
-                    memberView.notification4 = adpanel ? "Advising Panel Panelty " + member.MemberType.Code  : String.Empty;
+                    memberView.notification4 = adpanel ? "Advising Panel ": String.Empty;
                     memberView.isNotification5 = finepay;
-                    memberView.notification5 = finepay ? "Fine Payment Panelty " + member.MemberType.Code  : String.Empty;
+                    memberView.notification5 = finepay ? "Fine Payments" : String.Empty;
                     memberView.isNotification6 = punish;
-                    memberView.notification6 = punish ? "Punishment Panelty " + member.MemberType.Code : String.Empty;
+                    memberView.notification6 = punish ? "Punishment Training" : String.Empty;
                 }
 
 

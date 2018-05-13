@@ -39,6 +39,7 @@ namespace NTC.API.Controllers
             try
             {
                 List<MeritReportViewModel> meritList = new List<MeritReportViewModel>();
+                List<MeritReportViewModel> reportMeritList = new List<MeritReportViewModel>();
                 IEnumerable<MeritReportEntityModel> merits = new List<MeritReportEntityModel>();
                 merits = _report.CreateReport(search.colorCodeId, search.fromDate, search.toDate, search.typeId, search.order);
 
@@ -46,19 +47,30 @@ namespace NTC.API.Controllers
                 {
                     foreach (MeritReportEntityModel merit in merits)
                     {
-                        MeritReportViewModel meritView = new MeritReportViewModel();
-                        meritView.id = merit.ID;
-                        meritView.fullName = merit.FullName;
-                        meritView.description = merit.Description;
-                        meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-                        meritView.ntcNo = merit.NTCNo;
-                        meritList.Add(meritView);
+                        var a = meritList.Find(x => x.description == merit.Description && x.ntcNo == merit.NTCNo);
+                        if (a == null)
+                        {
+                            MeritReportViewModel meritView = new MeritReportViewModel();
+                            meritView.id = merit.ID;
+                            meritView.fullName = merit.FullName;
+                            meritView.description = merit.Description;
+                            meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
+                            meritView.ntcNo = merit.NTCNo;
+                            meritView.count = 1;
+                            meritList.Add(meritView);
+                        }
+                        else
+                        {
+                            a.count++;
+                        }
+                        
                     }
+                    reportMeritList = meritList.Where(x => x.count > 2).ToList();
                 }
 
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
-                var returnObject = new { roleList = meritList, messageCode = messageData };
+                var returnObject = new { roleList = reportMeritList, messageCode = messageData };
                 return Ok(returnObject);
             }
             catch (Exception ex)
@@ -131,14 +143,25 @@ namespace NTC.API.Controllers
                 {
                     foreach (MeritReportEntityModel merit in merits)
                     {
-                        MeritReportViewModel meritView = new MeritReportViewModel();
-                        meritView.id = merit.ID;
-                        meritView.fullName = merit.FullName;
-                        meritView.description = merit.Description;
-                        meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-                        meritView.ntcNo = merit.NTCNo;
-                        meritList.Add(meritView);
+                        var a = meritList.Find(x => x.description == merit.Description && x.ntcNo == merit.NTCNo);
+                        if (a == null)
+                        {
+                            MeritReportViewModel meritView = new MeritReportViewModel();
+                            meritView.id = merit.ID;
+                            meritView.fullName = merit.FullName;
+                            meritView.description = merit.Description;
+                            meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
+                            meritView.ntcNo = merit.NTCNo;
+                            meritView.count = 1;
+                            meritList.Add(meritView);
+                        }
+                        else
+                        {
+                            a.count++;
+                        }
+
                     }
+                    meritList = meritList.Where(x => x.count > 2).ToList();
                 }
                 MemoryStream stream = new MemoryStream();
                 HttpResponseMessage result = new HttpResponseMessage();
@@ -208,14 +231,25 @@ namespace NTC.API.Controllers
                 {
                     foreach (MeritReportEntityModel merit in merits)
                     {
-                        MeritReportViewModel meritView = new MeritReportViewModel();
-                        meritView.id = merit.ID;
-                        meritView.fullName = merit.FullName;
-                        meritView.description = merit.Description;
-                        meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-                        meritView.ntcNo = merit.NTCNo;
-                        meritList.Add(meritView);
+                        var a = meritList.Find(x => x.description == merit.Description && x.ntcNo == merit.NTCNo);
+                        if (a == null)
+                        {
+                            MeritReportViewModel meritView = new MeritReportViewModel();
+                            meritView.id = merit.ID;
+                            meritView.fullName = merit.FullName;
+                            meritView.description = merit.Description;
+                            meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
+                            meritView.ntcNo = merit.NTCNo;
+                            meritView.count = 1;
+                            meritList.Add(meritView);
+                        }
+                        else
+                        {
+                            a.count++;
+                        }
+
                     }
+                    meritList = meritList.Where(x => x.count > 2).ToList();
                 }
                 MemoryStream stream = new MemoryStream();
                 HttpResponseMessage result = new HttpResponseMessage();
@@ -285,14 +319,25 @@ namespace NTC.API.Controllers
                 {
                     foreach (MeritReportEntityModel merit in merits)
                     {
-                        MeritReportViewModel meritView = new MeritReportViewModel();
-                        meritView.id = merit.ID;
-                        meritView.fullName = merit.FullName;
-                        meritView.description = merit.Description;
-                        meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-                        meritView.ntcNo = merit.NTCNo;
-                        meritList.Add(meritView);
+                        var a = meritList.Find(x => x.description == merit.Description && x.ntcNo == merit.NTCNo);
+                        if (a == null)
+                        {
+                            MeritReportViewModel meritView = new MeritReportViewModel();
+                            meritView.id = merit.ID;
+                            meritView.fullName = merit.FullName;
+                            meritView.description = merit.Description;
+                            meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
+                            meritView.ntcNo = merit.NTCNo;
+                            meritView.count = 1;
+                            meritList.Add(meritView);
+                        }
+                        else
+                        {
+                            a.count++;
+                        }
+
                     }
+                    meritList = meritList.Where(x => x.count > 2).ToList();
                 }
                 MemoryStream stream = new MemoryStream();
                 HttpResponseMessage result = new HttpResponseMessage();
@@ -355,6 +400,7 @@ namespace NTC.API.Controllers
             try
             {
                 List<MeritReportViewModel> meritList = new List<MeritReportViewModel>();
+                List<MeritReportViewModel> reportMeritList = new List<MeritReportViewModel>();
                 IEnumerable<MeritReportEntityModel> merits = new List<MeritReportEntityModel>();
                 merits = _report.CreateReport(1, fromDate, toDate, typeId, order);
 
@@ -362,14 +408,25 @@ namespace NTC.API.Controllers
                 {
                     foreach (MeritReportEntityModel merit in merits)
                     {
-                        MeritReportViewModel meritView = new MeritReportViewModel();
-                        meritView.id = merit.ID;
-                        meritView.fullName = merit.FullName;
-                        meritView.description = merit.Description;
-                        meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
-                        meritView.ntcNo = merit.NTCNo;
-                        meritList.Add(meritView);
+                        var a = meritList.Find(x => x.description == merit.Description && x.ntcNo == merit.NTCNo);
+                        if (a == null)
+                        {
+                            MeritReportViewModel meritView = new MeritReportViewModel();
+                            meritView.id = merit.ID;
+                            meritView.fullName = merit.FullName;
+                            meritView.description = merit.Description;
+                            meritView.inqueryDate = merit.InqueryDate.ToString(@"yyyy-MM-dd");
+                            meritView.ntcNo = merit.NTCNo;
+                            meritView.count = 1;
+                            meritList.Add(meritView);
+                        }
+                        else
+                        {
+                            a.count++;
+                        }
+
                     }
+                    meritList = meritList.Where(x => x.count > 2).ToList();
                 }
                 MemoryStream stream = new MemoryStream();
                 HttpResponseMessage result = new HttpResponseMessage();
