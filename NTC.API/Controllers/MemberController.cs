@@ -728,8 +728,8 @@ namespace NTC.API.Controllers
                     }
                 }
 
-                highDriver = highDriver.Where(w => w.point > 10).ToList();
-                highCond = highCond.Where(w => w.point > 10).ToList();
+                highDriver = highDriver.Where(w => w.point > 5).ToList();
+                highCond = highCond.Where(w => w.point > 5).ToList();
 
                 if (typeId == 1)
                 {

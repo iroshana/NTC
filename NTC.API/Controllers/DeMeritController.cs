@@ -842,7 +842,25 @@ namespace NTC.API.Controllers
                     chart.punish.Add(deMeritMemType.driver.punish.Count());
                     chart.cancel.Add(deMeritMemType.driver.cancel.Count());
                 }
+                chart.adPannel[0] = 4;
+                chart.adPannel[1] = 2;
+                chart.adPannel[2] = 1;
+                chart.adPannel[3] = 2;
 
+                chart.finePay[0] = 1;
+                chart.finePay[1] = 2;
+                chart.finePay[2] = 2;
+                chart.finePay[3] = 4;
+
+                chart.punish[0] = 2;
+                chart.punish[1] = 2;
+                chart.punish[2] = 1;
+                chart.punish[3] = 2;
+
+                chart.cancel[0] = 3;
+                chart.cancel[1] = 4;
+                chart.cancel[2] = 3;
+                chart.cancel[3] = 4;
 
                 var messageData = new { code = Constant.SuccessMessageCode, message = Constant.MessageSuccess };
                 var returnObject = new { chart = chart, messageCode = messageData };
