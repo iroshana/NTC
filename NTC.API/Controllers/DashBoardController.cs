@@ -232,8 +232,8 @@ namespace NTC.API.Controllers
                         a.point++;
                     }
                 }
-                int maxcomplain = highDriver.Max(x=>x.point);
-                int maxcomplaincon = highCond.Max(x => x.point);
+                int maxcomplain = highDriver.Count()  <= 0 ? 0 :highDriver.Max(x=>x.point);
+                int maxcomplaincon = highCond.Count() <=0? 0 : highCond.Max(x => x.point);
 
                 highDriver = highDriver.Where(w => w.point == maxcomplain).ToList();
                 highCond = highCond.Where(w => w.point == maxcomplaincon).ToList();
